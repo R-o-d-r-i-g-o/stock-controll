@@ -23,7 +23,7 @@ const options: NextAuthOptions = {
         }),
     ],
     pages: {
-        signIn: "/",
+        signIn: "/entrar",
     },
 };
 
