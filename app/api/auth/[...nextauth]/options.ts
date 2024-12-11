@@ -1,7 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import { useHash } from "@/hooks";
+import { getAuthUser } from '@/backend/services'
+
 
 const options: NextAuthOptions = {
     providers: [
@@ -11,20 +12,10 @@ const options: NextAuthOptions = {
                 password: { type: "password" },
             },
             async authorize(credentials) {
+                if (!credentials) throw new Error("As credenciais não foram enviadas corretamente")
+
                 try {
-                    const { email, password } = credentials!;
-
-                    // const registredUser = { password: '123456', } //await getAuthUser(email);
-                    // const passwordMatch = await useHash().comparePasswords(
-                    //     password,
-                    //     registredUser.password
-                    // );
-                    // if (!passwordMatch) throw new Error();
-
-                    return {
-                        id: "user-code",
-                        email: email,
-                    };
+                    return await getAuthUser(credentials);
                 } catch (err) {
                     return null;
                 }

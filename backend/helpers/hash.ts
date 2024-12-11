@@ -21,6 +21,6 @@ const comparePasswords = async (password: string, hashedPassword: string) => {
     }
 }
 
-const useHash = () => ({ comparePasswords, encryptPassword })
+const hashHelper = () => ({ comparePasswords, encryptPassword })
 
-export { useHash };
+export { hashHelper };
