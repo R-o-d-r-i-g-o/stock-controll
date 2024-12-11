@@ -9,7 +9,15 @@ type getAuthUserResponse = {
     email: string;
 }
 
+type createUserProps = {
+    name: string;
+    email: string;
+    role_id: number;
+    password: string;
+}
+
 export type {
     getAuthUserProps,
-    getAuthUserResponse
+    getAuthUserResponse,
+    createUserProps,
 };

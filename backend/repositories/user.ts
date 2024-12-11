@@ -1,10 +1,17 @@
-import prisma from './_prisma'
+import { prisma, prismaTransaction } from './_prisma'
+import * as t from './_types'
 
 const getUserByEmail = async (email: string) => {
-    await prisma.$connect();
-    const user = await prisma.user.findFirstOrThrow({ where: { email } })
-    await prisma.$disconnect();
-    return user
+    return await prismaTransaction(async () =>
+        await prisma.user.findFirstOrThrow({ where: { email } })
+    )
 }
 
-export { getUserByEmail };
+const createUser = async (user: t.createUserProps) => {
+    return await prismaTransaction(async () => {
+        const { id } = await prisma.user.create({ data: user })
+        return id
+    })
+}
+
+export { getUserByEmail, createUser };
