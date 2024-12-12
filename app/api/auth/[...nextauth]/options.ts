@@ -12,9 +12,10 @@ const options: NextAuthOptions = {
                 password: { type: "password" },
             },
             async authorize(credentials) {
-                if (!credentials) throw new Error("As credenciais não foram enviadas corretamente")
-
                 try {
+                    if (!credentials)
+                        throw new Error("Credenciais não encontradas")
+
                     return await getAuthUser(credentials);
                 } catch (err) {
                     return null;
