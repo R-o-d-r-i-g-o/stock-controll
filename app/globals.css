@@ -19,3 +19,19 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Estilizações referente ao scroll-bar */
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #E2E8F0;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #4C51BF;
+  border: 3px solid #E2E8F0;
+  border-radius: 10px;
+}
