@@ -1,22 +1,9 @@
 'use client'
 
-import { loginSchema } from '@/schemas'
-
-import { signIn } from "next-auth/react";
-
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useLogin } from './hook'
 
 export default function Home() {
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(loginSchema) });
-
-    const onSubmit = async (data: any) => {
-        try {
-            await signIn("credentials", { ...data, callbackUrl: '/test' });
-        } catch (err) {
-            console.error(err)
-        }
-    };
+    const { register, handleSubmit, errors, onSubmit } = useLogin();
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500">
