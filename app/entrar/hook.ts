@@ -17,12 +17,12 @@ const useLogin = () => {
     const { failure } = useToast();
     const searchParams = useSearchParams();
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: object) => {
         try {
             const auth = await signIn("credentials", { ...data, redirect: false });
             if (auth && !auth.ok) throw new Error()
 
-            router.push(searchParams.get("callbackUrl") ?? "/test")
+            router.push(searchParams.get("callbackUrl") ?? "/usuario")
         } catch (err) {
             console.error(err)
             failure("Usuário ou senha incorretos.");

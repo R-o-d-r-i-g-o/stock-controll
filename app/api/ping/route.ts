@@ -1,7 +1,6 @@
-import { NextRequest } from 'next/server';
 import { version } from '@/package.json'
 
-const setupPing = async (req: NextRequest) => {
+const setupPing = async () => {
     const res = {
         version,
         message: "pong"

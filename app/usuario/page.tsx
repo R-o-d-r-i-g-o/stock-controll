@@ -9,7 +9,6 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Paper,
     TablePagination,
     IconButton
 } from '@mui/material';

@@ -17,6 +17,7 @@ const options: NextAuthOptions = {
 
                     return await getAuthUser(credentials);
                 } catch (err) {
+                    console.error(err)
                     return null;
                 }
             },
