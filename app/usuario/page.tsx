@@ -52,9 +52,8 @@ export default function Tabela() {
     const [rowsPerPage, setRowsPerPage] = useState(2);
     const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
-    const handleChangePage = (e: React.MouseEvent<HTMLButtonElement>, newPage: number) => {
-        e.preventDefault()
-
+    const handleChangePage = (e: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+        e?.preventDefault()
         setPage(newPage);
     };
 
@@ -118,7 +117,6 @@ export default function Tabela() {
                     </Table>
                 </CustomTableContainer>
                 <TablePagination
-
                     rowsPerPageOptions={[2, 5, 10]}
                     component="div"
                     count={data.length}

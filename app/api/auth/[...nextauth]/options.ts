@@ -3,7 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 import { getAuthUser } from '@/backend/services'
 
-
 const options: NextAuthOptions = {
     providers: [
         CredentialsProvider({
