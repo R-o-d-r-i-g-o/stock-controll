@@ -19,7 +19,7 @@ const getUsersPaginated = async (req: NextRequest) => {
     const searchParams = req.nextUrl.searchParams;
     const payload = {
       page: parseInt(searchParams.get("page") ?? "1"),
-      size: parseInt(searchParams.get("page") ?? "10")
+      size: parseInt(searchParams.get("size") ?? "10")
     }
 
     const userList = await svc.getUsersPaginated(payload)

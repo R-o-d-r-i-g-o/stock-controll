@@ -6,6 +6,7 @@ const _15_MINS = 1000 * 60 * 15;
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
+  maxRedirects: 1,
 });
 
 const cachedApi = setupCache(api, {
