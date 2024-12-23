@@ -1,7 +1,7 @@
 const HomePage = () => (
   <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-4xl">
     {/* notas sobre o uso do sistema */}
-    <h2 className="text-2xl font-bold mb-4">Controle de Estoque - Sapataria</h2>
+    <h2 className="text-2xl font-bold mb-4">Funcionalidades do Sistema</h2>
     <ul className="list-disc pl-5 space-y-2">
       <li><strong>Cadastro de Produtos:</strong> Adicionar, editar e excluir sapatos com informações detalhadas.</li>
       <li><strong>Controle de Quantidade:</strong> Acompanhe o estoque em tempo real e ajuste automaticamente após vendas.</li>
