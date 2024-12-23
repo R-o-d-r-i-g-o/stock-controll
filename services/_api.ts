@@ -5,7 +5,7 @@ import { setupCache, cacheOperations } from './_cache'
 const _15_MINS = 1000 * 60 * 15;
 
 const api = axios.create({
-  baseURL: process.env.NEXTAUTH_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 const cachedApi = setupCache(api, {
