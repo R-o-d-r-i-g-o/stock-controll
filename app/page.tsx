@@ -2,13 +2,13 @@ import { redirect } from 'next/navigation'
 import { getServerSession } from "next-auth/next";
 import { NavigationPage } from '@/common';
 
-export default async function Page() {
-  const { Login, Dash } = NavigationPage
+const Page = async () => {
+  const { Login, Home } = NavigationPage
   const session = await getServerSession()
 
   const handleRedirect = () => {
     if (session) {
-      redirect(Dash)
+      redirect(Home)
       return
     }
 
@@ -18,3 +18,5 @@ export default async function Page() {
   handleRedirect()
   return <></>
 }
+
+export default Page;

@@ -55,9 +55,9 @@ const MenuDrawer = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {menuItems.map(({ lable, icon: Icon }) => (
+        {menuItems.map(({ lable, nav, icon: Icon }) => (
           <ListItem key={lable} disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => router.push(nav)}>
               <ListItemIcon>
                 <Icon />
               </ListItemIcon>

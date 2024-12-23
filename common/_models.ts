@@ -5,6 +5,7 @@ type Anchor = 'top' | 'left' | 'bottom' | 'right';
 type MenuItem = {
   lable: string
   icon: SvgIconComponent
+  nav: NavigationPage
 }
 
 type MenuPosition = {
@@ -13,10 +14,12 @@ type MenuPosition = {
 }
 
 enum NavigationPage {
-  Dash = "/painel",
+  Home = "/painel",
   Login = "/entrar",
   Shoes = "/painel/calcados",
   Users = "/painel/usuarios",
+  Reports = "/painel/relatorios",
+  History = "/painel/historico"
 }
 
 export {

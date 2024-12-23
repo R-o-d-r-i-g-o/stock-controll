@@ -23,7 +23,7 @@ const useLogin = () => {
       const auth = await signIn("credentials", { ...data, redirect: false });
       if (auth && !auth.ok) throw new Error()
 
-      router.push(searchParams.get("callbackUrl") ?? NavigationPage.Dash)
+      router.push(searchParams.get("callbackUrl") ?? NavigationPage.Home)
     } catch (err) {
       console.error(err)
       failure("Usuário ou senha incorretos.");
