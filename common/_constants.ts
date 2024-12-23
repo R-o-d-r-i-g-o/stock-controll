@@ -1,6 +1,6 @@
-import MailIcon from '@mui/icons-material/Mail';
-import HomeIcon from '@mui/icons-material/Home';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import GroupIcon from '@mui/icons-material/Group';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 import SwipeUpSharpIcon from '@mui/icons-material/SwipeUpSharp';
 import SwipeDownSharpIcon from '@mui/icons-material/SwipeDownSharp';
@@ -12,15 +12,15 @@ import * as t from './_models'
 const menuItems: Array<t.MenuItem> = [
   {
     lable: "Usuários",
-    icon: MailIcon
+    icon: GroupIcon
   },
   {
     lable: "Calçados",
-    icon: InboxIcon
+    icon: LocalShippingIcon
   },
   {
-    lable: "Home",
-    icon: HomeIcon
+    lable: "Relatórios",
+    icon: SummarizeIcon
   },
 ]
 

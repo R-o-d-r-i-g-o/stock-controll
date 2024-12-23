@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { getAuthUser } from '@/backend/services'
+import { NavigationPage } from '@/common'
 
 const options: NextAuthOptions = {
     providers: [
@@ -24,7 +25,7 @@ const options: NextAuthOptions = {
         }),
     ],
     pages: {
-        signIn: "/entrar",
+        signIn: NavigationPage.Login,
     },
 };
 

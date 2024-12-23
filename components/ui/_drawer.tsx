@@ -12,18 +12,36 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import UndoIcon from '@mui/icons-material/Undo';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 import { menuItems, menuPositions, Anchor } from '@/common'
 
 const MenuDrawer = () => {
+  const router = useRouter()
+
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
+  const actionItem = [
+    {
+      lable: "Voltar",
+      icon: UndoIcon,
+      action: router.back
+    },
+    {
+      lable: "Sair",
+      icon: ExitToAppIcon,
+      action: () => signOut().then()
+    }
+  ]
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) => () =>
@@ -50,13 +68,13 @@ const MenuDrawer = () => {
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+        {actionItem.map(({ lable, action, icon: Icon }) => (
+          <ListItem key={lable} disablePadding>
+            <ListItemButton onClick={action}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <Icon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={lable} />
             </ListItemButton>
           </ListItem>
         ))}
