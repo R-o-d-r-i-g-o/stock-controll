@@ -1,3 +1,5 @@
+import { StorageValue } from 'axios-cache-interceptor';
+
 type HealthCheckResponse = {
   version: string;
   message: string;
@@ -5,4 +7,11 @@ type HealthCheckResponse = {
   last_build: string;
 }
 
-export type { HealthCheckResponse }
+type CacheStorage = {
+  [key: string]: StorageValue;
+}
+
+export type {
+  HealthCheckResponse,
+  CacheStorage,
+}
