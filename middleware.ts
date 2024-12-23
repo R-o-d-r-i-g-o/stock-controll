@@ -1,8 +1,3 @@
 export { default } from "next-auth/middleware"
 
-export const config = {
-    matcher: [
-        "/test",
-        "/user"
-    ]
-}
+export const config = { matcher: ["/painel/:path*"] }
