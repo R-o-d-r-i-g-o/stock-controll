@@ -1,7 +1,7 @@
 import moment from 'moment'
 import getConfig from "next/config";
 
-import { version } from '@/package.json'
+import app from '@/package.json'
 import { pingDatabase } from '@/backend/services'
 
 const setupPing = async () => {
@@ -9,8 +9,8 @@ const setupPing = async () => {
     const modifiedDate = moment(publicRuntimeConfig.modifiedDate).format('YYYY-MM-DD HH:mm:ss');
 
     const res = {
-        version,
         message: "pong",
+        version: app.version,
         database: await pingDatabase(),
         last_build: modifiedDate
     }
