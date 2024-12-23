@@ -9,7 +9,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TablePagination,
+  Pagination,
   IconButton
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -42,17 +42,11 @@ const data = [
 
 export default function Tabela() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(2);
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
-  const handleChangePage = (e: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
     e?.preventDefault()
     setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
   };
 
   const handleRowClick = (index: number) => {
@@ -65,15 +59,15 @@ export default function Tabela() {
       <CustomTableContainer > {/* component={Paper} */}
         <Table>
           <TableHead>
-            <TableRow className="bg-indigo-500 text-white">
-              <TableCell className="text-white font-semibold">Name</TableCell>
-              <TableCell className="text-white font-semibold">Email</TableCell>
-              <TableCell className="text-white font-semibold">Status</TableCell>
-              <TableCell className="text-white font-semibold">Actions</TableCell>
+            <TableRow className="bg-indigo-500">
+              <TableCell className="!text-white font-semibold">Name</TableCell>
+              <TableCell className="!text-white font-semibold">Email</TableCell>
+              <TableCell className="!text-white font-semibold">Status</TableCell>
+              <TableCell className="!text-white font-semibold">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
+            {data.map((row, index) => (
               <React.Fragment key={index}>
                 <TableRow className="hover:bg-indigo-100">
                   <TableCell>
@@ -108,21 +102,17 @@ export default function Tabela() {
           </TableBody>
         </Table>
       </CustomTableContainer>
-      <TablePagination
-        rowsPerPageOptions={[2, 5, 10]}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        className="mt-4"
-        classes={{
-          root: 'flex justify-center',
-          selectIcon: 'text-indigo-600',
-          actions: 'text-indigo-600',
-        }}
-      />
+      <div className="flex justify-center items-center mt-4">
+        <Pagination
+          count={8}
+          page={page}
+          defaultPage={1}
+          onChange={handleChangePage}
+          siblingCount={1}
+          boundaryCount={1}
+          color="secondary"
+        />
+      </div>
     </div>
   );
 }

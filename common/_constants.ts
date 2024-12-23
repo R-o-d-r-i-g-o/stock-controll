@@ -1,5 +1,6 @@
 import GroupIcon from '@mui/icons-material/Group';
 import SummarizeIcon from '@mui/icons-material/Summarize';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 import SwipeUpSharpIcon from '@mui/icons-material/SwipeUpSharp';
@@ -22,6 +23,10 @@ const menuItems: Array<t.MenuItem> = [
     lable: "Relatórios",
     icon: SummarizeIcon
   },
+  {
+    lable: "Histórico",
+    icon: AccessAlarmIcon,
+  }
 ]
 
 const menuPositions: Array<t.MenuPosition> = [
@@ -43,4 +48,7 @@ const menuPositions: Array<t.MenuPosition> = [
   }
 ]
 
-export { menuItems, menuPositions }
+export {
+  menuPositions,
+  menuItems,
+}
