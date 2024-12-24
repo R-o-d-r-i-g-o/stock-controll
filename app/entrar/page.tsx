@@ -8,8 +8,8 @@ const LoginForm = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500">
-      <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Login</h2>
+      <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-md mx-5 sm:mx-0">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800">Login</h2>
 
         {/* Exibindo erro geral */}
         {errors.email || errors.password ? (
@@ -25,8 +25,7 @@ const LoginForm = () => {
               id="email"
               {...register("email")}
               placeholder="Digite seu email"
-              className={`w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 ${errors.email ? "border-red-500" : "border-gray-300"
-                }`}
+              className={`w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 ${errors.email ? "border-red-500" : "border-gray-300"}`}
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
@@ -41,8 +40,7 @@ const LoginForm = () => {
               id="password"
               {...register("password")}
               placeholder="Digite sua senha"
-              className={`w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 ${errors.password ? "border-red-500" : "border-gray-300"
-                }`}
+              className={`w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 ${errors.password ? "border-red-500" : "border-gray-300"}`}
             />
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>

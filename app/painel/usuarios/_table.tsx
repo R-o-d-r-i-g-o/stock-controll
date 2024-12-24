@@ -50,12 +50,13 @@ const Tabela = ({ meta, users }: t.TabelaProps) => {
     <React.Fragment>
       <CreateUserButton onClick={() => router.push(NavigationPage.UsersCreate)} />
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Usuários do sistema</h2>
-      <CustomTableContainer>
+
+      <CustomTableContainer className='overflow-x-auto'>
         <Table>
           <TableHead>
             <TableRow className="bg-indigo-500">
               <TableCell className="!text-white font-semibold">#</TableCell>
-              <TableCell className="!text-white font-semibold">Name</TableCell>
+              <TableCell className="!text-white font-semibold">Nome</TableCell>
               <TableCell className="!text-white font-semibold">Email</TableCell>
               <TableCell className="!text-white font-semibold">Cargo</TableCell>
               <TableCell className="!text-white font-semibold">Status</TableCell>
@@ -80,6 +81,7 @@ const Tabela = ({ meta, users }: t.TabelaProps) => {
           </TableBody>
         </Table>
       </CustomTableContainer>
+
       <div className="flex justify-center items-center mt-4">
         <Pagination
           count={meta?.total}

@@ -5,7 +5,7 @@ const UserPage = async () => {
   const UsersPaginated = await svc.fetchUsersPaginated()
 
   return (
-    <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-4xl">
+    <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
       <Table {...UsersPaginated} />
     </div>
   )
@@ -14,4 +14,3 @@ const UserPage = async () => {
 const Page = () => <UserPage />
 
 export default Page;
-
