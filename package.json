@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "prisma generate && next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "npm run seed && next start",
+    "lint": "next lint",
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -26,6 +27,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.0",
     "react-toastify": "^10.0.6",
+    "tsx": "^4.19.2",
     "web-push": "^3.6.7",
     "yup": "^1.5.0"
   },
