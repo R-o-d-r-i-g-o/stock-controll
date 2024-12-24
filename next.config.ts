@@ -1,49 +1,24 @@
+import nextPwa from "next-pwa";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-        ],
-      },
-      {
-        source: '/sw.js',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/javascript; charset=utf-8',
-          },
-          {
-            key: 'Cache-Control',
-            value: 'no-cache, no-store, must-revalidate',
-          },
-          {
-            key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self'",
-          },
-        ],
-      },
-    ]
-  },
 
   publicRuntimeConfig: {
     modifiedDate: new Date().toISOString(),
   },
 };
 
-export default nextConfig;
+const withPWA = nextPwa({
+  dest: "public",
+  cacheOnFrontEndNav: true,
+  reloadOnOnline: true,
+  disableDevLogs: true,
+  register: true,
+  disable: false,
+});
+
+// @ts-expect-error/its-already-the-way-is-in-documentation
+const config = withPWA(nextConfig);
+
+export default config;
