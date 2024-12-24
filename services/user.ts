@@ -11,4 +11,8 @@ const fetchUsersPaginated = async () => {
   return res.data;
 };
 
-export { fetchUsersPaginated };
+const createNewUser = () => {
+
+}
+
+export { fetchUsersPaginated, createNewUser };
