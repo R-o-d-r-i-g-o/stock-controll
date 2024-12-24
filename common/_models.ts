@@ -19,7 +19,11 @@ enum NavigationPage {
   Shoes = "/painel/calcados",
   Users = "/painel/usuarios",
   Reports = "/painel/relatorios",
-  History = "/painel/historico"
+  History = "/painel/historico",
+
+  // create operations
+  UsersCreate = "/painel/usuarios/criar",
+  ShoesCreate = "/painel/calcados/criar",
 }
 
 export {

@@ -11,9 +11,7 @@ const UserPage = async () => {
   )
 }
 
-const Page = () => (
-  <UserPage />
-)
+const Page = () => <UserPage />
 
 export default Page;
 

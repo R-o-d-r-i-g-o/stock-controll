@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import {
-  Collapse,
   Table,
   TableBody,
   TableCell,
@@ -10,12 +9,17 @@ import {
   TableHead,
   TableRow,
   Pagination,
-  IconButton
+  IconButton,
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import AddIcon from '@mui/icons-material/Add';
+
+import { useRouter } from "next/navigation";
 import { styled } from '@mui/material/styles';
 
 import * as t from './_types'
+import { NavigationPage } from '@/common';
 
 const CustomTableContainer = styled(TableContainer)({
   boxShadow: '0px 13px 20px 0px #80808029',
@@ -23,64 +27,55 @@ const CustomTableContainer = styled(TableContainer)({
   overflow: 'hidden',
 });
 
+const CreateUserButton = ({ onClick }: { onClick: () => void }) => (
+  <IconButton
+    color="primary"
+    title='Adicionar Usuário'
+    onClick={onClick}
+  >
+    <AddIcon />
+  </IconButton>
+)
+
 const Tabela = ({ meta, users }: t.TabelaProps) => {
+  const router = useRouter()
   const [page, setPage] = useState(0);
-  const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
   const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
     e?.preventDefault()
     setPage(newPage);
   };
 
-  const handleRowClick = (index: number) => {
-    setSelectedRow(index === selectedRow ? null : index);
-  };
-
   return (
     <React.Fragment>
+      <CreateUserButton onClick={() => router.push(NavigationPage.UsersCreate)} />
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Usuários do sistema</h2>
       <CustomTableContainer>
         <Table>
           <TableHead>
             <TableRow className="bg-indigo-500">
+              <TableCell className="!text-white font-semibold">#</TableCell>
               <TableCell className="!text-white font-semibold">Name</TableCell>
               <TableCell className="!text-white font-semibold">Email</TableCell>
+              <TableCell className="!text-white font-semibold">Cargo</TableCell>
               <TableCell className="!text-white font-semibold">Status</TableCell>
-              <TableCell className="!text-white font-semibold">Actions</TableCell>
+              <TableCell className="!text-white font-semibold">Config.</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {users?.map((row, index) => (
-              <React.Fragment key={index}>
-                <TableRow className="hover:bg-indigo-100">
-                  <TableCell>
-                    <div
-                      onClick={() => handleRowClick(index)}
-                      className="cursor-pointer"
-                    >
-                      {row.name}
-                    </div>
-                  </TableCell>
-                  <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.role}</TableCell>
-                  <TableCell>
-                    <IconButton onClick={() => handleRowClick(index)}>
-                      <ExpandMoreIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell colSpan={4} style={{ paddingBottom: 0, paddingTop: 0 }}>
-                    <Collapse in={selectedRow === index} timeout="auto" unmountOnExit>
-                      <div className="p-4">
-                        <p className="text-gray-700"><strong>Details:</strong></p>
-                        <p className="text-gray-700">Email: {row.email}</p>
-                        <p className="text-gray-700">Status: {row.role}</p>
-                      </div>
-                    </Collapse>
-                  </TableCell>
-                </TableRow>
-              </React.Fragment>
+            {users?.map((u, index) => (
+              <TableRow key={index} className="hover:bg-indigo-100">
+                <TableCell>{u.id}</TableCell>
+                <TableCell>{u.name}</TableCell>
+                <TableCell>{u.email}</TableCell>
+                <TableCell>{u.role}</TableCell>
+                <TableCell>{u.deletedAt != null ? "🔴 Desabilitado" : "🟢 Ativo"}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => router.push(`${NavigationPage.Users}/${u.id}`)}>
+                    <MoreVertIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
             ))}
           </TableBody>
         </Table>
