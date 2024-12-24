@@ -53,7 +53,8 @@ function PushNotificationManager() {
     })
     setSubscription(sub)
     const serializedSub = JSON.parse(JSON.stringify(sub))
-    await subscribeUser(serializedSub)
+
+    console.log('deu certo:::', await subscribeUser(serializedSub))
   }
 
   async function unsubscribeFromPush() {
