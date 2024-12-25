@@ -21,4 +21,13 @@ const cacheOperations = buildStorage({
   },
 });
 
-export { setupCache, cacheOperations };
+enum CacheCustomKeys {
+  listUsersRoles = "list-users-roles",
+  listPaginatedUsers = "list-paginated-users"
+}
+
+export {
+  setupCache,
+  cacheOperations,
+  CacheCustomKeys,
+};
