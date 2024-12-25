@@ -1,14 +1,13 @@
 import Form from './form'
-import * as svc from '@/services'
+// import * as svc from '@/services'
 
 const UserCreateForm = async () => {
-  const listRoles = await svc.getRolesList()
+  // const listRolekxs = await svc.getRolesList()
 
   return (
-    <Form roles={listRoles.roles} />
+    <Form roles={[]} />
   );
 };
-
 
 const UserCreatePage = () => <UserCreateForm />
 
