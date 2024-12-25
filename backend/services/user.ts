@@ -48,6 +48,20 @@ const getUsersPaginated = async (filter: t.getUsersPaginatedProps) => {
   }
 }
 
+const getRoleList = async () => {
+  const roles = await repo.getRolesList()
+
+  return {
+    meta: {
+      total: roles.length
+    },
+    roles: roles.map(r => ({
+      id: r.id,
+      name: r.name,
+    }))
+  }
+}
+
 const createUser = async (user: t.createUserProps) => {
   user.password = await encryptPassword(user.password)
   return await repo.createUser(user)
@@ -56,5 +70,6 @@ const createUser = async (user: t.createUserProps) => {
 export {
   createUser,
   getAuthUser,
+  getRoleList,
   getUsersPaginated,
 }

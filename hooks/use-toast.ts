@@ -1,6 +1,6 @@
 import { toast, ToastOptions } from "react-toastify";
 
-const toastConfigs: ToastOptions<{}> = {
+const toastConfigs: ToastOptions = {
     className: "custom-toast",
     autoClose: 3000,
     hideProgressBar: false,

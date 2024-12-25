@@ -7,6 +7,16 @@ type HealthCheckResponse = {
   last_build: string;
 }
 
+type GetRolesListResponse = {
+  meta: {
+    total: number;
+  };
+  roles: Array<{
+    id: number;
+    name: string;
+  }>
+}
+
 type GetUsersPaginatedResponse = {
   meta: {
     skip: number;
@@ -23,12 +33,26 @@ type GetUsersPaginatedResponse = {
   }>;
 }
 
+type CreateNewUser = {
+  name: string
+  email: string
+  role_id: number
+  password: string
+}
+
+type CreateNewUserResponse = {
+  user_id: number
+}
+
 type CacheStorage = {
   [key: string]: StorageValue;
 }
 
 export type {
   HealthCheckResponse,
+  GetRolesListResponse,
+  CreateNewUserResponse,
   GetUsersPaginatedResponse,
+  CreateNewUser,
   CacheStorage,
 }

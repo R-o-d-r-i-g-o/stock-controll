@@ -11,6 +11,8 @@ import SwipeRightSharpIcon from '@mui/icons-material/SwipeRightSharp';
 
 import * as t from './_models'
 
+const defautlPageSize = 10
+
 const menuItems: Array<t.MenuItem> = [
   {
     lable: "Usuários",
@@ -59,6 +61,7 @@ const menuPositions: Array<t.MenuPosition> = [
 ]
 
 export {
+  defautlPageSize,
   menuPositions,
   menuItems,
 }

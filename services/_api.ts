@@ -5,7 +5,9 @@ import { setupCache, cacheOperations } from './_cache'
 const _60_SECS = 1000 * 60;
 const _15_MINS = 1000 * 60 * 15;
 
-const api = axios.create({
+const { isAxiosError, create } = axios
+
+const api = create({
   timeout: _60_SECS,
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: { 'Content-Type': 'application/json' },
@@ -18,6 +20,11 @@ const cachedApi = setupCache(api, {
   storage: cacheOperations,
 })
 
-export { cachedApi, api }
+
+export {
+  isAxiosError,
+  cachedApi,
+  api,
+}
 
 export default api;

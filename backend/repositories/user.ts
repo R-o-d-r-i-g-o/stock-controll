@@ -25,9 +25,14 @@ const getUsersPaginated = async (filter: t.getUsersPaginatedProps) => {
   })
 }
 
+const getRolesList = async () => {
+  return await prisma.role.findMany()
+}
+
 export {
   createUser,
   getUserByEmail,
   getusersCount,
   getUsersPaginated,
+  getRolesList,
 };

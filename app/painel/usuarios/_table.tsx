@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import { styled } from '@mui/material/styles';
 
 import * as t from './_types'
-import { NavigationPage } from '@/common';
+import { defautlPageSize, NavigationPage } from '@/common';
 
 const CustomTableContainer = styled(TableContainer)({
   boxShadow: '0px 13px 20px 0px #80808029',
@@ -40,6 +40,8 @@ const CreateUserButton = ({ onClick }: { onClick: () => void }) => (
 const Tabela = ({ meta, users }: t.TabelaProps) => {
   const router = useRouter()
   const [page, setPage] = useState(0);
+
+  const totalPages = Math.ceil(meta?.total / defautlPageSize)
 
   const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
     e?.preventDefault()
@@ -86,7 +88,7 @@ const Tabela = ({ meta, users }: t.TabelaProps) => {
 
       <div className="flex justify-center items-center mt-4">
         <Pagination
-          count={meta?.total}
+          count={totalPages}
           page={page}
           defaultPage={1}
           onChange={handleChangePage}
