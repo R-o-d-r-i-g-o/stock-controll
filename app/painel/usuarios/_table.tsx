@@ -79,7 +79,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
           onChange={handleChangePage}
           siblingCount={1}
           boundaryCount={1}
-          color="secondary"
+          color="primary"
         />
       </div>
     </React.Fragment>

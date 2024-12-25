@@ -4,10 +4,11 @@ import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
 import { useToast } from "@/hooks";
-import * as a from './_actions'
+import { useRouter } from "next/navigation";
+import { NavigationPage } from "@/common";
 
-// import { useRouter } from "next/navigation";
-// import { NavigationPage } from "@/common";
+import * as a from './_actions'
+import * as m from './_models'
 
 type UserCreateFormProps = {
   roles: Array<{
@@ -23,6 +24,7 @@ const SubmitButton = () => {
   return (
     <button
       type="submit"
+      disabled={pending}
       className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
     >
       {lable}
@@ -32,17 +34,18 @@ const SubmitButton = () => {
 
 const UserCreateForm = ({ roles }: UserCreateFormProps) => {
   const { success, failure } = useToast()
-  const [state, formAction] = useFormState(a.handleSubmit, null)
+  const [state, formAction] = useFormState(a.handleSubmit, m.initalState)
 
-  // const router = useRouter()
+  const router = useRouter()
 
   const handleFormReponse = () => {
-    if (state) {
-      failure(state.message)
-      return
+    if (state.message === "success") {
+      success("Novo usuário criado com sucesso!")
+      router.push(NavigationPage.Users)
     }
-    success("Novo usuário criado com sucesso!")
-    // router.push(NavigationPage.Users)
+    else if (state.message !== "") {
+      failure(state.message)
+    }
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,7 +53,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Cadastro de Novo Usuário</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Novo Usuário</h2>
 
       <form action={formAction}>
         <div className="mb-6">
