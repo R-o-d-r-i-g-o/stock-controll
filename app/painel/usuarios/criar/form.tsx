@@ -6,8 +6,8 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useToast } from "@/hooks";
 import * as a from './_actions'
 
-import { useRouter } from "next/navigation";
-import { NavigationPage } from "@/common";
+// import { useRouter } from "next/navigation";
+// import { NavigationPage } from "@/common";
 
 type UserCreateFormProps = {
   roles: Array<{
@@ -34,7 +34,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
   const { success, failure } = useToast()
   const [state, formAction] = useFormState(a.handleSubmit, null)
 
-  const router = useRouter()
+  // const router = useRouter()
 
   const handleFormReponse = () => {
     if (state) {
@@ -42,7 +42,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
       return
     }
     success("Novo usuário criado com sucesso!")
-    router.push(NavigationPage.Users)
+    // router.push(NavigationPage.Users)
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
