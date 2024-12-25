@@ -12,7 +12,7 @@ const fetchUsersPaginated = async () => {
 };
 
 const getRolesList = async () => {
-  const res = await cachedApi.get<t.GetRolesListResponse>("api/users/roles")
+  const res = await cachedApi.get<t.GetRolesListResponse>("/api/users/roles")
   return res.data
 }
 

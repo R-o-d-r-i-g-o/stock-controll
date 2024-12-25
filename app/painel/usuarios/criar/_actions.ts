@@ -2,10 +2,8 @@
 
 import axios from "axios";
 
-// import { createNewUser } from "@/services"
-// import { createUserSchema, ValidationError } from "@/schemas";
-
-import { ValidationError } from "@/schemas";
+import { createNewUser } from "@/services"
+import { createUserSchema, ValidationError } from "@/schemas";
 
 type CreateUserFormEntries = {
   name: string;
@@ -19,8 +17,8 @@ async function handleSubmit(state: Error | undefined | null, formData: FormData)
     const data = Object.fromEntries(formData.entries()) as CreateUserFormEntries;
     data.role_id = parseInt(data.role_id as string, 10);
 
-    // const result = await createUserSchema.validate(data, { abortEarly: false });
-    // await createNewUser(result)
+    const result = await createUserSchema.validate(data, { abortEarly: false });
+    await createNewUser(result)
   } catch (err) {
     if (err instanceof ValidationError)
       return new Error(err.errors[0])
