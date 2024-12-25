@@ -1,12 +1,9 @@
 import { cachedApi, api } from './_api'
 import * as t from './_types'
 
-const fetchUsersPaginated = async () => {
+const fetchUsersPaginated = async (req: t.GetUsersPaginated) => {
   const res = await cachedApi.get<t.GetUsersPaginatedResponse>("/api/users", {
-    params: {
-      page: 1,
-      size: 10,
-    }
+    params: req
   });
   return res.data;
 };

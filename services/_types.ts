@@ -17,6 +17,11 @@ type GetRolesListResponse = {
   }>
 }
 
+type GetUsersPaginated = {
+  page: number;
+  size: number;
+}
+
 type GetUsersPaginatedResponse = {
   meta: {
     skip: number;
@@ -53,6 +58,7 @@ export type {
   GetRolesListResponse,
   CreateNewUserResponse,
   GetUsersPaginatedResponse,
+  GetUsersPaginated,
   CreateNewUser,
   CacheStorage,
 }

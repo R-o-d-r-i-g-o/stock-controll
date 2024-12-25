@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -12,47 +12,32 @@ import {
   IconButton,
 } from '@mui/material';
 
+import { styled } from '@mui/material/styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import AddIcon from '@mui/icons-material/Add';
 
 import { useRouter } from "next/navigation";
-import { styled } from '@mui/material/styles';
+import { NavigationPage } from '@/common';
 
 import * as t from './_types'
-import { defautlPageSize, NavigationPage } from '@/common';
 
 const CustomTableContainer = styled(TableContainer)({
   boxShadow: '0px 13px 20px 0px #80808029',
   borderRadius: '10px',
-  overflow: 'hidden',
+  overflowX: 'scroll',
 });
 
-const CreateUserButton = ({ onClick }: { onClick: () => void }) => (
-  <IconButton
-    color="primary"
-    title='Adicionar Usuário'
-    onClick={onClick}
-  >
-    <AddIcon />
-  </IconButton>
-)
-
-const Tabela = ({ meta, users }: t.TabelaProps) => {
+const Tabela = ({ filter, data }: t.TabelaProps) => {
   const router = useRouter()
-  const [page, setPage] = useState(0);
-
-  const totalPages = Math.ceil(meta?.total / defautlPageSize)
+  const totalPages = Math.ceil(data.meta?.total / filter.size)
 
   const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
     e?.preventDefault()
-    setPage(newPage);
+    router.push(`${NavigationPage.Users}?page=${newPage}`)
   };
 
   return (
     <React.Fragment>
-      <CreateUserButton onClick={() => router.push(NavigationPage.UsersCreate)} />
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Usuários do sistema</h2>
-
       <div className="overflow-x-auto">
         <CustomTableContainer>
           <Table>
@@ -67,7 +52,7 @@ const Tabela = ({ meta, users }: t.TabelaProps) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users?.map((u, index) => (
+              {data.users?.map((u, index) => (
                 <TableRow key={index} className="hover:bg-indigo-100">
                   <TableCell>{u.id}</TableCell>
                   <TableCell>{u.name}</TableCell>
@@ -88,9 +73,9 @@ const Tabela = ({ meta, users }: t.TabelaProps) => {
 
       <div className="flex justify-center items-center mt-4">
         <Pagination
-          count={totalPages}
-          page={page}
           defaultPage={1}
+          count={totalPages}
+          page={filter.page}
           onChange={handleChangePage}
           siblingCount={1}
           boundaryCount={1}
