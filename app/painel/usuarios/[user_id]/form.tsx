@@ -1,7 +1,10 @@
 "use client"
 
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
+
+import { deleteUser } from "@/services"
+import Swal from 'sweetalert2'
 
 import { useToast } from "@/hooks";
 import { useRouter } from "next/navigation";
@@ -25,18 +28,56 @@ type UserCreateFormProps = {
   }>
 }
 
-const SubmitButton = () => {
+const FormButtons = ({ userId }: { userId: number }) => {
+  const { success, failure } = useToast()
+  const router = useRouter()
+
   const { pending } = useFormStatus()
   const lable = pending ? "Processando..." : "Cadastrar"
 
+  const handleDelete = () => {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Essa ação não pode ser desfeita!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sim, deletar!',
+      cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+      try {
+        if (!result.isConfirmed)
+          return
+
+        await deleteUser(userId)
+        success("O usuário foi deletado com sucesso!")
+        router.push(NavigationPage.Users)
+      }
+      catch (err) {
+        console.error(err)
+        failure("Houve um erro ao deletar o usuário.")
+      }
+    })
+  }
+
   return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-    >
-      {lable}
-    </button>
+    <Fragment>
+      <button
+        type="submit"
+        disabled={pending}
+        className="w-full py-3 px-4 mb-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+      >
+        {lable}
+      </button>
+      <button
+        type="button"
+        onClick={handleDelete}
+        className="w-full py-3 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300"
+      >
+        Deletar Usuário
+      </button>
+    </Fragment>
   )
 }
 
@@ -121,7 +162,7 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
             ))}
           </select>
         </div>
-        <SubmitButton />
+        <FormButtons userId={user.id} />
       </form>
     </div>
   );

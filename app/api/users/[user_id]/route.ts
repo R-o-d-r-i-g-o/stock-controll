@@ -23,7 +23,7 @@ const deleteUser = async (req: NextRequest, { params }: UserParams) => {
     const userId = parseInt((await params).user_id, 10)
     await svc.deleteUser(userId)
 
-    return Response.json(null, { status: 204 });
+    return Response.json(null, { status: 200 });
   } catch (error) {
     return Response.json(error, { status: 500 });
   }
