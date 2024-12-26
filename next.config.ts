@@ -15,7 +15,7 @@ const withPWA = nextPwa({
   reloadOnOnline: true,
   disableDevLogs: true,
   register: true,
-  disable: false,
+  disable: true,
   runtimeCaching: [
     {
       urlPattern: /^\/api\//,
