@@ -16,6 +16,12 @@ const withPWA = nextPwa({
   disableDevLogs: true,
   register: true,
   disable: false,
+  runtimeCaching: [
+    {
+      urlPattern: /^\/api\//,
+      handler: 'NetworkOnly'
+    }
+  ]
 });
 
 // @ts-expect-error/its-already-the-way-is-in-documentation
