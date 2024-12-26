@@ -13,16 +13,9 @@ const api = create({
   timeout: Timeout._60sec,
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   maxRedirects: 1,
-  fetchOptions: {
-    cache: 'no-store',
-    next: { revalidate: 0 }
-  },
-  headers: {
-    'Content-Type': 'application/json',
-    'Cache-Control': 'no-cache, no-store, must-revalidate',
-    'Pragma': 'no-cache',
-    'Expires': '0'
-  },
+  adapter: 'fetch',
+  fetchOptions: { cache: 'no-store' } as RequestInit,
+  headers: { 'Content-Type': 'application/json', },
 });
 
 const cachedApi = setupCache(api, {
