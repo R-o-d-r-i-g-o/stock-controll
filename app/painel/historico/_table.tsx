@@ -43,7 +43,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
 
   return (
     <React.Fragment>
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Usuários do sistema</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Histórico de atividades</h2>
       <div className="overflow-x-auto">
         <CustomTableContainer>
           <Table>
@@ -57,6 +57,13 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
               </TableRow>
             </TableHead>
             <TableBody>
+              {!data.audits || data.audits.length < 1 && (
+                <TableRow>
+                  <TableCell colSpan={5} align="center">
+                    <p className="text-gray-500">Nenhum registro encontrado.</p>
+                  </TableCell>
+                </TableRow>
+              )}
               {data.audits?.map((a, index) => (
                 <React.Fragment key={index}>
                   <TableRow key={index} className="hover:bg-indigo-100">

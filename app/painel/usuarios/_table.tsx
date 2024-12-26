@@ -52,13 +52,20 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
               </TableRow>
             </TableHead>
             <TableBody>
+              {!data.users || data.users.length < 1 && (
+                <TableRow>
+                  <TableCell colSpan={6} align="center">
+                    <p className="text-gray-500">Nenhum registro encontrado.</p>
+                  </TableCell>
+                </TableRow>
+              )}
               {data.users?.map((u, index) => (
                 <TableRow key={index} className="hover:bg-indigo-100">
                   <TableCell>{u.id}</TableCell>
                   <TableCell>{u.name}</TableCell>
                   <TableCell>{u.email}</TableCell>
                   <TableCell>{u.role}</TableCell>
-                  <TableCell>{u.deletedAt != null ? "🔴 Desabilitado" : "🟢 Ativo"}</TableCell>
+                  <TableCell>{u.deletedAt != null ? "🔴 Desa." : "🟢 Ativo"}</TableCell>
                   <TableCell>
                     <IconButton onClick={() => router.push(`${NavigationPage.Users}/${u.id}`)}>
                       <MoreVertIcon />
