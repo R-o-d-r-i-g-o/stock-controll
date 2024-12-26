@@ -8,7 +8,7 @@ const { comparePasswords, encryptPassword } = h.hashHelper()
 const getAuthUser = async (filter: t.getAuthUserProps): Promise<t.getAuthUserResponse> => {
   const { email, password } = filter;
 
-  const user = await repo.getUserByEmail(email);
+  const user = await repo.getUserBy({ email });
   if (!user)
     throw new Error("Usuário não encontrado");
 
@@ -21,6 +21,20 @@ const getAuthUser = async (filter: t.getAuthUserProps): Promise<t.getAuthUserRes
     name: user.name,
     email: user.email,
   };
+}
+
+const getUserBy = async (filter: t.getUserProps) => {
+  const user = await repo.getUserBy({ ...filter })
+
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  };
+}
+
+const deleteUser = async (id: number) => {
+  await repo.deleteUser(id)
 }
 
 const getUsersPaginated = async (filter: t.getUsersPaginatedProps) => {
@@ -67,8 +81,15 @@ const createUser = async (user: t.createUserProps) => {
   return await repo.createUser(user)
 }
 
+const updateUser = async (user: t.updateUserProps) => {
+  return await repo.updateUser(user)
+}
+
 export {
+  getUserBy,
   createUser,
+  updateUser,
+  deleteUser,
   getAuthUser,
   getRoleList,
   getUsersPaginated,

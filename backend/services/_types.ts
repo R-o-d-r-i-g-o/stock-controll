@@ -16,14 +16,30 @@ type createUserProps = {
   password: string;
 }
 
+type updateUserProps = {
+  id: number;
+  name: string;
+  email: string;
+  role_id: number;
+  password: string;
+}
+
 type getUsersPaginatedProps = {
   page: number;
   size: number;
 }
 
+type getUserProps = {
+  id?: number;
+  name?: string;
+  email?: string;
+}
+
 export type {
   getAuthUserProps,
   getAuthUserResponse,
+  updateUserProps,
   createUserProps,
   getUsersPaginatedProps,
+  getUserProps,
 };
