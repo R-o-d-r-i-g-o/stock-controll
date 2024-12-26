@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { NavigationPage } from '@/common';
 
 import * as t from './_types'
+import moment from 'moment';
 
 const CustomTableContainer = styled(TableContainer)({
   boxShadow: '0px 13px 20px 0px #80808029',
@@ -44,55 +45,63 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
   return (
     <React.Fragment>
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Histórico de atividades</h2>
-      <div className="overflow-x-auto">
-        <CustomTableContainer>
-          <Table>
-            <TableHead>
-              <TableRow className="bg-indigo-500">
-                <TableCell className="!text-white font-semibold">#</TableCell>
-                <TableCell className="!text-white font-semibold">Data</TableCell>
-                <TableCell className="!text-white font-semibold">User</TableCell>
-                <TableCell className="!text-white font-semibold">Calçado</TableCell>
-                <TableCell className="!text-white font-semibold">Config.</TableCell>
+      {/* <div className="overflow-x-auto"> */}
+      <CustomTableContainer>
+        <Table>
+          <TableHead>
+            <TableRow className="bg-indigo-500">
+              <TableCell className="!text-white font-semibold">#</TableCell>
+              <TableCell className="!text-white font-semibold">Data</TableCell>
+              <TableCell className="!text-white font-semibold">User</TableCell>
+              <TableCell className="!text-white font-semibold">Calçado</TableCell>
+              <TableCell className="!text-white font-semibold">Config.</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {!data.audits || data.audits.length < 1 && (
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  <p className="text-gray-500">Nenhum registro encontrado.</p>
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {!data.audits || data.audits.length < 1 && (
-                <TableRow>
-                  <TableCell colSpan={5} align="center">
-                    <p className="text-gray-500">Nenhum registro encontrado.</p>
+            )}
+            {data.audits?.map((a, index) => (
+              <React.Fragment key={index}>
+                <TableRow key={index} className="hover:bg-indigo-100">
+                  <TableCell>
+                    {a.id}
+                  </TableCell>
+                  <TableCell>
+                    {moment(a.createdAt).format('YYYY-MM-DD HH:mm:ss')}
+                  </TableCell>
+                  <TableCell>
+                    {a.user}
+                  </TableCell>
+                  <TableCell>
+                    {a.shoeId ?? "--"}
+                  </TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleRowClick(index)}>
+                      <ExpandMoreIcon />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
-              )}
-              {data.audits?.map((a, index) => (
-                <React.Fragment key={index}>
-                  <TableRow key={index} className="hover:bg-indigo-100">
-                    <TableCell>{a.id}</TableCell>
-                    <TableCell>{a.createdAt}</TableCell>
-                    <TableCell>{a.user}</TableCell>
-                    <TableCell>{a.shoeId}</TableCell>
-                    <TableCell>
-                      <IconButton onClick={() => handleRowClick(index)}>
-                        <ExpandMoreIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell colSpan={4} style={{ paddingBottom: 0, paddingTop: 0 }}>
-                      <Collapse in={selectedRow === index} timeout="auto" unmountOnExit>
-                        <div className="p-4">
-                          <p className="text-gray-700"><strong>Descrição:</strong></p>
-                          <p className="text-gray-700">{a.note}</p>
-                        </div>
-                      </Collapse>
-                    </TableCell>
-                  </TableRow>
-                </React.Fragment>
-              ))}
-            </TableBody>
-          </Table>
-        </CustomTableContainer>
-      </div>
+                <TableRow>
+                  <TableCell colSpan={5} style={{ paddingBottom: 0, paddingTop: 0 }}>
+                    <Collapse in={selectedRow === index} timeout="auto" unmountOnExit>
+                      <div className="p-4">
+                        <p className="text-gray-700"><strong>Descrição:</strong></p>
+                        <p className="text-gray-700">{a.note}</p>
+                      </div>
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </CustomTableContainer>
+      {/* </div> */}
 
       <div className="flex justify-center items-center mt-4">
         <Pagination
