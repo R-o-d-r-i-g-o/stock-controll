@@ -35,11 +35,24 @@ type getUserProps = {
   email?: string;
 }
 
+type createHistoryProps = {
+  note: string
+  user_id: number
+  shoe_id?: number
+}
+
+type getAuditsPaginatedProps = {
+  page: number;
+  size: number;
+}
+
 export type {
   getAuthUserProps,
   getAuthUserResponse,
   updateUserProps,
   createUserProps,
   getUsersPaginatedProps,
+  getAuditsPaginatedProps,
+  createHistoryProps,
   getUserProps,
 };

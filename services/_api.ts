@@ -12,10 +12,14 @@ const { isAxiosError, create } = axios
 const api = create({
   timeout: Timeout._60sec,
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  maxRedirects: 1,
   adapter: 'fetch',
-  fetchOptions: { cache: 'no-store' } as RequestInit,
-  headers: { 'Content-Type': 'application/json', },
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  fetchOptions: <RequestInit>{
+    cache: 'no-store',
+    next: { revalidate: 0 }
+  }
 });
 
 const cachedApi = setupCache(api, {
