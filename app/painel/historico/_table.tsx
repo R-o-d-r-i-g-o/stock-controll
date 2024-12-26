@@ -45,7 +45,6 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
   return (
     <React.Fragment>
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Histórico de atividades</h2>
-      {/* <div className="overflow-x-auto"> */}
       <CustomTableContainer>
         <Table>
           <TableHead>
@@ -101,7 +100,6 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
           </TableBody>
         </Table>
       </CustomTableContainer>
-      {/* </div> */}
 
       <div className="flex justify-center items-center mt-4">
         <Pagination
