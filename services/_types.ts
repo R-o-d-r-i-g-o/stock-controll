@@ -38,12 +38,30 @@ type GetUsersPaginatedResponse = {
   }>;
 }
 
+type GetUserByIdResponse = {
+  id: number;
+  name: string;
+  role: string;
+  email: string;
+  createdAt: string;
+  deletedAt: string | null;
+}
+
 type CreateNewUser = {
   name: string
   email: string
   role_id: number
   password: string
 }
+
+type UpdateUser = {
+  id: number
+  name?: string
+  email?: string
+  role_id?: number
+  password?: string
+}
+
 
 type CreateNewUserResponse = {
   user_id: number
@@ -54,10 +72,12 @@ type CacheStorage = {
 }
 
 export type {
+  UpdateUser,
   HealthCheckResponse,
   GetRolesListResponse,
   CreateNewUserResponse,
   GetUsersPaginatedResponse,
+  GetUserByIdResponse,
   GetUsersPaginated,
   CreateNewUser,
   CacheStorage,

@@ -3,7 +3,7 @@
 import axios from "axios";
 import * as m from './_models'
 
-import { createNewUser } from "@/services"
+import { createUser } from "@/services"
 import { createUserSchema, ValidationError } from "@/schemas";
 
 async function handleSubmit(state: m.InitialStateEntries, formData: FormData): Promise<m.InitialStateEntries> {
@@ -15,7 +15,7 @@ async function handleSubmit(state: m.InitialStateEntries, formData: FormData): P
     }
 
     const result = await createUserSchema.validate(payload, { abortEarly: false });
-    await createNewUser(result)
+    await createUser(result)
 
     return {
       message: "success",

@@ -14,15 +14,38 @@ const getRolesList = async () => {
   return res.data
 }
 
-const createNewUser = async (req: t.CreateNewUser) => {
-  const res = await api.post<t.CreateNewUserResponse>("/api/users", req)
-  cachedApi.storage.remove(CacheCustomKeys.listPaginatedUsers)
+const getUserById = async (id: number) => {
+  const res = await cachedApi.get<t.GetUserByIdResponse>(`/api/users/${id}`);
+  return res.data;
+}
 
+const createUser = async (req: t.CreateNewUser) => {
+  const res = await api.post<t.CreateNewUserResponse>("/api/users", req)
+
+  cachedApi.storage.remove(CacheCustomKeys.listPaginatedUsers)
   return res.data
+}
+
+const updateUser = async (req: t.UpdateUser) => {
+  await api.put<null>(`/api/users/${req.id}`, {
+    name: req.name,
+    email: req.email,
+    role_id: req.role_id,
+    Password: req.password,
+  })
+  cachedApi.storage.remove(CacheCustomKeys.listPaginatedUsers)
+}
+
+const deleteUser = async (id: number) => {
+  await api.delete(`/api/users/${id}`)
+  cachedApi.storage.remove(CacheCustomKeys.listPaginatedUsers)
 }
 
 export {
   fetchUsersPaginated,
+  getUserById,
   getRolesList,
-  createNewUser,
+  createUser,
+  updateUser,
+  deleteUser,
 };
