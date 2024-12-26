@@ -38,6 +38,26 @@ type GetUsersPaginatedResponse = {
   }>;
 }
 
+type GetAuditsPaginated = {
+  page: number;
+  size: number;
+}
+
+type GetAuditsPaginatedResponse = {
+  meta: {
+    skip: number;
+    take: number;
+    total: number;
+  };
+  audits: Array<{
+    id: number;
+    user: string;
+    note: string;
+    shoeId: number;
+    createdAt: string;
+  }>;
+}
+
 type GetUserByIdResponse = {
   id: number;
   name: string;
@@ -76,8 +96,10 @@ export type {
   HealthCheckResponse,
   GetRolesListResponse,
   CreateNewUserResponse,
+  GetAuditsPaginatedResponse,
   GetUsersPaginatedResponse,
   GetUserByIdResponse,
+  GetAuditsPaginated,
   GetUsersPaginated,
   CreateNewUser,
   CacheStorage,
