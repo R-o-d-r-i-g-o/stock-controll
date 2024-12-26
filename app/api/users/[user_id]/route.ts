@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 
-import { createUserSchema } from '@/schemas'
+import { updateUserSchema } from '@/schemas'
 import * as svc from '@/backend/services'
 
 type UserParams = {
@@ -32,7 +32,7 @@ const deleteUser = async (req: NextRequest, { params }: UserParams) => {
 const updateUser = async (req: NextRequest, { params }: UserParams) => {
   try {
     const userId = parseInt((await params).user_id, 10)
-    const payload = await createUserSchema.validate(await req.json(), { abortEarly: false });
+    const payload = await updateUserSchema.validate(await req.json(), { abortEarly: false });
     await svc.updateUser({
       id: userId,
       name: payload.name,

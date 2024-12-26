@@ -1,4 +1,6 @@
+import { notFound } from 'next/navigation';
 
+import Form from './form'
 import * as svc from '@/services'
 
 type UpdateUserPageProps = {
@@ -11,10 +13,9 @@ const UpdateUserPage = async ({ params }: UpdateUserPageProps) => {
   const userId = (await params).user_id
   const [rolesList, user] = await Promise.all([svc.getRolesList(), svc.getUserById(userId)])
 
-  return <>
-    {JSON.stringify(rolesList)}
-    {JSON.stringify(user)}
-  </>
+  if (!user) notFound();
+
+  return <Form user={user} roles={rolesList.roles} />
 }
 
 export default UpdateUserPage;

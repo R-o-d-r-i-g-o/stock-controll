@@ -32,8 +32,13 @@ const createUserSchema = Yup.object().shape({
     .required('Senha é obrigatória'),
 });
 
+const updateUserSchema = createUserSchema.clone().shape({
+  id: Yup.number().required('O id do usuário deve ser referenciado')
+})
+
 export {
   loginSchema,
   createUserSchema,
+  updateUserSchema,
   ValidationError,
 }

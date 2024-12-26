@@ -30,6 +30,9 @@ const getUserBy = async (filter: t.getUserProps) => {
     id: user.id,
     name: user.name,
     email: user.email,
+    role_id: user.role_id,
+    createdAt: user.created_at,
+    deletedAt: user.deleted_at,
   };
 }
 
@@ -82,6 +85,9 @@ const createUser = async (user: t.createUserProps) => {
 }
 
 const updateUser = async (user: t.updateUserProps) => {
+  if (user.password && user.password !== "")
+    user.password = await encryptPassword(user.password)
+
   return await repo.updateUser(user)
 }
 

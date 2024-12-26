@@ -41,8 +41,8 @@ type GetUsersPaginatedResponse = {
 type GetUserByIdResponse = {
   id: number;
   name: string;
-  role: string;
   email: string;
+  role_id: number;
   createdAt: string;
   deletedAt: string | null;
 }
