@@ -12,7 +12,7 @@ const getUserByID = async (req: NextRequest, { params }: UserParams) => {
     const userId = parseInt((await params).user_id, 10)
     const user = await svc.getUserBy({ id: userId })
 
-    return Response.json({ user }, { status: 200 });
+    return Response.json(user, { status: 200 });
   } catch (error) {
     return Response.json(error, { status: 500 });
   }
@@ -31,14 +31,14 @@ const deleteUser = async (req: NextRequest, { params }: UserParams) => {
 
 const updateUser = async (req: NextRequest, { params }: UserParams) => {
   try {
-    const userId = parseInt((await params).user_id, 10)
-    const payload = await updateUserSchema.validate(await req.json(), { abortEarly: false });
+    const payload = {
+      ...(await req.json()),
+      id: parseInt((await params).user_id, 10)
+    }
+    const result = await updateUserSchema.validate(payload, { abortEarly: false });
     await svc.updateUser({
-      id: userId,
-      name: payload.name,
-      email: payload.email,
-      role_id: payload.role_id,
-      password: payload.password,
+      ...result,
+      password: result.password ?? "",
     })
 
     return Response.json(null, { status: 200 });

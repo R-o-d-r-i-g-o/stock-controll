@@ -22,7 +22,7 @@ const getUserById = async (id: number) => {
 const createUser = async (req: t.CreateNewUser) => {
   const res = await api.post<t.CreateNewUserResponse>("/api/users", req)
 
-  cachedApi.storage.remove(CacheCustomKeys.listPaginatedUsers)
+  await cachedApi.storage.remove(CacheCustomKeys.listPaginatedUsers)
   return res.data
 }
 
@@ -33,12 +33,12 @@ const updateUser = async (req: t.UpdateUser) => {
     role_id: req.role_id,
     Password: req.password,
   })
-  cachedApi.storage.remove(CacheCustomKeys.listPaginatedUsers)
+  await cachedApi.storage.remove(CacheCustomKeys.listPaginatedUsers)
 }
 
 const deleteUser = async (id: number) => {
   await api.delete(`/api/users/${id}`)
-  cachedApi.storage.remove(CacheCustomKeys.listPaginatedUsers)
+  await cachedApi.storage.remove(CacheCustomKeys.listPaginatedUsers)
 }
 
 export {

@@ -12,11 +12,14 @@ async function handleSubmit(state: m.InitialStateEntries, formData: FormData): P
     const payload = {
       ...data,
       role_id: parseInt(data.role_id, 10),
-      id: parseInt(data.id, 10),
+      id: parseInt(state.fieldValues.id, 10),
     }
 
     const result = await updateUserSchema.validate(payload, { abortEarly: false });
-    await updateUser(result)
+    await updateUser({
+      ...result,
+      password: result.password ?? undefined,
+    })
 
     return {
       message: "success",

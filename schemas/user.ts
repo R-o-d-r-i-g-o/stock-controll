@@ -33,7 +33,16 @@ const createUserSchema = Yup.object().shape({
 });
 
 const updateUserSchema = createUserSchema.clone().shape({
-  id: Yup.number().required('O id do usuário deve ser referenciado')
+  id: Yup.number()
+    .integer('O ID deve ser um número inteiro')
+    .positive('O ID deve ser um número positivo')
+    .required('O ID do usuário deve ser referenciado'),
+
+  password: Yup.string()
+    .nullable()
+    .transform((value) => (value === '' ? null : value))
+    .min(6, 'Senha deve ter pelo menos 6 caracteres')
+    .max(50, 'Senha pode ter no máximo 50 caracteres'),
 })
 
 export {

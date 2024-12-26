@@ -41,13 +41,8 @@ const SubmitButton = () => {
 }
 
 const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
-  const initialState = {
-    ...m.initalState,
-    name: user.name,
-    email: user.email,
-    role_id: user.role_id?.toString(),
-    id: user.id?.toString(),
-  }
+  const initialState = m.initalState
+  initialState.fieldValues.id = user.id.toString()
 
   const { success, failure } = useToast()
   const [state, formAction] = useFormState(a.handleSubmit, initialState)
@@ -91,6 +86,7 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
             type="email"
             id="email"
             name="email"
+            autoComplete="off"
             defaultValue={user.email}
             placeholder="Digite seu email"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
@@ -102,6 +98,7 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
             type="password"
             id="password"
             name="password"
+            autoComplete="off"
             placeholder="Digite sua senha"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           />
