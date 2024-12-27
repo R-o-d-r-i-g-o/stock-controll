@@ -9,6 +9,8 @@ import {
 } from '@mui/material';
 
 import * as t from './_types'
+import { defaultDateMask } from '@/common';
+import moment from 'moment';
 
 const CustomTableContainer = styled(TableContainer)({
   marginTop: '30px',
@@ -21,7 +23,7 @@ const AuxTabela = ({ data }: t.TableProps) => {
       <Table className='w-full'>
         <TableHead>
           <TableRow>
-            <TableCell className="!text-center">ID</TableCell>
+            <TableCell className="!text-center">#</TableCell>
             <TableCell className="!text-center">SKU</TableCell>
             <TableCell className="!text-center">Tamanho</TableCell>
             <TableCell className="!text-center">Preço</TableCell>
@@ -41,8 +43,12 @@ const AuxTabela = ({ data }: t.TableProps) => {
               <TableCell className="!text-center">{shoe.id}</TableCell>
               <TableCell className="!text-center">{shoe.sku}</TableCell>
               <TableCell className="!text-center">{shoe.size}</TableCell>
-              <TableCell className="!text-center">{`R$ ${shoe.price.toFixed(2)}`}</TableCell>
-              <TableCell className="!text-center">{new Date(shoe.createdAt).toISOString()}</TableCell>
+              <TableCell className="!text-center">
+                {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(shoe.price)}
+              </TableCell>
+              <TableCell className="!text-center">
+                {moment(shoe.createdAt).format(defaultDateMask)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
