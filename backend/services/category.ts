@@ -14,8 +14,9 @@ const getCategoryBy = async (filter: t.getCategoryByProps) => {
       id: s.id,
       sku: s.hash_code,
       size: s.size,
-      price: s.price,
+      price: s.price.toNumber(),
       createdAt: s.created_at,
+      deletedAt: s.deleted_at,
     })),
   };
 }

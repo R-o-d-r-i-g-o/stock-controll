@@ -16,7 +16,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
 
 import { useRouter } from "next/navigation";
-import { NavigationPage } from '@/common';
+import { defaultDateMask, NavigationPage } from '@/common';
 
 import * as t from './_types'
 import moment from 'moment';
@@ -71,7 +71,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                     {a.id}
                   </TableCell>
                   <TableCell>
-                    {moment(a.createdAt).format('DD/MM/YYYY HH:mm:ss')}
+                    {moment(a.createdAt).format(defaultDateMask)}
                   </TableCell>
                   <TableCell>
                     {a.user}

@@ -1,11 +1,12 @@
 import Table from './_table'
-import { defautlPageSize } from "@/common"
+import { defaultPageSize } from "@/common"
 
 import * as svc from '@/services'
 
 type UserListPageProps = {
   searchParams: Promise<{
-    page: string
+    page: string;
+    size: string;
   }>
 }
 
@@ -13,8 +14,8 @@ const HistoryListPage = async ({ searchParams }: UserListPageProps) => {
   const req = await searchParams
 
   const filters = {
-    size: defautlPageSize,
     page: parseInt(req.page ?? "1"),
+    size: parseInt(req.size ?? defaultPageSize.toString()),
   }
   const usersPaginated = await svc.getShoesGroupedByCategoryPaginated(filters)
 

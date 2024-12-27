@@ -17,7 +17,7 @@ import { styled } from '@mui/material/styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { useRouter } from "next/navigation";
-import { NavigationPage } from '@/common';
+import { defaultDateMask, NavigationPage } from '@/common';
 
 import * as t from './_types'
 import moment from 'moment';
@@ -110,7 +110,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                     {c.name}
                   </TableCell>
                   <TableCell>
-                    {moment(c.createdAt).format('DD/MM/YYYY HH:mm:ss')}
+                    {moment(c.createdAt).format(defaultDateMask)}
                   </TableCell>
                   <TableCell>
                     {c.color}

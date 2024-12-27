@@ -1,4 +1,4 @@
-import { cachedApi } from './_api'
+import { cachedApi, api } from './_api'
 import * as t from './_types'
 
 const getShoesGroupedByCategoryPaginated = async (req: t.GetShoesGroupedByCategoryPaginated) => {
@@ -8,4 +8,9 @@ const getShoesGroupedByCategoryPaginated = async (req: t.GetShoesGroupedByCatego
   return res.data;
 };
 
-export { getShoesGroupedByCategoryPaginated };
+const getCategoryById = async (id: number) => {
+  const res = await api.get<t.GetShoesGroupedByCategoryPaginatedRespose>(`/api/categories/${id}`);
+  return res.data;
+};
+
+export { getShoesGroupedByCategoryPaginated, getCategoryById };

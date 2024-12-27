@@ -1,13 +1,14 @@
 import Table from './_table'
 import * as svc from '@/services'
-import { defautlPageSize, NavigationPage } from '@/common'
+import { defaultPageSize, NavigationPage } from '@/common'
 
 import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
 
 type UserListPageProps = {
   searchParams: Promise<{
-    page: string
+    page: string;
+    size: string;
   }>
 }
 
@@ -25,8 +26,8 @@ const UserListPage = async ({ searchParams }: UserListPageProps) => {
   const req = await searchParams
 
   const filters = {
-    size: defautlPageSize,
     page: parseInt(req.page ?? "1"),
+    size: parseInt(req.size ?? defaultPageSize.toString()),
   }
   const usersPaginated = await svc.fetchUsersPaginated(filters)
 

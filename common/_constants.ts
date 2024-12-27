@@ -11,7 +11,9 @@ import SwipeRightSharpIcon from '@mui/icons-material/SwipeRightSharp';
 
 import * as t from './_models'
 
-const defautlPageSize = 10
+const defaultPageSize = 10
+
+const defaultDateMask = "DD/MM/YYYY HH:mm:ss"
 
 const menuItems: Array<t.MenuItem> = [
   {
@@ -61,7 +63,8 @@ const menuPositions: Array<t.MenuPosition> = [
 ]
 
 export {
-  defautlPageSize,
+  defaultPageSize,
+  defaultDateMask,
   menuPositions,
   menuItems,
 }
