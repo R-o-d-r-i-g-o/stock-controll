@@ -3,13 +3,10 @@
 import React, { useState } from 'react';
 
 import { IconButton } from '@mui/material';
+import Scanner from './_scanner'
 
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-// import Test from './barCodeScanner'
-// import Test from './qrCodeScanner'
-import Test from './qrCodeZing'
 
 const RegisterBuying = () => {
   const [tasks, setTasks] = useState<string[]>([]);
@@ -32,7 +29,7 @@ const RegisterBuying = () => {
       <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
         SKUs p/a baixa do estoque
       </h2>
-      <Test />
+      <Scanner />
 
       <div className="flex items-center mb-6">
         <input
