@@ -46,6 +46,15 @@ type getAuditsPaginatedProps = {
   size: number;
 }
 
+type getShoesGroupedByCategoryPaginatedProps = {
+  page: number;
+  size: number;
+}
+
+type Accumulator = {
+  [size: number]: { size: number; shoes: { id: number; price: number }[] };
+};
+
 export type {
   getAuthUserProps,
   getAuthUserResponse,
@@ -53,6 +62,8 @@ export type {
   createUserProps,
   getUsersPaginatedProps,
   getAuditsPaginatedProps,
+  getShoesGroupedByCategoryPaginatedProps,
   createHistoryProps,
+  Accumulator,
   getUserProps,
 };
