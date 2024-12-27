@@ -20,6 +20,7 @@ enum NavigationPage {
   Users = "/painel/usuarios",
   Reports = "/painel/relatorios",
   History = "/painel/historico",
+  SKUs = "/painel/calcados/sku",
 
   // create operations
   UsersCreate = "/painel/usuarios/criar",
