@@ -7,7 +7,16 @@ const Test = () => {
   return (
     <>
       <QrReader
-        constraints={{}}
+        className='w-full'
+        constraints={{
+          // advanced: [
+          //   {
+          //     facingMode: "environment",
+          //     width: { ideal: 1280 },
+          //     height: { ideal: 720 },
+          //   },
+          // ]
+        }}
         onResult={(result, error) => {
           if (result) setData(result);
           if (error) console.info(error);
