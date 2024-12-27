@@ -2,8 +2,11 @@
 
 import React from 'react';
 
-import { Button, Box, Divider, IconButton } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
+
+import { Divider, IconButton } from '@mui/material';
 
 import * as t from './_types'
 import Table from './_table'
@@ -15,7 +18,6 @@ const ProductDash = ({ data }: t.DashProps) => {
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
           {`Detalhes do Produto #${data.id}`}
         </h2>
-
         <form className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -59,23 +61,18 @@ const ProductDash = ({ data }: t.DashProps) => {
               />
             </div>
           </div>
-
           <Divider sx={{ margin: '20px 0' }} />
-
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              className="w-full sm:w-auto"
-              disabled
-            >
-              Editar
-            </Button>
-            <IconButton color="primary">
-              <MoreVertIcon />
+          <div className="flex gap-2 items-center justify-center">
+            <IconButton className=" !bg-green-500 !rounded-2xl !text-white">
+              <AddIcon />
             </IconButton>
-          </Box>
+            <IconButton className=" !bg-blue-500 !rounded-2xl !text-white">
+              <EditIcon />
+            </IconButton>
+            <IconButton className="!bg-red-500 !rounded-2xl !text-white">
+              <DeleteIcon />
+            </IconButton>
+          </div>
         </form>
       </div>
       <Table data={data.shoes} />

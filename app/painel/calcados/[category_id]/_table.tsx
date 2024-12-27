@@ -5,8 +5,11 @@ import {
   TableContainer,
   TableHead,
   TableBody,
-  TableRow
+  TableRow,
+  IconButton
 } from '@mui/material';
+
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import * as t from './_types'
 import { defaultDateMask } from '@/common';
@@ -28,6 +31,7 @@ const AuxTabela = ({ data }: t.TableProps) => {
             <TableCell className="!text-center">Tamanho</TableCell>
             <TableCell className="!text-center">Preço</TableCell>
             <TableCell className="!text-center">Data</TableCell>
+            <TableCell className="!text-center"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -48,6 +52,11 @@ const AuxTabela = ({ data }: t.TableProps) => {
               </TableCell>
               <TableCell className="!text-center">
                 {moment(shoe.createdAt).format(defaultDateMask)}
+              </TableCell>
+              <TableCell className="!text-center">
+                <IconButton>
+                  <MoreVertIcon />
+                </IconButton>
               </TableCell>
             </TableRow>
           ))}
