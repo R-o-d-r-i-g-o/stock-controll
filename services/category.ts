@@ -9,7 +9,7 @@ const getShoesGroupedByCategoryPaginated = async (req: t.GetShoesGroupedByCatego
 };
 
 const getCategoryById = async (id: number) => {
-  const res = await api.get<t.GetShoesGroupedByCategoryPaginatedRespose>(`/api/categories/${id}`);
+  const res = await api.get<t.GetCategoryByIdResponse>(`/api/categories/${id}`);
   return res.data;
 };
 

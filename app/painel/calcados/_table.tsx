@@ -69,7 +69,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
 
   const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
     e?.preventDefault()
-    router.push(`${NavigationPage.History}?page=${newPage}`)
+    router.push(`${NavigationPage.Shoes}?page=${newPage}`)
   };
 
   const handleRowClick = (index: number) => {
@@ -100,9 +100,9 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                 </TableCell>
               </TableRow>
             )}
-            {data.categories?.map((c, index) => (
-              <React.Fragment key={index}>
-                <TableRow key={index} className="hover:bg-indigo-100">
+            {data.categories?.map((c) => (
+              <React.Fragment key={c.id}>
+                <TableRow className="hover:bg-indigo-100">
                   <TableCell>
                     {c.id}
                   </TableCell>
@@ -119,19 +119,19 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                     {c.sole}
                   </TableCell>
                   <TableCell>
-                    <IconButton onClick={() => handleRowClick(index)}>
+                    <IconButton onClick={() => handleRowClick(c.id)}>
                       <ExpandMoreIcon />
                     </IconButton>
                   </TableCell>
                   <TableCell>
-                    <IconButton onClick={() => handleRowClick(index)}>
+                    <IconButton onClick={() => router.push(`${NavigationPage.Shoes}/${c.id}`)}>
                       <MoreVertIcon />
                     </IconButton>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell colSpan={7} style={{ paddingBottom: 0, paddingTop: 0 }}>
-                    <Collapse in={selectedRow === index} timeout="auto" unmountOnExit>
+                    <Collapse in={selectedRow === c.id} timeout="auto" unmountOnExit>
                       <div className="p-4">
                         <p className="text-gray-700"><strong>Descrição:</strong></p>
                         <p className="text-gray-700">{c.note || "--"}</p>

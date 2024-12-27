@@ -96,6 +96,24 @@ type GetUserByIdResponse = {
   deletedAt: string | null;
 }
 
+type GetCategoryByIdResponse = {
+  id: number;
+  name: string;
+  sole: string;
+  color: string;
+  note: string;
+  createdAt: string;
+  deletedAt: string | null;
+  shoes: {
+    id: number;
+    sku: string;
+    size: number;
+    price: number;
+    createdAt: string;
+    deletedAt: string | null;
+  }[];
+}
+
 type CreateNewUser = {
   name: string
   email: string
@@ -110,7 +128,6 @@ type UpdateUser = {
   role_id?: number
   password?: string
 }
-
 
 type CreateNewUserResponse = {
   user_id: number
@@ -129,6 +146,7 @@ export type {
   GetUsersPaginatedResponse,
   GetShoesGroupedByCategoryPaginated,
   GetShoesGroupedByCategoryPaginatedRespose,
+  GetCategoryByIdResponse,
   GetUserByIdResponse,
   GetAuditsPaginated,
   GetUsersPaginated,
