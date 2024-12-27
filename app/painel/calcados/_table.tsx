@@ -27,6 +27,39 @@ const CustomTableContainer = styled(TableContainer)({
   overflowX: 'scroll',
 });
 
+const FOOT_SIZES = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52];
+
+type AuxTabelaProps = {
+  groupedShoes: t.GroupedShoe[];
+};
+
+const AuxTabela = ({ groupedShoes }: AuxTabelaProps) => {
+  const shoeCountBySize: { [size: number]: number } = {};
+
+  groupedShoes.forEach((group) => {
+    shoeCountBySize[group.size] = (shoeCountBySize[group.size] || 0) + group.shoes.length;
+  });
+
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          {FOOT_SIZES.map((size) => (
+            <TableCell key={size}>{size}</TableCell>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          {FOOT_SIZES.map((size) => (
+            <TableCell key={size}>{shoeCountBySize[size] || 0}</TableCell>
+          ))}
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+};
+
 const Tabela = ({ filter, data }: t.TabelaProps) => {
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
@@ -44,40 +77,44 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
 
   return (
     <React.Fragment>
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Histórico de atividades</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Calçados disponiveis</h2>
       <CustomTableContainer>
         <Table>
           <TableHead>
             <TableRow className="bg-indigo-500">
               <TableCell className="!text-white font-semibold">#</TableCell>
+              <TableCell className="!text-white font-semibold">Nome</TableCell>
               <TableCell className="!text-white font-semibold">Data</TableCell>
-              <TableCell className="!text-white font-semibold">User</TableCell>
-              <TableCell className="!text-white font-semibold">Calçado</TableCell>
+              <TableCell className="!text-white font-semibold">Cor</TableCell>
+              <TableCell className="!text-white font-semibold">Solado</TableCell>
               <TableCell className="!text-white font-semibold">Config.</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {!data.audits || data.audits.length < 1 && (
+            {!data.categories || data.categories.length < 1 && (
               <TableRow>
-                <TableCell colSpan={5} align="center">
+                <TableCell colSpan={6} align="center">
                   <p className="text-gray-500">Nenhum registro encontrado.</p>
                 </TableCell>
               </TableRow>
             )}
-            {data.audits?.map((a, index) => (
+            {data.categories?.map((c, index) => (
               <React.Fragment key={index}>
                 <TableRow key={index} className="hover:bg-indigo-100">
                   <TableCell>
-                    {a.id}
+                    {c.id}
                   </TableCell>
                   <TableCell>
-                    {moment(a.createdAt).format('DD/MM/YYYY HH:mm:ss')}
+                    {c.name}
                   </TableCell>
                   <TableCell>
-                    {a.user}
+                    {moment(c.createdAt).format('DD/MM/YYYY HH:mm:ss')}
                   </TableCell>
                   <TableCell>
-                    {a.shoeId ?? "--"}
+                    {c.color}
+                  </TableCell>
+                  <TableCell>
+                    {c.sole}
                   </TableCell>
                   <TableCell>
                     <IconButton onClick={() => handleRowClick(index)}>
@@ -86,11 +123,13 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell colSpan={5} style={{ paddingBottom: 0, paddingTop: 0 }}>
+                  <TableCell colSpan={6} style={{ paddingBottom: 0, paddingTop: 0 }}>
                     <Collapse in={selectedRow === index} timeout="auto" unmountOnExit>
                       <div className="p-4">
                         <p className="text-gray-700"><strong>Descrição:</strong></p>
-                        <p className="text-gray-700">{a.note}</p>
+                        <p className="text-gray-700 mb-4">{c.note}</p>
+
+                        <AuxTabela groupedShoes={c.groupedShoes} />
                       </div>
                     </Collapse>
                   </TableCell>

@@ -58,6 +58,35 @@ type GetAuditsPaginatedResponse = {
   }>;
 }
 
+type GetShoesGroupedByCategoryPaginated = {
+  page: number;
+  size: number;
+}
+
+type GetShoesGroupedByCategoryPaginatedRespose = {
+  meta: {
+    skip: number;
+    take: number;
+    total: number;
+  };
+  categories: {
+    id: number;
+    name: string;
+    sole: string;
+    note: string;
+    color: string;
+    createdAt: string;
+    deletedAt: string | null;
+    groupedShoes: {
+      size: number;
+      shoes: {
+        id: number;
+        price: number;
+      }[];
+    }[];
+  }[];
+}
+
 type GetUserByIdResponse = {
   id: number;
   name: string;
@@ -98,6 +127,8 @@ export type {
   CreateNewUserResponse,
   GetAuditsPaginatedResponse,
   GetUsersPaginatedResponse,
+  GetShoesGroupedByCategoryPaginated,
+  GetShoesGroupedByCategoryPaginatedRespose,
   GetUserByIdResponse,
   GetAuditsPaginated,
   GetUsersPaginated,
