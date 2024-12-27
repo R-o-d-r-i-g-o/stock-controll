@@ -67,9 +67,11 @@ const AuxTabela = ({ data }: t.TableProps) => (
               {moment(shoe.createdAt).format(defaultDateMask)}
             </TableCell>
             <TableCell className="!text-center">
-              <IconButton>
-                <MoreVertIcon />
-              </IconButton>
+              <Link href={`${NavigationPage.Products}/${shoe.id}`}>
+                <IconButton>
+                  <MoreVertIcon />
+                </IconButton>
+              </Link>
             </TableCell>
           </TableRow>
         ))}

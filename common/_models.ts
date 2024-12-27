@@ -18,9 +18,10 @@ enum NavigationPage {
   Login = "/entrar",
   Shoes = "/painel/calcados",
   Users = "/painel/usuarios",
-  Reports = "/painel/relatorios",
-  History = "/painel/historico",
   SKUs = "/painel/calcados/sku",
+  History = "/painel/historico",
+  Reports = "/painel/relatorios",
+  Products = "/painel/calcados/produtos",
 
   // create operations
   UsersCreate = "/painel/usuarios/criar",
