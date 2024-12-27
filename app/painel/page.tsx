@@ -1,6 +1,5 @@
 const HomePage = () => (
   <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-4xl">
-    {/* notas sobre o uso do sistema */}
     <h2 className="text-2xl font-bold mb-4">Funcionalidades do Sistema</h2>
     <ul className="list-disc pl-5 space-y-2">
       <li><strong>Cadastro de Produtos:</strong> Adicionar, editar e excluir sapatos com informações detalhadas.</li>
@@ -10,7 +9,6 @@ const HomePage = () => (
       <li><strong>Busca e Filtro de Produtos:</strong> Facilite a pesquisa por categoria, tamanho, cor e preço.</li>
       <li><strong>Controle de Fornecedores:</strong> Cadastre fornecedores e mantenha o estoque sempre abastecido.</li>
     </ul>
-    {/* notas sobre a segurança no sistema */}
     <h2 className="text-2xl font-bold mb-4 mt-8">Notas de Segurança</h2>
     <ul className="list-disc pl-5 space-y-2">
       <li><strong>Senha Forte:</strong> Utilize uma combinação de letras, números e caracteres especiais.</li>
