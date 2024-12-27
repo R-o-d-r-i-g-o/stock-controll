@@ -34,6 +34,11 @@ type getShoesPaginatedProps = {
   take: number;
 }
 
+type getCategoryByProps = {
+  id?: number
+  name?: string;
+}
+
 type getUserProps = {
   id?: number;
   name?: string;
@@ -44,6 +49,7 @@ export type {
   updateUserProps,
   createUserProps,
   createHistoryProps,
+  getCategoryByProps,
   getShoesPaginatedProps,
   getUsersPaginatedProps,
   getAuditsPaginatedProps,

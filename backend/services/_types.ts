@@ -41,6 +41,11 @@ type createHistoryProps = {
   shoe_id?: number
 }
 
+type getCategoryByProps = {
+  id?: number
+  name?: string;
+}
+
 type getAuditsPaginatedProps = {
   page: number;
   size: number;
@@ -60,6 +65,7 @@ export type {
   getAuthUserResponse,
   updateUserProps,
   createUserProps,
+  getCategoryByProps,
   getUsersPaginatedProps,
   getAuditsPaginatedProps,
   getShoesGroupedByCategoryPaginatedProps,

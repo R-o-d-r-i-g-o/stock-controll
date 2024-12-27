@@ -1,14 +1,33 @@
 import * as repo from '@/backend/repositories'
 import * as t from './_types'
 
+const getCategoryBy = async (filter: t.getCategoryByProps) => {
+  const category = await repo.getCategoryBy(filter)
+  const { id, name, sole, description, color, created_at, deleted_at, Shoe } = category;
+
+  return {
+    id, name, sole, color,
+    note: description,
+    createdAt: created_at,
+    deletedAt: deleted_at,
+    shoes: Shoe?.map(s => ({
+      id: s.id,
+      sku: s.hash_code,
+      size: s.size,
+      price: s.price,
+      createdAt: s.created_at,
+    })),
+  };
+}
+
 const getShoesGroupedByCategoryPaginated = async (filter: t.getShoesGroupedByCategoryPaginatedProps) => {
   const parsedFilter = {
     skip: (filter.page - 1) * filter.size,
     take: filter.size
   }
 
-  const categoryCount = await repo.getShoesGroupedByCategoryCount(parsedFilter)
-  const categoryList = await repo.getShoesGroupedByCategoryPaginated(parsedFilter)
+  const categoryCount = await repo.getCategoryShoesCount(parsedFilter)
+  const categoryList = await repo.getCategoryShoesPaginated(parsedFilter)
 
   const categoriesGrouped = categoryList?.map(category => {
     const { id, name, sole, description, color, created_at, deleted_at, Shoe } = category;
@@ -38,4 +57,4 @@ const getShoesGroupedByCategoryPaginated = async (filter: t.getShoesGroupedByCat
   }
 }
 
-export { getShoesGroupedByCategoryPaginated }
+export { getShoesGroupedByCategoryPaginated, getCategoryBy }

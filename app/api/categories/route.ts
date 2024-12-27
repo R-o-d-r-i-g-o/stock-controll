@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import * as svc from '@/backend/services'
 
-const getUsersPaginated = async (req: NextRequest) => {
+const getCategoriesAndRelatedShoesPaginated = async (req: NextRequest) => {
   try {
     const searchParams = req.nextUrl.searchParams;
     const payload = {
@@ -16,4 +16,4 @@ const getUsersPaginated = async (req: NextRequest) => {
   }
 }
 
-export { getUsersPaginated as GET }
+export { getCategoriesAndRelatedShoesPaginated as GET }

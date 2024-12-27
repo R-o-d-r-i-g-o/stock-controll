@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { useRouter } from "next/navigation";
 import { NavigationPage } from '@/common';
@@ -88,12 +89,13 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
               <TableCell className="!text-white font-semibold">Cor</TableCell>
               <TableCell className="!text-white font-semibold">Solado</TableCell>
               <TableCell className="!text-white font-semibold">Config.</TableCell>
+              <TableCell className="!text-white font-semibold"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {!data.categories || data.categories.length < 1 && (
               <TableRow>
-                <TableCell colSpan={6} align="center">
+                <TableCell colSpan={7} align="center">
                   <p className="text-gray-500">Nenhum registro encontrado.</p>
                 </TableCell>
               </TableRow>
@@ -121,9 +123,14 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                       <ExpandMoreIcon />
                     </IconButton>
                   </TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleRowClick(index)}>
+                      <MoreVertIcon />
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell colSpan={6} style={{ paddingBottom: 0, paddingTop: 0 }}>
+                  <TableCell colSpan={7} style={{ paddingBottom: 0, paddingTop: 0 }}>
                     <Collapse in={selectedRow === index} timeout="auto" unmountOnExit>
                       <div className="p-4">
                         <p className="text-gray-700"><strong>Descrição:</strong></p>
