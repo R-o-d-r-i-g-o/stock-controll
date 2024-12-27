@@ -10,13 +10,15 @@ import { Divider, IconButton } from '@mui/material';
 
 import * as t from './_types'
 import Table from './_table'
+import { NavigationPage } from '@/common';
+import Link from 'next/link';
 
 const ProductDash = ({ data }: t.DashProps) => {
   return (
     <React.Fragment>
       <div className="bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-          {`Detalhes do Produto #${data.id}`}
+          {`Detalhes do calçado #${data.id}`}
         </h2>
         <form className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -63,9 +65,11 @@ const ProductDash = ({ data }: t.DashProps) => {
           </div>
           <Divider sx={{ margin: '20px 0' }} />
           <div className="flex gap-2 items-center justify-center">
-            <IconButton className=" !bg-green-500 !rounded-2xl !text-white">
-              <AddIcon />
-            </IconButton>
+            <Link href={NavigationPage.ProductsCreate}>
+              <IconButton className=" !bg-green-500 !rounded-2xl !text-white">
+                <AddIcon />
+              </IconButton>
+            </Link>
             <IconButton className=" !bg-blue-500 !rounded-2xl !text-white">
               <EditIcon />
             </IconButton>

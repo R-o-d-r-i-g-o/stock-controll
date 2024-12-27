@@ -24,8 +24,10 @@ enum NavigationPage {
   Products = "/painel/calcados/produtos",
 
   // create operations
+  ShoesSale = "/painel/calcados/baixa",
   UsersCreate = "/painel/usuarios/criar",
   ShoesCreate = "/painel/calcados/criar",
+  ProductsCreate = "/painel/calcados/produtos/criar",
 }
 
 export {

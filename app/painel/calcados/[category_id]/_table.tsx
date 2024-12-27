@@ -38,7 +38,7 @@ const AuxTabela = ({ data }: t.TableProps) => (
       <TableBody>
         {!data || data.length < 1 && (
           <TableRow>
-            <TableCell colSpan={5} align="center">
+            <TableCell colSpan={6} align="center">
               <p className="text-gray-500">Nenhum registro encontrado.</p>
             </TableCell>
           </TableRow>
