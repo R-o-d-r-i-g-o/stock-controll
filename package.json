@@ -31,6 +31,7 @@
     "react-hook-form": "^7.54.0",
     "react-qr-reader": "^3.0.0-beta-1",
     "react-toastify": "^10.0.6",
+    "react-zxing": "^2.0.2",
     "sweetalert2": "^11.15.3",
     "tsx": "^4.19.2",
     "web-push": "^3.6.7",
@@ -56,6 +57,10 @@
       "react-dom": "$react-dom"
     },
     "react-barcode-reader": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "react-zxing": {
       "react": "$react",
       "react-dom": "$react-dom"
     }

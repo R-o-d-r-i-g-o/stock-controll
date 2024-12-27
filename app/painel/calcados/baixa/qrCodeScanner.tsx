@@ -4,6 +4,8 @@ import { QrReader } from 'react-qr-reader';
 const Test = () => {
   const [data, setData] = useState<object>({});
 
+  console.log('está aqui')
+
   return (
     <>
       <QrReader
@@ -19,7 +21,7 @@ const Test = () => {
         }}
         onResult={(result, error) => {
           if (result) setData(result);
-          if (error) console.info(error);
+          if (error) console.error("veio no erro: ", error);
         }}
       />
       <p>{JSON.stringify(data)}</p>
