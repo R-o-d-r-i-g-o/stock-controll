@@ -127,8 +127,8 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                     <Collapse in={selectedRow === index} timeout="auto" unmountOnExit>
                       <div className="p-4">
                         <p className="text-gray-700"><strong>Descrição:</strong></p>
-                        <p className="text-gray-700 mb-4">{c.note}</p>
-
+                        <p className="text-gray-700">{c.note || "--"}</p>
+                        <p className="text-gray-700 mt-6"><strong>Tamanho X Unidades:</strong></p>
                         <AuxTabela groupedShoes={c.groupedShoes} />
                       </div>
                     </Collapse>
