@@ -15,6 +15,10 @@ const getShoeBy = async (filter: t.getShoeByProps) => {
   };
 }
 
+const debitShoes = async (SKUs: string[]) => {
+  await repo.debitShoes(SKUs)
+}
+
 const createShoe = async (data: t.createShoeProps) => {
   const shoeId = await repo.createShoe(data)
   return shoeId
@@ -34,5 +38,6 @@ export {
   getShoeBy,
   createShoe,
   deleteShoe,
-  updateShoe
+  updateShoe,
+  debitShoes
 }

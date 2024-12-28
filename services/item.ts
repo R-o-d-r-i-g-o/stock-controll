@@ -6,8 +6,8 @@ const getShoeById = async (id: number) => {
   return res.data;
 };
 
-const debitShoesFromStorage = async (SKUs: string[]) => {
-  const res = await api.post<t.GetShoesById>("/api/shoes/debit", { SKUs });
+const debitShoesFromStorage = async (skuList: string[]) => {
+  const res = await api.post<t.GetShoesById>("/api/shoes/debit", { skuList });
   return res.data;
 }
 

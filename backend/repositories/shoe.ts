@@ -4,7 +4,14 @@ import * as t from './_types'
 
 const createShoe = async (shoe: t.createShoeProps) => {
   return await prismaTransaction(async () => {
-    const { id } = await prisma.shoe.create({ data: shoe })
+    const { id } = await prisma.shoe.create({
+      data: {
+        size: shoe.size,
+        price: shoe.price,
+        hash_code: shoe.sku,
+        category_id: shoe.categoryId,
+      }
+    })
     return id
   })
 }
@@ -45,9 +52,27 @@ const getShoeBy = async (filter: t.getShoeByProps) => {
   })
 }
 
+const debitShoes = async (SKUs: string[]) => {
+  const shoes = await prisma.shoe.findMany({
+    where: { hash_code: { in: SKUs } },
+    select: { id: true }
+  })
+
+  const data = shoes.map((u) => ({
+    shoe_id: u.id,
+    user_id: 1,
+    note: ""
+  }))
+
+  await prisma.order.createMany({
+    data: data
+  })
+}
+
 export {
   getShoeBy,
   deleteShoe,
   createShoe,
   updateShoe,
+  debitShoes
 }

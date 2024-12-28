@@ -43,10 +43,10 @@ type getShoeByProps = {
 }
 
 type createShoeProps = {
+  sku: string;
   size: number;
   price: number;
-  hash_code: string;
-  category_id: number;
+  categoryId: number;
 }
 
 type updateShoeProps = {
