@@ -55,6 +55,20 @@ const deleteCategory = async (id: number) => {
   })
 }
 
+const updateCategory = async (user: t.updateCategoryProps) => {
+  return await prismaTransaction(async () => {
+    await prisma.category.update({
+      where: { id: user.id },
+      data: {
+        name: user.name || undefined,
+        sole: user.sole || undefined,
+        color: user.color || undefined,
+        description: user.note || undefined,
+      }
+    })
+  })
+}
+
 const createCategory = async (data: t.createCategoryProps) => {
   const { id } = await prisma.category.create({
     data: {
@@ -68,6 +82,7 @@ const createCategory = async (data: t.createCategoryProps) => {
 }
 
 export {
+  updateCategory,
   deleteCategory,
   createCategory,
   getCategoryBy,

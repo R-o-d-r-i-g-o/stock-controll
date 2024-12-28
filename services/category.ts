@@ -20,7 +20,10 @@ const deleteCategoryById = async (id: number) => {
 
 const updateCategory = async (req: t.UpdateCategory) => {
   const res = await api.put(`/api/categories/${req.id}`, {
-    params: req,
+    name: req.name,
+    sole: req.sole,
+    note: req.note,
+    color: req.color
   });
   return res.data;
 }

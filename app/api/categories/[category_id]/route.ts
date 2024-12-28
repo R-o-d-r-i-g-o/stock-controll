@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import * as svc from '@/backend/services'
+import { updateCategoryValdiationSchema } from '@/schemas';
 
 type UserParams = {
   params: Promise<{ category_id: string }>
@@ -27,7 +28,24 @@ const deleteCategory = async (req: NextRequest, { params }: UserParams) => {
   }
 };
 
+const updateCategory = async (req: NextRequest, { params }: UserParams) => {
+  try {
+    const payload = {
+      ...(await req.json()),
+      id: parseInt((await params).category_id, 10)
+    }
+
+    const result = await updateCategoryValdiationSchema.validate(payload, { abortEarly: false });
+    await svc.updateCategory(result)
+
+    return Response.json(null, { status: 200 });
+  } catch (error) {
+    return Response.json(error, { status: 500 });
+  }
+};
+
 export {
   getCategoriesAndRelatedShoesPaginated as GET,
   deleteCategory as DELETE,
+  updateCategory as PUT,
 }

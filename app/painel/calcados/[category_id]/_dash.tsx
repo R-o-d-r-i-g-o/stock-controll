@@ -33,16 +33,14 @@ const ProductDash = ({ data }: t.DashProps) => {
   }
 
   const { pending } = useFormStatus()
-  const [state, formAction] = useFormState(a.handleEditUserSubmit, initialState)
+  const [state, formAction] = useFormState(a.handleEditCategorySubmit, initialState)
 
   const handleFormReponse = () => {
-    if (state.message === "success") {
-      success("Usuário atualizado com sucesso!")
-      router.push(NavigationPage.Users)
-    }
-    else if (state.message !== "") {
+    if (state.message === "success")
+      success("Calçado atualizado com sucesso!")
+
+    else if (state.message !== "")
       failure(state.message)
-    }
   }
 
   const router = useRouter()

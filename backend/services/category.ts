@@ -67,9 +67,14 @@ const createCategory = async (data: t.createCategoryProps) => {
   return await repo.createCategory(data)
 }
 
+const updateCategory = async (data: t.updateCategoryProps) => {
+  await repo.updateCategory(data)
+}
+
 export {
   getShoesGroupedByCategoryPaginated,
   getCategoryBy,
   createCategory,
-  deleteCategory
+  deleteCategory,
+  updateCategory
 }

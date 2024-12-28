@@ -7,7 +7,7 @@ import axios from 'axios';
 import { updateCategoryValdiationSchema } from '@/schemas'
 import * as svc from '@/services'
 
-async function handleEditUserSubmit(state: m.InitialStateEntries, formData: FormData): Promise<m.InitialStateEntries> {
+async function handleEditCategorySubmit(state: m.InitialStateEntries, formData: FormData): Promise<m.InitialStateEntries> {
   try {
     const data = Object.fromEntries(formData.entries()) as m.CreateUserFormEntries
     const payload = {
@@ -38,4 +38,4 @@ async function handleEditUserSubmit(state: m.InitialStateEntries, formData: Form
   }
 }
 
-export { handleEditUserSubmit }
+export { handleEditCategorySubmit }

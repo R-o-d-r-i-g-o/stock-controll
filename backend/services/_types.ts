@@ -78,11 +78,21 @@ type createCategoryProps = {
   note: string;
 }
 
+type updateCategoryProps = {
+  id: number;
+  color?: string;
+  sole?: string;
+  name?: string;
+  note?: string;
+}
+
+
 type Accumulator = {
   [size: number]: { size: number; shoes: { id: number; price: number }[] };
 };
 
 export type {
+  updateCategoryProps,
   getAuthUserProps,
   getAuthUserResponse,
   updateUserProps,
