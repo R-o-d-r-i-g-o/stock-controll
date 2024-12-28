@@ -124,6 +124,21 @@ type GetShoesById = {
   deletedAt: string | null;
 }
 
+type CreateShoe = {
+  sku: string;
+  size: number;
+  price: number;
+  categoryId: number;
+}
+
+type UpdateShoe = {
+  id: number;
+  sku: string;
+  size: number;
+  price: number;
+  categoryId: number;
+}
+
 type UpdateCategory = {
   id: number;
   name: string;
@@ -173,8 +188,10 @@ export type {
   GetShoesGroupedByCategoryPaginatedRespose,
   GetCategoryByIdResponse,
   GetUserByIdResponse,
+  CreateShoe,
   GetAuditsPaginated,
   GetUsersPaginated,
+  UpdateShoe,
   UpdateCategory,
   CreateCategory,
   GetShoesById,

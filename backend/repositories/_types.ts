@@ -12,11 +12,18 @@ type createHistoryProps = {
 }
 
 type createShoeProps = {
-  id: number;
   size: number;
   price: number;
   hash_code: string;
   category_id: number;
+}
+
+type updateShoeProps = {
+  id: number;
+  sku: string;
+  size: number;
+  price: number;
+  categoryId: number;
 }
 
 type updateUserProps = {
@@ -87,5 +94,6 @@ export type {
   getUsersPaginatedProps,
   getAuditsPaginatedProps,
   getUserProps,
+  updateShoeProps,
   updateCategoryProps,
 }

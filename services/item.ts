@@ -16,8 +16,25 @@ const deleteShoeById = async (id: number) => {
   return res.data;
 };
 
+const createShoe = async (data: t.CreateShoe) => {
+  const res = await api.post("/api/shoes", data)
+  return res.data
+}
+
+const updateShoe = async (data: t.UpdateShoe) => {
+  const res = await api.put(`/api/shoes/${data.id}`, {
+    sku: data.sku,
+    size: data.size,
+    price: data.size,
+    categoryId: data.size,
+  })
+  return res.data
+}
+
 export {
   getShoeById,
   debitShoesFromStorage,
-  deleteShoeById
+  deleteShoeById,
+  createShoe,
+  updateShoe
 }

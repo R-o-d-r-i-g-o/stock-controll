@@ -5,19 +5,19 @@ type InitialStateEntries = {
 }
 
 type CreateUserFormEntries = {
-  name: string;
-  email: string;
-  role_id: string;
-  password: string
+  sku: string;
+  size: string;
+  price: string;
+  categoryId: string;
 }
 
 const initalState: InitialStateEntries = {
   message: "",
   fieldValues: {
-    name: "",
-    email: "",
-    role_id: "",
-    password: "",
+    sku: "",
+    size: "",
+    price: "",
+    categoryId: "",
   }
 }
 

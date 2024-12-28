@@ -20,6 +20,11 @@ const createShoe = async (data: t.createShoeProps) => {
   return shoeId
 }
 
+const updateShoe = async (data: t.updateShoeProps) => {
+  const shoe = await repo.updateShoe(data)
+  return shoe
+}
+
 const deleteShoe = async (id: number) => {
   const shoe = await repo.deleteShoe(id)
   return shoe
@@ -28,5 +33,6 @@ const deleteShoe = async (id: number) => {
 export {
   getShoeBy,
   createShoe,
-  deleteShoe
+  deleteShoe,
+  updateShoe
 }

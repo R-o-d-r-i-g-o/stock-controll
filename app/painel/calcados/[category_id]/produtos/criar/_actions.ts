@@ -3,19 +3,21 @@
 import axios from "axios";
 import * as m from './_models'
 
-import { createUser } from "@/services"
-import { createUserSchema, ValidationError } from "@/schemas";
+import { createShoe } from "@/services"
+import { itemCreationSchema, ValidationError } from "@/schemas";
 
 async function handleSubmit(state: m.InitialStateEntries, formData: FormData): Promise<m.InitialStateEntries> {
   try {
     const data = Object.fromEntries(formData.entries()) as m.CreateUserFormEntries
     const payload = {
-      ...data,
-      role_id: parseInt(data.role_id as string, 10),
+      sku: data.sku,
+      size: parseInt(data.size),
+      price: parseFloat(data.price),
+      categoryId: parseInt(state.fieldValues.categoryId)
     }
 
-    const result = await createUserSchema.validate(payload, { abortEarly: false });
-    await createUser(result)
+    const result = await itemCreationSchema.validate(payload);
+    await createShoe(result)
 
     return {
       message: "success",

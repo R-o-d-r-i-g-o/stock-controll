@@ -25,7 +25,7 @@ const SubmitButton = () => {
   )
 }
 
-const UserCreateForm = () => {
+const ItemCreationForm = () => {
   const { success, failure } = useToast()
   const [state, formAction] = useFormState(a.handleSubmit, m.initalState)
 
@@ -33,7 +33,7 @@ const UserCreateForm = () => {
 
   const handleFormReponse = () => {
     if (state.message === "success") {
-      success("Novo usuário criado com sucesso!")
+      success("Novo item criado com sucesso!")
       router.push(NavigationPage.Users)
     }
     else if (state.message !== "") {
@@ -94,4 +94,4 @@ const UserCreateForm = () => {
   );
 };
 
-export default UserCreateForm;
+export default ItemCreationForm;
