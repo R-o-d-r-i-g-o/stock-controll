@@ -27,7 +27,7 @@ const ActionButtons = () => (
     </Link>
     <Link
       title="Adicionar Categoria"
-      href={NavigationPage.UsersCreate}
+      href={NavigationPage.ShoesCreate}
       className="flex items-center space-x-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
     >
       <AddIcon />

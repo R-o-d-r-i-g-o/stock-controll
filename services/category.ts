@@ -25,8 +25,8 @@ const updateCategory = async (req: t.UpdateCategory) => {
   return res.data;
 }
 
-const createCategory = async () => {
-  const res = await api.post("/api/categories");
+const createCategory = async (req: t.CreateCategory) => {
+  const res = await api.post("/api/categories", req);
   return res.data;
 }
 

@@ -118,8 +118,15 @@ type UpdateCategory = {
   id: number;
   name: string;
   sole: string;
-  color: string;
   note: string;
+  color: string;
+}
+
+type CreateCategory = {
+  name: string;
+  sole: string;
+  note: string;
+  color: string;
 }
 
 type CreateNewUser = {
@@ -159,6 +166,7 @@ export type {
   GetAuditsPaginated,
   GetUsersPaginated,
   UpdateCategory,
+  CreateCategory,
   CreateNewUser,
   CacheStorage,
 }
