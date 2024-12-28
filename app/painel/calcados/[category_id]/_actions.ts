@@ -1,7 +1,7 @@
 "use server"
 
 import { ValidationError } from 'yup';
-import * as m from './_models'
+import * as m from './_types'
 import axios from 'axios';
 
 import { updateCategoryValdiationSchema } from '@/schemas'
