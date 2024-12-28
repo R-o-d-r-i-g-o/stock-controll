@@ -17,7 +17,7 @@ import { styled } from '@mui/material/styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { useRouter } from "next/navigation";
-import { defaultDateMask, NavigationPage } from '@/common';
+import { defaultDateMask, footSizesList, NavigationPage } from '@/common';
 
 import * as t from './_types'
 import moment from 'moment';
@@ -27,8 +27,6 @@ const CustomTableContainer = styled(TableContainer)({
   borderRadius: '10px',
   overflowX: 'scroll',
 });
-
-const FOOT_SIZES = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52];
 
 type AuxTabelaProps = {
   groupedShoes: t.GroupedShoe[];
@@ -45,14 +43,14 @@ const AuxTabela = ({ groupedShoes }: AuxTabelaProps) => {
     <Table>
       <TableHead>
         <TableRow>
-          {FOOT_SIZES.map((size) => (
+          {footSizesList.map((size) => (
             <TableCell key={size}>{size}</TableCell>
           ))}
         </TableRow>
       </TableHead>
       <TableBody>
         <TableRow>
-          {FOOT_SIZES.map((size) => (
+          {footSizesList.map((size) => (
             <TableCell key={size}>{shoeCountBySize[size] || 0}</TableCell>
           ))}
         </TableRow>

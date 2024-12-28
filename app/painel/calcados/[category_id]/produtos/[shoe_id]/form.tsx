@@ -8,9 +8,9 @@ import Swal from 'sweetalert2'
 
 import { useToast } from "@/hooks";
 import { useRouter } from "next/navigation";
-import { NavigationPage } from "@/common";
 
 import * as a from './_actions'
+import { footSizesList } from "@/common";
 // import * as m from './_models'
 
 type UserCreateFormProps = {
@@ -78,15 +78,15 @@ const FormButtons = ({ shoeId }: { shoeId: number }) => {
   )
 }
 
-const UserCreateForm = ({ shoe }: UserCreateFormProps) => {
+const UserCreateForm = ({ shoe: item }: UserCreateFormProps) => {
   const initialState = {
     message: "",
     fieldValues: {
-      ...shoe,
-      id: shoe.id.toString(),
-      size: shoe.size.toString(),
-      price: shoe.price.toString(),
-      categoryId: shoe.categoryId.toString(),
+      ...item,
+      id: item.id.toString(),
+      size: item.size.toString(),
+      price: item.price.toString(),
+      categoryId: item.categoryId.toString(),
     }
   }
 
@@ -97,8 +97,8 @@ const UserCreateForm = ({ shoe }: UserCreateFormProps) => {
 
   const handleFormReponse = () => {
     if (state.message === "success") {
-      success("O  atualizado com sucesso!")
-      router.push(NavigationPage.Users)
+      success("Produto atualizado com sucesso!")
+      router.push(`painel/calcados/${item.categoryId}`)
     }
     else if (state.message !== "") {
       failure(state.message)
@@ -111,11 +111,51 @@ const UserCreateForm = ({ shoe }: UserCreateFormProps) => {
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        {`Editar produto #${shoe.id}`}
+        {`Editar item #${item.id}`}
       </h2>
       <form action={formAction}>
-
-        <FormButtons shoeId={shoe.id} />
+        <div className="mb-6">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-600">SKU</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            defaultValue={item.sku}
+            placeholder="Definal um código para o item"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="password" className="block text-sm font-medium text-gray-600">Preço</label>
+          <input
+            id="price"
+            name="price"
+            type="number"
+            step={0.01}
+            defaultValue={item.price}
+            placeholder="Digite o preço do item"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="role_id" className="block text-sm font-medium text-gray-600">Tamanho</label>
+          <select
+            id="size"
+            name="size"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+          >
+            {footSizesList?.map(footSize => (
+              <option
+                key={footSize}
+                value={footSize}
+                selected={footSize === item.size}
+              >
+                {footSize}
+              </option>
+            ))}
+          </select>
+        </div>
+        <FormButtons shoeId={item.id} />
       </form>
     </div>
   );

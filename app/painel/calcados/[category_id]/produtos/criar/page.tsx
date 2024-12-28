@@ -5,7 +5,7 @@ import { useFormState, useFormStatus } from "react-dom";
 
 import { useToast } from "@/hooks";
 import { useRouter } from "next/navigation";
-import { NavigationPage } from "@/common";
+import { footSizesList, NavigationPage } from "@/common";
 
 import * as a from './_actions'
 import * as m from './_models'
@@ -46,52 +46,46 @@ const UserCreateForm = () => {
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Novo produto</h2>
-
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        Novo item
+      </h2>
       <form action={formAction}>
         <div className="mb-6">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-600">Nome</label>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-600">SKU</label>
           <input
-            type="text"
             id="name"
             name="name"
-            placeholder="Digite seu nome completo"
+            type="text"
+            placeholder="Definal um código para o item"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-600">Email</label>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-600">Preço</label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Digite seu email"
+            id="price"
+            name="price"
+            type="number"
+            step={0.01}
+            placeholder="Digite o preço do item"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-600">Senha</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Digite sua senha"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-          />
-        </div>
-        <div className="mb-6">
-          <label htmlFor="role_id" className="block text-sm font-medium text-gray-600">Cargo</label>
+          <label htmlFor="role_id" className="block text-sm font-medium text-gray-600">Tamanho</label>
           <select
-            id="role_id"
-            name="role_id"
+            id="size"
+            name="size"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           >
-            <option selected disabled>Selecione o cargo</option>
-            {/* {roles?.map(r => (
-              <option key={r.id} value={r.id}>
-                {r.name}
+            {footSizesList?.map(footSize => (
+              <option
+                key={footSize}
+                value={footSize}
+              >
+                {footSize}
               </option>
-            ))} */}
+            ))}
           </select>
         </div>
         <SubmitButton />
