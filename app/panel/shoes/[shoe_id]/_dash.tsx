@@ -127,7 +127,7 @@ const ProductDash = ({ data }: t.DashProps) => {
           <Divider sx={{ margin: '20px 0' }} />
           <div className="flex gap-2 items-center justify-center">
             <IconButton
-              onClick={() => router.push(`/painel/calcados/${data.id}/produtos/criar`)}
+              onClick={() => router.push(`/panel/shoes/${data.id}/items/create`)}
               disabled={pending}
               className=" !bg-green-500 !rounded-2xl !text-white">
               <AddIcon />

@@ -8,7 +8,7 @@ type SkuPageProps = {
 }
 
 const SkuPage = async ({ params }: SkuPageProps) => {
-  const shoeSku = (await params).sku;
+  const itemSku = (await params).sku;
 
   return (
     <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
@@ -16,20 +16,20 @@ const SkuPage = async ({ params }: SkuPageProps) => {
         Detalhes do SKU
       </h2>
       <p className="text-center text-lg mb-10">
-        Código SKU: <strong>{shoeSku}</strong>
+        Código SKU: <strong>{itemSku}</strong>
       </p>
 
       <div className="mb-8 overflow-x-auto">
         <h3 className="text-lg font-medium mb-2 text-gray-700">QR Code:</h3>
         <div className="flex justify-center">
-          <QrCode text={shoeSku} />
+          <QrCode text={itemSku} />
         </div>
       </div>
 
       <div className="mb-8 overflow-x-auto">
         <h3 className="text-lg font-medium mb-2 text-gray-700">Código de Barras:</h3>
         <div className="flex justify-center">
-          <BarCode text={shoeSku} />
+          <BarCode text={itemSku} />
         </div>
       </div>
     </div>

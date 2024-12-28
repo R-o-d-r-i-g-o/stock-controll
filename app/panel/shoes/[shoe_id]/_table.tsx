@@ -49,7 +49,7 @@ const AuxTabela = ({ meta, data }: t.TableProps) => (
               {shoe.id}
             </TableCell>
             <TableCell className="!text-center">
-              <Link href={`/painel/calcados/${meta.categoryId}/produtos/sku/${shoe.sku}`}>
+              <Link href={`/panel/shoes/${meta.categoryId}/items/sku/${shoe.sku}`}>
                 {shoe.sku}
                 <IconButton>
                   <OpenInNewIcon fontSize="small" />
@@ -66,7 +66,7 @@ const AuxTabela = ({ meta, data }: t.TableProps) => (
               {moment(shoe.createdAt).format(defaultDateMask)}
             </TableCell>
             <TableCell className="!text-center">
-              <Link href={`/painel/calcados/${meta.categoryId}/produtos/${shoe.id}`}>
+              <Link href={`/panel/shoes/${meta.categoryId}/items/${shoe.id}`}>
                 <IconButton>
                   <MoreVertIcon />
                 </IconButton>

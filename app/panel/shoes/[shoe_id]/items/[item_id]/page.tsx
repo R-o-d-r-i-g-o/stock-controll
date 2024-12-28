@@ -3,15 +3,15 @@ import Form from './form'
 
 type UpdateShoePageProps = {
   params: Promise<{
-    shoe_id: number;
+    item_id: number;
   }>
 }
 
 const UpdateShoePage = async ({ params }: UpdateShoePageProps) => {
-  const shoeId = (await params).shoe_id
-  const shoe = await svc.getShoeById(shoeId)
+  const itemId = (await params).item_id
+  const itemData = await svc.getShoeById(itemId)
 
-  return <Form shoe={shoe} />
+  return <Form shoe={itemData} />
 }
 
 export default UpdateShoePage;

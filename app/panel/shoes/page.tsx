@@ -55,4 +55,6 @@ const HistoryListPage = async ({ searchParams }: UserListPageProps) => {
   )
 }
 
+export const revalidate = 0
+
 export default HistoryListPage;

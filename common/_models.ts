@@ -14,19 +14,19 @@ type MenuPosition = {
 }
 
 enum NavigationPage {
-  Home = "/painel",
-  Login = "/entrar",
-  Category = "/painel/calcados",
-  Users = "/painel/usuarios",
-  History = "/painel/historico",
-  Reports = "/painel/relatorios",
-  Products = "/painel/calcados/produtos",
+  Home = "/panel",
+  Login = "/login",
+  Category = "/panel/shoes",
+  Users = "/panel/users",
+  History = "/panel/audits",
+  Reports = "/panel/reports",
+  Products = "/panel/shoes/items",
 
   // create operations
-  ShoesSale = "/painel/calcados/baixa",
-  UsersCreate = "/painel/usuarios/criar",
-  ShoesCreate = "/painel/calcados/criar",
-  ProductsCreate = "/painel/calcados/produtos/criar",
+  ShoesSale = "/panel/shoes/debit",
+  UsersCreate = "/panel/users/create",
+  ShoesCreate = "/panel/shoes/create",
+  ProductsCreate = "/panel/shoes/items/create",
 }
 
 export {
