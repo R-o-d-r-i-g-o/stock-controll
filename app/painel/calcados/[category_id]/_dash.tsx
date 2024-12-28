@@ -63,7 +63,7 @@ const ProductDash = ({ data }: t.DashProps) => {
 
         await svc.deleteCategoryById(data.id)
         success("O Produto foi deletado com sucesso!")
-        router.push(NavigationPage.Shoes)
+        router.push(NavigationPage.Category)
       }
       catch (err) {
         console.error(err)
@@ -127,7 +127,7 @@ const ProductDash = ({ data }: t.DashProps) => {
           <Divider sx={{ margin: '20px 0' }} />
           <div className="flex gap-2 items-center justify-center">
             <IconButton
-              onClick={() => router.push(NavigationPage.ProductsCreate)}
+              onClick={() => router.push(`/painel/calcados/${data.id}/produtos/criar`)}
               disabled={pending}
               className=" !bg-green-500 !rounded-2xl !text-white">
               <AddIcon />
@@ -149,7 +149,10 @@ const ProductDash = ({ data }: t.DashProps) => {
           </div>
         </form>
       </div >
-      <Table data={data.shoes} />
+      <Table
+        meta={{ categoryId: data.id }}
+        data={data.shoes}
+      />
     </React.Fragment >
   );
 };

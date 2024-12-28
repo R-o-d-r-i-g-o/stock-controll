@@ -27,14 +27,14 @@ const SubmitButton = () => {
 
 const UserCreateForm = () => {
   const { success, failure } = useToast()
-  const [state, formAction] = useFormState(a.handleCreateCategorySubmit, m.initialState)
+  const [state, formAction] = useFormState(a.handleSubmit, m.initalState)
 
   const router = useRouter()
 
   const handleFormReponse = () => {
     if (state.message === "success") {
-      success("Novo calçado criado com sucesso!")
-      router.push(NavigationPage.Category)
+      success("Novo usuário criado com sucesso!")
+      router.push(NavigationPage.Users)
     }
     else if (state.message !== "") {
       failure(state.message)
@@ -46,44 +46,53 @@ const UserCreateForm = () => {
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Novo Calçado</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Novo produto</h2>
 
       <form action={formAction}>
         <div className="mb-6">
           <label htmlFor="name" className="block text-sm font-medium text-gray-600">Nome</label>
           <input
+            type="text"
             id="name"
             name="name"
-            placeholder="Digite o nome do produto"
+            placeholder="Digite seu nome completo"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="sole" className="block text-sm font-medium text-gray-600">Sola</label>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-600">Email</label>
           <input
-            id="sole"
-            name="sole"
-            placeholder="Tipo de sola"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Digite seu email"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="color" className="block text-sm font-medium text-gray-600">Cor</label>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-600">Senha</label>
           <input
-            id="color"
-            name="color"
-            placeholder="Digite a cor do produto"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Digite sua senha"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="note" className="block text-sm font-medium text-gray-600">Nota</label>
-          <input
-            id="note"
-            name="note"
-            placeholder="Notas sobre o produto"
+          <label htmlFor="role_id" className="block text-sm font-medium text-gray-600">Cargo</label>
+          <select
+            id="role_id"
+            name="role_id"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-          />
+          >
+            <option selected disabled>Selecione o cargo</option>
+            {/* {roles?.map(r => (
+              <option key={r.id} value={r.id}>
+                {r.name}
+              </option>
+            ))} */}
+          </select>
         </div>
         <SubmitButton />
       </form>

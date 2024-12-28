@@ -16,9 +16,8 @@ type MenuPosition = {
 enum NavigationPage {
   Home = "/painel",
   Login = "/entrar",
-  Shoes = "/painel/calcados",
+  Category = "/painel/calcados",
   Users = "/painel/usuarios",
-  SKUs = "/painel/calcados/sku",
   History = "/painel/historico",
   Reports = "/painel/relatorios",
   Products = "/painel/calcados/produtos",

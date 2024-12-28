@@ -1,4 +1,7 @@
 type TableProps = {
+  meta: {
+    categoryId: number;
+  },
   data: {
     id: number;
     sku: string;

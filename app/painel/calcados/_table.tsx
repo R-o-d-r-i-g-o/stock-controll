@@ -69,7 +69,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
 
   const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
     e?.preventDefault()
-    router.push(`${NavigationPage.Shoes}?page=${newPage}`)
+    router.push(`${NavigationPage.Category}?page=${newPage}`)
   };
 
   const handleRowClick = (index: number) => {
@@ -124,7 +124,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                     </IconButton>
                   </TableCell>
                   <TableCell>
-                    <IconButton onClick={() => router.push(`${NavigationPage.Shoes}/${c.id}`)}>
+                    <IconButton onClick={() => router.push(`${NavigationPage.Category}/${c.id}`)}>
                       <MoreVertIcon />
                     </IconButton>
                   </TableCell>

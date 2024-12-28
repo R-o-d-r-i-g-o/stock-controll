@@ -24,7 +24,7 @@ const menuItems: Array<t.MenuItem> = [
   {
     lable: "Calçados",
     icon: LocalShippingIcon,
-    nav: t.NavigationPage.Shoes
+    nav: t.NavigationPage.Category
   },
   {
     lable: "Relatórios",

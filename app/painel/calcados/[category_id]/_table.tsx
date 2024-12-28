@@ -14,7 +14,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import * as t from './_types'
-import { defaultDateMask, NavigationPage } from '@/common';
+import { defaultDateMask } from '@/common';
 import moment from 'moment';
 
 const CustomTableContainer = styled(TableContainer)({
@@ -22,7 +22,7 @@ const CustomTableContainer = styled(TableContainer)({
   overflowX: 'scroll',
 });
 
-const AuxTabela = ({ data }: t.TableProps) => (
+const AuxTabela = ({ meta, data }: t.TableProps) => (
   <CustomTableContainer>
     <Table className='w-full'>
       <TableHead>
@@ -49,7 +49,7 @@ const AuxTabela = ({ data }: t.TableProps) => (
               {shoe.id}
             </TableCell>
             <TableCell className="!text-center">
-              <Link href={`${NavigationPage.SKUs}/${shoe.sku}`}>
+              <Link href={`/painel/calcados/${meta.categoryId}/produtos/sku/${shoe.sku}`}>
                 {shoe.sku}
                 <IconButton>
                   <OpenInNewIcon fontSize="small" />
@@ -58,7 +58,6 @@ const AuxTabela = ({ data }: t.TableProps) => (
             </TableCell>
             <TableCell className="!text-center">
               {shoe.size}
-
             </TableCell>
             <TableCell className="!text-center">
               {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(shoe.price)}
@@ -67,7 +66,7 @@ const AuxTabela = ({ data }: t.TableProps) => (
               {moment(shoe.createdAt).format(defaultDateMask)}
             </TableCell>
             <TableCell className="!text-center">
-              <Link href={`${NavigationPage.Products}/${shoe.id}`}>
+              <Link href={`/painel/calcados/${meta.categoryId}/produtos/${shoe.id}`}>
                 <IconButton>
                   <MoreVertIcon />
                 </IconButton>
