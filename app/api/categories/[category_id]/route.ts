@@ -29,5 +29,5 @@ const deleteCategory = async (req: NextRequest, { params }: UserParams) => {
 
 export {
   getCategoriesAndRelatedShoesPaginated as GET,
-  deleteCategory
+  deleteCategory as DELETE,
 }

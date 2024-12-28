@@ -71,6 +71,13 @@ type getShoesGroupedByCategoryPaginatedProps = {
   size: number;
 }
 
+type createCategoryProps = {
+  color: string;
+  sole: string;
+  name: string;
+  note: string;
+}
+
 type Accumulator = {
   [size: number]: { size: number; shoes: { id: number; price: number }[] };
 };
@@ -79,6 +86,7 @@ export type {
   getAuthUserProps,
   getAuthUserResponse,
   updateUserProps,
+  createCategoryProps,
   createShoeProps,
   createUserProps,
   getCategoryByProps,

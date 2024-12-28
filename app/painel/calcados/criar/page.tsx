@@ -34,7 +34,7 @@ const UserCreateForm = () => {
   const handleFormReponse = () => {
     if (state.message === "success") {
       success("Novo calçado criado com sucesso!")
-      router.push(NavigationPage.Users)
+      router.push(NavigationPage.Shoes)
     }
     else if (state.message !== "") {
       failure(state.message)

@@ -55,8 +55,21 @@ const deleteCategory = async (id: number) => {
   })
 }
 
+const createCategory = async (data: t.createCategoryProps) => {
+  const { id } = await prisma.category.create({
+    data: {
+      name: data.name,
+      sole: data.sole,
+      color: data.color,
+      description: data.note,
+    }
+  })
+  return id
+}
+
 export {
   deleteCategory,
+  createCategory,
   getCategoryBy,
   getCategoryShoesCount,
   getCategoryShoesPaginated,

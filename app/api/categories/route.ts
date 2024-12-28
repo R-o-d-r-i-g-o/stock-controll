@@ -1,5 +1,7 @@
 import { NextRequest } from 'next/server';
-import * as svc from '@/backend/services'
+import * as svc from '@/backend/services';
+
+import { createCategoryValdiationSchema } from '@/schemas';
 
 const getCategoriesAndRelatedShoesPaginated = async (req: NextRequest) => {
   try {
@@ -16,4 +18,23 @@ const getCategoriesAndRelatedShoesPaginated = async (req: NextRequest) => {
   }
 }
 
-export { getCategoriesAndRelatedShoesPaginated as GET }
+const createCategory = async (req: NextRequest) => {
+  try {
+    const payload = await createCategoryValdiationSchema.validate(await req.json(), { abortEarly: false });
+    const categoryId = await svc.createCategory({
+      name: payload.name,
+      sole: payload.sole,
+      note: payload.note,
+      color: payload.color,
+    })
+
+    return Response.json({ categoryId }, { status: 201 });
+  } catch (error) {
+    return Response.json(error, { status: 500 });
+  }
+};
+
+export {
+  getCategoriesAndRelatedShoesPaginated as GET,
+  createCategory as POST
+}

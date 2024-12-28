@@ -42,6 +42,13 @@ type getShoesPaginatedProps = {
   take: number;
 }
 
+type createCategoryProps = {
+  color: string;
+  sole: string;
+  name: string;
+  note: string;
+}
+
 type getCategoryByProps = {
   id?: number
   name?: string;
@@ -65,6 +72,7 @@ export type {
   createUserProps,
   createShoeProps,
   getShoeByProps,
+  createCategoryProps,
   createHistoryProps,
   getCategoryByProps,
   getShoesPaginatedProps,
