@@ -13,4 +13,27 @@ const getCategoryById = async (id: number) => {
   return res.data;
 };
 
-export { getShoesGroupedByCategoryPaginated, getCategoryById };
+const deleteCategoryById = async (id: number) => {
+  const res = await api.delete(`/api/categories/${id}`);
+  return res.data;
+}
+
+const updateCategory = async (req: t.UpdateCategory) => {
+  const res = await api.put(`/api/categories/${req.id}`, {
+    params: req,
+  });
+  return res.data;
+}
+
+const createCategory = async () => {
+  const res = await api.post("/api/categories");
+  return res.data;
+}
+
+export {
+  getShoesGroupedByCategoryPaginated,
+  createCategory,
+  updateCategory,
+  deleteCategoryById,
+  getCategoryById
+};

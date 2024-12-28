@@ -1,26 +1,89 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
 import { Divider, IconButton } from '@mui/material';
+import { useFormState, useFormStatus } from "react-dom";
+
+import * as a from './_actions'
 
 import * as t from './_types'
 import Table from './_table'
 import { NavigationPage } from '@/common';
-import Link from 'next/link';
+import Swal from 'sweetalert2';
+import { useToast } from '@/hooks/use-toast';
+import { useRouter } from "next/navigation";
+
+import * as svc from '@/services'
 
 const ProductDash = ({ data }: t.DashProps) => {
+  const initialState = {
+    message: "",
+    fieldValues: {
+      id: data.id.toString(),
+      name: data.name,
+      sole: data.sole,
+      color: data.color,
+      note: data.note,
+    }
+  }
+
+  const { pending } = useFormStatus()
+  const [state, formAction] = useFormState(a.handleEditUserSubmit, initialState)
+
+  const handleFormReponse = () => {
+    if (state.message === "success") {
+      success("Usuário atualizado com sucesso!")
+      router.push(NavigationPage.Users)
+    }
+    else if (state.message !== "") {
+      failure(state.message)
+    }
+  }
+
+  const router = useRouter()
+  const { success, failure } = useToast()
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Essa ação não pode ser desfeita!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sim, deletar!',
+      cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+      try {
+        if (!result.isConfirmed)
+          return
+
+        await svc.deleteCategoryById(data.id)
+        success("O Produto foi deletado com sucesso!")
+        router.push(NavigationPage.Shoes)
+      }
+      catch (err) {
+        console.error(err)
+        failure("Houve um erro ao deletar o produto.")
+      }
+    })
+  }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(handleFormReponse, [state])
+
   return (
     <React.Fragment>
       <div className="bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
           {`Detalhes do calçado #${data.id}`}
         </h2>
-        <form className="space-y-6">
+        <form action={formAction} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-600">Nome</label>
@@ -65,22 +128,31 @@ const ProductDash = ({ data }: t.DashProps) => {
           </div>
           <Divider sx={{ margin: '20px 0' }} />
           <div className="flex gap-2 items-center justify-center">
-            <Link href={NavigationPage.ProductsCreate}>
-              <IconButton className=" !bg-green-500 !rounded-2xl !text-white">
-                <AddIcon />
-              </IconButton>
-            </Link>
-            <IconButton className=" !bg-blue-500 !rounded-2xl !text-white">
+            <IconButton
+              onClick={() => router.push(NavigationPage.ProductsCreate)}
+              disabled={pending}
+              className=" !bg-green-500 !rounded-2xl !text-white">
+              <AddIcon />
+            </IconButton>
+            <IconButton
+              type='submit'
+              disabled={pending}
+              className=" !bg-blue-500 !rounded-2xl !text-white"
+            >
               <EditIcon />
             </IconButton>
-            <IconButton className="!bg-red-500 !rounded-2xl !text-white">
+            <IconButton
+              onClick={handleDelete}
+              disabled={pending}
+              className="!bg-red-500 !rounded-2xl !text-white"
+            >
               <DeleteIcon />
             </IconButton>
           </div>
         </form>
-      </div>
+      </div >
       <Table data={data.shoes} />
-    </React.Fragment>
+    </React.Fragment >
   );
 };
 

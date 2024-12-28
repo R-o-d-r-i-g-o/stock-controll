@@ -114,6 +114,14 @@ type GetCategoryByIdResponse = {
   }[];
 }
 
+type UpdateCategory = {
+  id: number;
+  name: string;
+  sole: string;
+  color: string;
+  note: string;
+}
+
 type CreateNewUser = {
   name: string
   email: string
@@ -150,6 +158,7 @@ export type {
   GetUserByIdResponse,
   GetAuditsPaginated,
   GetUsersPaginated,
+  UpdateCategory,
   CreateNewUser,
   CacheStorage,
 }
