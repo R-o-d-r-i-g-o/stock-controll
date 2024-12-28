@@ -16,4 +16,18 @@ const getCategoriesAndRelatedShoesPaginated = async (req: NextRequest, { params 
   }
 }
 
-export { getCategoriesAndRelatedShoesPaginated as GET }
+const deleteCategory = async (req: NextRequest, { params }: UserParams) => {
+  try {
+    const categoryId = parseInt((await params).category_id, 10)
+    await svc.deleteCategory(categoryId)
+
+    return Response.json(null, { status: 200 });
+  } catch (error) {
+    return Response.json(error, { status: 500 });
+  }
+};
+
+export {
+  getCategoriesAndRelatedShoesPaginated as GET,
+  deleteCategory
+}

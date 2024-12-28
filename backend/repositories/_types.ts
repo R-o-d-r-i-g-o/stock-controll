@@ -11,6 +11,14 @@ type createHistoryProps = {
   shoe_id?: number
 }
 
+type createShoeProps = {
+  id: number;
+  size: number;
+  price: number;
+  hash_code: string;
+  category_id: number;
+}
+
 type updateUserProps = {
   id: number;
   name: string;
@@ -45,9 +53,18 @@ type getUserProps = {
   email?: string;
 }
 
+type getShoeByProps = {
+  id?: number;
+  sku?: string;
+  size?: number;
+  price?: number;
+}
+
 export type {
   updateUserProps,
   createUserProps,
+  createShoeProps,
+  getShoeByProps,
   createHistoryProps,
   getCategoryByProps,
   getShoesPaginatedProps,

@@ -1,4 +1,6 @@
-import { prisma } from './_prisma'
+import { prisma, prismaTransaction } from './_prisma'
+import moment from 'moment'
+
 import * as t from './_types'
 
 const getCategoryBy = async (filter: t.getCategoryByProps) => {
@@ -43,7 +45,18 @@ const getCategoryShoesPaginated = async (filter: t.getShoesPaginatedProps) => {
   return shoesGroupedByCategory
 }
 
+const deleteCategory = async (id: number) => {
+  return await prismaTransaction(async () => {
+    const deletedCategory = await prisma.category.update({
+      where: { id },
+      data: { deleted_at: moment.utc().toDate() }
+    })
+    return deletedCategory
+  })
+}
+
 export {
+  deleteCategory,
   getCategoryBy,
   getCategoryShoesCount,
   getCategoryShoesPaginated,

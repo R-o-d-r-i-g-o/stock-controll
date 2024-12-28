@@ -114,6 +114,16 @@ type GetCategoryByIdResponse = {
   }[];
 }
 
+type GetShoesById = {
+  id: number;
+  sku: string;
+  size: number;
+  price: string;
+  categoryId: number;
+  createdAt: string;
+  deletedAt: string | null;
+}
+
 type UpdateCategory = {
   id: number;
   name: string;
@@ -167,6 +177,7 @@ export type {
   GetUsersPaginated,
   UpdateCategory,
   CreateCategory,
+  GetShoesById,
   CreateNewUser,
   CacheStorage,
 }

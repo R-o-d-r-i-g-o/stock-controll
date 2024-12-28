@@ -58,4 +58,13 @@ const getShoesGroupedByCategoryPaginated = async (filter: t.getShoesGroupedByCat
   }
 }
 
-export { getShoesGroupedByCategoryPaginated, getCategoryBy }
+const deleteCategory = async (id: number) => {
+  const category = await repo.deleteCategory(id)
+  return category
+}
+
+export {
+  getShoesGroupedByCategoryPaginated,
+  getCategoryBy,
+  deleteCategory
+}
