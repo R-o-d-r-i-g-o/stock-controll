@@ -1,4 +1,5 @@
 import * as svc from '@/services'
+import Form from './form'
 
 type UpdateShoePageProps = {
   params: Promise<{
@@ -10,11 +11,7 @@ const UpdateShoePage = async ({ params }: UpdateShoePageProps) => {
   const shoeId = (await params).shoe_id
   const shoe = await svc.getShoeById(shoeId)
 
-  return (
-    <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0" >
-      {JSON.stringify(shoe)}
-    </div>
-  )
+  return <Form shoe={shoe} />
 }
 
 export default UpdateShoePage;

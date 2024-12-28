@@ -1,16 +1,32 @@
 "use client"
 
 import React, { useState } from 'react';
-
+import { useToast } from '@/hooks';
 import { IconButton } from '@mui/material';
-import Scanner from './_scanner'
+// import Scanner from './_scanner'
 
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import * as svc from '@/services'
+
 const RegisterBuying = () => {
+  const { failure, success } = useToast();
+
   const [tasks, setTasks] = useState<string[]>([]);
   const [task, setTask] = useState<string>('');
+
+  const sendSKUs = async () => {
+    try {
+      await svc.debitShoesFromStorage(tasks)
+
+      success('SKUs enviados com sucesso!');
+      setTasks([]);
+    } catch (error) {
+      console.error(error)
+      failure("Não foi possível concluir a requisição.");
+    }
+  };
 
   const addTask = () => {
     if (task.trim()) {
@@ -29,7 +45,7 @@ const RegisterBuying = () => {
       <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
         SKUs p/a baixa do estoque
       </h2>
-      <Scanner />
+      {/* <Scanner /> */}
 
       <div className="flex items-center mb-6">
         <input
@@ -59,6 +75,14 @@ const RegisterBuying = () => {
           </li>
         ))}
       </ul>
+      {tasks && tasks.length >= 1 && (
+        <button
+          onClick={sendSKUs}
+          className="mt-6 w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+        >
+          Enviar SKUs
+        </button>
+      )}
     </div>
   );
 }

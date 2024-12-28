@@ -4,29 +4,29 @@ import * as svc from '@/backend/services'
 // import { updateUserSchema } from '@/schemas'
 
 type UserParams = {
-	params: Promise<{ shoe_id: string }>
+  params: Promise<{ shoe_id: string }>
 }
 
 const getShoeById = async (req: NextRequest, { params }: UserParams) => {
-	try {
-		const shoeId = parseInt((await params).shoe_id, 10)
-		const shoe = await svc.getShoeBy({ id: shoeId })
+  try {
+    const shoeId = parseInt((await params).shoe_id, 10)
+    const shoe = await svc.getShoeBy({ id: shoeId })
 
-		return Response.json(shoe, { status: 200 });
-	} catch (error) {
-		return Response.json(error, { status: 500 });
-	}
+    return Response.json(shoe, { status: 200 });
+  } catch (error) {
+    return Response.json(error, { status: 500 });
+  }
 }
 
 const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
-	try {
-		const shoeId = parseInt((await params).shoe_id, 10)
-		await svc.deleteShoe(shoeId)
+  try {
+    const shoeId = parseInt((await params).shoe_id, 10)
+    await svc.deleteShoe(shoeId)
 
-		return Response.json(null, { status: 200 });
-	} catch (error) {
-		return Response.json(error, { status: 500 });
-	}
+    return Response.json(null, { status: 200 });
+  } catch (error) {
+    return Response.json(error, { status: 500 });
+  }
 };
 
 // const updateShoe = async (req: NextRequest, { params }: UserParams) => {
@@ -49,7 +49,7 @@ const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
 
 
 export {
-	deleteShoe as DELETE,
-	getShoeById as GET,
-	// updateShoe as PUT
+  deleteShoe as DELETE,
+  getShoeById as GET,
+  // updateShoe as PUT
 }
