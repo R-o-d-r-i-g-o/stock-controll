@@ -3,13 +3,13 @@ import * as svc from '@/backend/services'
 import { itemUpdateSchema } from '@/schemas';
 
 type UserParams = {
-  params: Promise<{ shoe_id: string }>
+  params: Promise<{ item_id: string }>
 }
 
 const getShoeById = async (req: NextRequest, { params }: UserParams) => {
   try {
-    const shoeId = parseInt((await params).shoe_id, 10)
-    const shoe = await svc.getShoeBy({ id: shoeId })
+    const item_id = parseInt((await params).item_id, 10)
+    const shoe = await svc.getItemBy({ id: item_id })
 
     return Response.json(shoe, { status: 200 });
   } catch (error) {
@@ -19,8 +19,8 @@ const getShoeById = async (req: NextRequest, { params }: UserParams) => {
 
 const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
   try {
-    const shoeId = parseInt((await params).shoe_id, 10)
-    await svc.deleteShoe(shoeId)
+    const itemId = parseInt((await params).item_id, 10)
+    await svc.deleteItem(itemId)
 
     return Response.json(null, { status: 200 });
   } catch (error) {
@@ -32,10 +32,10 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
   try {
     const payload = {
       ...(await req.json()),
-      id: parseInt((await params).shoe_id, 10)
+      id: parseInt((await params).item_id, 10)
     }
     const result = await itemUpdateSchema.validate(payload, { abortEarly: false });
-    await svc.updateShoe(result)
+    await svc.updateItem(result)
 
     return Response.json(null, { status: 200 });
   } catch (error) {

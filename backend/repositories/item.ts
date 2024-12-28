@@ -2,7 +2,18 @@ import moment from 'moment'
 import { prisma, prismaTransaction } from './_prisma'
 import * as t from './_types'
 
-const createShoe = async (shoe: t.createShoeProps) => {
+const getItemBy = async (filter: t.getShoeByProps) => {
+  return await prisma.shoe.findFirstOrThrow({
+    where: {
+      id: filter.id || undefined,
+      size: filter.size || undefined,
+      price: filter.price || undefined,
+      hash_code: filter.sku || undefined,
+    }
+  })
+}
+
+const createItem = async (shoe: t.createShoeProps) => {
   return await prismaTransaction(async () => {
     const { id } = await prisma.shoe.create({
       data: {
@@ -16,7 +27,7 @@ const createShoe = async (shoe: t.createShoeProps) => {
   })
 }
 
-const updateShoe = async (data: t.updateShoeProps) => {
+const updateItem = async (data: t.updateShoeProps) => {
   return await prismaTransaction(async () => {
     const shoe = await prisma.shoe.update({
       where: { id: data.id },
@@ -31,7 +42,7 @@ const updateShoe = async (data: t.updateShoeProps) => {
   })
 }
 
-const deleteShoe = async (id: number) => {
+const deleteItem = async (id: number) => {
   return await prismaTransaction(async () => {
     const deletedShoe = await prisma.shoe.update({
       where: { id },
@@ -41,18 +52,7 @@ const deleteShoe = async (id: number) => {
   })
 }
 
-const getShoeBy = async (filter: t.getShoeByProps) => {
-  return await prisma.shoe.findFirstOrThrow({
-    where: {
-      id: filter.id || undefined,
-      size: filter.size || undefined,
-      price: filter.price || undefined,
-      hash_code: filter.sku || undefined,
-    }
-  })
-}
-
-const debitShoes = async (SKUs: string[]) => {
+const debitItems = async (SKUs: string[]) => {
   const shoes = await prisma.shoe.findMany({
     where: { hash_code: { in: SKUs } },
     select: { id: true }
@@ -70,9 +70,9 @@ const debitShoes = async (SKUs: string[]) => {
 }
 
 export {
-  getShoeBy,
-  deleteShoe,
-  createShoe,
-  updateShoe,
-  debitShoes
+  getItemBy,
+  deleteItem,
+  createItem,
+  updateItem,
+  debitItems
 }
