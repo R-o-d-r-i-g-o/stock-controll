@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
-import UndoIcon from '@mui/icons-material/Undo';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import UndoIcon from "@mui/icons-material/Undo";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-import { menuItems, menuPositions, Anchor } from '@/common'
+import { menuItems, menuPositions, Anchor } from "@/common";
 
 const MenuDrawer = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const [state, setState] = React.useState({
     top: false,
@@ -34,22 +34,21 @@ const MenuDrawer = () => {
     {
       lable: "Voltar",
       icon: UndoIcon,
-      action: router.back
+      action: router.back,
     },
     {
       lable: "Sair",
       icon: ExitToAppIcon,
-      action: () => signOut().then()
-    }
-  ]
+      action: () => signOut().then(),
+    },
+  ];
 
-  const toggleDrawer =
-    (anchor: Anchor, open: boolean) => () =>
-      setState({ ...state, [anchor]: open });
+  const toggleDrawer = (anchor: Anchor, open: boolean) => () =>
+    setState({ ...state, [anchor]: open });
 
   const list = (anchor: Anchor) => (
     <Box
-      sx={{ width: ['top', 'bottom'].includes(anchor) ? 'auto' : 250 }}
+      sx={{ width: ["top", "bottom"].includes(anchor) ? "auto" : 250 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -100,6 +99,6 @@ const MenuDrawer = () => {
       ))}
     </div>
   );
-}
+};
 
 export { MenuDrawer };

@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-import { ValidationError } from 'yup';
+import { ValidationError } from "yup";
 
 const loginSchema = Yup.object({
   email: Yup.string()
@@ -13,41 +13,36 @@ const loginSchema = Yup.object({
 
 const createUserSchema = Yup.object().shape({
   name: Yup.string()
-    .min(3, 'Nome deve ter pelo menos 3 caracteres')
-    .max(100, 'Nome pode ter no máximo 100 caracteres')
-    .required('Nome é obrigatório'),
+    .min(3, "Nome deve ter pelo menos 3 caracteres")
+    .max(100, "Nome pode ter no máximo 100 caracteres")
+    .required("Nome é obrigatório"),
 
   email: Yup.string()
-    .email('Email deve ser válido')
-    .required('Email é obrigatório'),
+    .email("Email deve ser válido")
+    .required("Email é obrigatório"),
 
   role_id: Yup.number()
-    .integer('Role ID deve ser um número inteiro')
-    .positive('Role ID deve ser um número positivo')
-    .required('Role ID é obrigatório'),
+    .integer("Role ID deve ser um número inteiro")
+    .positive("Role ID deve ser um número positivo")
+    .required("Role ID é obrigatório"),
 
   password: Yup.string()
-    .min(6, 'Senha deve ter pelo menos 6 caracteres')
-    .max(50, 'Senha pode ter no máximo 50 caracteres')
-    .required('Senha é obrigatória'),
+    .min(6, "Senha deve ter pelo menos 6 caracteres")
+    .max(50, "Senha pode ter no máximo 50 caracteres")
+    .required("Senha é obrigatória"),
 });
 
 const updateUserSchema = createUserSchema.clone().shape({
   id: Yup.number()
-    .integer('O ID deve ser um número inteiro')
-    .positive('O ID deve ser um número positivo')
-    .required('O ID do usuário deve ser referenciado'),
+    .integer("O ID deve ser um número inteiro")
+    .positive("O ID deve ser um número positivo")
+    .required("O ID do usuário deve ser referenciado"),
 
   password: Yup.string()
     .nullable()
-    .transform((value) => (value === '' ? null : value))
-    .min(6, 'Senha deve ter pelo menos 6 caracteres')
-    .max(50, 'Senha pode ter no máximo 50 caracteres'),
-})
+    .transform((value) => (value === "" ? null : value))
+    .min(6, "Senha deve ter pelo menos 6 caracteres")
+    .max(50, "Senha pode ter no máximo 50 caracteres"),
+});
 
-export {
-  loginSchema,
-  createUserSchema,
-  updateUserSchema,
-  ValidationError,
-}
+export { loginSchema, createUserSchema, updateUserSchema, ValidationError };
