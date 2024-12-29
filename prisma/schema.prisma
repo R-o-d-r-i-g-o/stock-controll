@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Category {
+model Shoe {
   id          Int       @id @default(autoincrement())
   color       String
   sole        String
@@ -21,34 +21,34 @@ model Category {
   description String
   created_at  DateTime  @default(now())
   deleted_at  DateTime?
-  Shoe        Shoe[]
-
-  @@map("tb_categories")
-}
-
-model Shoe {
-  id          Int       @id @default(autoincrement())
-  hash_code   String    @unique @default(uuid())
-  price       Decimal
-  size        Int
-  created_at  DateTime  @default(now())
-  deleted_at  DateTime?
-  category_id Int
-  category    Category  @relation(fields: [category_id], references: [id])
-  Order       Order[]
-  History     History[]
+  Item        Item[]
 
   @@map("tb_shoes")
+}
+
+model Item {
+  id         Int       @id @default(autoincrement())
+  hash_code  String    @unique @default(uuid())
+  price      Decimal
+  size       Int
+  created_at DateTime  @default(now())
+  deleted_at DateTime?
+  shoe_id    Int
+  Shoe       Shoe      @relation(fields: [shoe_id], references: [id])
+  Order      Order[]
+  Audit      Audit[]
+
+  @@map("tb_items")
 }
 
 model Order {
   id        Int    @id @default(autoincrement())
   hash_code String @unique @default(uuid())
   note      String
-  shoe_id   Int
+  item_id   Int
   user_id   Int
-  shoe      Shoe   @relation(fields: [shoe_id], references: [id])
-  user      User   @relation(fields: [user_id], references: [id])
+  Item      Item   @relation(fields: [item_id], references: [id])
+  User      User   @relation(fields: [user_id], references: [id])
 
   @@map("tb_orders")
 }
@@ -63,7 +63,7 @@ model User {
   deleted_at DateTime?
   role       Role      @relation(fields: [role_id], references: [id])
   Order      Order[]
-  History    History[]
+  Audit      Audit[]
 
   @@map("tb_users")
 }
@@ -77,14 +77,14 @@ model Role {
   @@map("tb_roles")
 }
 
-model History {
+model Audit {
   id         Int      @id @default(autoincrement())
   created_at DateTime @default(now())
   note       String
   user_id    Int
-  shoe_id    Int?
-  shoe       Shoe?    @relation(fields: [shoe_id], references: [id])
-  user       User     @relation(fields: [user_id], references: [id])
+  item_id    Int?
+  Item       Item?    @relation(fields: [item_id], references: [id])
+  User       User     @relation(fields: [user_id], references: [id])
 
-  @@map("tb_history")
+  @@map("tb_audits")
 }
