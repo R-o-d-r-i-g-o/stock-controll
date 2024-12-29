@@ -37,7 +37,7 @@ const RegisterBuying = () => {
   };
 
   const handleScanResult = (scannedTask: string) => {
-    if (!tasks || tasks.includes(scannedTask)) return;
+    if (scannedTask === "" || !tasks || tasks.includes(scannedTask)) return;
     setTask(scannedTask);
   };
 

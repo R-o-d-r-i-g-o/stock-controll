@@ -83,7 +83,10 @@ const CodeScanner = ({
           </select>
         </div>
       )}
-      <video className={className} ref={ref} />
+      <div className="relative h-min rounded-md overflow-hidden">
+        <video className={className} ref={ref} />
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-red-500 transform -translate-y-1/2 pointer-events-none"></div>
+      </div>
     </React.Fragment>
   );
 };
