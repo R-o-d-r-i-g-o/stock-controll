@@ -34,9 +34,7 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
       ...(await req.json()),
       id: parseInt((await params).item_id, 10),
     };
-    const result = await itemUpdateSchema.validate(payload, {
-      abortEarly: false,
-    });
+    const result = await itemUpdateSchema.validate(payload);
     await svc.updateItem(result);
 
     return Response.json(null, { status: 200 });

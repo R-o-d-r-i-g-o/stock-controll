@@ -5,9 +5,7 @@ import * as svc from "@/backend";
 
 const createUser = async (req: NextRequest) => {
   try {
-    const payload = await createUserSchema.validate(await req.json(), {
-      abortEarly: false,
-    });
+    const payload = await createUserSchema.validate(await req.json());
     const userID = await svc.createUser({
       name: payload.name,
       email: payload.email,

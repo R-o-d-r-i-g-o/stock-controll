@@ -14,77 +14,77 @@ datasource db {
 }
 
 model Shoe {
-  id         Int       @id @default(autoincrement())
-  color      String
-  sole       String
-  name       String    @unique
-  note       String
-  created_at DateTime  @default(now())
-  deleted_at DateTime?
-  Item       Item[]
+  id        Int       @id @default(autoincrement()) @map("id")
+  color     String    @map("color")
+  sole      String    @map("sole")
+  name      String    @unique @map("name")
+  note      String    @map("note")
+  createdAt DateTime  @default(now()) @map("created_at")
+  deletedAt DateTime? @map("deleted_at")
+  Item      Item[]
 
   @@map("tb_shoes")
 }
 
 model Item {
-  id         Int       @id @default(autoincrement())
-  sku        String    @unique @default(uuid())
-  price      Decimal
-  size       Int
-  created_at DateTime  @default(now())
-  deleted_at DateTime?
-  shoe_id    Int
-  Shoe       Shoe      @relation(fields: [shoe_id], references: [id])
-  Order      Order[]
+  id         Int          @id @default(autoincrement()) @map("id")
+  sku        String       @unique @default(uuid()) @map("sku")
+  price      Decimal      @map("price")
+  size       Int          @map("size")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  deletedAt  DateTime?    @map("deleted_at")
+  shoeId     Int          @map("shoe_id")
+  Shoe       Shoe         @relation(fields: [shoeId], references: [id])
+  Expedition Expedition[]
   Audit      Audit[]
 
   @@map("tb_items")
 }
 
-model Order {
-  id      Int    @id @default(autoincrement())
-  code    String @unique @default(uuid())
-  note    String
-  item_id Int
-  user_id Int
-  Item    Item   @relation(fields: [item_id], references: [id])
-  User    User   @relation(fields: [user_id], references: [id])
+model Expedition {
+  id     Int    @id @default(autoincrement()) @map("id")
+  code   String @unique @default(uuid()) @map("code")
+  note   String @map("note")
+  itemId Int    @map("item_id")
+  userId Int    @map("user_id")
+  Item   Item   @relation(fields: [itemId], references: [id])
+  User   User   @relation(fields: [userId], references: [id])
 
-  @@map("tb_orders")
+  @@map("tb_expeditions")
 }
 
 model User {
-  id         Int       @id @default(autoincrement())
-  name       String
-  email      String    @unique
-  password   String
-  role_id    Int
-  created_at DateTime  @default(now())
-  deleted_at DateTime?
-  role       Role      @relation(fields: [role_id], references: [id])
-  Order      Order[]
+  id         Int          @id @default(autoincrement()) @map("id")
+  name       String       @map("name")
+  email      String       @unique @map("email")
+  password   String       @map("password")
+  roleId     Int          @map("role_id")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  deletedAt  DateTime?    @map("deleted_at")
+  role       Role         @relation(fields: [roleId], references: [id])
+  Expedition Expedition[]
   Audit      Audit[]
 
   @@map("tb_users")
 }
 
 model Role {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-  note String
+  id   Int    @id @default(autoincrement()) @map("id")
+  name String @unique @map("name")
+  note String @map("note")
   User User[]
 
   @@map("tb_roles")
 }
 
 model Audit {
-  id         Int      @id @default(autoincrement())
-  created_at DateTime @default(now())
-  note       String
-  user_id    Int
-  item_id    Int?
-  Item       Item?    @relation(fields: [item_id], references: [id])
-  User       User     @relation(fields: [user_id], references: [id])
+  id        Int      @id @default(autoincrement()) @map("id")
+  createdAt DateTime @default(now()) @map("created_at")
+  note      String   @map("note")
+  userId    Int      @map("user_id")
+  itemId    Int?     @map("item_id")
+  Item      Item?    @relation(fields: [itemId], references: [id])
+  User      User     @relation(fields: [userId], references: [id])
 
   @@map("tb_audits")
 }

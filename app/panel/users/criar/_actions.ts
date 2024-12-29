@@ -19,9 +19,7 @@ async function handleSubmit(
       role_id: parseInt(data.role_id as string, 10),
     };
 
-    const result = await createUserSchema.validate(payload, {
-      abortEarly: false,
-    });
+    const result = await createUserSchema.validate(payload);
     await createUser(result);
 
     return {

@@ -20,9 +20,7 @@ async function handleSubmit(
       id: parseInt(state.fieldValues.id, 10),
     };
 
-    const result = await updateUserSchema.validate(payload, {
-      abortEarly: false,
-    });
+    const result = await updateUserSchema.validate(payload);
     await updateUser({
       ...result,
       password: result.password ?? undefined,

@@ -38,9 +38,7 @@ const updateCategory = async (req: NextRequest, { params }: UserParams) => {
       id: parseInt((await params).shoe_id, 10),
     };
 
-    const result = await updateCategoryValdiationSchema.validate(payload, {
-      abortEarly: false,
-    });
+    const result = await updateCategoryValdiationSchema.validate(payload);
     await svc.updateCategory(result);
 
     return Response.json(null, { status: 200 });

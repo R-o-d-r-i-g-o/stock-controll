@@ -35,9 +35,7 @@ const updateUser = async (req: NextRequest, { params }: UserParams) => {
       ...(await req.json()),
       id: parseInt((await params).user_id, 10),
     };
-    const result = await updateUserSchema.validate(payload, {
-      abortEarly: false,
-    });
+    const result = await updateUserSchema.validate(payload);
     await svc.updateUser({
       ...result,
       password: result.password ?? "",

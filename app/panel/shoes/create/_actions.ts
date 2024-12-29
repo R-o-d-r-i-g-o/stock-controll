@@ -19,9 +19,7 @@ async function handleCreateCategorySubmit(
       ...data,
     };
 
-    const result = await createCategoryValdiationSchema.validate(payload, {
-      abortEarly: false,
-    });
+    const result = await createCategoryValdiationSchema.validate(payload);
     await svc.createCategory(result);
 
     return {
