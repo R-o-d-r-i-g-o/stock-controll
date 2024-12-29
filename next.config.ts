@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
 };
 
 const withPWA = nextPwa({
-  dest: "public",
+  dest: "/public/workers",
   cacheOnFrontEndNav: true,
   reloadOnOnline: true,
   disableDevLogs: true,
@@ -19,9 +19,9 @@ const withPWA = nextPwa({
   runtimeCaching: [
     {
       urlPattern: /^\/api\//,
-      handler: 'NetworkOnly'
-    }
-  ]
+      handler: "NetworkOnly",
+    },
+  ],
 });
 
 // @ts-expect-error/its-already-the-way-is-in-documentation
