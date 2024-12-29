@@ -19,10 +19,10 @@ const constraints: MediaStreamConstraints = {
 };
 
 const CodeScanner = ({
-  beepEnabled,
+  beepEnabled = false,
+  paused = false,
   className,
   onResult,
-  paused,
 }: ScannerProps) => {
   const [loading, setLoading] = useState(true);
   const lastCode = useRef<string | null>(null);

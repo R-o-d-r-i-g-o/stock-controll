@@ -11,34 +11,36 @@ import * as svc from "@/services";
 
 const RegisterBuying = () => {
   const { failure, success } = useToast();
-  const [tasks, setTasks] = useState<string[]>([]);
-  const [task, setTask] = useState<string>("");
+  const [skus, setSkus] = useState<string[]>([]);
 
   const sendSKUs = async () => {
     try {
-      await svc.debitShoesFromStorage(tasks);
+      await svc.debitShoesFromStorage(skus);
       success("SKUs debitados com sucesso!");
-      setTasks([]);
+      setSkus([]);
     } catch (error) {
       console.error(error);
       failure("Não foi possível concluir a requisição.");
     }
   };
 
-  const addTask = () => {
-    if (task.trim()) {
-      setTasks([...tasks, task]);
-      setTask("");
-    }
+  const handleRemoveSku = (sku: string) => {
+    setSkus(skus.filter((s) => s !== sku));
   };
 
-  const removeTask = (index: number) => {
-    setTasks(tasks.filter((_, taskIndex) => taskIndex !== index));
+  const handlOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = new FormData(e.target as HTMLFormElement);
+    const skuCode = form.get("sku")?.toString().trim() ?? "";
+
+    if (skuCode === "" || skus.includes(skuCode)) return;
+    setSkus([...skus, skuCode]);
+    (e.target as HTMLFormElement).reset();
   };
 
   const handleScanResult = useCallback((scannedSKU: string) => {
-    if (!tasks || tasks.includes(scannedSKU)) return;
-    setTasks((prevTasks) => [...prevTasks, scannedSKU]);
+    if (!skus || skus.includes(scannedSKU)) return;
+    setSkus((prevTasks) => [...prevTasks, scannedSKU]);
   }, []);
 
   return (
@@ -51,39 +53,40 @@ const RegisterBuying = () => {
         onResult={handleScanResult}
         className="rounded-md mb-6"
       />
-      <div className="flex items-center border-b border-gray-300 pb-2 mb-4">
+      <form
+        onSubmit={handlOnSubmit}
+        className="flex items-center border-b border-gray-300 pb-2 mb-4"
+      >
         <input
           type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
+          name="sku"
           placeholder="Digite o SKU"
           className="flex-grow p-2 text-sm focus:outline-none"
         />
-        <IconButton onClick={addTask} color="primary">
+        <IconButton type="submit" color="primary">
           <AddIcon fontSize="small" />
         </IconButton>
-      </div>
+      </form>
       <ul className="divide-y divide-gray-200">
-        {tasks.map((task, index) => (
+        {skus.map((s) => (
           <li
-            key={index}
+            key={s}
             className="flex justify-between items-center py-2 text-sm"
           >
-            <span className="text-gray-700">{task}</span>
-            <IconButton onClick={() => removeTask(index)} color="error">
+            <span className="text-gray-700">{s}</span>
+            <IconButton onClick={() => handleRemoveSku(s)} color="error">
               <DeleteIcon fontSize="small" />
             </IconButton>
           </li>
         ))}
       </ul>
-      {tasks.length > 0 && (
-        <button
-          onClick={sendSKUs}
-          className="mt-4 w-full py-2 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition"
-        >
-          Enviar SKUs
-        </button>
-      )}
+      <button
+        onClick={sendSKUs}
+        disabled={skus.length > 0}
+        className="mt-4 w-full py-2 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition"
+      >
+        Enviar SKUs
+      </button>
     </div>
   );
 };
