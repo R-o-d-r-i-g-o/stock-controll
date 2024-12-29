@@ -1,9 +1,9 @@
-import { cachedApi } from './_api'
-import * as t from './_types'
+import { api } from "./_api";
+import * as t from "./_types";
 
 const getAuditsPaginated = async (req: t.GetAuditsPaginated) => {
-  const res = await cachedApi.get<t.GetAuditsPaginatedResponse>("/api/audits", {
-    params: req
+  const res = await api.get<t.GetAuditsPaginatedResponse>("/api/audits", {
+    params: req,
   });
   return res.data;
 };

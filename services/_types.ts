@@ -1,11 +1,11 @@
-import { StorageValue } from 'axios-cache-interceptor';
+import { StorageValue } from "axios-cache-interceptor";
 
 type HealthCheckResponse = {
   version: string;
   message: string;
   database: boolean;
   last_build: string;
-}
+};
 
 type GetRolesListResponse = {
   meta: {
@@ -14,13 +14,13 @@ type GetRolesListResponse = {
   roles: Array<{
     id: number;
     name: string;
-  }>
-}
+  }>;
+};
 
 type GetUsersPaginated = {
   page: number;
   size: number;
-}
+};
 
 type GetUsersPaginatedResponse = {
   meta: {
@@ -36,12 +36,12 @@ type GetUsersPaginatedResponse = {
     createdAt: string;
     deletedAt: string | null;
   }>;
-}
+};
 
 type GetAuditsPaginated = {
   page: number;
   size: number;
-}
+};
 
 type GetAuditsPaginatedResponse = {
   meta: {
@@ -56,12 +56,12 @@ type GetAuditsPaginatedResponse = {
     shoeId: number;
     createdAt: string;
   }>;
-}
+};
 
 type GetShoesGroupedByCategoryPaginated = {
   page: number;
   size: number;
-}
+};
 
 type GetShoesGroupedByCategoryPaginatedRespose = {
   meta: {
@@ -85,7 +85,7 @@ type GetShoesGroupedByCategoryPaginatedRespose = {
       }[];
     }[];
   }[];
-}
+};
 
 type GetUserByIdResponse = {
   id: number;
@@ -94,7 +94,7 @@ type GetUserByIdResponse = {
   role_id: number;
   createdAt: string;
   deletedAt: string | null;
-}
+};
 
 type GetCategoryByIdResponse = {
   id: number;
@@ -112,7 +112,7 @@ type GetCategoryByIdResponse = {
     createdAt: string;
     deletedAt: string | null;
   }[];
-}
+};
 
 type GetShoesById = {
   id: number;
@@ -122,14 +122,14 @@ type GetShoesById = {
   categoryId: number;
   createdAt: string;
   deletedAt: string | null;
-}
+};
 
 type CreateShoe = {
   sku: string;
   size: number;
   price: number;
   categoryId: number;
-}
+};
 
 type UpdateShoe = {
   id: number;
@@ -137,7 +137,7 @@ type UpdateShoe = {
   size: number;
   price: number;
   categoryId: number;
-}
+};
 
 type UpdateCategory = {
   id: number;
@@ -145,37 +145,33 @@ type UpdateCategory = {
   sole: string;
   note: string;
   color: string;
-}
+};
 
 type CreateCategory = {
   name: string;
   sole: string;
   note: string;
   color: string;
-}
+};
 
 type CreateNewUser = {
-  name: string
-  email: string
-  role_id: number
-  password: string
-}
+  name: string;
+  email: string;
+  role_id: number;
+  password: string;
+};
 
 type UpdateUser = {
-  id: number
-  name?: string
-  email?: string
-  role_id?: number
-  password?: string
-}
+  id: number;
+  name?: string;
+  email?: string;
+  role_id?: number;
+  password?: string;
+};
 
 type CreateNewUserResponse = {
-  user_id: number
-}
-
-type CacheStorage = {
-  [key: string]: StorageValue;
-}
+  user_id: number;
+};
 
 export type {
   UpdateUser,
@@ -196,5 +192,4 @@ export type {
   CreateCategory,
   GetShoesById,
   CreateNewUser,
-  CacheStorage,
-}
+};
