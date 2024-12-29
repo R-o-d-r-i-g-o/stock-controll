@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
-import { useToast } from '@/hooks';
-import { IconButton } from '@mui/material';
+import React, { useState } from "react";
+import { useToast } from "@/hooks";
+import { IconButton } from "@mui/material";
 // import Scanner from './_scanner'
 
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-import * as svc from '@/services'
+import * as svc from "@/services";
 
 const RegisterBuying = () => {
   const { failure, success } = useToast();
 
   const [tasks, setTasks] = useState<string[]>([]);
-  const [task, setTask] = useState<string>('');
+  const [task, setTask] = useState<string>("");
 
   const sendSKUs = async () => {
     try {
-      await svc.debitShoesFromStorage(tasks)
+      await svc.debitShoesFromStorage(tasks);
 
-      success('SKUs enviados com sucesso!');
+      success("SKUs enviados com sucesso!");
       setTasks([]);
     } catch (error) {
-      console.error(error)
+      console.error(error);
       failure("Não foi possível concluir a requisição.");
     }
   };
@@ -31,7 +31,7 @@ const RegisterBuying = () => {
   const addTask = () => {
     if (task.trim()) {
       setTasks([...tasks, task]);
-      setTask('');
+      setTask("");
     }
   };
 
@@ -64,7 +64,10 @@ const RegisterBuying = () => {
       </div>
       <ul className="space-y-4">
         {tasks.map((task, index) => (
-          <li key={index} className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-md">
+          <li
+            key={index}
+            className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-md"
+          >
             <span className="text-gray-700">{task}</span>
             <IconButton
               onClick={() => removeTask(index)}
@@ -85,6 +88,6 @@ const RegisterBuying = () => {
       )}
     </div>
   );
-}
+};
 
 export default RegisterBuying;

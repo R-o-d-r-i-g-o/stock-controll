@@ -1,5 +1,3 @@
-import { StorageValue } from "axios-cache-interceptor";
-
 type HealthCheckResponse = {
   version: string;
   message: string;
