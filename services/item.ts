@@ -1,5 +1,5 @@
-import { api } from './_api'
-import * as t from './_types'
+import { api } from "./api/_api";
+import * as t from "./_types";
 
 const getShoeById = async (id: number) => {
   const res = await api.get<t.GetShoesById>(`/api/shoes/${id}`);
@@ -9,7 +9,7 @@ const getShoeById = async (id: number) => {
 const debitShoesFromStorage = async (skuList: string[]) => {
   const res = await api.post<t.GetShoesById>("/api/shoes/debit", { skuList });
   return res.data;
-}
+};
 
 const deleteShoeById = async (id: number) => {
   const res = await api.delete<t.GetShoesById>(`/api/shoes/${id}`);
@@ -17,9 +17,9 @@ const deleteShoeById = async (id: number) => {
 };
 
 const createShoe = async (data: t.CreateShoe) => {
-  const res = await api.post("/api/shoes", data)
-  return res.data
-}
+  const res = await api.post("/api/shoes", data);
+  return res.data;
+};
 
 const updateShoe = async (data: t.UpdateShoe) => {
   const res = await api.put(`/api/shoes/${data.id}`, {
@@ -27,14 +27,14 @@ const updateShoe = async (data: t.UpdateShoe) => {
     size: data.size,
     price: data.size,
     categoryId: data.size,
-  })
-  return res.data
-}
+  });
+  return res.data;
+};
 
 export {
   getShoeById,
   debitShoesFromStorage,
   deleteShoeById,
   createShoe,
-  updateShoe
-}
+  updateShoe,
+};
