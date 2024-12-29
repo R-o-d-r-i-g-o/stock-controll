@@ -1,33 +1,32 @@
-import { prisma, prismaTransaction } from './_prisma'
-import moment from 'moment'
-
-import * as t from './_types'
+import { prisma, prismaTransaction } from "../prisma";
+import moment from "moment";
+import * as t from "./_types.repo";
 
 const getCategoryBy = async (filter: t.getCategoryByProps) => {
   const category = await prisma.category.findFirstOrThrow({
     where: {
       id: filter.id || undefined,
-      name: filter.name || undefined
+      name: filter.name || undefined,
     },
     include: {
       Shoe: {
         where: { deleted_at: null },
-        orderBy: { size: 'asc' },
+        orderBy: { size: "asc" },
       },
     },
-  })
+  });
 
-  return category
-}
+  return category;
+};
 
 const getCategoryShoesCount = async (filter: t.getShoesPaginatedProps) => {
-  console.log("filters", filter)
+  console.log("filters", filter);
   const shoesGroupedByCategory = await prisma.category.count({
     where: { deleted_at: null },
   });
 
-  return shoesGroupedByCategory
-}
+  return shoesGroupedByCategory;
+};
 
 const getCategoryShoesPaginated = async (filter: t.getShoesPaginatedProps) => {
   const shoesGroupedByCategory = await prisma.category.findMany({
@@ -37,23 +36,23 @@ const getCategoryShoesPaginated = async (filter: t.getShoesPaginatedProps) => {
     include: {
       Shoe: {
         where: { deleted_at: null },
-        orderBy: { size: 'asc' },
+        orderBy: { size: "asc" },
       },
     },
   });
 
-  return shoesGroupedByCategory
-}
+  return shoesGroupedByCategory;
+};
 
 const deleteCategory = async (id: number) => {
   return await prismaTransaction(async () => {
     const deletedCategory = await prisma.category.update({
       where: { id },
-      data: { deleted_at: moment.utc().toDate() }
-    })
-    return deletedCategory
-  })
-}
+      data: { deleted_at: moment.utc().toDate() },
+    });
+    return deletedCategory;
+  });
+};
 
 const updateCategory = async (user: t.updateCategoryProps) => {
   return await prismaTransaction(async () => {
@@ -64,10 +63,10 @@ const updateCategory = async (user: t.updateCategoryProps) => {
         sole: user.sole || undefined,
         color: user.color || undefined,
         description: user.note || undefined,
-      }
-    })
-  })
-}
+      },
+    });
+  });
+};
 
 const createCategory = async (data: t.createCategoryProps) => {
   const { id } = await prisma.category.create({
@@ -76,10 +75,10 @@ const createCategory = async (data: t.createCategoryProps) => {
       sole: data.sole,
       color: data.color,
       description: data.note,
-    }
-  })
-  return id
-}
+    },
+  });
+  return id;
+};
 
 export {
   updateCategory,
@@ -88,4 +87,4 @@ export {
   getCategoryBy,
   getCategoryShoesCount,
   getCategoryShoesPaginated,
-}
+};

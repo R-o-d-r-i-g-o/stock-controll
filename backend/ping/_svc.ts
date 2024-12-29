@@ -1,4 +1,4 @@
-import * as repo from '@/backend/repositories'
+import * as repo from "./_repo";
 
 /**
  * Função para verificar a conexão com o banco de dados.
@@ -6,12 +6,12 @@ import * as repo from '@/backend/repositories'
  */
 const pingDatabase = async () => {
   try {
-    await repo.pingDatabase()
-    return true
+    await repo.pingDatabase();
+    return true;
   } catch (err) {
-    console.error(err)
-    return false
+    console.error(err);
+    return false;
   }
-}
+};
 
-export { pingDatabase }
+export { pingDatabase };

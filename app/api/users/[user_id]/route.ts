@@ -1,16 +1,16 @@
-import { NextRequest } from 'next/server';
+import { NextRequest } from "next/server";
 
-import { updateUserSchema } from '@/schemas'
-import * as svc from '@/backend/services'
+import { updateUserSchema } from "@/schemas";
+import * as svc from "@/backend";
 
 type UserParams = {
-  params: Promise<{ user_id: string }>
-}
+  params: Promise<{ user_id: string }>;
+};
 
 const getUserByID = async (req: NextRequest, { params }: UserParams) => {
   try {
-    const userId = parseInt((await params).user_id, 10)
-    const user = await svc.getUserBy({ id: userId })
+    const userId = parseInt((await params).user_id, 10);
+    const user = await svc.getUserBy({ id: userId });
 
     return Response.json(user, { status: 200 });
   } catch (error) {
@@ -20,8 +20,8 @@ const getUserByID = async (req: NextRequest, { params }: UserParams) => {
 
 const deleteUser = async (req: NextRequest, { params }: UserParams) => {
   try {
-    const userId = parseInt((await params).user_id, 10)
-    await svc.deleteUser(userId)
+    const userId = parseInt((await params).user_id, 10);
+    await svc.deleteUser(userId);
 
     return Response.json(null, { status: 200 });
   } catch (error) {
@@ -33,13 +33,15 @@ const updateUser = async (req: NextRequest, { params }: UserParams) => {
   try {
     const payload = {
       ...(await req.json()),
-      id: parseInt((await params).user_id, 10)
-    }
-    const result = await updateUserSchema.validate(payload, { abortEarly: false });
+      id: parseInt((await params).user_id, 10),
+    };
+    const result = await updateUserSchema.validate(payload, {
+      abortEarly: false,
+    });
     await svc.updateUser({
       ...result,
       password: result.password ?? "",
-    })
+    });
 
     return Response.json(null, { status: 200 });
   } catch (error) {
@@ -47,8 +49,4 @@ const updateUser = async (req: NextRequest, { params }: UserParams) => {
   }
 };
 
-export {
-  updateUser as PUT,
-  deleteUser as DELETE,
-  getUserByID as GET,
-}
+export { updateUser as PUT, deleteUser as DELETE, getUserByID as GET };

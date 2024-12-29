@@ -1,8 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import { getAuthUser } from '@/backend/services'
-import { NavigationPage } from '@/common'
+import { getAuthUser } from "@/backend";
+import { NavigationPage } from "@/common";
 
 const providers: NextAuthOptions["providers"] = [
   CredentialsProvider({
@@ -12,17 +12,16 @@ const providers: NextAuthOptions["providers"] = [
     },
     async authorize(credentials) {
       try {
-        if (!credentials)
-          throw new Error("Credenciais não encontradas")
+        if (!credentials) throw new Error("Credenciais não encontradas");
 
         return await getAuthUser(credentials);
       } catch (err) {
-        console.error(err)
+        console.error(err);
         return null;
       }
     },
-  })
-]
+  }),
+];
 
 const options: NextAuthOptions = {
   providers,

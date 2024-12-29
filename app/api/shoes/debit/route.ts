@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import * as svc from "@/backend/services";
+import * as svc from "@/backend";
 
 const debitShoe = async (req: NextRequest) => {
   try {

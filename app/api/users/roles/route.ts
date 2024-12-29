@@ -1,12 +1,12 @@
-import * as svc from '@/backend/services'
+import * as svc from "@/backend";
 
 const getRoleList = async () => {
-    try {
-        const list = await svc.getRoleList()
-        return Response.json(list, { status: 200 });
-    } catch (error) {
-        return Response.json(error, { status: 500 });
-    }
-}
+  try {
+    const list = await svc.getRoleList();
+    return Response.json(list, { status: 200 });
+  } catch (error) {
+    return Response.json(error, { status: 500 });
+  }
+};
 
-export { getRoleList as GET }
+export { getRoleList as GET };
