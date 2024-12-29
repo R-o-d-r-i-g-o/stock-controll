@@ -1,4 +1,4 @@
-import { api } from "./api/_api";
+import { api } from "../api";
 import * as t from "./_types";
 
 const getAuditsPaginated = async (req: t.GetAuditsPaginated) => {
