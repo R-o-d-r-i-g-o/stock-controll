@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
 import { Fragment, useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
-import * as svc from "@/services"
-import Swal from 'sweetalert2'
+import * as svc from "@/services";
+import Swal from "sweetalert2";
 
 import { useToast } from "@/hooks";
 import { useRouter } from "next/navigation";
 
-import * as a from './_actions'
+import * as a from "./_actions";
 import { footSizesList } from "@/common";
 // import * as m from './_models'
 
@@ -22,41 +22,39 @@ type UserCreateFormProps = {
     categoryId: number;
     createdAt: string;
     deletedAt: string | null;
-  }
-}
+  };
+};
 
 const FormButtons = ({ shoeId }: { shoeId: number }) => {
-  const { success, failure } = useToast()
-  const router = useRouter()
+  const { success, failure } = useToast();
+  const router = useRouter();
 
-  const { pending } = useFormStatus()
-  const lable = pending ? "Processando..." : "Cadastrar"
+  const { pending } = useFormStatus();
+  const lable = pending ? "Processando..." : "Cadastrar";
 
   const handleDelete = () => {
     Swal.fire({
-      title: 'Tem certeza?',
-      text: 'Essa ação não pode ser desfeita!',
-      icon: 'warning',
+      title: "Tem certeza?",
+      text: "Essa ação não pode ser desfeita!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Sim, deletar!',
-      cancelButtonText: 'Cancelar'
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sim, deletar!",
+      cancelButtonText: "Cancelar",
     }).then(async (result) => {
       try {
-        if (!result.isConfirmed)
-          return
+        if (!result.isConfirmed) return;
 
-        await svc.deleteShoeById(shoeId)
-        success("O usuário foi deletado com sucesso!")
-        router.back()
+        await svc.deleteShoeById(shoeId);
+        success("O usuário foi deletado com sucesso!");
+        router.back();
+      } catch (err) {
+        console.error(err);
+        failure("Houve um erro ao deletar o usuário.");
       }
-      catch (err) {
-        console.error(err)
-        failure("Houve um erro ao deletar o usuário.")
-      }
-    })
-  }
+    });
+  };
 
   return (
     <Fragment>
@@ -72,11 +70,11 @@ const FormButtons = ({ shoeId }: { shoeId: number }) => {
         onClick={handleDelete}
         className="w-full py-3 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300"
       >
-        Deletar produto
+        Deletar item
       </button>
     </Fragment>
-  )
-}
+  );
+};
 
 const UserCreateForm = ({ shoe: item }: UserCreateFormProps) => {
   const initialState = {
@@ -87,26 +85,25 @@ const UserCreateForm = ({ shoe: item }: UserCreateFormProps) => {
       size: item.size.toString(),
       price: item.price.toString(),
       categoryId: item.categoryId.toString(),
-    }
-  }
+    },
+  };
 
-  const { success, failure } = useToast()
-  const [state, formAction] = useFormState(a.handleSubmit, initialState)
+  const { success, failure } = useToast();
+  const [state, formAction] = useFormState(a.handleSubmit, initialState);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleFormReponse = () => {
     if (state.message === "success") {
-      success("Produto atualizado com sucesso!")
-      router.push(`painel/calcados/${item.categoryId}`)
+      success("Item atualizado com sucesso!");
+      router.push(`painel/calcados/${item.categoryId}`);
+    } else if (state.message !== "") {
+      failure(state.message);
     }
-    else if (state.message !== "") {
-      failure(state.message)
-    }
-  }
+  };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(handleFormReponse, [state])
+  useEffect(handleFormReponse, [state]);
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
@@ -115,7 +112,12 @@ const UserCreateForm = ({ shoe: item }: UserCreateFormProps) => {
       </h2>
       <form action={formAction}>
         <div className="mb-6">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-600">SKU</label>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-600"
+          >
+            SKU
+          </label>
           <input
             id="name"
             name="name"
@@ -126,7 +128,12 @@ const UserCreateForm = ({ shoe: item }: UserCreateFormProps) => {
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-600">Preço</label>
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Preço
+          </label>
           <input
             id="price"
             name="price"
@@ -138,13 +145,18 @@ const UserCreateForm = ({ shoe: item }: UserCreateFormProps) => {
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="role_id" className="block text-sm font-medium text-gray-600">Tamanho</label>
+          <label
+            htmlFor="role_id"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Tamanho
+          </label>
           <select
             id="size"
             name="size"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           >
-            {footSizesList?.map(footSize => (
+            {footSizesList?.map((footSize) => (
               <option
                 key={footSize}
                 value={footSize}
