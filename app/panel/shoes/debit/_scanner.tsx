@@ -34,6 +34,8 @@ const CodeScanner = ({
     (device) => device.kind === "videoinput"
   );
 
+  console.log("renderizou");
+
   const handleBeepSound = () => {
     if (!audioRef.current) return;
     audioRef.current.currentTime = 0;
@@ -68,7 +70,7 @@ const CodeScanner = ({
       torch.off();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [torch, result]);
+  }, [result]);
 
   return (
     <React.Fragment>
