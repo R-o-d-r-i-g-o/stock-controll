@@ -1,8 +1,8 @@
 type TabelaProps = {
   filter: {
-    page: number
-    size: number
-  },
+    page: number;
+    size: number;
+  };
   data: {
     meta: {
       skip: number;
@@ -17,7 +17,7 @@ type TabelaProps = {
       createdAt: string;
       deletedAt: string | null;
     }>;
-  }
-}
+  };
+};
 
 export type { TabelaProps };

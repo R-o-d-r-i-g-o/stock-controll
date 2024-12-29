@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import {
   Table,
   TableBody,
@@ -10,34 +10,36 @@ import {
   TableRow,
   Pagination,
   IconButton,
-} from '@mui/material';
+} from "@mui/material";
 
-import { styled } from '@mui/material/styles';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { styled } from "@mui/material/styles";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import { useRouter } from "next/navigation";
-import { NavigationPage } from '@/common';
+import { NavigationPage } from "@/common";
 
-import * as t from './_types'
+import * as t from "./_types";
 
 const CustomTableContainer = styled(TableContainer)({
-  boxShadow: '0px 13px 20px 0px #80808029',
-  borderRadius: '10px',
-  overflowX: 'scroll',
+  boxShadow: "0px 13px 20px 0px #80808029",
+  borderRadius: "10px",
+  overflowX: "scroll",
 });
 
 const Tabela = ({ filter, data }: t.TabelaProps) => {
-  const router = useRouter()
-  const totalPages = Math.ceil(data.meta?.total / filter.size)
+  const router = useRouter();
+  const totalPages = Math.ceil(data.meta?.total / filter.size);
 
   const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
-    e?.preventDefault()
-    router.push(`${NavigationPage.Users}?page=${newPage}`)
+    e?.preventDefault();
+    router.push(`${NavigationPage.Users}?page=${newPage}`);
   };
 
   return (
     <React.Fragment>
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Usuários do sistema</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        Usuários do sistema
+      </h2>
       <CustomTableContainer>
         <Table>
           <TableHead>
@@ -46,27 +48,38 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
               <TableCell className="!text-white font-semibold">Nome</TableCell>
               <TableCell className="!text-white font-semibold">Email</TableCell>
               <TableCell className="!text-white font-semibold">Cargo</TableCell>
-              <TableCell className="!text-white font-semibold">Status</TableCell>
-              <TableCell className="!text-white font-semibold">Config.</TableCell>
+              <TableCell className="!text-white font-semibold">
+                Status
+              </TableCell>
+              <TableCell className="!text-white font-semibold">
+                Config.
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {!data.users || data.users.length < 1 && (
-              <TableRow>
-                <TableCell colSpan={6} align="center">
-                  <p className="text-gray-500">Nenhum registro encontrado.</p>
-                </TableCell>
-              </TableRow>
-            )}
+            {!data.users ||
+              (data.users.length < 1 && (
+                <TableRow>
+                  <TableCell colSpan={6} align="center">
+                    <p className="text-gray-500">Nenhum registro encontrado.</p>
+                  </TableCell>
+                </TableRow>
+              ))}
             {data.users?.map((u, index) => (
               <TableRow key={index} className="hover:bg-indigo-100">
                 <TableCell>{u.id}</TableCell>
                 <TableCell>{u.name}</TableCell>
                 <TableCell>{u.email}</TableCell>
                 <TableCell>{u.role}</TableCell>
-                <TableCell>{u.deletedAt != null ? "🔴 Desa." : "🟢 Ativo"}</TableCell>
                 <TableCell>
-                  <IconButton onClick={() => router.push(`${NavigationPage.Users}/${u.id}`)}>
+                  {u.deletedAt != null ? "🔴 Desa." : "🟢 Ativo"}
+                </TableCell>
+                <TableCell>
+                  <IconButton
+                    onClick={() =>
+                      router.push(`${NavigationPage.Users}/${u.id}`)
+                    }
+                  >
                     <MoreVertIcon />
                   </IconButton>
                 </TableCell>
@@ -89,6 +102,6 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
       </div>
     </React.Fragment>
   );
-}
+};
 
 export default Tabela;

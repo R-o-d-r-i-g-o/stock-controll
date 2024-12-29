@@ -1,15 +1,14 @@
-
 type InitialStateEntries = {
   message: string;
   fieldValues: CreateUserFormEntries;
-}
+};
 
 type CreateUserFormEntries = {
   name: string;
   email: string;
   role_id: string;
-  password: string
-}
+  password: string;
+};
 
 const initalState: InitialStateEntries = {
   message: "",
@@ -18,11 +17,7 @@ const initalState: InitialStateEntries = {
     email: "",
     role_id: "",
     password: "",
-  }
-}
+  },
+};
 
-export {
-  type InitialStateEntries,
-  type CreateUserFormEntries,
-  initalState,
-}
+export { type InitialStateEntries, type CreateUserFormEntries, initalState };

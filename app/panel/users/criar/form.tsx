@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -7,19 +7,19 @@ import { useToast } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { NavigationPage } from "@/common";
 
-import * as a from './_actions'
-import * as m from './_models'
+import * as a from "./_actions";
+import * as m from "./_models";
 
 type UserCreateFormProps = {
   roles: Array<{
     id: number;
     name: string;
-  }>
-}
+  }>;
+};
 
 const SubmitButton = () => {
-  const { pending } = useFormStatus()
-  const lable = pending ? "Processando..." : "Cadastrar"
+  const { pending } = useFormStatus();
+  const lable = pending ? "Processando..." : "Cadastrar";
 
   return (
     <button
@@ -29,35 +29,41 @@ const SubmitButton = () => {
     >
       {lable}
     </button>
-  )
-}
+  );
+};
 
 const UserCreateForm = ({ roles }: UserCreateFormProps) => {
-  const { success, failure } = useToast()
-  const [state, formAction] = useFormState(a.handleSubmit, m.initalState)
+  const { success, failure } = useToast();
+  const [state, formAction] = useFormState(a.handleSubmit, m.initalState);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleFormReponse = () => {
     if (state.message === "success") {
-      success("Novo usuário criado com sucesso!")
-      router.push(NavigationPage.Users)
+      success("Novo usuário criado com sucesso!");
+      router.push(NavigationPage.Users);
+    } else if (state.message !== "") {
+      failure(state.message);
     }
-    else if (state.message !== "") {
-      failure(state.message)
-    }
-  }
+  };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(handleFormReponse, [state])
+  useEffect(handleFormReponse, [state]);
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Novo Usuário</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        Novo Usuário
+      </h2>
 
       <form action={formAction}>
         <div className="mb-6">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-600">Nome</label>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Nome
+          </label>
           <input
             type="text"
             id="name"
@@ -67,7 +73,12 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-600">Email</label>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Email
+          </label>
           <input
             type="email"
             id="email"
@@ -77,7 +88,12 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-600">Senha</label>
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Senha
+          </label>
           <input
             type="password"
             id="password"
@@ -87,14 +103,21 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="role_id" className="block text-sm font-medium text-gray-600">Cargo</label>
+          <label
+            htmlFor="role_id"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Cargo
+          </label>
           <select
             id="role_id"
             name="role_id"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           >
-            <option selected disabled>Selecione o cargo</option>
-            {roles?.map(r => (
+            <option selected disabled>
+              Selecione o cargo
+            </option>
+            {roles?.map((r) => (
               <option key={r.id} value={r.id}>
                 {r.name}
               </option>

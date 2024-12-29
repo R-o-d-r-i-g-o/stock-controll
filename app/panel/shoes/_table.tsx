@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -11,21 +11,21 @@ import {
   Pagination,
   IconButton,
   Collapse,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { styled } from '@mui/material/styles';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { styled } from "@mui/material/styles";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import { useRouter } from "next/navigation";
-import { defaultDateMask, footSizesList, NavigationPage } from '@/common';
+import { defaultDateMask, footSizesList, NavigationPage } from "@/common";
 
-import * as t from './_types'
-import moment from 'moment';
+import * as t from "./_types";
+import moment from "moment";
 
 const CustomTableContainer = styled(TableContainer)({
-  boxShadow: '0px 13px 20px 0px #80808029',
-  borderRadius: '10px',
-  overflowX: 'scroll',
+  boxShadow: "0px 13px 20px 0px #80808029",
+  borderRadius: "10px",
+  overflowX: "scroll",
 });
 
 type AuxTabelaProps = {
@@ -36,7 +36,8 @@ const AuxTabela = ({ groupedShoes }: AuxTabelaProps) => {
   const shoeCountBySize: { [size: number]: number } = {};
 
   groupedShoes.forEach((group) => {
-    shoeCountBySize[group.size] = (shoeCountBySize[group.size] || 0) + group.shoes.length;
+    shoeCountBySize[group.size] =
+      (shoeCountBySize[group.size] || 0) + group.shoes.length;
   });
 
   return (
@@ -62,12 +63,12 @@ const AuxTabela = ({ groupedShoes }: AuxTabelaProps) => {
 const Tabela = ({ filter, data }: t.TabelaProps) => {
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
-  const router = useRouter()
-  const totalPages = Math.ceil(data.meta?.total / filter.size)
+  const router = useRouter();
+  const totalPages = Math.ceil(data.meta?.total / filter.size);
 
   const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
-    e?.preventDefault()
-    router.push(`${NavigationPage.Category}?page=${newPage}`)
+    e?.preventDefault();
+    router.push(`${NavigationPage.Category}?page=${newPage}`);
   };
 
   const handleRowClick = (index: number) => {
@@ -76,7 +77,9 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
 
   return (
     <React.Fragment>
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Calçados disponiveis</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        Calçados disponiveis
+      </h2>
       <CustomTableContainer>
         <Table>
           <TableHead>
@@ -85,55 +88,67 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
               <TableCell className="!text-white font-semibold">Nome</TableCell>
               <TableCell className="!text-white font-semibold">Data</TableCell>
               <TableCell className="!text-white font-semibold">Cor</TableCell>
-              <TableCell className="!text-white font-semibold">Solado</TableCell>
-              <TableCell className="!text-white font-semibold">Config.</TableCell>
+              <TableCell className="!text-white font-semibold">
+                Solado
+              </TableCell>
+              <TableCell className="!text-white font-semibold">
+                Config.
+              </TableCell>
               <TableCell className="!text-white font-semibold"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {!data.categories || data.categories.length < 1 && (
-              <TableRow>
-                <TableCell colSpan={7} align="center">
-                  <p className="text-gray-500">Nenhum registro encontrado.</p>
-                </TableCell>
-              </TableRow>
-            )}
+            {!data.categories ||
+              (data.categories.length < 1 && (
+                <TableRow>
+                  <TableCell colSpan={7} align="center">
+                    <p className="text-gray-500">Nenhum registro encontrado.</p>
+                  </TableCell>
+                </TableRow>
+              ))}
             {data.categories?.map((c) => (
               <React.Fragment key={c.id}>
                 <TableRow className="hover:bg-indigo-100">
-                  <TableCell>
-                    {c.id}
-                  </TableCell>
-                  <TableCell>
-                    {c.name}
-                  </TableCell>
+                  <TableCell>{c.id}</TableCell>
+                  <TableCell>{c.name}</TableCell>
                   <TableCell>
                     {moment(c.createdAt).format(defaultDateMask)}
                   </TableCell>
-                  <TableCell>
-                    {c.color}
-                  </TableCell>
-                  <TableCell>
-                    {c.sole}
-                  </TableCell>
+                  <TableCell>{c.color}</TableCell>
+                  <TableCell>{c.sole}</TableCell>
                   <TableCell>
                     <IconButton onClick={() => handleRowClick(c.id)}>
                       <ExpandMoreIcon />
                     </IconButton>
                   </TableCell>
                   <TableCell>
-                    <IconButton onClick={() => router.push(`${NavigationPage.Category}/${c.id}`)}>
+                    <IconButton
+                      onClick={() =>
+                        router.push(`${NavigationPage.Category}/${c.id}`)
+                      }
+                    >
                       <MoreVertIcon />
                     </IconButton>
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell colSpan={7} style={{ paddingBottom: 0, paddingTop: 0 }}>
-                    <Collapse in={selectedRow === c.id} timeout="auto" unmountOnExit>
+                  <TableCell
+                    colSpan={7}
+                    style={{ paddingBottom: 0, paddingTop: 0 }}
+                  >
+                    <Collapse
+                      in={selectedRow === c.id}
+                      timeout="auto"
+                      unmountOnExit
+                    >
                       <div className="p-4">
-                        <p className="text-gray-700"><strong>Descrição:</strong></p>
+                        <p className="text-gray-700">
+                          <strong>Descrição:</strong>
+                        </p>
                         <p className="text-gray-700">{c.note || "--"}</p>
-                        <p className="text-gray-700 mt-6"><strong>Tamanho X Unidades:</strong></p>
+                        <p className="text-gray-700 mt-6">
+                          <strong>Tamanho X Unidades:</strong>
+                        </p>
                         <AuxTabela groupedShoes={c.groupedShoes} />
                       </div>
                     </Collapse>
@@ -158,6 +173,6 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
       </div>
     </React.Fragment>
   );
-}
+};
 
 export default Tabela;

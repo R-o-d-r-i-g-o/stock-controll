@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
 import { Fragment, useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
-import { deleteUser } from "@/services"
-import Swal from 'sweetalert2'
+import { deleteUser } from "@/services";
+import Swal from "sweetalert2";
 
 import { useToast } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { NavigationPage } from "@/common";
 
-import * as a from './_actions'
-import * as m from './_models'
+import * as a from "./_actions";
+import * as m from "./_models";
 
 type UserCreateFormProps = {
   user: {
@@ -21,45 +21,43 @@ type UserCreateFormProps = {
     role_id: number;
     createdAt: string;
     deletedAt: string | null;
-  },
+  };
   roles: Array<{
     id: number;
     name: string;
-  }>
-}
+  }>;
+};
 
 const FormButtons = ({ userId }: { userId: number }) => {
-  const { success, failure } = useToast()
-  const router = useRouter()
+  const { success, failure } = useToast();
+  const router = useRouter();
 
-  const { pending } = useFormStatus()
-  const lable = pending ? "Processando..." : "Cadastrar"
+  const { pending } = useFormStatus();
+  const lable = pending ? "Processando..." : "Cadastrar";
 
   const handleDelete = () => {
     Swal.fire({
-      title: 'Tem certeza?',
-      text: 'Essa ação não pode ser desfeita!',
-      icon: 'warning',
+      title: "Tem certeza?",
+      text: "Essa ação não pode ser desfeita!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Sim, deletar!',
-      cancelButtonText: 'Cancelar'
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sim, deletar!",
+      cancelButtonText: "Cancelar",
     }).then(async (result) => {
       try {
-        if (!result.isConfirmed)
-          return
+        if (!result.isConfirmed) return;
 
-        await deleteUser(userId)
-        success("O usuário foi deletado com sucesso!")
-        router.push(NavigationPage.Users)
+        await deleteUser(userId);
+        success("O usuário foi deletado com sucesso!");
+        router.push(NavigationPage.Users);
+      } catch (err) {
+        console.error(err);
+        failure("Houve um erro ao deletar o usuário.");
       }
-      catch (err) {
-        console.error(err)
-        failure("Houve um erro ao deletar o usuário.")
-      }
-    })
-  }
+    });
+  };
 
   return (
     <Fragment>
@@ -78,30 +76,29 @@ const FormButtons = ({ userId }: { userId: number }) => {
         Deletar Usuário
       </button>
     </Fragment>
-  )
-}
+  );
+};
 
 const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
-  const initialState = m.initalState
-  initialState.fieldValues.id = user.id.toString()
+  const initialState = m.initalState;
+  initialState.fieldValues.id = user.id.toString();
 
-  const { success, failure } = useToast()
-  const [state, formAction] = useFormState(a.handleSubmit, initialState)
+  const { success, failure } = useToast();
+  const [state, formAction] = useFormState(a.handleSubmit, initialState);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleFormReponse = () => {
     if (state.message === "success") {
-      success("Usuário atualizado com sucesso!")
-      router.push(NavigationPage.Users)
+      success("Usuário atualizado com sucesso!");
+      router.push(NavigationPage.Users);
+    } else if (state.message !== "") {
+      failure(state.message);
     }
-    else if (state.message !== "") {
-      failure(state.message)
-    }
-  }
+  };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(handleFormReponse, [state])
+  useEffect(handleFormReponse, [state]);
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
@@ -110,7 +107,12 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
       </h2>
       <form action={formAction}>
         <div className="mb-6">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-600">Nome</label>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Nome
+          </label>
           <input
             key={user.name}
             type="text"
@@ -122,7 +124,12 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-600">Email</label>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Email
+          </label>
           <input
             type="email"
             id="email"
@@ -134,7 +141,12 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-600">Senha</label>
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Senha
+          </label>
           <input
             type="password"
             id="password"
@@ -145,18 +157,19 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="role_id" className="block text-sm font-medium text-gray-600">Cargo</label>
+          <label
+            htmlFor="role_id"
+            className="block text-sm font-medium text-gray-600"
+          >
+            Cargo
+          </label>
           <select
             id="role_id"
             name="role_id"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           >
-            {roles?.map(r => (
-              <option
-                key={r.id}
-                value={r.id}
-                selected={r.id === user.role_id}
-              >
+            {roles?.map((r) => (
+              <option key={r.id} value={r.id} selected={r.id === user.role_id}>
                 {r.name}
               </option>
             ))}

@@ -4,13 +4,13 @@ type GroupedShoe = {
     id: number;
     price: number;
   }[];
-}
+};
 
 type TabelaProps = {
   filter: {
-    page: number
-    size: number
-  },
+    page: number;
+    size: number;
+  };
   data: {
     meta: {
       skip: number;
@@ -27,7 +27,7 @@ type TabelaProps = {
       deletedAt: string | null;
       groupedShoes: GroupedShoe[];
     }[];
-  }
-}
+  };
+};
 
 export type { TabelaProps, GroupedShoe };

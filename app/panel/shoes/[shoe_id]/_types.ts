@@ -1,7 +1,7 @@
 type TableProps = {
   meta: {
     categoryId: number;
-  },
+  };
   data: {
     id: number;
     sku: string;
@@ -10,7 +10,7 @@ type TableProps = {
     createdAt: string;
     deletedAt: string | null;
   }[];
-}
+};
 
 type DashProps = {
   data: {
@@ -29,13 +29,13 @@ type DashProps = {
       createdAt: string;
       deletedAt: string | null;
     }[];
-  }
-}
+  };
+};
 
 type InitialStateEntries = {
   message: string;
   fieldValues: CreateUserFormEntries;
-}
+};
 
 type CreateUserFormEntries = {
   id: string;
@@ -43,11 +43,11 @@ type CreateUserFormEntries = {
   sole: string;
   color: string;
   note: string;
-}
+};
 
 export type {
   InitialStateEntries,
   CreateUserFormEntries,
   TableProps,
-  DashProps
-}
+  DashProps,
+};

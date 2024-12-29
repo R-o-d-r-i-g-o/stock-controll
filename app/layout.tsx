@@ -5,7 +5,7 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import InfoButton from '@/components/info'
+import InfoButton from "@/components/info";
 
 const geistSans = localFont({
   src: "../public/fonts/GeistVF.woff",
@@ -25,13 +25,11 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = Readonly<{
   children: React.ReactNode;
-}>
+}>;
 
 const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang="en">
-    <body
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <InfoButton />
       <ToastContainer />
       {children}
