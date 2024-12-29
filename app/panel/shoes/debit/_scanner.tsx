@@ -25,7 +25,6 @@ const CodeScanner = ({
   onResult,
 }: ScannerProps) => {
   const [loading, setLoading] = useState(true);
-  const lastCode = useRef<string | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const [selectedCamera, setSelectedCamera] = useState<string | undefined>();
@@ -48,9 +47,8 @@ const CodeScanner = ({
 
   const handleScannerResult = (res: Result) => {
     const newCode = res.getText();
-    if (newCode === "" || newCode === lastCode.current) return;
+    if (newCode === "") return;
 
-    lastCode.current = newCode;
     setResult(newCode);
     setLoading(false);
   };
