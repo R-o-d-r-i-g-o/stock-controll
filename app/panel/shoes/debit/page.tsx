@@ -3,23 +3,20 @@
 import React, { useState } from "react";
 import { useToast } from "@/hooks";
 import { IconButton } from "@mui/material";
-// import Scanner from './_scanner'
-
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Scanner from "./_scanner";
 
 import * as svc from "@/services";
 
 const RegisterBuying = () => {
   const { failure, success } = useToast();
-
   const [tasks, setTasks] = useState<string[]>([]);
   const [task, setTask] = useState<string>("");
 
   const sendSKUs = async () => {
     try {
       await svc.debitShoesFromStorage(tasks);
-
       success("SKUs enviados com sucesso!");
       setTasks([]);
     } catch (error) {
@@ -36,52 +33,49 @@ const RegisterBuying = () => {
   };
 
   const removeTask = (index: number) => {
-    const updatedTasks = tasks.filter((_, taskIndex) => taskIndex !== index);
-    setTasks(updatedTasks);
+    setTasks(tasks.filter((_, taskIndex) => taskIndex !== index));
+  };
+
+  const handleScanResult = (scannedTask: string) => {
+    if (!tasks || tasks.includes(scannedTask)) return;
+    setTask(scannedTask);
   };
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-      <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
-        SKUs p/a baixa do estoque
+    <div className="bg-white p-6 rounded-lg shadow w-full max-w-sm">
+      <h2 className="text-xl font-medium text-center text-gray-800 mb-4">
+        SKUs para baixa
       </h2>
-      {/* <Scanner /> */}
-
-      <div className="flex items-center mb-6">
+      <Scanner onResult={handleScanResult} className="rounded-md mb-6" />
+      <div className="flex items-center border-b border-gray-300 pb-2 mb-4">
         <input
           type="text"
           value={task}
           onChange={(e) => setTask(e.target.value)}
-          placeholder="Adicione uma nova tarefa"
-          className="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Digite o SKU"
+          className="flex-grow p-2 text-sm focus:outline-none"
         />
-        <button
-          onClick={addTask}
-          className="ml-4 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
-        >
-          <AddIcon />
-        </button>
+        <IconButton onClick={addTask} color="primary">
+          <AddIcon fontSize="small" />
+        </IconButton>
       </div>
-      <ul className="space-y-4">
+      <ul className="divide-y divide-gray-200">
         {tasks.map((task, index) => (
           <li
             key={index}
-            className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-md"
+            className="flex justify-between items-center py-2 text-sm"
           >
             <span className="text-gray-700">{task}</span>
-            <IconButton
-              onClick={() => removeTask(index)}
-              className="hover:text-red-600 transition"
-            >
-              <DeleteIcon />
+            <IconButton onClick={() => removeTask(index)} color="error">
+              <DeleteIcon fontSize="small" />
             </IconButton>
           </li>
         ))}
       </ul>
-      {tasks && tasks.length >= 1 && (
+      {tasks.length > 0 && (
         <button
           onClick={sendSKUs}
-          className="mt-6 w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+          className="mt-4 w-full py-2 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition"
         >
           Enviar SKUs
         </button>

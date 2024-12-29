@@ -27,6 +27,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.0",
+    "react-media-devices": "^1.1.5",
     "react-toastify": "^10.0.6",
     "react-zxing": "^2.0.2",
     "sweetalert2": "^11.15.3",
@@ -50,6 +51,10 @@
   },
   "overrides": {
     "react-zxing": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "react-media-devices": {
       "react": "$react",
       "react-dom": "$react-dom"
     }
