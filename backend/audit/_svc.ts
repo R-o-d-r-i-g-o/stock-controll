@@ -23,8 +23,8 @@ const getAuditsPaginated = async (filter: t.getAuditsPaginatedProps) => {
     audits: auditList.map((a) => ({
       id: a.id,
       note: a.note,
-      user: a.user.name,
-      shoeId: a.shoe_id,
+      user: a.User.name,
+      shoeId: a.item_id,
       createdAt: a.created_at,
     })),
   };

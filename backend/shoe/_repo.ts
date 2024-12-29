@@ -3,13 +3,13 @@ import moment from "moment";
 import * as t from "./_types.repo";
 
 const getCategoryBy = async (filter: t.getCategoryByProps) => {
-  const category = await prisma.category.findFirstOrThrow({
+  const category = await prisma.shoe.findFirstOrThrow({
     where: {
       id: filter.id || undefined,
       name: filter.name || undefined,
     },
     include: {
-      Shoe: {
+      Item: {
         where: { deleted_at: null },
         orderBy: { size: "asc" },
       },
@@ -21,7 +21,7 @@ const getCategoryBy = async (filter: t.getCategoryByProps) => {
 
 const getCategoryShoesCount = async (filter: t.getShoesPaginatedProps) => {
   console.log("filters", filter);
-  const shoesGroupedByCategory = await prisma.category.count({
+  const shoesGroupedByCategory = await prisma.shoe.count({
     where: { deleted_at: null },
   });
 
@@ -29,12 +29,12 @@ const getCategoryShoesCount = async (filter: t.getShoesPaginatedProps) => {
 };
 
 const getCategoryShoesPaginated = async (filter: t.getShoesPaginatedProps) => {
-  const shoesGroupedByCategory = await prisma.category.findMany({
+  const shoesGroupedByCategory = await prisma.shoe.findMany({
     skip: filter.skip,
     take: filter.take,
     where: { deleted_at: null },
     include: {
-      Shoe: {
+      Item: {
         where: { deleted_at: null },
         orderBy: { size: "asc" },
       },
@@ -46,7 +46,7 @@ const getCategoryShoesPaginated = async (filter: t.getShoesPaginatedProps) => {
 
 const deleteCategory = async (id: number) => {
   return await prismaTransaction(async () => {
-    const deletedCategory = await prisma.category.update({
+    const deletedCategory = await prisma.shoe.update({
       where: { id },
       data: { deleted_at: moment.utc().toDate() },
     });
@@ -56,25 +56,25 @@ const deleteCategory = async (id: number) => {
 
 const updateCategory = async (user: t.updateCategoryProps) => {
   return await prismaTransaction(async () => {
-    await prisma.category.update({
+    await prisma.shoe.update({
       where: { id: user.id },
       data: {
         name: user.name || undefined,
         sole: user.sole || undefined,
+        note: user.note || undefined,
         color: user.color || undefined,
-        description: user.note || undefined,
       },
     });
   });
 };
 
 const createCategory = async (data: t.createCategoryProps) => {
-  const { id } = await prisma.category.create({
+  const { id } = await prisma.shoe.create({
     data: {
       name: data.name,
       sole: data.sole,
+      note: data.note,
       color: data.color,
-      description: data.note,
     },
   });
   return id;

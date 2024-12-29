@@ -3,24 +3,24 @@ import moment from "moment";
 import * as t from "./_types.repo";
 
 const getItemBy = async (filter: t.getShoeByProps) => {
-  return await prisma.shoe.findFirstOrThrow({
+  return await prisma.item.findFirstOrThrow({
     where: {
       id: filter.id || undefined,
+      sku: filter.sku || undefined,
       size: filter.size || undefined,
       price: filter.price || undefined,
-      hash_code: filter.sku || undefined,
     },
   });
 };
 
 const createItem = async (shoe: t.createShoeProps) => {
   return await prismaTransaction(async () => {
-    const { id } = await prisma.shoe.create({
+    const { id } = await prisma.item.create({
       data: {
+        sku: shoe.sku,
         size: shoe.size,
         price: shoe.price,
-        hash_code: shoe.sku,
-        category_id: shoe.categoryId,
+        shoe_id: shoe.shoeId,
       },
     });
     return id;
@@ -29,13 +29,13 @@ const createItem = async (shoe: t.createShoeProps) => {
 
 const updateItem = async (data: t.updateShoeProps) => {
   return await prismaTransaction(async () => {
-    const shoe = await prisma.shoe.update({
+    const shoe = await prisma.item.update({
       where: { id: data.id },
       data: {
+        sku: data.sku || undefined,
         size: data.size || undefined,
         price: data.price || undefined,
-        hash_code: data.sku || undefined,
-        category_id: data.categoryId || undefined,
+        shoe_id: data.shoeId || undefined,
       },
     });
     return shoe;
@@ -44,7 +44,7 @@ const updateItem = async (data: t.updateShoeProps) => {
 
 const deleteItem = async (id: number) => {
   return await prismaTransaction(async () => {
-    const deletedShoe = await prisma.shoe.update({
+    const deletedShoe = await prisma.item.update({
       where: { id },
       data: { deleted_at: moment.utc().toDate() },
     });
@@ -53,13 +53,13 @@ const deleteItem = async (id: number) => {
 };
 
 const debitItems = async (SKUs: string[]) => {
-  const shoes = await prisma.shoe.findMany({
-    where: { hash_code: { in: SKUs } },
+  const shoes = await prisma.item.findMany({
+    where: { sku: { in: SKUs } },
     select: { id: true },
   });
 
   const data = shoes.map((u) => ({
-    shoe_id: u.id,
+    item_id: u.id,
     user_id: 1,
     note: "",
   }));

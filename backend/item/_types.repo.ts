@@ -2,7 +2,7 @@ type createShoeProps = {
   sku: string;
   size: number;
   price: number;
-  categoryId: number;
+  shoeId: number;
 };
 
 type updateShoeProps = {
@@ -10,7 +10,7 @@ type updateShoeProps = {
   sku: string;
   size: number;
   price: number;
-  categoryId: number;
+  shoeId: number;
 };
 
 type getShoesPaginatedProps = {

@@ -1,24 +1,24 @@
-import { SvgIconComponent } from "@mui/icons-material"
+import { SvgIconComponent } from "@mui/icons-material";
 
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
+type Anchor = "top" | "left" | "bottom" | "right";
 
 type MenuItem = {
-  lable: string
-  icon: SvgIconComponent
-  nav: NavigationPage
-}
+  lable: string;
+  icon: SvgIconComponent;
+  nav: NavigationPage;
+};
 
 type MenuPosition = {
-  anchor: Anchor
-  icon: SvgIconComponent
-}
+  anchor: Anchor;
+  icon: SvgIconComponent;
+};
 
 enum NavigationPage {
   Home = "/panel",
   Login = "/login",
   Category = "/panel/shoes",
   Users = "/panel/users",
-  History = "/panel/audits",
+  Audit = "/panel/audits",
   Reports = "/panel/reports",
   Products = "/panel/shoes/items",
 
@@ -29,9 +29,4 @@ enum NavigationPage {
   ProductsCreate = "/panel/shoes/items/create",
 }
 
-export {
-  type Anchor,
-  type MenuItem,
-  type MenuPosition,
-  NavigationPage,
-}
+export { type Anchor, type MenuItem, type MenuPosition, NavigationPage };

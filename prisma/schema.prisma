@@ -14,21 +14,21 @@ datasource db {
 }
 
 model Shoe {
-  id          Int       @id @default(autoincrement())
-  color       String
-  sole        String
-  name        String    @unique
-  description String
-  created_at  DateTime  @default(now())
-  deleted_at  DateTime?
-  Item        Item[]
+  id         Int       @id @default(autoincrement())
+  color      String
+  sole       String
+  name       String    @unique
+  note       String
+  created_at DateTime  @default(now())
+  deleted_at DateTime?
+  Item       Item[]
 
   @@map("tb_shoes")
 }
 
 model Item {
   id         Int       @id @default(autoincrement())
-  hash_code  String    @unique @default(uuid())
+  sku        String    @unique @default(uuid())
   price      Decimal
   size       Int
   created_at DateTime  @default(now())
@@ -42,13 +42,13 @@ model Item {
 }
 
 model Order {
-  id        Int    @id @default(autoincrement())
-  hash_code String @unique @default(uuid())
-  note      String
-  item_id   Int
-  user_id   Int
-  Item      Item   @relation(fields: [item_id], references: [id])
-  User      User   @relation(fields: [user_id], references: [id])
+  id      Int    @id @default(autoincrement())
+  code    String @unique @default(uuid())
+  note    String
+  item_id Int
+  user_id Int
+  Item    Item   @relation(fields: [item_id], references: [id])
+  User    User   @relation(fields: [user_id], references: [id])
 
   @@map("tb_orders")
 }

@@ -3,23 +3,23 @@ import * as t from "./_types.repo";
 
 const createAudit = async (audit: t.createHistoryProps) => {
   return await prismaTransaction(async () => {
-    const { id } = await prisma.history.create({ data: audit });
+    const { id } = await prisma.audit.create({ data: audit });
     return id;
   });
 };
 
 const getAuditsCount = async (filter: t.getAuditsPaginatedProps) => {
   console.log("filter", filter);
-  return await prisma.history.count();
+  return await prisma.audit.count();
 };
 
 const getAuditsPaginated = async (filter: t.getAuditsPaginatedProps) => {
-  return await prisma.history.findMany({
+  return await prisma.audit.findMany({
     take: filter.take,
     skip: filter.skip,
     include: {
-      user: true,
-      shoe: true,
+      User: true,
+      Item: true,
     },
   });
 };

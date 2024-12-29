@@ -35,7 +35,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
 
   const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
     e?.preventDefault();
-    router.push(`${NavigationPage.History}?page=${newPage}`);
+    router.push(`${NavigationPage.Audit}?page=${newPage}`);
   };
 
   const handleRowClick = (index: number) => {
