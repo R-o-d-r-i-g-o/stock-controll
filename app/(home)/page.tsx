@@ -7,7 +7,8 @@ const Page = async () => {
   const session = await getServerSession();
 
   const handleRedirect = () => {
-    session ? redirect(Home) : redirect(Login);
+    const destiny = session ? Home : Login;
+    redirect(destiny);
   };
 
   handleRedirect();
