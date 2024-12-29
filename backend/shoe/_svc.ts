@@ -1,5 +1,5 @@
 import * as repo from "./_repo";
-import * as t from "./_types.svc";
+import * as t from "./_svc.types";
 
 const getCategoryBy = async (filter: t.getCategoryByProps) => {
   const category = await repo.getCategoryBy(filter);

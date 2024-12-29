@@ -1,6 +1,6 @@
 import { prisma, prismaTransaction } from "../prisma";
 import moment from "moment";
-import * as t from "./_types.repo";
+import * as t from "./_repo.types";
 
 const createUser = async (user: t.createUserProps) => {
   return await prismaTransaction(async () => {

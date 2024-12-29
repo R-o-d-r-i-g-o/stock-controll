@@ -1,5 +1,5 @@
 import * as repo from "./_repo";
-import * as t from "./_types.svc";
+import * as t from "./_svc.types";
 
 const createAudit = async (audit: t.createHistoryProps) => {
   const auditId = await repo.createAudit(audit);

@@ -1,6 +1,6 @@
 import * as repo from "./_repo";
 import * as h from "./_helper";
-import * as t from "./_types.svc";
+import * as t from "./_svc.types";
 
 const { comparePasswords, encryptPassword } = h.hashHelper();
 
