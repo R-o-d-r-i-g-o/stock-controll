@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useZxing } from "react-zxing";
+import React, { useState, useEffect, useRef, memo } from "react";
+import { useZxing, Result } from "react-zxing";
 import { useMediaDevices } from "react-media-devices";
 
 // Doc: https://www.npmjs.com/package/react-zxing
 
 type ScannerProps = {
-  cameraStatus?: (isAvailable: boolean) => void;
   onResult?: (sku: string) => void;
+  beepEnabled?: boolean;
   className?: string;
   paused?: boolean;
 };
@@ -19,45 +19,58 @@ const constraints: MediaStreamConstraints = {
 };
 
 const CodeScanner = ({
+  beepEnabled,
   className,
-  cameraStatus,
   onResult,
   paused,
-  ...rest
 }: ScannerProps) => {
-  const [result, setResult] = useState("");
-  const [selectedCamera, setSelectedCamera] = useState<string | undefined>();
+  const [loading, setLoading] = useState(true);
+  const lastCode = useRef<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  // handle media devices
-  const { devices } = useMediaDevices({ constraints });
-  const videoDevices = devices?.filter(
+  const [selectedCamera, setSelectedCamera] = useState<string | undefined>();
+  const [result, setResult] = useState("");
+
+  const videoDevices = useMediaDevices({ constraints }).devices?.filter(
     (device) => device.kind === "videoinput"
   );
 
-  // handle camera
+  const handleBeepSound = () => {
+    if (!audioRef.current) return;
+    audioRef.current.currentTime = 0;
+    audioRef.current.play();
+  };
+
+  const handleCameraChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    e.preventDefault();
+    setSelectedCamera(e.target.value);
+  };
+
+  const handleScannerResult = (res: Result) => {
+    const newCode = res.getText();
+    if (newCode === "" || newCode === lastCode.current) return;
+
+    lastCode.current = newCode;
+    setResult(newCode);
+    setLoading(false);
+  };
+
   const { ref, torch } = useZxing({
-    ...rest,
     paused,
     deviceId: selectedCamera,
-    onDecodeResult(result) {
-      setResult(result.getText());
-    },
+    onDecodeResult: handleScannerResult,
   });
 
   useEffect(() => {
+    if (loading) return;
     if (onResult) onResult(result);
-    if (cameraStatus) cameraStatus(torch.isAvailable ?? false);
+    if (beepEnabled) handleBeepSound();
 
     return () => {
       torch.off();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [torch, result]);
-
-  const handleCameraChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    e.preventDefault();
-    setSelectedCamera(e.target.value);
-  };
 
   return (
     <React.Fragment>
@@ -85,10 +98,11 @@ const CodeScanner = ({
       )}
       <div className="relative h-min rounded-md overflow-hidden">
         <video className={className} ref={ref} />
-        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-red-500 transform -translate-y-1/2 pointer-events-none"></div>
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-red-500 transform -translate-y-1/2 pointer-events-none" />
       </div>
+      <audio ref={audioRef} src="/sounds/beep.mp3" />
     </React.Fragment>
   );
 };
 
-export default CodeScanner;
+export default memo(CodeScanner);

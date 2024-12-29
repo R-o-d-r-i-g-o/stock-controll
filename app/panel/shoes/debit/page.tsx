@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useToast } from "@/hooks";
 import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -17,7 +17,7 @@ const RegisterBuying = () => {
   const sendSKUs = async () => {
     try {
       await svc.debitShoesFromStorage(tasks);
-      success("SKUs enviados com sucesso!");
+      success("SKUs debitados com sucesso!");
       setTasks([]);
     } catch (error) {
       console.error(error);
@@ -36,17 +36,21 @@ const RegisterBuying = () => {
     setTasks(tasks.filter((_, taskIndex) => taskIndex !== index));
   };
 
-  const handleScanResult = (scannedTask: string) => {
-    if (scannedTask === "" || !tasks || tasks.includes(scannedTask)) return;
-    setTask(scannedTask);
-  };
+  const handleScanResult = useCallback((scannedSKU: string) => {
+    if (!tasks || tasks.includes(scannedSKU)) return;
+    setTasks((prevTasks) => [...prevTasks, scannedSKU]);
+  }, []);
 
   return (
     <div className="bg-white p-6 rounded-lg shadow w-full max-w-sm">
       <h2 className="text-xl font-medium text-center text-gray-800 mb-4">
         SKUs para baixa
       </h2>
-      <Scanner onResult={handleScanResult} className="rounded-md mb-6" />
+      <Scanner
+        beepEnabled
+        onResult={handleScanResult}
+        className="rounded-md mb-6"
+      />
       <div className="flex items-center border-b border-gray-300 pb-2 mb-4">
         <input
           type="text"
