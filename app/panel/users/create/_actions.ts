@@ -35,7 +35,7 @@ async function processForm(formData: FormData) {
     return validatedData;
   } catch (err) {
     const error = err as YupError;
-    return { error: error.errors[0] };
+    return { error: error.message };
   }
 }
 
