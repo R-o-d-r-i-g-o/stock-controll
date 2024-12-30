@@ -1,17 +1,26 @@
 "use client";
 
-import { Fragment, useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
-
-import { deleteUser } from "@/services";
-import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { z } from "zod";
 
 import { useToast } from "@/hooks";
-import { useRouter } from "next/navigation";
+import { updateUser } from "@/services";
 import { NavigationPage } from "@/common";
 
-import * as a from "./_actions";
-import * as m from "./_models";
+import DeleteButton from "./delete";
+
+const updateUserSchema = z.object({
+  name: z.string().min(1, "Nome é obrigatório"),
+  email: z.string().email("Email inválido").min(1, "Email é obrigatório"),
+  roleId: z.coerce.number().min(1, "Selecione um cargo"),
+  password: z
+    .string()
+    .min(6, "Senha deve ter pelo menos 6 caracteres")
+    .optional()
+    .or(z.literal("")),
+});
 
 type UserCreateFormProps = {
   user: {
@@ -28,84 +37,38 @@ type UserCreateFormProps = {
   }>;
 };
 
-const FormButtons = ({ userId }: { userId: number }) => {
-  const { success, failure } = useToast();
-  const router = useRouter();
-
-  const { pending } = useFormStatus();
-  const lable = pending ? "Processando..." : "Editar";
-
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Tem certeza?",
-      text: "Essa ação não pode ser desfeita!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sim, deletar!",
-      cancelButtonText: "Cancelar",
-    }).then(async (result) => {
-      try {
-        if (!result.isConfirmed) return;
-
-        await deleteUser(userId);
-        success("O usuário foi deletado com sucesso!");
-        router.push(NavigationPage.Users);
-      } catch (err) {
-        console.error(err);
-        failure("Houve um erro ao deletar o usuário.");
-      }
-    });
-  };
-
-  return (
-    <Fragment>
-      <button
-        type="submit"
-        disabled={pending}
-        className="w-full py-3 px-4 mb-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-      >
-        {lable}
-      </button>
-      <button
-        type="button"
-        onClick={handleDelete}
-        className="w-full py-3 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300"
-      >
-        Deletar Usuário
-      </button>
-    </Fragment>
-  );
-};
+type UpdateUserSchema = z.infer<typeof updateUserSchema>;
 
 const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
-  const initialState = m.initalState;
-  initialState.fieldValues.id = user.id.toString();
-
   const { success, failure } = useToast();
-  const [state, formAction] = useFormState(a.handleSubmit, initialState);
-
   const router = useRouter();
 
-  const handleFormReponse = () => {
-    if (state.message === "success") {
+  const { register, handleSubmit, formState } = useForm<UpdateUserSchema>({
+    resolver: zodResolver(updateUserSchema),
+    defaultValues: {
+      name: user.name,
+      email: user.email,
+      roleId: user.roleId,
+    },
+  });
+
+  const onSubmit = async (data: UpdateUserSchema) => {
+    try {
+      await updateUser({ ...data, id: user.id });
       success("Usuário atualizado com sucesso!");
       router.push(NavigationPage.Users);
-    } else if (state.message !== "") {
-      failure(state.message);
+    } catch (err) {
+      console.error(err);
+      failure("Erro ao atualizar usuário. Tente novamente.");
     }
   };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(handleFormReponse, [state]);
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
         {`Editar usuário #${user.id}`}
       </h2>
-      <form action={formAction}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-6">
           <label
             htmlFor="name"
@@ -113,15 +76,18 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
           >
             Nome
           </label>
+
           <input
-            key={user.name}
-            type="text"
             id="name"
-            name="name"
-            defaultValue={user.name}
             placeholder="Digite seu nome completo"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("name")}
           />
+          {formState.errors.name && (
+            <span className="text-red-600 text-sm">
+              {formState.errors.name.message}
+            </span>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -131,14 +97,16 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
             Email
           </label>
           <input
-            type="email"
             id="email"
-            name="email"
-            autoComplete="off"
-            defaultValue={user.email}
             placeholder="Digite seu email"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("email")}
           />
+          {formState.errors.email && (
+            <span className="text-red-600 text-sm">
+              {formState.errors.email.message}
+            </span>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -148,13 +116,16 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
             Senha
           </label>
           <input
-            type="password"
             id="password"
-            name="password"
-            autoComplete="off"
             placeholder="Digite sua senha"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("password")}
           />
+          {formState.errors.password && (
+            <span className="text-red-600 text-sm">
+              {formState.errors.password.message}
+            </span>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -165,17 +136,29 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
           </label>
           <select
             id="roleId"
-            name="roleId"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("roleId")}
           >
             {roles?.map((r) => (
-              <option key={r.id} value={r.id} selected={r.id === user.roleId}>
+              <option key={r.id} value={r.id}>
                 {r.name}
               </option>
             ))}
           </select>
+
+          {formState.errors.roleId && (
+            <span className="text-red-600 text-sm">
+              {formState.errors.roleId.message}
+            </span>
+          )}
         </div>
-        <FormButtons userId={user.id} />
+        <button
+          type="submit"
+          className="w-full py-3 px-4 mb-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+        >
+          {formState.isSubmitting ? "Processando..." : "Editar"}
+        </button>
+        <DeleteButton userId={user.id} />
       </form>
     </div>
   );
