@@ -28,7 +28,7 @@ const SubmitButton = () => {
 const UserCreateForm = () => {
   const { success, failure } = useToast();
   const [state, formAction] = useFormState(
-    a.handleCreateCategorySubmit,
+    a.handleCreateShoeSubmit,
     m.initialState
   );
 
@@ -37,7 +37,7 @@ const UserCreateForm = () => {
   const handleFormReponse = () => {
     if (state.message === "success") {
       success("Novo calçado criado com sucesso!");
-      router.push(NavigationPage.Category);
+      router.push(NavigationPage.Shoe);
     } else if (state.message !== "") {
       failure(state.message);
     }

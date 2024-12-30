@@ -1,15 +1,15 @@
-type GetShoesGroupedByCategoryPaginated = {
+type GetItemsGroupedByShoePaginated = {
   page: number;
   size: number;
 };
 
-type GetShoesGroupedByCategoryPaginatedRespose = {
+type getShoesGroupedByItemSizePaginatedRespose = {
   meta: {
     skip: number;
     take: number;
     total: number;
   };
-  categories: {
+  shoes: {
     id: number;
     name: string;
     sole: string;
@@ -17,7 +17,7 @@ type GetShoesGroupedByCategoryPaginatedRespose = {
     color: string;
     createdAt: string;
     deletedAt: string | null;
-    groupedShoes: {
+    groupedItems: {
       size: number;
       shoes: {
         id: number;
@@ -27,7 +27,7 @@ type GetShoesGroupedByCategoryPaginatedRespose = {
   }[];
 };
 
-type GetCategoryByIdResponse = {
+type GetShoeByIdResponse = {
   id: number;
   name: string;
   sole: string;
@@ -45,7 +45,7 @@ type GetCategoryByIdResponse = {
   }[];
 };
 
-type UpdateCategory = {
+type Updateshoe = {
   id: number;
   name: string;
   sole: string;
@@ -53,7 +53,7 @@ type UpdateCategory = {
   color: string;
 };
 
-type CreateCategory = {
+type CreateShoe = {
   name: string;
   sole: string;
   note: string;
@@ -61,9 +61,9 @@ type CreateCategory = {
 };
 
 export type {
-  GetShoesGroupedByCategoryPaginatedRespose,
-  GetShoesGroupedByCategoryPaginated,
-  GetCategoryByIdResponse,
-  UpdateCategory,
-  CreateCategory,
+  getShoesGroupedByItemSizePaginatedRespose,
+  GetItemsGroupedByShoePaginated,
+  GetShoeByIdResponse,
+  Updateshoe,
+  CreateShoe,
 };

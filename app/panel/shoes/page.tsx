@@ -26,7 +26,7 @@ const ActionButtons = () => (
       <CropFreeIcon />
     </Link>
     <Link
-      title="Adicionar Categoria"
+      title="Adicionar Calçado"
       href={NavigationPage.ShoesCreate}
       className="flex items-center space-x-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
     >
@@ -42,7 +42,7 @@ const HistoryListPage = async ({ searchParams }: UserListPageProps) => {
     page: parseInt(req.page ?? "1"),
     size: parseInt(req.size ?? defaultPageSize.toString()),
   };
-  const usersPaginated = await svc.getShoesGroupedByCategoryPaginated(filters);
+  const usersPaginated = await svc.getShoesGroupedByItemSizePaginated(filters);
 
   return (
     <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">

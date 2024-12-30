@@ -61,7 +61,7 @@ model User {
   roleId     Int          @map("role_id")
   createdAt  DateTime     @default(now()) @map("created_at")
   deletedAt  DateTime?    @map("deleted_at")
-  role       Role         @relation(fields: [roleId], references: [id])
+  Role       Role         @relation(fields: [roleId], references: [id])
   Expedition Expedition[]
   Audit      Audit[]
 

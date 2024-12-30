@@ -10,7 +10,7 @@ type UpdateUserPageProps = {
 
 const ShoeDetailPage = async ({ params }: UpdateUserPageProps) => {
   const shoeId = (await params).shoe_id;
-  const shoeData = await svc.getCategoryById(shoeId);
+  const shoeData = await svc.getShoeById(shoeId);
 
   if (!shoeData) notFound();
 

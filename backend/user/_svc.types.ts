@@ -12,7 +12,7 @@ type getAuthUserResponse = {
 type createUserProps = {
   name: string;
   email: string;
-  role_id: number;
+  roleId: number;
   password: string;
 };
 
@@ -20,7 +20,7 @@ type updateUserProps = {
   id: number;
   name: string;
   email: string;
-  role_id: number;
+  roleId: number;
   password: string;
 };
 

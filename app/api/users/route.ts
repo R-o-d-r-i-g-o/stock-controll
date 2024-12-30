@@ -9,7 +9,7 @@ const createUser = async (req: NextRequest) => {
     const userID = await svc.createUser({
       name: payload.name,
       email: payload.email,
-      role_id: payload.role_id,
+      roleId: payload.roleId,
       password: payload.password,
     });
 

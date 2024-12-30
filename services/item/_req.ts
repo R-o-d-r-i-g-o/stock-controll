@@ -1,45 +1,40 @@
 import { api } from "../api";
 import * as t from "./_types";
 
-// Retrieves a shoe's details by its ID.
-const getShoeById = async (id: number) => {
-  const res = await api.get<t.GetShoesById>(`/api/items/${id}`);
+const getItemById = async (id: number) => {
+  const res = await api.get<t.GetItemById>(`/api/items/${id}`);
   return res.data;
 };
 
-// Debits multiple shoes from storage using a list of SKUs.
-const debitShoesFromStorage = async (skuList: string[]) => {
-  const res = await api.post<t.GetShoesById>("/api/items/debit", { skuList });
+const debitItemsFromStorage = async (skuList: string[]) => {
+  const res = await api.post<t.GetItemById[]>("/api/items/debit", { skuList });
   return res.data;
 };
 
-// Deletes a shoe from the database by its ID.
-const deleteShoeById = async (id: number) => {
-  const res = await api.delete<t.GetShoesById>(`/api/items/${id}`);
+const deleteItemById = async (id: number) => {
+  const res = await api.delete<t.GetItemById>(`/api/items/${id}`);
   return res.data;
 };
 
-// Creates a new shoe record in the database.
-const createShoe = async (data: t.CreateShoe) => {
+const createItem = async (data: t.CreateItem) => {
   const res = await api.post("/api/items", data);
   return res.data;
 };
 
-// Updates an existing shoe record with the provided details.
-const updateShoe = async (data: t.UpdateShoe) => {
+const updateItem = async (data: t.UpdateItem) => {
   const res = await api.put(`/api/items/${data.id}`, {
     sku: data.sku,
     size: data.size,
     price: data.size,
-    categoryId: data.size,
+    shoeId: data.size,
   });
   return res.data;
 };
 
 export {
-  getShoeById,
-  debitShoesFromStorage,
-  deleteShoeById,
-  createShoe,
-  updateShoe,
+  getItemById,
+  debitItemsFromStorage,
+  deleteItemById,
+  createItem,
+  updateItem,
 };

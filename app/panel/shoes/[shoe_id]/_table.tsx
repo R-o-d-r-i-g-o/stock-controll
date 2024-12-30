@@ -7,24 +7,24 @@ import {
   TableBody,
   TableRow,
   IconButton,
-  Link
-} from '@mui/material';
+  Link,
+} from "@mui/material";
 
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import * as t from './_types'
-import { defaultDateMask } from '@/common';
-import moment from 'moment';
+import * as t from "./_types";
+import { defaultDateMask } from "@/common";
+import moment from "moment";
 
 const CustomTableContainer = styled(TableContainer)({
-  marginTop: '30px',
-  overflowX: 'scroll',
+  marginTop: "30px",
+  overflowX: "scroll",
 });
 
 const AuxTabela = ({ meta, data }: t.TableProps) => (
   <CustomTableContainer>
-    <Table className='w-full'>
+    <Table className="w-full">
       <TableHead>
         <TableRow>
           <TableCell className="!text-center">#</TableCell>
@@ -36,37 +36,37 @@ const AuxTabela = ({ meta, data }: t.TableProps) => (
         </TableRow>
       </TableHead>
       <TableBody>
-        {!data || data.length < 1 && (
-          <TableRow>
-            <TableCell colSpan={6} align="center">
-              <p className="text-gray-500">Nenhum registro encontrado.</p>
-            </TableCell>
-          </TableRow>
-        )}
+        {!data ||
+          (data.length < 1 && (
+            <TableRow>
+              <TableCell colSpan={6} align="center">
+                <p className="text-gray-500">Nenhum registro encontrado.</p>
+              </TableCell>
+            </TableRow>
+          ))}
         {data?.map((shoe) => (
           <TableRow key={shoe.id} className="hover:bg-gray-100">
+            <TableCell className="!text-center">{shoe.id}</TableCell>
             <TableCell className="!text-center">
-              {shoe.id}
-            </TableCell>
-            <TableCell className="!text-center">
-              <Link href={`/panel/shoes/${meta.categoryId}/items/sku/${shoe.sku}`}>
+              <Link href={`/panel/shoes/${meta.shoeId}/items/sku/${shoe.sku}`}>
                 {shoe.sku}
                 <IconButton>
                   <OpenInNewIcon fontSize="small" />
                 </IconButton>
               </Link>
             </TableCell>
+            <TableCell className="!text-center">{shoe.size}</TableCell>
             <TableCell className="!text-center">
-              {shoe.size}
-            </TableCell>
-            <TableCell className="!text-center">
-              {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(shoe.price)}
+              {new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(shoe.price)}
             </TableCell>
             <TableCell className="!text-center">
               {moment(shoe.createdAt).format(defaultDateMask)}
             </TableCell>
             <TableCell className="!text-center">
-              <Link href={`/panel/shoes/${meta.categoryId}/items/${shoe.id}`}>
+              <Link href={`/panel/shoes/${meta.shoeId}/items/${shoe.id}`}>
                 <IconButton>
                   <MoreVertIcon />
                 </IconButton>

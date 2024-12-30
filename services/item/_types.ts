@@ -3,7 +3,7 @@ type GetShoesById = {
   sku: string;
   size: number;
   price: string;
-  categoryId: number;
+  shoeId: number;
   createdAt: string;
   deletedAt: string | null;
 };
@@ -12,7 +12,7 @@ type CreateShoe = {
   sku: string;
   size: number;
   price: number;
-  categoryId: number;
+  shoeId: number;
 };
 
 type UpdateShoe = {
@@ -20,7 +20,11 @@ type UpdateShoe = {
   sku: string;
   size: number;
   price: number;
-  categoryId: number;
+  shoeId: number;
 };
 
-export type { GetShoesById, CreateShoe, UpdateShoe };
+export type {
+  GetShoesById as GetItemById,
+  CreateShoe as CreateItem,
+  UpdateShoe as UpdateItem,
+};

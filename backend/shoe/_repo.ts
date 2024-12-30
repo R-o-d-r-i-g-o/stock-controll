@@ -2,59 +2,58 @@ import { prisma, prismaTransaction } from "../prisma";
 import moment from "moment";
 import * as t from "./_repo.types";
 
-const getCategoryBy = async (filter: t.getCategoryByProps) => {
-  const category = await prisma.shoe.findFirstOrThrow({
+const getShoeBy = async (filter: t.getShoeBy) => {
+  const shoe = await prisma.shoe.findFirstOrThrow({
     where: {
       id: filter.id || undefined,
       name: filter.name || undefined,
     },
     include: {
       Item: {
-        where: { deleted_at: null },
+        where: { deletedAt: null },
         orderBy: { size: "asc" },
       },
     },
   });
 
-  return category;
+  return shoe;
 };
 
-const getCategoryShoesCount = async (filter: t.getShoesPaginatedProps) => {
+const getItemShoesCount = async (filter: t.getShoesPaginated) => {
   console.log("filters", filter);
-  const shoesGroupedByCategory = await prisma.shoe.count({
-    where: { deleted_at: null },
+  const itemsGroupedByShoe = await prisma.shoe.count({
+    where: { deletedAt: null },
   });
 
-  return shoesGroupedByCategory;
+  return itemsGroupedByShoe;
 };
 
-const getCategoryShoesPaginated = async (filter: t.getShoesPaginatedProps) => {
-  const shoesGroupedByCategory = await prisma.shoe.findMany({
+const getItemShoesPaginated = async (filter: t.getShoesPaginated) => {
+  const itemsGroupedByShoe = await prisma.shoe.findMany({
     skip: filter.skip,
     take: filter.take,
-    where: { deleted_at: null },
+    where: { deletedAt: null },
     include: {
       Item: {
-        where: { deleted_at: null },
+        where: { deletedAt: null },
         orderBy: { size: "asc" },
       },
     },
   });
-
-  return shoesGroupedByCategory;
+  return itemsGroupedByShoe;
 };
 
-const deleteCategory = async (id: number) => {
+const deleteShoe = async (id: number) => {
   return await prismaTransaction(async () => {
-    const deletedCategory = await prisma.shoe.update({
+    const deletedShoe = await prisma.shoe.update({
       where: { id },
-      data: { deleted_at: moment.utc().toDate() },
+      data: { deletedAt: moment.utc().toDate() },
     });
-    return deletedCategory;
+    return deletedShoe;
   });
 };
 
-const updateCategory = async (user: t.updateCategoryProps) => {
+const updateShoe = async (user: t.updateShoe) => {
   return await prismaTransaction(async () => {
     await prisma.shoe.update({
       where: { id: user.id },
@@ -68,7 +67,7 @@ const updateCategory = async (user: t.updateCategoryProps) => {
   });
 };
 
-const createCategory = async (data: t.createCategoryProps) => {
+const createShoe = async (data: t.createShoe) => {
   const { id } = await prisma.shoe.create({
     data: {
       name: data.name,
@@ -81,10 +80,10 @@ const createCategory = async (data: t.createCategoryProps) => {
 };
 
 export {
-  updateCategory,
-  deleteCategory,
-  createCategory,
-  getCategoryBy,
-  getCategoryShoesCount,
-  getCategoryShoesPaginated,
+  deleteShoe,
+  updateShoe,
+  createShoe,
+  getShoeBy,
+  getItemShoesCount,
+  getItemShoesPaginated,
 };

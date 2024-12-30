@@ -1,52 +1,50 @@
 import * as repo from "./_repo";
 import * as t from "./_svc.types";
 
-const getCategoryBy = async (filter: t.getCategoryByProps) => {
-  const category = await repo.getCategoryBy(filter);
-  const { id, name, sole, description, color, created_at, deleted_at, Shoe } =
-    category;
+const getShoeBy = async (filter: t.getShoeBy) => {
+  const shoe = await repo.getShoeBy(filter);
+  const { id, name, sole, note, color, createdAt, deletedAt, Item } = shoe;
 
   return {
     id,
     name,
     sole,
     color,
-    note: description,
-    createdAt: created_at,
-    deletedAt: deleted_at,
-    shoes: Shoe?.map((s) => ({
-      id: s.id,
-      sku: s.hash_code,
-      size: s.size,
-      price: s.price.toNumber(),
-      createdAt: s.created_at,
-      deletedAt: s.deleted_at,
+    note,
+    createdAt: createdAt,
+    deletedAt: deletedAt,
+    items: Item?.map((i) => ({
+      id: i.id,
+      sku: i.sku,
+      size: i.size,
+      price: i.price.toNumber(),
+      createdAt: i.createdAt,
+      deletedAt: i.deletedAt,
     })),
   };
 };
 
-const getShoesGroupedByCategoryPaginated = async (
-  filter: t.getShoesGroupedByCategoryPaginatedProps
+const getShoesGroupedBySizePaginated = async (
+  filter: t.getShoesGroupedBySizePaginated
 ) => {
   const parsedFilter = {
     skip: (filter.page - 1) * filter.size,
     take: filter.size,
   };
 
-  const categoryCount = await repo.getCategoryShoesCount(parsedFilter);
-  const categoryList = await repo.getCategoryShoesPaginated(parsedFilter);
+  const shoesCount = await repo.getItemShoesCount(parsedFilter);
+  const shoesList = await repo.getItemShoesPaginated(parsedFilter);
 
-  const categoriesGrouped = categoryList?.map((category) => {
-    const { id, name, sole, description, color, created_at, deleted_at, Shoe } =
-      category;
+  const ShoesGrouped = shoesList?.map((shoe) => {
+    const { id, name, sole, note, color, createdAt, deletedAt, Item } = shoe;
 
-    const shoesGroupedBySize = Object.values(
-      Shoe?.reduce<t.Accumulator>((acc, shoe) => {
-        if (!acc[shoe.size]) acc[shoe.size] = { size: shoe.size, shoes: [] };
+    const itemsGroupedBySize = Object.values(
+      Item?.reduce<t.Accumulator>((acc, item) => {
+        if (!acc[item.size]) acc[item.size] = { size: item.size, shoes: [] };
 
-        acc[shoe.size].shoes.push({
-          id: shoe.id,
-          price: shoe.price.toNumber(),
+        acc[item.size].shoes.push({
+          id: item.id,
+          price: item.price.toNumber(),
         });
         return acc;
       }, {})
@@ -57,36 +55,36 @@ const getShoesGroupedByCategoryPaginated = async (
       name,
       sole,
       color,
-      note: description,
-      createdAt: created_at,
-      deletedAt: deleted_at,
-      groupedShoes: shoesGroupedBySize,
+      note,
+      createdAt: createdAt,
+      deletedAt: deletedAt,
+      groupedItems: itemsGroupedBySize,
     };
   });
 
   return {
-    meta: { ...filter, total: categoryCount },
-    categories: categoriesGrouped,
+    meta: { ...filter, total: shoesCount },
+    categories: ShoesGrouped,
   };
 };
 
-const deleteCategory = async (id: number) => {
-  const category = await repo.deleteCategory(id);
-  return category;
+const deleteShoe = async (id: number) => {
+  const deletedShoe = await repo.deleteShoe(id);
+  return deletedShoe;
 };
 
-const createCategory = async (data: t.createCategoryProps) => {
-  return await repo.createCategory(data);
+const createShoe = async (data: t.createShoe) => {
+  return await repo.createShoe(data);
 };
 
-const updateCategory = async (data: t.updateCategoryProps) => {
-  await repo.updateCategory(data);
+const updateShoe = async (data: t.updateShoe) => {
+  await repo.updateShoe(data);
 };
 
 export {
-  getShoesGroupedByCategoryPaginated,
-  getCategoryBy,
-  createCategory,
-  deleteCategory,
-  updateCategory,
+  getShoesGroupedBySizePaginated,
+  getShoeBy as getShoeBy,
+  createShoe,
+  deleteShoe,
+  updateShoe,
 };

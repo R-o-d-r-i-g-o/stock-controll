@@ -1,32 +1,27 @@
-type createUserProps = {
+type createUser = {
   name: string;
   email: string;
-  role_id: number;
+  roleId: number;
   password: string;
 };
 
-type updateUserProps = {
+type updateUser = {
   id: number;
   name: string;
   email: string;
-  role_id: number;
+  roleId: number;
   password: string;
 };
 
-type getUsersPaginatedProps = {
+type getUsersPaginated = {
   skip: number;
   take: number;
 };
 
-type getUserProps = {
+type getUser = {
   id?: number;
   name?: string;
   email?: string;
 };
 
-export type {
-  getUsersPaginatedProps,
-  updateUserProps,
-  createUserProps,
-  getUserProps,
-};
+export type { getUsersPaginated, updateUser, createUser, getUser };

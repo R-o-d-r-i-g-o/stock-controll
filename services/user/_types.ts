@@ -33,7 +33,7 @@ type GetUserByIdResponse = {
   id: number;
   name: string;
   email: string;
-  role_id: number;
+  roleId: number;
   createdAt: string;
   deletedAt: string | null;
 };
@@ -41,7 +41,7 @@ type GetUserByIdResponse = {
 type CreateNewUser = {
   name: string;
   email: string;
-  role_id: number;
+  roleId: number;
   password: string;
 };
 
@@ -49,12 +49,12 @@ type UpdateUser = {
   id: number;
   name?: string;
   email?: string;
-  role_id?: number;
+  roleId?: number;
   password?: string;
 };
 
 type CreateNewUserResponse = {
-  user_id: number;
+  userId: number;
 };
 
 export type {

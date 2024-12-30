@@ -6,17 +6,14 @@ import { pingDatabase } from "@/backend";
 
 const setupPing = async () => {
   const { publicRuntimeConfig } = getConfig();
-  const modifiedDate = moment(publicRuntimeConfig.modifiedDate).format(
-    "YYYY-MM-DD HH:mm:ss"
-  );
+  const modifiedDate = moment(publicRuntimeConfig.modifiedDate);
 
   const res = {
     message: "pong",
     version: app.version,
     database: await pingDatabase(),
-    last_build: modifiedDate,
+    lastBuild: modifiedDate.format("YYYY-MM-DD HH:mm:ss"),
   };
-
   return Response.json(res, { status: 200 });
 };
 

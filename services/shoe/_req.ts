@@ -1,11 +1,10 @@
 import { api } from "../api";
 import * as t from "./_types";
 
-// Fetches a paginated list of shoes grouped by category.
-const getShoesGroupedByCategoryPaginated = async (
-  req: t.GetShoesGroupedByCategoryPaginated
+const getShoesGroupedByItemSizePaginated = async (
+  req: t.GetItemsGroupedByShoePaginated
 ) => {
-  const res = await api.get<t.GetShoesGroupedByCategoryPaginatedRespose>(
+  const res = await api.get<t.getShoesGroupedByItemSizePaginatedRespose>(
     "/api/shoes",
     {
       params: req,
@@ -14,20 +13,17 @@ const getShoesGroupedByCategoryPaginated = async (
   return res.data;
 };
 
-// Retrieves category details by its ID.
-const getCategoryById = async (id: number) => {
-  const res = await api.get<t.GetCategoryByIdResponse>(`/api/shoes/${id}`);
+const getShoeById = async (id: number) => {
+  const res = await api.get<t.GetShoeByIdResponse>(`/api/shoes/${id}`);
   return res.data;
 };
 
-// Deletes a category by its ID.
-const deleteCategoryById = async (id: number) => {
+const deleteShoeById = async (id: number) => {
   const res = await api.delete(`/api/shoes/${id}`);
   return res.data;
 };
 
-// Updates an existing category with new data.
-const updateCategory = async (req: t.UpdateCategory) => {
+const updateShoe = async (req: t.Updateshoe) => {
   const res = await api.put(`/api/shoes/${req.id}`, {
     name: req.name,
     sole: req.sole,
@@ -37,16 +33,15 @@ const updateCategory = async (req: t.UpdateCategory) => {
   return res.data;
 };
 
-// Creates a new category.
-const createCategory = async (req: t.CreateCategory) => {
+const createShoe = async (req: t.CreateShoe) => {
   const res = await api.post("/api/shoes", req);
   return res.data;
 };
 
 export {
-  getShoesGroupedByCategoryPaginated,
-  createCategory,
-  updateCategory,
-  deleteCategoryById,
-  getCategoryById,
+  getShoesGroupedByItemSizePaginated,
+  createShoe as createShoe,
+  updateShoe as updateShoe,
+  deleteShoeById as deleteShoeById,
+  getShoeById as getShoeById,
 };

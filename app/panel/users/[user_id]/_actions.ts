@@ -16,7 +16,7 @@ async function handleSubmit(
     ) as m.CreateUserFormEntries;
     const payload = {
       ...data,
-      role_id: parseInt(data.role_id, 10),
+      roleId: parseInt(data.roleId, 10),
       id: parseInt(state.fieldValues.id, 10),
     };
 

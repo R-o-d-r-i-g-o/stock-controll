@@ -6,7 +6,7 @@ type InitialStateEntries = {
 type CreateUserFormEntries = {
   name: string;
   email: string;
-  role_id: string;
+  roleId: string;
   password: string;
 };
 
@@ -15,7 +15,7 @@ const initalState: InitialStateEntries = {
   fieldValues: {
     name: "",
     email: "",
-    role_id: "",
+    roleId: "",
     password: "",
   },
 };

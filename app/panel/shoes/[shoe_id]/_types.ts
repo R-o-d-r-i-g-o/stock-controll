@@ -1,6 +1,6 @@
 type TableProps = {
   meta: {
-    categoryId: number;
+    shoeId: number;
   };
   data: {
     id: number;

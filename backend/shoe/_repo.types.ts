@@ -1,11 +1,11 @@
-type createCategoryProps = {
+type createShoe = {
   color: string;
   sole: string;
   name: string;
   note: string;
 };
 
-type updateCategoryProps = {
+type updateShoe = {
   id: number;
   color?: string;
   sole?: string;
@@ -13,19 +13,14 @@ type updateCategoryProps = {
   note?: string;
 };
 
-type getCategoryByProps = {
+type getShoeBy = {
   id?: number;
   name?: string;
 };
 
-type getShoesPaginatedProps = {
+type getShoesPaginated = {
   skip: number;
   take: number;
 };
 
-export type {
-  createCategoryProps,
-  updateCategoryProps,
-  getCategoryByProps,
-  getShoesPaginatedProps,
-};
+export type { createShoe, updateShoe, getShoeBy, getShoesPaginated };

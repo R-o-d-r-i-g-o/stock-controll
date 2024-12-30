@@ -21,7 +21,7 @@ const createUserSchema = Yup.object().shape({
     .email("Email deve ser válido")
     .required("Email é obrigatório"),
 
-  role_id: Yup.number()
+  roleId: Yup.number()
     .integer("Role ID deve ser um número inteiro")
     .positive("Role ID deve ser um número positivo")
     .required("Role ID é obrigatório"),

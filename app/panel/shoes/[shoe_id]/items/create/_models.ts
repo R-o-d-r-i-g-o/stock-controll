@@ -1,15 +1,14 @@
-
 type InitialStateEntries = {
   message: string;
   fieldValues: CreateUserFormEntries;
-}
+};
 
 type CreateUserFormEntries = {
   sku: string;
   size: string;
   price: string;
-  categoryId: string;
-}
+  shoeId: string;
+};
 
 const initalState: InitialStateEntries = {
   message: "",
@@ -17,12 +16,8 @@ const initalState: InitialStateEntries = {
     sku: "",
     size: "",
     price: "",
-    categoryId: "",
-  }
-}
+    shoeId: "",
+  },
+};
 
-export {
-  type InitialStateEntries,
-  type CreateUserFormEntries,
-  initalState,
-}
+export { type InitialStateEntries, type CreateUserFormEntries, initalState };

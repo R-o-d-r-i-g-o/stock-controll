@@ -29,15 +29,15 @@ const CustomTableContainer = styled(TableContainer)({
 });
 
 type AuxTabelaProps = {
-  groupedShoes: t.GroupedShoe[];
+  groupedItems: t.GroupedItems[];
 };
 
-const AuxTabela = ({ groupedShoes }: AuxTabelaProps) => {
-  const shoeCountBySize: { [size: number]: number } = {};
+const AuxTabela = ({ groupedItems }: AuxTabelaProps) => {
+  const itemCountBySize: { [size: number]: number } = {};
 
-  groupedShoes.forEach((group) => {
-    shoeCountBySize[group.size] =
-      (shoeCountBySize[group.size] || 0) + group.shoes.length;
+  groupedItems.forEach((group) => {
+    itemCountBySize[group.size] =
+      (itemCountBySize[group.size] || 0) + group.shoes.length;
   });
 
   return (
@@ -52,7 +52,7 @@ const AuxTabela = ({ groupedShoes }: AuxTabelaProps) => {
       <TableBody>
         <TableRow>
           {footSizesList.map((size) => (
-            <TableCell key={size}>{shoeCountBySize[size] || 0}</TableCell>
+            <TableCell key={size}>{itemCountBySize[size] || 0}</TableCell>
           ))}
         </TableRow>
       </TableBody>
@@ -68,7 +68,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
 
   const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
     e?.preventDefault();
-    router.push(`${NavigationPage.Category}?page=${newPage}`);
+    router.push(`${NavigationPage.Shoe}?page=${newPage}`);
   };
 
   const handleRowClick = (index: number) => {
@@ -124,7 +124,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                   <TableCell>
                     <IconButton
                       onClick={() =>
-                        router.push(`${NavigationPage.Category}/${c.id}`)
+                        router.push(`${NavigationPage.Shoe}/${c.id}`)
                       }
                     >
                       <MoreVertIcon />
@@ -149,7 +149,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                         <p className="text-gray-700 mt-6">
                           <strong>Tamanho X Unidades:</strong>
                         </p>
-                        <AuxTabela groupedShoes={c.groupedShoes} />
+                        <AuxTabela groupedItems={c.groupeditems} />
                       </div>
                     </Collapse>
                   </TableCell>

@@ -1,7 +1,7 @@
 type createHistoryProps = {
   note: string;
-  user_id: number;
-  shoe_id?: number;
+  userId: number;
+  shoeId?: number;
 };
 
 type getAuditsPaginatedProps = {

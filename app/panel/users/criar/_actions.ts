@@ -16,7 +16,7 @@ async function handleSubmit(
     ) as m.CreateUserFormEntries;
     const payload = {
       ...data,
-      role_id: parseInt(data.role_id as string, 10),
+      roleId: parseInt(data.roleId as string, 10),
     };
 
     const result = await createUserSchema.validate(payload);

@@ -7,7 +7,7 @@ type CreateUserFormEntries = {
   id: string;
   name: string;
   email: string;
-  role_id: string;
+  roleId: string;
   password: string;
 };
 
@@ -17,7 +17,7 @@ const initalState: InitialStateEntries = {
     id: "",
     name: "",
     email: "",
-    role_id: "",
+    roleId: "",
     password: "",
   },
 };

@@ -18,7 +18,7 @@ type UserCreateFormProps = {
     id: number;
     name: string;
     email: string;
-    role_id: number;
+    roleId: number;
     createdAt: string;
     deletedAt: string | null;
   };
@@ -158,18 +158,18 @@ const UserCreateForm = ({ roles, user }: UserCreateFormProps) => {
         </div>
         <div className="mb-6">
           <label
-            htmlFor="role_id"
+            htmlFor="roleId"
             className="block text-sm font-medium text-gray-600"
           >
             Cargo
           </label>
           <select
-            id="role_id"
-            name="role_id"
+            id="roleId"
+            name="roleId"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           >
             {roles?.map((r) => (
-              <option key={r.id} value={r.id} selected={r.id === user.role_id}>
+              <option key={r.id} value={r.id} selected={r.id === user.roleId}>
                 {r.name}
               </option>
             ))}

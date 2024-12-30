@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import * as svc from "@/backend";
 
-const debitShoe = async (req: NextRequest) => {
+const debitItem = async (req: NextRequest) => {
   try {
     const payload = (await req.json()) as { skuList: string[] };
     if (!payload.skuList && payload.skuList < 1)
@@ -14,4 +14,4 @@ const debitShoe = async (req: NextRequest) => {
   }
 };
 
-export { debitShoe as POST };
+export { debitItem as POST };

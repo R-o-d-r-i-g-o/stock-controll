@@ -29,7 +29,7 @@ const menuItems: Array<t.MenuItem> = [
   {
     lable: "Calçados",
     icon: LocalShippingIcon,
-    nav: t.NavigationPage.Category,
+    nav: t.NavigationPage.Shoe,
   },
   {
     lable: "Relatórios",

@@ -104,14 +104,14 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
         </div>
         <div className="mb-6">
           <label
-            htmlFor="role_id"
+            htmlFor="roleId"
             className="block text-sm font-medium text-gray-600"
           >
             Cargo
           </label>
           <select
-            id="role_id"
-            name="role_id"
+            id="roleId"
+            name="roleId"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           >
             <option selected disabled>

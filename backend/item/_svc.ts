@@ -9,9 +9,9 @@ const getItemBy = async (filter: t.getShoeByProps) => {
     sku: s.sku,
     size: s.size,
     price: s.price,
-    categoryId: s.shoe_id,
-    createdAt: s.created_at,
-    deletedAt: s.deleted_at,
+    shoeId: s.shoeId,
+    createdAt: s.createdAt,
+    deletedAt: s.deletedAt,
   };
 };
 

@@ -6,18 +6,18 @@ type UserParams = {
   params: Promise<{ item_id: string }>;
 };
 
-const getShoeById = async (req: NextRequest, { params }: UserParams) => {
+const getItemById = async (req: NextRequest, { params }: UserParams) => {
   try {
     const item_id = parseInt((await params).item_id, 10);
-    const shoe = await svc.getItemBy({ id: item_id });
+    const item = await svc.getItemBy({ id: item_id });
 
-    return Response.json(shoe, { status: 200 });
+    return Response.json(item, { status: 200 });
   } catch (error) {
     return Response.json(error, { status: 500 });
   }
 };
 
-const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
+const deleteItem = async (req: NextRequest, { params }: UserParams) => {
   try {
     const itemId = parseInt((await params).item_id, 10);
     await svc.deleteItem(itemId);
@@ -28,7 +28,7 @@ const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
   }
 };
 
-const updateShoe = async (req: NextRequest, { params }: UserParams) => {
+const updateItem = async (req: NextRequest, { params }: UserParams) => {
   try {
     const payload = {
       ...(await req.json()),
@@ -43,4 +43,4 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
   }
 };
 
-export { deleteShoe as DELETE, updateShoe as PUT, getShoeById as GET };
+export { deleteItem as DELETE, updateItem as PUT, getItemById as GET };

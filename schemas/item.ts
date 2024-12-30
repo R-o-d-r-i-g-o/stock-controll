@@ -13,10 +13,10 @@ const itemCreationSchema = Yup.object().shape({
     .required("Preço é obrigatório")
     .typeError("Preço deve ser um número válido"),
 
-  categoryId: Yup.number()
-    .positive("A categoria deve ser um número positivo")
-    .required("A categoria é obrigatória")
-    .typeError("A categoria deve ser um número válido"),
+  shoeId: Yup.number()
+    .positive("O calçado deve ser um número positivo")
+    .required("O calçado é obrigatório")
+    .typeError("O calçadoa deve ser um número válido"),
 });
 
 const itemUpdateSchema = itemCreationSchema.clone().shape({

@@ -1,18 +1,14 @@
-
 type InitialStateEntries = {
   message: string;
   fieldValues: CreateUserFormEntries;
-}
+};
 
 type CreateUserFormEntries = {
   id: string;
   sku: string;
   size: string;
   price: string;
-  categoryId: string;
-}
+  shoeId: string;
+};
 
-export {
-  type InitialStateEntries,
-  type CreateUserFormEntries,
-}
+export { type InitialStateEntries, type CreateUserFormEntries };

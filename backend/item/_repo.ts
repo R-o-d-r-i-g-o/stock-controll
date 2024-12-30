@@ -20,7 +20,7 @@ const createItem = async (shoe: t.createShoeProps) => {
         sku: shoe.sku,
         size: shoe.size,
         price: shoe.price,
-        shoe_id: shoe.shoeId,
+        shoeId: shoe.shoeId,
       },
     });
     return id;
@@ -35,7 +35,7 @@ const updateItem = async (data: t.updateShoeProps) => {
         sku: data.sku || undefined,
         size: data.size || undefined,
         price: data.price || undefined,
-        shoe_id: data.shoeId || undefined,
+        shoeId: data.shoeId || undefined,
       },
     });
     return shoe;
@@ -46,7 +46,7 @@ const deleteItem = async (id: number) => {
   return await prismaTransaction(async () => {
     const deletedShoe = await prisma.item.update({
       where: { id },
-      data: { deleted_at: moment.utc().toDate() },
+      data: { deletedAt: moment.utc().toDate() },
     });
     return deletedShoe;
   });
@@ -59,14 +59,12 @@ const debitItems = async (SKUs: string[]) => {
   });
 
   const data = shoes.map((u) => ({
-    item_id: u.id,
-    user_id: 1,
+    itemId: u.id,
+    userId: 1,
     note: "",
   }));
 
-  await prisma.order.createMany({
-    data: data,
-  });
+  await prisma.expedition.createMany({ data });
 };
 
 export { getItemBy, deleteItem, createItem, updateItem, debitItems };

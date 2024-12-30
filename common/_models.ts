@@ -16,7 +16,7 @@ type MenuPosition = {
 enum NavigationPage {
   Home = "/panel",
   Login = "/login",
-  Category = "/panel/shoes",
+  Shoe = "/panel/shoes",
   Users = "/panel/users",
   Audit = "/panel/audits",
   Reports = "/panel/reports",

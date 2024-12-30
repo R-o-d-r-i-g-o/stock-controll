@@ -14,12 +14,12 @@ import { footSizesList } from "@/common";
 // import * as m from './_models'
 
 type UserCreateFormProps = {
-  shoe: {
+  item: {
     id: number;
     sku: string;
     size: number;
     price: string;
-    categoryId: number;
+    shoeId: number;
     createdAt: string;
     deletedAt: string | null;
   };
@@ -76,7 +76,7 @@ const FormButtons = ({ shoeId }: { shoeId: number }) => {
   );
 };
 
-const UserCreateForm = ({ shoe: item }: UserCreateFormProps) => {
+const UserCreateForm = ({ item }: UserCreateFormProps) => {
   const initialState = {
     message: "",
     fieldValues: {
@@ -84,7 +84,7 @@ const UserCreateForm = ({ shoe: item }: UserCreateFormProps) => {
       id: item.id.toString(),
       size: item.size.toString(),
       price: item.price.toString(),
-      categoryId: item.categoryId.toString(),
+      shoeId: item.shoeId.toString(),
     },
   };
 
@@ -96,7 +96,7 @@ const UserCreateForm = ({ shoe: item }: UserCreateFormProps) => {
   const handleFormReponse = () => {
     if (state.message === "success") {
       success("Item atualizado com sucesso!");
-      router.push(`painel/calcados/${item.categoryId}`);
+      router.push(`painel/calcados/${item.shoeId}`);
     } else if (state.message !== "") {
       failure(state.message);
     }
@@ -146,7 +146,7 @@ const UserCreateForm = ({ shoe: item }: UserCreateFormProps) => {
         </div>
         <div className="mb-6">
           <label
-            htmlFor="role_id"
+            htmlFor="roleId"
             className="block text-sm font-medium text-gray-600"
           >
             Tamanho

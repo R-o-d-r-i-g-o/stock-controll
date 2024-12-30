@@ -4,10 +4,10 @@ import { ValidationError } from "yup";
 import * as m from "./_models";
 import axios from "axios";
 
-import { createCategoryValdiationSchema } from "@/schemas";
+import { createShoeSchema } from "@/schemas";
 import * as svc from "@/services";
 
-async function handleCreateCategorySubmit(
+async function handleCreateShoeSubmit(
   state: m.InitialStateEntries,
   formData: FormData
 ): Promise<m.InitialStateEntries> {
@@ -19,8 +19,8 @@ async function handleCreateCategorySubmit(
       ...data,
     };
 
-    const result = await createCategoryValdiationSchema.validate(payload);
-    await svc.createCategory(result);
+    const result = await createShoeSchema.validate(payload);
+    await svc.createShoe(result);
 
     return {
       message: "success",
@@ -41,4 +41,4 @@ async function handleCreateCategorySubmit(
   }
 }
 
-export { handleCreateCategorySubmit };
+export { handleCreateShoeSubmit };

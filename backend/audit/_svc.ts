@@ -24,8 +24,8 @@ const getAuditsPaginated = async (filter: t.getAuditsPaginatedProps) => {
       id: a.id,
       note: a.note,
       user: a.User.name,
-      shoeId: a.item_id,
-      createdAt: a.created_at,
+      shoeId: a.itemId,
+      createdAt: a.createdAt,
     })),
   };
 };

@@ -32,7 +32,7 @@ const updateUser = async (req: t.UpdateUser) => {
   await api.put<null>(`/api/users/${req.id}`, {
     name: req.name,
     email: req.email,
-    role_id: req.role_id,
+    roleId: req.roleId,
     Password: req.password,
   });
 };

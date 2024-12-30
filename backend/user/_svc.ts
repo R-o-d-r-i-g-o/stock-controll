@@ -29,9 +29,9 @@ const getUserBy = async (filter: t.getUserProps) => {
     id: user.id,
     name: user.name,
     email: user.email,
-    role_id: user.role_id,
-    createdAt: user.created_at,
-    deletedAt: user.deleted_at,
+    roleId: user.roleId,
+    createdAt: user.createdAt,
+    deletedAt: user.deletedAt,
   };
 };
 
@@ -57,9 +57,9 @@ const getUsersPaginated = async (filter: t.getUsersPaginatedProps) => {
       id: u.id,
       name: u.name,
       email: u.email,
-      createdAt: u.created_at,
-      deletedAt: u.deleted_at,
       role: u.role.name,
+      createdAt: u.createdAt,
+      deletedAt: u.deletedAt,
     })),
   };
 };

@@ -34,7 +34,7 @@ const ProductDash = ({ data }: t.DashProps) => {
 
   const { pending } = useFormStatus();
   const [state, formAction] = useFormState(
-    a.handleEditCategorySubmit,
+    a.handleEditShoeSubmit,
     initialState
   );
 
@@ -60,9 +60,9 @@ const ProductDash = ({ data }: t.DashProps) => {
       try {
         if (!result.isConfirmed) return;
 
-        await svc.deleteCategoryById(data.id);
+        await svc.deleteShoeById(data.id);
         success("O item foi deletado com sucesso!");
-        router.push(NavigationPage.Category);
+        router.push(NavigationPage.Shoe);
       } catch (err) {
         console.error(err);
         failure("Houve um erro ao deletar o item.");
@@ -170,7 +170,7 @@ const ProductDash = ({ data }: t.DashProps) => {
           </div>
         </form>
       </div>
-      <Table meta={{ categoryId: data.id }} data={data.shoes} />
+      <Table meta={{ shoeId: data.id }} data={data.shoes} />
     </React.Fragment>
   );
 };

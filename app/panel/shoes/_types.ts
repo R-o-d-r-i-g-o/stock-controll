@@ -1,4 +1,4 @@
-type GroupedShoe = {
+type GroupedItem = {
   size: number;
   shoes: {
     id: number;
@@ -25,9 +25,9 @@ type TabelaProps = {
       color: string;
       createdAt: string;
       deletedAt: string | null;
-      groupedShoes: GroupedShoe[];
+      groupeditems: GroupedItem[];
     }[];
   };
 };
 
-export type { TabelaProps, GroupedShoe };
+export type { TabelaProps, GroupedItem as GroupedItems };
