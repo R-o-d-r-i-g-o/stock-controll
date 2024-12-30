@@ -64,7 +64,7 @@ const getShoesGroupedBySizePaginated = async (
 
   return {
     meta: { ...filter, total: shoesCount },
-    categories: ShoesGrouped,
+    shoes: ShoesGrouped,
   };
 };
 

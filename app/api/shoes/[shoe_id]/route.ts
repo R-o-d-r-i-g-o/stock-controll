@@ -6,7 +6,7 @@ type UserParams = {
   params: Promise<{ shoe_id: string }>;
 };
 
-const getCategoriesAndRelatedShoesPaginated = async (
+const getShoesAndRelatedItemsPaginated = async (
   req: NextRequest,
   { params }: UserParams
 ) => {
@@ -48,7 +48,7 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
 };
 
 export {
-  getCategoriesAndRelatedShoesPaginated as GET,
+  getShoesAndRelatedItemsPaginated as GET,
   deleteShoe as DELETE,
   updateShoe as PUT,
 };
