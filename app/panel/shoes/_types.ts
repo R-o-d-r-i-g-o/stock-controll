@@ -1,6 +1,6 @@
 type GroupedItem = {
   size: number;
-  shoes: {
+  items: {
     id: number;
     price: number;
   }[];
@@ -17,7 +17,7 @@ type TabelaProps = {
       take: number;
       total: number;
     };
-    categories: {
+    shoes: {
       id: number;
       name: string;
       sole: string;
@@ -25,7 +25,7 @@ type TabelaProps = {
       color: string;
       createdAt: string;
       deletedAt: string | null;
-      groupeditems: GroupedItem[];
+      groupedItems: GroupedItem[];
     }[];
   };
 };

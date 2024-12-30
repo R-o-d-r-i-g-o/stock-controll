@@ -46,7 +46,7 @@ const getUsersPaginated = async (filter: t.getUsersPaginated) => {
   return await prisma.user.findMany({
     take: filter.take,
     skip: filter.skip,
-    include: { role: true },
+    include: { Role: true },
   });
 };
 

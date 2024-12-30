@@ -24,7 +24,7 @@ type updateShoe = {
 };
 
 type Accumulator = {
-  [size: number]: { size: number; shoes: { id: number; price: number }[] };
+  [size: number]: { size: number; items: { id: number; price: number }[] };
 };
 
 export type {

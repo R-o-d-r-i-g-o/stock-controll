@@ -37,7 +37,7 @@ const AuxTabela = ({ groupedItems }: AuxTabelaProps) => {
 
   groupedItems.forEach((group) => {
     itemCountBySize[group.size] =
-      (itemCountBySize[group.size] || 0) + group.shoes.length;
+      (itemCountBySize[group.size] || 0) + group.items.length;
   });
 
   return (
@@ -98,15 +98,15 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {!data.categories ||
-              (data.categories.length < 1 && (
+            {!data.shoes ||
+              (data.shoes.length < 1 && (
                 <TableRow>
                   <TableCell colSpan={7} align="center">
                     <p className="text-gray-500">Nenhum registro encontrado.</p>
                   </TableCell>
                 </TableRow>
               ))}
-            {data.categories?.map((c) => (
+            {data.shoes?.map((c) => (
               <React.Fragment key={c.id}>
                 <TableRow className="hover:bg-indigo-100">
                   <TableCell>{c.id}</TableCell>
@@ -149,7 +149,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                         <p className="text-gray-700 mt-6">
                           <strong>Tamanho X Unidades:</strong>
                         </p>
-                        <AuxTabela groupedItems={c.groupeditems} />
+                        <AuxTabela groupedItems={c.groupedItems} />
                       </div>
                     </Collapse>
                   </TableCell>

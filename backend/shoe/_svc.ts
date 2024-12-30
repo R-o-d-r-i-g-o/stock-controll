@@ -40,9 +40,9 @@ const getShoesGroupedBySizePaginated = async (
 
     const itemsGroupedBySize = Object.values(
       Item?.reduce<t.Accumulator>((acc, item) => {
-        if (!acc[item.size]) acc[item.size] = { size: item.size, shoes: [] };
+        if (!acc[item.size]) acc[item.size] = { size: item.size, items: [] };
 
-        acc[item.size].shoes.push({
+        acc[item.size].items.push({
           id: item.id,
           price: item.price.toNumber(),
         });

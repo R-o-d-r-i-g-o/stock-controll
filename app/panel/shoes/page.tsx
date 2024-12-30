@@ -35,21 +35,21 @@ const ActionButtons = () => (
   </div>
 );
 
-const HistoryListPage = async ({ searchParams }: UserListPageProps) => {
+const ShoesListPage = async ({ searchParams }: UserListPageProps) => {
   const req = await searchParams;
 
   const filters = {
     page: parseInt(req.page ?? "1"),
     size: parseInt(req.size ?? defaultPageSize.toString()),
   };
-  const usersPaginated = await svc.getShoesGroupedByItemSizePaginated(filters);
+  const shoesPaginated = await svc.getShoesGroupedByItemSizePaginated(filters);
 
   return (
     <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
       <ActionButtons />
-      <Table filter={filters} data={usersPaginated} />
+      <Table filter={filters} data={shoesPaginated} />
     </div>
   );
 };
 
-export default HistoryListPage;
+export default ShoesListPage;

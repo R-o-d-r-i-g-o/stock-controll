@@ -57,7 +57,7 @@ const getUsersPaginated = async (filter: t.getUsersPaginatedProps) => {
       id: u.id,
       name: u.name,
       email: u.email,
-      role: u.role.name,
+      role: u.Role.name,
       createdAt: u.createdAt,
       deletedAt: u.deletedAt,
     })),

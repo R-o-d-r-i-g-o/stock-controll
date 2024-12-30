@@ -3,7 +3,7 @@
 import axios from "axios";
 import * as m from "./_models";
 
-import { createShoe } from "@/services";
+import { createItem } from "@/services";
 import { itemCreationSchema, ValidationError } from "@/schemas";
 
 async function handleSubmit(
@@ -22,7 +22,7 @@ async function handleSubmit(
     };
 
     const result = await itemCreationSchema.validate(payload);
-    await createShoe(result);
+    await createItem(result);
 
     return {
       message: "success",

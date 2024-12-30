@@ -15,7 +15,7 @@ const RegisterBuying = () => {
 
   const sendSKUs = async () => {
     try {
-      await svc.debitShoesFromStorage(skus);
+      await svc.debitItemsFromStorage(skus);
       success("SKUs debitados com sucesso!");
       setSkus([]);
     } catch (error) {

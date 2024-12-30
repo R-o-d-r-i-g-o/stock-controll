@@ -1,9 +1,9 @@
-import React from 'react';
-import InfoIcon from '@mui/icons-material/InfoOutlined';
+import React from "react";
+import InfoIcon from "@mui/icons-material/InfoOutlined";
 
-import * as src from '@/services'
-import { defaultDateMask } from '@/common';
-import moment from 'moment';
+import * as src from "@/services";
+import { defaultDateMask } from "@/common";
+import moment from "moment";
 
 const InfoButton = async () => {
   const appData = await src.fetchHealthData();
@@ -25,7 +25,7 @@ const InfoButton = async () => {
           </p>
           <p>
             <strong>Última Atualização:</strong>
-            {moment(appData.last_build).format(defaultDateMask)}
+            {moment(appData.lastBuild).format(defaultDateMask)}
           </p>
         </div>
       </div>
