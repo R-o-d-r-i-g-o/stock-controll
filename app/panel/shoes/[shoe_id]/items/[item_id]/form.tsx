@@ -1,24 +1,58 @@
 "use client";
 
-import { Fragment, useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
-
-import * as svc from "@/services";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+import { z } from "zod";
 
 import { useToast } from "@/hooks";
-import { useRouter } from "next/navigation";
-
-import * as a from "./_actions";
 import { footSizesList } from "@/common";
-import * as m from "./_models";
+import { updateItem, deleteShoeById } from "@/services";
 
-const FormButtons = ({ shoeId }: { shoeId: number }) => {
+const itemUpdateSchema = z.object({
+  sku: z.string().min(1, "SKU é obrigatório"),
+  size: z.coerce.number().min(1, "Tamanho é obrigatório"),
+  price: z.coerce.number().positive("Preço deve ser maior que zero"),
+});
+
+type ItemUpdateFormData = z.infer<typeof itemUpdateSchema>;
+
+type ItemUpdateFormProps = {
+  item: {
+    id: number;
+    sku: string;
+    size: number;
+    price: number;
+    shoeId: number;
+    createdAt: string;
+    deletedAt: string | null;
+  };
+};
+
+const ItemUpdateFormProps = ({ item }: ItemUpdateFormProps) => {
   const { success, failure } = useToast();
   const router = useRouter();
 
-  const { pending } = useFormStatus();
-  const lable = pending ? "Processando..." : "Cadastrar";
+  const { register, handleSubmit, formState } = useForm<ItemUpdateFormData>({
+    resolver: zodResolver(itemUpdateSchema),
+    defaultValues: {
+      sku: item.sku,
+      price: item.price,
+      size: item.size,
+    },
+  });
+
+  const onSubmit = async (data: ItemUpdateFormData) => {
+    try {
+      await updateItem({ ...data, shoeId: item.shoeId, id: item.id });
+      success("Item atualizado com sucesso!");
+      router.back();
+    } catch (error) {
+      console.error(error);
+      failure("Erro ao atualizar o item.");
+    }
+  };
 
   const handleDelete = () => {
     Swal.fire({
@@ -34,9 +68,9 @@ const FormButtons = ({ shoeId }: { shoeId: number }) => {
       try {
         if (!result.isConfirmed) return;
 
-        await svc.deleteShoeById(shoeId);
+        await deleteShoeById(item.shoeId);
         success("O item foi deletado com sucesso!");
-        router.back();
+        router.push(`/panel/shoes/${item.shoeId}`);
       } catch (err) {
         console.error(err);
         failure("Houve um erro ao deletar o item.");
@@ -45,60 +79,11 @@ const FormButtons = ({ shoeId }: { shoeId: number }) => {
   };
 
   return (
-    <Fragment>
-      <button
-        type="submit"
-        disabled={pending}
-        className="w-full py-3 px-4 mb-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-      >
-        {lable}
-      </button>
-      <button
-        type="button"
-        onClick={handleDelete}
-        className="w-full py-3 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300"
-      >
-        Deletar item
-      </button>
-    </Fragment>
-  );
-};
-
-const UserCreateForm = ({ item }: m.ItemUpdateFormProps) => {
-  const initialState: m.InitialStateEntries = {
-    message: "",
-    fieldValues: {
-      id: item.id.toString(),
-      sku: item.sku,
-      size: item.size.toString(),
-      price: item.price.toString(),
-      shoeId: item.shoeId.toString(),
-    },
-  };
-
-  const { success, failure } = useToast();
-  const [state, formAction] = useFormState(a.handleSubmit, initialState);
-
-  const router = useRouter();
-
-  const handleFormReponse = () => {
-    if (state.message === "success") {
-      success("Item atualizado com sucesso!");
-      router.back();
-    } else if (state.message !== "") {
-      failure(state.message);
-    }
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(handleFormReponse, [state]);
-
-  return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
         {`Editar item #${item.id}`}
       </h2>
-      <form action={formAction}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-6">
           <label
             htmlFor="sku"
@@ -108,12 +93,15 @@ const UserCreateForm = ({ item }: m.ItemUpdateFormProps) => {
           </label>
           <input
             id="sku"
-            name="sku"
-            type="text"
-            defaultValue={item.sku}
-            placeholder="Definal um código para o item"
+            placeholder="Defina um código para o item"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("sku")}
           />
+          {formState.errors.sku && (
+            <p className="text-red-600 text-sm">
+              {formState.errors.sku.message}
+            </p>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -124,13 +112,16 @@ const UserCreateForm = ({ item }: m.ItemUpdateFormProps) => {
           </label>
           <input
             id="price"
-            name="price"
             type="number"
-            step={0.01}
-            defaultValue={item.price}
             placeholder="Digite o preço do item"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("price")}
           />
+          {formState.errors.price && (
+            <p className="text-red-600 text-sm">
+              {formState.errors.price.message}
+            </p>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -141,24 +132,37 @@ const UserCreateForm = ({ item }: m.ItemUpdateFormProps) => {
           </label>
           <select
             id="size"
-            name="size"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("size")}
           >
             {footSizesList?.map((footSize) => (
-              <option
-                key={footSize}
-                value={footSize}
-                selected={footSize === item.size}
-              >
+              <option key={footSize} value={footSize}>
                 {footSize}
               </option>
             ))}
           </select>
+          {formState.errors.size && (
+            <p className="text-red-600 text-sm">
+              {formState.errors.size.message}
+            </p>
+          )}
         </div>
-        <FormButtons shoeId={item.id} />
+        <button
+          type="submit"
+          className="w-full py-3 px-4 mb-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+        >
+          {formState.isSubmitting ? "Processando..." : "Cadastrar"}
+        </button>
+        <button
+          type="button"
+          onClick={handleDelete}
+          className="w-full py-3 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300"
+        >
+          Deletar item
+        </button>
       </form>
     </div>
   );
 };
 
-export default UserCreateForm;
+export default ItemUpdateFormProps;
