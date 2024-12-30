@@ -1,10 +1,47 @@
 "use client";
 
-import { Suspense } from "react";
-import { useLogin } from "./hook";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
+import { z } from "zod";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import { useToast } from "@/hooks";
+
+const loginSchema = z.object({
+  email: z
+    .string()
+    .email("Digite um email válido")
+    .min(1, "O email é obrigatório"),
+  password: z
+    .string()
+    .min(6, "A senha deve ter pelo menos 6 caracteres")
+    .optional(),
+});
+
+type LoginSchema = z.infer<typeof loginSchema>;
 
 const LoginForm = () => {
-  const { register, handleSubmit, errors, onSubmit } = useLogin();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const { register, handleSubmit, formState } = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const { failure } = useToast();
+
+  const onSubmit = async (data: LoginSchema) => {
+    try {
+      const auth = await signIn("credentials", { ...data, redirect: false });
+      if (auth && !auth.ok) throw new Error();
+
+      router.push(searchParams.get("callbackUrl") ?? "/panel");
+    } catch (err) {
+      console.error(err);
+      failure("Usuário ou senha incorretos.");
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500">
@@ -12,12 +49,6 @@ const LoginForm = () => {
         <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800">
           Login
         </h2>
-        {errors.email || errors.password ? (
-          <p className="text-red-500 text-center mb-4">
-            Por favor, corrija os erros abaixo.
-          </p>
-        ) : null}
-
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
             <label
@@ -27,20 +58,18 @@ const LoginForm = () => {
               Email
             </label>
             <input
-              type="email"
               id="email"
-              {...register("email")}
               placeholder="Digite seu email"
-              className={`w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 ${
-                errors.email ? "border-red-500" : "border-gray-300"
-              }`}
+              className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+              {...register("email")}
             />
-            {errors.email && (
+            {formState.errors.email && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.email.message}
+                {formState.errors.email.message}
               </p>
             )}
           </div>
+
           <div className="mb-6">
             <label
               htmlFor="password"
@@ -49,25 +78,24 @@ const LoginForm = () => {
               Senha
             </label>
             <input
-              type="password"
               id="password"
-              {...register("password")}
+              type="password"
               placeholder="Digite sua senha"
-              className={`w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 ${
-                errors.password ? "border-red-500" : "border-gray-300"
-              }`}
+              className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+              {...register("password")}
             />
-            {errors.password && (
+            {formState.errors.password && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.password.message}
+                {formState.errors.password.message}
               </p>
             )}
           </div>
+
           <button
             type="submit"
             className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           >
-            Entrar
+            {formState.isSubmitting ? "Processando..." : "Entrar"}
           </button>
         </form>
       </div>
@@ -75,10 +103,4 @@ const LoginForm = () => {
   );
 };
 
-const Page = () => (
-  <Suspense>
-    <LoginForm />
-  </Suspense>
-);
-
-export default Page;
+export default LoginForm;
