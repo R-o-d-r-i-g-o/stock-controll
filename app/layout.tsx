@@ -5,8 +5,6 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import InfoButton from "@/components/info";
-
 const geistSans = localFont({
   src: "../public/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -30,9 +28,8 @@ type RootLayoutProps = Readonly<{
 const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang="en">
     <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <InfoButton />
-      <ToastContainer />
       {children}
+      <ToastContainer />
     </body>
   </html>
 );

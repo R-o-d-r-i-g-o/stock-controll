@@ -1,3 +1,5 @@
+"use server";
+
 import React from "react";
 import InfoIcon from "@mui/icons-material/InfoOutlined";
 
@@ -5,11 +7,15 @@ import * as src from "@/services";
 import { defaultDateMask } from "@/common";
 import moment from "moment";
 
-const InfoButton = async () => {
+type InfoButton = {
+  displayInMobile?: boolean;
+};
+
+const InfoButton = async ({ displayInMobile = false }: InfoButton) => {
   const appData = await src.fetchHealthData();
 
   return (
-    <div className="relative">
+    <div className={displayInMobile ? "sm:hidden" : "block"}>
       <div className="fixed bottom-5 left-5 group">
         <div className="w-14 h-14 bg-white text-black rounded-full flex items-center justify-center shadow-lg group-hover:rounded-r-none">
           <InfoIcon className="text-black" />
@@ -33,4 +39,4 @@ const InfoButton = async () => {
   );
 };
 
-export default InfoButton;
+export { InfoButton };
