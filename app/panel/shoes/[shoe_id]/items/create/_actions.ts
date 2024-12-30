@@ -4,7 +4,7 @@ import axios from "axios";
 import * as m from "./_models";
 
 import { createItem } from "@/services";
-import { itemCreationSchema, ValidationError } from "@/schemas";
+import { itemCreationSchema, YupError } from "@/schemas";
 
 async function handleSubmit(
   state: m.InitialStateEntries,
@@ -32,7 +32,7 @@ async function handleSubmit(
   } catch (err) {
     let message = "";
 
-    if (err instanceof ValidationError) message = err.errors[0];
+    if (err instanceof YupError) message = err.errors[0];
 
     if (axios.isAxiosError(err))
       message = "Houve um erro ao processar a solicitação";

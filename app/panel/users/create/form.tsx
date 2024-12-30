@@ -1,14 +1,27 @@
 "use client";
 
-import { useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { z } from "zod";
 
 import { useToast } from "@/hooks";
-import { useRouter } from "next/navigation";
-import { NavigationPage } from "@/common";
+import { createUser } from "@/services";
 
-import * as a from "./_actions";
-import * as m from "./_models";
+const createUserSchema = z.object({
+  name: z.string().min(1, "O nome é obrigatório"),
+  roleId: z.coerce.number().min(1, "Selecione um cargo"),
+  email: z
+    .string()
+    .email("Digite um email válido")
+    .min(1, "O email é obrigatório"),
+  password: z
+    .string()
+    .min(6, "A senha deve ter pelo menos 6 caracteres")
+    .min(1, "A senha é obrigatória"),
+});
+
+type CreateUserSchema = z.infer<typeof createUserSchema>;
 
 type UserCreateFormProps = {
   roles: Array<{
@@ -17,38 +30,24 @@ type UserCreateFormProps = {
   }>;
 };
 
-const SubmitButton = () => {
-  const { pending } = useFormStatus();
-  const lable = pending ? "Processando..." : "Cadastrar";
-
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-    >
-      {lable}
-    </button>
-  );
-};
-
 const UserCreateForm = ({ roles }: UserCreateFormProps) => {
   const { success, failure } = useToast();
-  const [state, formAction] = useFormState(a.handleSubmit, m.initalState);
-
   const router = useRouter();
 
-  const handleFormReponse = () => {
-    if (state.message === "success") {
-      success("Novo usuário criado com sucesso!");
-      router.push(NavigationPage.Users);
-    } else if (state.message !== "") {
-      failure(state.message);
+  const { register, handleSubmit, formState } = useForm<CreateUserSchema>({
+    resolver: zodResolver(createUserSchema),
+  });
+
+  const handleCrateUser = async (data: CreateUserSchema) => {
+    try {
+      await createUser(data);
+      success("Usuário criado com sucesso!");
+      router.push("/panel/users");
+    } catch (err) {
+      console.error(err);
+      failure("Houve um erro ao criar o usuário, tente novamente mais tarde!");
     }
   };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(handleFormReponse, [state]);
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
@@ -56,7 +55,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
         Novo Usuário
       </h2>
 
-      <form action={formAction}>
+      <form onSubmit={handleSubmit(handleCrateUser)}>
         <div className="mb-6">
           <label
             htmlFor="name"
@@ -65,12 +64,16 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
             Nome
           </label>
           <input
-            type="text"
             id="name"
-            name="name"
             placeholder="Digite seu nome completo"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("name")}
           />
+          {formState.errors.name && (
+            <span className="text-red-600 text-sm">
+              {formState.errors.name.message}
+            </span>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -80,12 +83,16 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
             Email
           </label>
           <input
-            type="email"
             id="email"
-            name="email"
             placeholder="Digite seu email"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("email")}
           />
+          {formState.errors.email && (
+            <span className="text-red-600 text-sm">
+              {formState.errors.email.message}
+            </span>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -95,12 +102,16 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
             Senha
           </label>
           <input
-            type="password"
             id="password"
-            name="password"
             placeholder="Digite sua senha"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("password")}
           />
+          {formState.errors.password && (
+            <span className="text-red-600 text-sm">
+              {formState.errors.password.message}
+            </span>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -111,10 +122,10 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
           </label>
           <select
             id="roleId"
-            name="roleId"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("roleId")}
           >
-            <option selected disabled>
+            <option value="" disabled>
               Selecione o cargo
             </option>
             {roles?.map((r) => (
@@ -123,8 +134,18 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
               </option>
             ))}
           </select>
+          {formState.errors.roleId && (
+            <span className="text-red-600 text-sm">
+              {formState.errors.roleId.message}
+            </span>
+          )}
         </div>
-        <SubmitButton />
+        <button
+          type="submit"
+          className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+        >
+          {formState.isSubmitting ? "Processando..." : "Cadastrar"}
+        </button>
       </form>
     </div>
   );
