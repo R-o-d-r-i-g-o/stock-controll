@@ -5,7 +5,7 @@ import { useFormState, useFormStatus } from "react-dom";
 
 import { useToast } from "@/hooks";
 import { useRouter } from "next/navigation";
-import { footSizesList, NavigationPage } from "@/common";
+import { footSizesList } from "@/common";
 
 import * as a from "./_actions";
 import * as m from "./_models";
