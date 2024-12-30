@@ -1,58 +1,47 @@
 "use client";
 
-import { useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { z } from "zod";
 
 import { useToast } from "@/hooks";
-import { useRouter } from "next/navigation";
-import { NavigationPage } from "@/common";
+import { createShoe } from "@/services";
 
-import * as a from "./_actions";
-import * as m from "./_models";
+const createShoeSchema = z.object({
+  name: z.string().min(1, "Nome é obrigatório"),
+  sole: z.string().min(1, "Sola é obrigatória"),
+  color: z.string().min(1, "Cor é obrigatória"),
+  note: z.string().optional(),
+});
 
-const SubmitButton = () => {
-  const { pending } = useFormStatus();
-  const lable = pending ? "Processando..." : "Cadastrar";
-
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-    >
-      {lable}
-    </button>
-  );
-};
+type CreateShoeSchema = z.infer<typeof createShoeSchema>;
 
 const UserCreateForm = () => {
   const { success, failure } = useToast();
-  const [state, formAction] = useFormState(
-    a.handleCreateShoeSubmit,
-    m.initialState
-  );
-
   const router = useRouter();
 
-  const handleFormReponse = () => {
-    if (state.message === "success") {
+  const { register, handleSubmit, formState } = useForm<CreateShoeSchema>({
+    resolver: zodResolver(createShoeSchema),
+  });
+
+  const onSubmit = async (data: CreateShoeSchema) => {
+    try {
+      await createShoe({ ...data, note: data.note ?? "" });
       success("Novo calçado criado com sucesso!");
-      router.push(NavigationPage.Shoe);
-    } else if (state.message !== "") {
-      failure(state.message);
+      router.push("/panel/shoes");
+    } catch (err) {
+      console.error(err);
+      failure("Ocorreu um erro ao criar o calçado.");
     }
   };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(handleFormReponse, [state]);
 
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
         Novo Calçado
       </h2>
-
-      <form action={formAction}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-6">
           <label
             htmlFor="name"
@@ -62,10 +51,15 @@ const UserCreateForm = () => {
           </label>
           <input
             id="name"
-            name="name"
             placeholder="Digite o nome do produto"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 "
+            {...register("name")}
           />
+          {formState.errors.name && (
+            <p className="text-red-500 text-sm mt-1">
+              {formState.errors.name.message}
+            </p>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -76,10 +70,15 @@ const UserCreateForm = () => {
           </label>
           <input
             id="sole"
-            name="sole"
             placeholder="Tipo de sola"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("sole")}
           />
+          {formState.errors.sole && (
+            <p className="text-red-500 text-sm mt-1">
+              {formState.errors.sole.message}
+            </p>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -90,10 +89,15 @@ const UserCreateForm = () => {
           </label>
           <input
             id="color"
-            name="color"
             placeholder="Digite a cor do produto"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("color")}
           />
+          {formState.errors.color && (
+            <p className="text-red-500 text-sm mt-1">
+              {formState.errors.color.message}
+            </p>
+          )}
         </div>
         <div className="mb-6">
           <label
@@ -104,12 +108,22 @@ const UserCreateForm = () => {
           </label>
           <input
             id="note"
-            name="note"
             placeholder="Notas sobre o produto"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            {...register("note")}
           />
+          {formState.errors.note && (
+            <p className="text-red-500 text-sm mt-1">
+              {formState.errors.note.message}
+            </p>
+          )}
         </div>
-        <SubmitButton />
+        <button
+          type="submit"
+          className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+        >
+          {formState.isSubmitting ? "Processando..." : "Cadastrar"}
+        </button>
       </form>
     </div>
   );
