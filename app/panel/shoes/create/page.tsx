@@ -12,7 +12,10 @@ const createShoeSchema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),
   sole: z.string().min(1, "Sola é obrigatória"),
   color: z.string().min(1, "Cor é obrigatória"),
-  note: z.string().optional(),
+  note: z
+    .string()
+    .optional()
+    .default(() => ""),
 });
 
 type CreateShoeSchema = z.infer<typeof createShoeSchema>;
@@ -27,7 +30,7 @@ const ShoeCreatePage = () => {
 
   const onSubmit = async (data: CreateShoeSchema) => {
     try {
-      await createShoe({ ...data, note: data.note ?? "" });
+      await createShoe(data);
       success("Novo calçado criado com sucesso!");
       router.push("/panel/shoes");
     } catch (err) {
