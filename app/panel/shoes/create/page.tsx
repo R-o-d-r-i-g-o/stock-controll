@@ -17,7 +17,7 @@ const createShoeSchema = z.object({
 
 type CreateShoeSchema = z.infer<typeof createShoeSchema>;
 
-const UserCreateForm = () => {
+const ShoeCreatePage = () => {
   const { success, failure } = useToast();
   const router = useRouter();
 
@@ -129,4 +129,4 @@ const UserCreateForm = () => {
   );
 };
 
-export default UserCreateForm;
+export default ShoeCreatePage;
