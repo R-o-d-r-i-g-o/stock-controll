@@ -13,13 +13,14 @@ async function handleSubmit(
   try {
     const data = Object.fromEntries(
       formData.entries()
-    ) as m.CreateUserFormEntries;
+    ) as m.ItemUpdateFormEntries;
+
     const payload = {
       id: parseInt(state.fieldValues.id),
       sku: data.sku,
       size: parseInt(data.size),
       price: parseFloat(data.price),
-      shoeId: parseInt(data.shoeId),
+      shoeId: parseInt(state.fieldValues.shoeId),
     };
 
     const result = await itemUpdateSchema.validate(payload);

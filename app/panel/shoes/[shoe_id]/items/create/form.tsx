@@ -1,80 +1,33 @@
 "use client";
 
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
-
-import * as svc from "@/services";
-import Swal from "sweetalert2";
 
 import { useToast } from "@/hooks";
 import { useRouter } from "next/navigation";
+import { footSizesList, NavigationPage } from "@/common";
 
 import * as a from "./_actions";
-import { footSizesList } from "@/common";
 import * as m from "./_models";
 
-const FormButtons = ({ shoeId }: { shoeId: number }) => {
-  const { success, failure } = useToast();
-  const router = useRouter();
-
+const SubmitButton = () => {
   const { pending } = useFormStatus();
   const lable = pending ? "Processando..." : "Cadastrar";
 
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Tem certeza?",
-      text: "Essa ação não pode ser desfeita!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sim, deletar!",
-      cancelButtonText: "Cancelar",
-    }).then(async (result) => {
-      try {
-        if (!result.isConfirmed) return;
-
-        await svc.deleteShoeById(shoeId);
-        success("O item foi deletado com sucesso!");
-        router.back();
-      } catch (err) {
-        console.error(err);
-        failure("Houve um erro ao deletar o item.");
-      }
-    });
-  };
-
   return (
-    <Fragment>
-      <button
-        type="submit"
-        disabled={pending}
-        className="w-full py-3 px-4 mb-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-      >
-        {lable}
-      </button>
-      <button
-        type="button"
-        onClick={handleDelete}
-        className="w-full py-3 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300"
-      >
-        Deletar item
-      </button>
-    </Fragment>
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+    >
+      {lable}
+    </button>
   );
 };
 
-const UserCreateForm = ({ item }: m.ItemUpdateFormProps) => {
-  const initialState: m.InitialStateEntries = {
-    message: "",
-    fieldValues: {
-      id: item.id.toString(),
-      sku: item.sku,
-      size: item.size.toString(),
-      price: item.price.toString(),
-      shoeId: item.shoeId.toString(),
-    },
-  };
+const ItemCreationForm = ({ shoeId }: m.ItemCreationFormProps) => {
+  const initialState = m.initalState;
+  initialState.fieldValues.shoeId = shoeId.toString();
 
   const { success, failure } = useToast();
   const [state, formAction] = useFormState(a.handleSubmit, initialState);
@@ -83,8 +36,8 @@ const UserCreateForm = ({ item }: m.ItemUpdateFormProps) => {
 
   const handleFormReponse = () => {
     if (state.message === "success") {
-      success("Item atualizado com sucesso!");
-      router.back();
+      success("Novo item criado com sucesso!");
+      router.push(`/panel/shoes/${shoeId}`);
     } else if (state.message !== "") {
       failure(state.message);
     }
@@ -96,7 +49,7 @@ const UserCreateForm = ({ item }: m.ItemUpdateFormProps) => {
   return (
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        {`Editar item #${item.id}`}
+        Novo item
       </h2>
       <form action={formAction}>
         <div className="mb-6">
@@ -110,7 +63,6 @@ const UserCreateForm = ({ item }: m.ItemUpdateFormProps) => {
             id="sku"
             name="sku"
             type="text"
-            defaultValue={item.sku}
             placeholder="Definal um código para o item"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           />
@@ -127,7 +79,6 @@ const UserCreateForm = ({ item }: m.ItemUpdateFormProps) => {
             name="price"
             type="number"
             step={0.01}
-            defaultValue={item.price}
             placeholder="Digite o preço do item"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           />
@@ -145,20 +96,16 @@ const UserCreateForm = ({ item }: m.ItemUpdateFormProps) => {
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
           >
             {footSizesList?.map((footSize) => (
-              <option
-                key={footSize}
-                value={footSize}
-                selected={footSize === item.size}
-              >
+              <option key={footSize} value={footSize}>
                 {footSize}
               </option>
             ))}
           </select>
         </div>
-        <FormButtons shoeId={item.id} />
+        <SubmitButton />
       </form>
     </div>
   );
 };
 
-export default UserCreateForm;
+export default ItemCreationForm;

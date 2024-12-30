@@ -33,7 +33,7 @@ const FormButtons = ({ userId }: { userId: number }) => {
   const router = useRouter();
 
   const { pending } = useFormStatus();
-  const lable = pending ? "Processando..." : "Cadastrar";
+  const lable = pending ? "Processando..." : "Editar";
 
   const handleDelete = () => {
     Swal.fire({

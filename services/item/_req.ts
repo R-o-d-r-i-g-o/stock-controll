@@ -25,8 +25,8 @@ const updateItem = async (data: t.UpdateItem) => {
   const res = await api.put(`/api/items/${data.id}`, {
     sku: data.sku,
     size: data.size,
-    price: data.size,
-    shoeId: data.size,
+    price: data.price,
+    shoeId: data.shoeId,
   });
   return res.data;
 };

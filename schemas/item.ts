@@ -16,14 +16,14 @@ const itemCreationSchema = Yup.object().shape({
   shoeId: Yup.number()
     .positive("O calçado deve ser um número positivo")
     .required("O calçado é obrigatório")
-    .typeError("O calçadoa deve ser um número válido"),
+    .typeError("O calçado deve ser um número válido"),
 });
 
 const itemUpdateSchema = itemCreationSchema.clone().shape({
   id: Yup.number()
     .integer("O ID deve ser um número inteiro")
     .positive("O ID deve ser um número positivo")
-    .required("O ID do usuário deve ser referenciado"),
+    .required("O ID do item deve ser referenciado"),
 });
 
 export { itemCreationSchema, itemUpdateSchema };

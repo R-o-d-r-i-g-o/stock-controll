@@ -10,6 +10,10 @@ type CreateUserFormEntries = {
   shoeId: string;
 };
 
+type ItemCreationFormProps = {
+  shoeId: number;
+};
+
 const initalState: InitialStateEntries = {
   message: "",
   fieldValues: {
@@ -20,4 +24,9 @@ const initalState: InitialStateEntries = {
   },
 };
 
-export { type InitialStateEntries, type CreateUserFormEntries, initalState };
+export {
+  type InitialStateEntries,
+  type CreateUserFormEntries,
+  type ItemCreationFormProps,
+  initalState,
+};

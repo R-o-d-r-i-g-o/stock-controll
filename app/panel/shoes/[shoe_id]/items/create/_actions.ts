@@ -14,6 +14,7 @@ async function handleSubmit(
     const data = Object.fromEntries(
       formData.entries()
     ) as m.CreateUserFormEntries;
+
     const payload = {
       sku: data.sku,
       size: parseInt(data.size),

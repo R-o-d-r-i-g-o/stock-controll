@@ -1,9 +1,9 @@
 type InitialStateEntries = {
   message: string;
-  fieldValues: CreateUserFormEntries;
+  fieldValues: ItemUpdateFormEntries;
 };
 
-type CreateUserFormEntries = {
+type ItemUpdateFormEntries = {
   id: string;
   sku: string;
   size: string;
@@ -11,4 +11,16 @@ type CreateUserFormEntries = {
   shoeId: string;
 };
 
-export { type InitialStateEntries, type CreateUserFormEntries };
+type ItemUpdateFormProps = {
+  item: {
+    id: number;
+    sku: string;
+    size: number;
+    price: string;
+    shoeId: number;
+    createdAt: string;
+    deletedAt: string | null;
+  };
+};
+
+export type { InitialStateEntries, ItemUpdateFormEntries, ItemUpdateFormProps };

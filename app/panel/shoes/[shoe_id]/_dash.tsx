@@ -170,7 +170,7 @@ const ProductDash = ({ data }: t.DashProps) => {
           </div>
         </form>
       </div>
-      <Table meta={{ shoeId: data.id }} data={data.shoes} />
+      <Table meta={{ shoeId: data.id }} data={data.items} />
     </React.Fragment>
   );
 };

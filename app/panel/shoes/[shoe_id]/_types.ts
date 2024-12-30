@@ -21,7 +21,7 @@ type DashProps = {
     note: string;
     createdAt: string;
     deletedAt: string | null;
-    shoes: {
+    items: {
       id: number;
       sku: string;
       size: number;
