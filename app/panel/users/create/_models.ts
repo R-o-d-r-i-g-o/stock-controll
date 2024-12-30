@@ -1,6 +1,5 @@
-type InitialStateEntries = {
+type Entries = {
   message: string;
-  fieldValues: CreateUserFormEntries;
 };
 
 type CreateUserFormEntries = {
@@ -10,14 +9,8 @@ type CreateUserFormEntries = {
   password: string;
 };
 
-const initalState: InitialStateEntries = {
+const initalState: Entries = {
   message: "",
-  fieldValues: {
-    name: "",
-    email: "",
-    roleId: "",
-    password: "",
-  },
 };
 
-export { type InitialStateEntries, type CreateUserFormEntries, initalState };
+export { type Entries, type CreateUserFormEntries, initalState };

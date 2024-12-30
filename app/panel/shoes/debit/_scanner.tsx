@@ -34,8 +34,6 @@ const CodeScanner = ({
     (device) => device.kind === "videoinput"
   );
 
-  console.log("renderizou");
-
   const handleBeepSound = () => {
     if (!audioRef.current) return;
     audioRef.current.currentTime = 0;

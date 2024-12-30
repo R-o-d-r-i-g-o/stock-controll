@@ -67,8 +67,6 @@ const getUsersPaginated = async (filter: t.getUsersPaginatedProps) => {
 const getRoleList = async () => {
   const roles = await repo.getRolesList();
 
-  console.log("vuscou os roles", roles);
-
   return {
     meta: {
       total: roles.length,

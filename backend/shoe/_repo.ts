@@ -10,7 +10,10 @@ const getShoeBy = async (filter: t.getShoeBy) => {
     },
     include: {
       Item: {
-        where: { deletedAt: null },
+        where: {
+          deletedAt: null,
+          Expedition: { none: {} },
+        },
         orderBy: { size: "asc" },
       },
     },

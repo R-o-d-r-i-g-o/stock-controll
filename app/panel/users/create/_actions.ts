@@ -4,41 +4,51 @@ import axios from "axios";
 import * as m from "./_models";
 
 import { createUser } from "@/services";
-import { createUserSchema, ValidationError } from "@/schemas";
+import { createUserSchema, YupError } from "@/schemas";
 
 async function handleSubmit(
-  state: m.InitialStateEntries,
+  _: m.Entries,
   formData: FormData
-): Promise<m.InitialStateEntries> {
+): Promise<m.Entries> {
   try {
-    const data = Object.fromEntries(
-      formData.entries()
-    ) as m.CreateUserFormEntries;
-    const payload = {
-      ...data,
-      roleId: parseInt(data.roleId as string, 10),
-    };
+    const data = await processForm(formData);
+    if ("error" in data) throw new Error(data.error);
 
-    const result = await createUserSchema.validate(payload);
-    await createUser(result);
-
-    return {
-      message: "success",
-      fieldValues: data,
-    };
+    await createUser(data);
+    return { message: "success" };
   } catch (err) {
-    let message = "";
-
-    if (err instanceof ValidationError) message = err.errors[0];
-
-    if (axios.isAxiosError(err))
-      message = "Houve um erro ao processar a solicitação";
-
-    return {
-      ...m.initalState,
-      message,
-    };
+    const message = getErrorMessage(err);
+    return { message };
   }
+}
+
+async function processForm(formData: FormData) {
+  const data = createUserSchema.cast({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    roleId: formData.get("roleId"),
+    password: formData.get("password"),
+  });
+
+  try {
+    const validatedData = await createUserSchema.validate(data);
+    return validatedData;
+  } catch (err) {
+    const error = err as YupError;
+    return { error: error.errors[0] };
+  }
+}
+
+function getErrorMessage(err: unknown): string {
+  if (axios.isAxiosError(err)) {
+    return "Houve um erro ao processar a solicitação";
+  }
+
+  if (err instanceof Error) {
+    return err.message || "Um erro inesperado ocorreu";
+  }
+
+  return "Um erro inesperado ocorreu";
 }
 
 export { handleSubmit };

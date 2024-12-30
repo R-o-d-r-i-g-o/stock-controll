@@ -75,8 +75,6 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
     setSelectedRow(index === selectedRow ? null : index);
   };
 
-  console.log("oq ue vuie", data);
-
   return (
     <React.Fragment>
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
