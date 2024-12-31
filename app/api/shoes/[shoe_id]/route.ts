@@ -1,6 +1,8 @@
 import { NextRequest } from "next/server";
 import * as svc from "@/backend";
+
 import { updateShoeSchema } from "@/schemas";
+import { validateAuthUser } from "@/common";
 
 type UserParams = {
   params: Promise<{ shoe_id: string }>;
@@ -11,6 +13,8 @@ const getShoesAndRelatedItemsPaginated = async (
   { params }: UserParams
 ) => {
   try {
+    await validateAuthUser(req);
+
     const shoeId = parseInt((await params).shoe_id, 10);
     const shoe = await svc.getShoeBy({ id: shoeId });
 
@@ -22,8 +26,14 @@ const getShoesAndRelatedItemsPaginated = async (
 
 const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
   try {
+    const user = await validateAuthUser(req);
+
     const shoeId = parseInt((await params).shoe_id, 10);
     await svc.deleteShoe(shoeId);
+    await svc.createAudit({
+      userId: user.id,
+      note: `O usuário deletou o calçado #${shoeId}`,
+    });
 
     return Response.json(null, { status: 200 });
   } catch (error) {
@@ -33,6 +43,8 @@ const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
 
 const updateShoe = async (req: NextRequest, { params }: UserParams) => {
   try {
+    const user = await validateAuthUser(req);
+
     const payload = {
       ...(await req.json()),
       id: parseInt((await params).shoe_id, 10),
@@ -42,7 +54,12 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
     if (result.error)
       return Response.json({ errors: result.error.errors }, { status: 400 });
 
-    await svc.updateShoe(result.data!);
+    await svc.updateShoe(result.data);
+    await svc.createAudit({
+      userId: user.id,
+      note: `O usuário editou as informações do calçado #${result.data.id}`,
+    });
+
     return Response.json(null, { status: 200 });
   } catch (error) {
     return Response.json(error, { status: 500 });

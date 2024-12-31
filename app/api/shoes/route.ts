@@ -2,9 +2,12 @@ import { NextRequest } from "next/server";
 import * as svc from "@/backend";
 
 import { createShoeSchema } from "@/schemas";
+import { validateAuthUser } from "@/common";
 
 const getShoesAndItemsPaginated = async (req: NextRequest) => {
   try {
+    await validateAuthUser(req);
+
     const searchParams = req.nextUrl.searchParams;
     const payload = {
       page: parseInt(searchParams.get("page") ?? "1"),
@@ -20,11 +23,18 @@ const getShoesAndItemsPaginated = async (req: NextRequest) => {
 
 const createShoe = async (req: NextRequest) => {
   try {
+    const user = await validateAuthUser(req);
+
     const result = createShoeSchema.safeParse(await req.json());
     if (result.error)
       return Response.json({ errors: result.error.errors }, { status: 400 });
 
     const shoeId = await svc.createShoe(result.data);
+    await svc.createAudit({
+      userId: user.id,
+      note: `O usuário cadastrou um novo calçado (#${shoeId})`,
+    });
+
     return Response.json({ shoeId }, { status: 201 });
   } catch (error) {
     return Response.json(error, { status: 500 });
