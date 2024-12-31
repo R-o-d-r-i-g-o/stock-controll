@@ -2,7 +2,7 @@ type GetShoesById = {
   id: number;
   sku: string;
   size: number;
-  price: string;
+  price: number;
   shoeId: number;
   createdAt: string;
   deletedAt: string | null;
