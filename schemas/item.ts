@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 const itemCreationSchema = Yup.object().shape({
-  sku: Yup.string().required("SKU é obrigatório"),
+  sku: Yup.string().optional().default(""),
 
   size: Yup.number()
     .integer("O tamanho deve ser um número inteiro")

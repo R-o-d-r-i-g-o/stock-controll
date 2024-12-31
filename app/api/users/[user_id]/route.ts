@@ -35,12 +35,11 @@ const updateUser = async (req: NextRequest, { params }: UserParams) => {
       ...(await req.json()),
       id: parseInt((await params).user_id, 10),
     };
-    const result = await updateUserSchema.validate(payload);
-    await svc.updateUser({
-      ...result,
-      password: result.password ?? "",
-    });
+    const result = updateUserSchema.safeParse(payload);
+    if (result.error)
+      return Response.json({ errors: result.error.errors }, { status: 400 });
 
+    await svc.updateUser(result.data);
     return Response.json(null, { status: 200 });
   } catch (error) {
     return Response.json(error, { status: 500 });

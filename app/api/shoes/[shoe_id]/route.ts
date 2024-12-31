@@ -38,9 +38,11 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
       id: parseInt((await params).shoe_id, 10),
     };
 
-    const result = await updateShoeSchema.validate(payload);
-    await svc.updateShoe(result);
+    const result = updateShoeSchema.safeParse(payload);
+    if (result.error)
+      return Response.json({ errors: result.error.errors }, { status: 400 });
 
+    await svc.updateShoe(result.data!);
     return Response.json(null, { status: 200 });
   } catch (error) {
     return Response.json(error, { status: 500 });

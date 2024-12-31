@@ -20,14 +20,11 @@ const getShoesAndItemsPaginated = async (req: NextRequest) => {
 
 const createShoe = async (req: NextRequest) => {
   try {
-    const payload = await createShoeSchema.validate(await req.json());
-    const shoeId = await svc.createShoe({
-      name: payload.name,
-      sole: payload.sole,
-      note: payload.note,
-      color: payload.color,
-    });
+    const result = createShoeSchema.safeParse(await req.json());
+    if (result.error)
+      return Response.json({ errors: result.error.errors }, { status: 400 });
 
+    const shoeId = await svc.createShoe(result.data);
     return Response.json({ shoeId }, { status: 201 });
   } catch (error) {
     return Response.json(error, { status: 500 });

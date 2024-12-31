@@ -5,15 +5,12 @@ import * as svc from "@/backend";
 
 const createUser = async (req: NextRequest) => {
   try {
-    const payload = await createUserSchema.validate(await req.json());
-    const userID = await svc.createUser({
-      name: payload.name,
-      email: payload.email,
-      roleId: payload.roleId,
-      password: payload.password,
-    });
+    const result = createUserSchema.safeParse(await req.json());
+    if (result.error)
+      return Response.json({ errors: result.error.errors }, { status: 400 });
 
-    return Response.json({ user_id: userID }, { status: 201 });
+    const userId = await svc.createUser(result.data);
+    return Response.json({ userId }, { status: 201 });
   } catch (error) {
     return Response.json(error, { status: 500 });
   }

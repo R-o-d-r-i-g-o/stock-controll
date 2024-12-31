@@ -1,18 +1,20 @@
-import * as Yup from "yup";
+import { z } from "zod";
 
-const createShoeSchema = Yup.object({
-  name: Yup.string().required("Nome é obrigatório"),
-  sole: Yup.string().required("Sola é obrigatória"),
-  color: Yup.string().required("Cor é obrigatória"),
-  note: Yup.string().required("Nota é obrigatória"),
+const createShoeSchema = z.object({
+  name: z.string().nonempty("Nome é obrigatório"),
+  sole: z.string().nonempty("Sola é obrigatória"),
+  color: z.string().nonempty("Cor é obrigatória"),
+  note: z.string().optional().or(z.literal("")).default(""),
 });
 
-const updateShoeSchema = createShoeSchema.clone().shape({
-  id: Yup.number()
-    .required("ID é obrigatório")
-    .typeError("O ID precisa ser um número")
+const updateShoeSchema = createShoeSchema.extend({
+  id: z
+    .number({
+      required_error: "ID é obrigatório",
+      invalid_type_error: "O ID precisa ser um número",
+    })
     .positive("O ID deve ser um número positivo")
-    .integer("O ID deve ser um número inteiro"),
+    .int("O ID deve ser um número inteiro"),
 });
 
 export { createShoeSchema, updateShoeSchema };
