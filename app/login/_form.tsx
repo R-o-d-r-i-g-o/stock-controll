@@ -36,7 +36,7 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginSchema) => {
     try {
       const auth = await signIn("credentials", { ...data, redirect: false });
-      if (auth && !auth.ok) throw new Error();
+      if (!auth || !auth.ok) throw new Error();
 
       router.push(searchParams.get("callbackUrl") ?? "/panel");
     } catch (err) {

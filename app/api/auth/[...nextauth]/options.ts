@@ -1,8 +1,11 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import jwt from "next-auth/jwt";
 
 import { getAuthUser } from "@/backend";
 import { NavigationPage } from "@/common";
+
+const secret = process.env.NEXTAUTH_SECRET;
 
 const providers: NextAuthOptions["providers"] = [
   CredentialsProvider({
@@ -30,6 +33,7 @@ const callbacks: NextAuthOptions["callbacks"] = {
       token.name = user.name;
       token.email = user.email;
     }
+
     return token;
   },
   async session({ session, token }) {
@@ -37,6 +41,7 @@ const callbacks: NextAuthOptions["callbacks"] = {
       session.user.id = token.id;
       session.user.name = token.name;
       session.user.email = token.email;
+      session.jwt = await jwt.encode({ token, secret: secret! });
     }
 
     return session;
