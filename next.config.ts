@@ -9,8 +9,8 @@ const nextConfig: NextConfig = {
         source: "/api/:path*",
         missing: [
           {
-            type: "senderserver",
-            key: "x-no-header",
+            type: "header",
+            key: "senderserver",
           },
         ],
         headers: [
