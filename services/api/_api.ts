@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getServerSession } from "next-auth";
 
 const { isAxiosError, create } = axios;
 
@@ -24,14 +25,11 @@ const api = create({
 
 api.interceptors.request.use(
   async (request) => {
-    const { data: auth } = await api.get<{ jwt: string }>("/api/auth/session", {
-      fetchOptions: <RequestInit>{
-        cache: "force-cache",
-        next: { revalidate: 3600 },
-      },
-    });
-    if (auth) {
-      request.headers["Cookie"] = `next-auth.session-token=${auth.jwt}`;
+    if (typeof window === "undefined") {
+      const auth = await getServerSession();
+      if (auth) {
+        request.headers["sender.server"] = auth.user.email;
+      }
     }
 
     return request;

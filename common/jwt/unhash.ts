@@ -19,6 +19,10 @@ async function validateAuthUser(req: NextRequest) {
   if (session) return await svc.getUserBy({ email: session.user.email });
   if (token) return await svc.getUserBy({ email: token.email });
 
+  // Note: essa merda é pq o ferramenta não dá suporte para server-side corretamente.
+  const senderReq = req.headers.get("sender.server");
+  if (senderReq) return await svc.getUserBy({ email: senderReq });
+
   throw new Error("A sessão não foi encontrada");
 }
 
