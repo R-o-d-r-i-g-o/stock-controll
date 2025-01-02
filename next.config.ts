@@ -7,10 +7,16 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
+        missing: [
+          {
+            type: "senderserver",
+            key: "x-no-header",
+          },
+        ],
         headers: [
           {
             key: "senderserver",
-            value: "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/",
+            value: "rodrigomarqribeiro@gmail.com",
           },
         ],
       },
