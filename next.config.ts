@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Headers",
-            value: "Content-Type, Authorization, sender.server",
+            value: "Content-Type, Authorization, senderserver",
           },
         ],
       },

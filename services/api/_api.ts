@@ -28,7 +28,7 @@ api.interceptors.request.use(
     if (typeof window === "undefined") {
       const auth = await getServerSession();
       if (auth) {
-        request.headers["sender.server"] = auth.user.email;
+        request.headers["senderserver"] = auth.user.email;
       }
     }
 
