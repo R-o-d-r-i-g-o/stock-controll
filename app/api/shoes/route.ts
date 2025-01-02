@@ -6,6 +6,8 @@ import { validateAuthUser } from "@/common";
 
 const getShoesAndItemsPaginated = async (req: NextRequest) => {
   try {
+    console.log("veio aqui ", req.headers);
+
     await validateAuthUser(req);
 
     const searchParams = req.nextUrl.searchParams;
