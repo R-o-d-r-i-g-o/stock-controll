@@ -32,6 +32,8 @@ api.interceptors.request.use(
       }
     }
 
+    console.log("setou o novo header no req", request.headers);
+
     return request;
   },
   (err) => Promise.reject(err)
