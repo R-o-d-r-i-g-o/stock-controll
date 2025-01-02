@@ -9,8 +9,8 @@ const nextConfig: NextConfig = {
         source: "/api/:path*",
         headers: [
           {
-            key: "Access-Control-Allow-Headers",
-            value: "Content-Type, Authorization, senderserver",
+            key: "senderserver",
+            value: "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/",
           },
         ],
       },
