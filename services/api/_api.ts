@@ -25,17 +25,16 @@ const api = create({
 api.interceptors.request.use(
   async (request) => {
     if (typeof window === "undefined") {
-      const { cookies } = await import("next/headers")
-      const sessionCookies = await cookies();
+      const { cookies } = await import("next/headers");
 
-      if (sessionCookies && sessionCookies.get("next-auth.session-token")) {
-        request.headers["Cookie"] = `next-auth.session-token=${sessionCookies.get("next-auth.session-token")!.value}`
-        console.log('veio aqui no session token', sessionCookies.get("next-auth.session-token")?.value)
+      const sessionCookies = await cookies();
+      const authCookie = sessionCookies?.get("next-auth.session-token");
+
+      if (authCookie) {
+        // Note: set auth cookie such as happens in client-side automatically.
+        request.headers.Cookie = `next-auth.session-token=${authCookie.value}`;
       }
     }
-
-    console.log("setou o novo header no req", request.headers);
-
     return request;
   },
   (err) => Promise.reject(err)
