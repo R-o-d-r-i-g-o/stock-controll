@@ -3,24 +3,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  async headers() {
+  async rewrites() {
     return [
       {
-        source: "/api/:path*",
-        missing: [
-          {
-            type: "header",
-            key: "senderserver",
-          },
-        ],
-        headers: [
-          {
-            key: "senderserver",
-            value: "rodrigomarqribeiro@gmail.com",
-          },
-        ],
+        source: '/api/:path*',
+        destination: `${process.env.NEXTAUTH_URL}/:path*`,
       },
-    ];
+    ]
   },
 
   publicRuntimeConfig: {
