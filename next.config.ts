@@ -3,14 +3,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${process.env.NEXTAUTH_URL}/:path*`,
-      },
-    ]
-  },
 
   publicRuntimeConfig: {
     modifiedDate: new Date().toISOString(),

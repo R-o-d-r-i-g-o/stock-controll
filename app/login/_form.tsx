@@ -11,14 +11,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useToast } from "@/hooks";
 
 const loginSchema = z.object({
-  email: z
-    .string()
-    .email("Digite um email válido")
-    .min(1, "O email é obrigatório"),
-  password: z
-    .string()
-    .min(6, "A senha deve ter pelo menos 6 caracteres")
-    .optional(),
+  email: z.string().email("Digite um email válido"),
+  password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
 });
 
 type LoginSchema = z.infer<typeof loginSchema>;
