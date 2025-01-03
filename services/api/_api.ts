@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getServerSession } from "next-auth";
 
 const { isAxiosError, create } = axios;
 
@@ -26,9 +25,12 @@ const api = create({
 api.interceptors.request.use(
   async (request) => {
     if (typeof window === "undefined") {
-      const auth = await getServerSession();
-      if (auth) {
-        request.headers["senderserver"] = auth.user.email;
+      const { cookies } = await import("next/headers")
+      const sessionCookies = await cookies();
+
+      if (sessionCookies && sessionCookies.get("next-auth.session-token")) {
+        request.headers["Cookie"] = `next-auth.session-token=${sessionCookies.get("next-auth.session-token")!.value}`
+        console.log('veio aqui no session token', sessionCookies.get("next-auth.session-token")?.value)
       }
     }
 
