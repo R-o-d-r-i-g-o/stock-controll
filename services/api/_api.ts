@@ -18,9 +18,27 @@ const api = create({
   // Prevent caching responses once next framework depends on fetch api nativelly.
   fetchOptions: <RequestInit>{
     cache: "no-store",
-    next: { revalidate: 0 },
+    next: { revalidate: false },
   },
 });
+
+api.interceptors.request.use(
+  async (request) => {
+    if (typeof window === "undefined") {
+      const { cookies } = await import("next/headers");
+
+      const sessionCookies = await cookies();
+      const authCookie = sessionCookies?.get("next-auth.session-token");
+
+      if (authCookie) {
+        // Note: set auth cookie such as happens in client-side automatically.
+        request.headers.Cookie = `next-auth.session-token=${authCookie.value}`;
+      }
+    }
+    return request;
+  },
+  (err) => Promise.reject(err)
+);
 
 export { isAxiosError, api };
 
