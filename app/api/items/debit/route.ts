@@ -19,6 +19,7 @@ const debitItem = async (req: NextRequest) => {
 
     return Response.json(null, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };

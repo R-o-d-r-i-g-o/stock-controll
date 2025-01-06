@@ -15,6 +15,7 @@ const createItem = async (req: NextRequest) => {
 
     return Response.json({ itemId }, { status: 201 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };

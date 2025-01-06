@@ -20,6 +20,7 @@ const getShoesAndRelatedItemsPaginated = async (
 
     return Response.json(shoe, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };
@@ -37,6 +38,7 @@ const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
 
     return Response.json(null, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };
@@ -62,6 +64,7 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
 
     return Response.json(null, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };

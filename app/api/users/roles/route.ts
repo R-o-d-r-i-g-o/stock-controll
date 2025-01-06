@@ -9,6 +9,7 @@ const getRoleList = async () => {
     const roles = await svc.getRoleList();
     return Response.json(roles, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };

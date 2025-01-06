@@ -17,6 +17,7 @@ const getItemById = async (req: NextRequest, { params }: UserParams) => {
 
     return Response.json(item, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };
@@ -34,6 +35,7 @@ const deleteItem = async (req: NextRequest, { params }: UserParams) => {
     });
     return Response.json(null, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };
@@ -56,6 +58,7 @@ const updateItem = async (req: NextRequest, { params }: UserParams) => {
     });
     return Response.json(null, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };

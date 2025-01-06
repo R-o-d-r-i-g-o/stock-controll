@@ -20,6 +20,7 @@ const createUser = async (req: NextRequest) => {
     });
     return Response.json({ userId }, { status: 201 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };
@@ -37,6 +38,7 @@ const getUsersPaginated = async (req: NextRequest) => {
     const userList = await svc.getUsersPaginated(payload);
     return Response.json(userList, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };

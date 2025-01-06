@@ -17,6 +17,7 @@ const getShoesAndItemsPaginated = async (req: NextRequest) => {
     const groupedItems = await svc.getShoesGroupedBySizePaginated(payload);
     return Response.json(groupedItems, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };
@@ -37,6 +38,7 @@ const createShoe = async (req: NextRequest) => {
 
     return Response.json({ shoeId }, { status: 201 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };

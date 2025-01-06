@@ -17,6 +17,7 @@ const getUserByID = async (req: NextRequest, { params }: UserParams) => {
 
     return Response.json(user, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };
@@ -36,6 +37,7 @@ const deleteUser = async (req: NextRequest, { params }: UserParams) => {
 
     return Response.json(null, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };
@@ -60,6 +62,7 @@ const updateUser = async (req: NextRequest, { params }: UserParams) => {
 
     return Response.json(null, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };

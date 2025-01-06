@@ -12,6 +12,7 @@ const getUsersPaginated = async (req: NextRequest) => {
     const auditList = await svc.getAuditsPaginated(payload);
     return Response.json(auditList, { status: 200 });
   } catch (error) {
+    console.error(error);
     return Response.json(error, { status: 500 });
   }
 };
