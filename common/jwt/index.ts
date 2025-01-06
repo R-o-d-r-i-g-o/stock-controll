@@ -16,6 +16,8 @@ async function validateAuthUser(req: NextRequest) {
     getServerSession(options),
   ]);
 
+  console.log("trouxe aqui no auth", token, session);
+
   // Note: the email field is check as unique in database.
   if (session) return await svc.getUserBy({ email: session.user.email });
   if (token) return await svc.getUserBy({ email: token.email });
