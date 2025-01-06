@@ -10,14 +10,9 @@ import * as svc from "@/backend";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
-const cookieName =
-  process.env.VERCEL_ENV === "development"
-    ? "next-auth.session-token"
-    : "__Secure-next-auth.session-token";
-
 async function validateAuthUser(req: NextRequest) {
   const [token, session] = await Promise.all([
-    jwt.getToken({ req, secret, cookieName }),
+    jwt.getToken({ req, secret }),
     getServerSession(options),
   ]);
 
