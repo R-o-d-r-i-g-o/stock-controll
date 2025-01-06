@@ -54,6 +54,9 @@ const options: NextAuthOptions = {
   pages: {
     signIn: NavigationPage.Login,
   },
+  session: {
+    strategy: "jwt",
+  },
 };
 
 export { options };
