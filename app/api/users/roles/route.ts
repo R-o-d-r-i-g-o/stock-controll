@@ -1,9 +1,8 @@
-import { NextRequest } from "next/server";
 import * as svc from "@/backend";
 
 // import { validateAuthUser } from "@/common";
 
-const getRoleList = async (req: NextRequest) => {
+const getRoleList = async () => {
   try {
     // await validateAuthUser(req);
 
