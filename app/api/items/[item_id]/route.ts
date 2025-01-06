@@ -10,7 +10,7 @@ type UserParams = {
 
 const getItemById = async (req: NextRequest, { params }: UserParams) => {
   try {
-    await validateAuthUser(req);
+    // await validateAuthUser(req);
 
     const itemId = parseInt((await params).item_id, 10);
     const item = await svc.getItemBy({ id: itemId });

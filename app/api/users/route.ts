@@ -26,7 +26,7 @@ const createUser = async (req: NextRequest) => {
 
 const getUsersPaginated = async (req: NextRequest) => {
   try {
-    await validateAuthUser(req);
+    // await validateAuthUser(req);
 
     const searchParams = req.nextUrl.searchParams;
     const payload = {

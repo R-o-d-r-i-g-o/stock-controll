@@ -13,7 +13,7 @@ const getShoesAndRelatedItemsPaginated = async (
   { params }: UserParams
 ) => {
   try {
-    await validateAuthUser(req);
+    // await validateAuthUser(req);
 
     const shoeId = parseInt((await params).shoe_id, 10);
     const shoe = await svc.getShoeBy({ id: shoeId });
