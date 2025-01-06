@@ -23,6 +23,8 @@ const getUserByID = async (req: NextRequest, { params }: UserParams) => {
 
 const deleteUser = async (req: NextRequest, { params }: UserParams) => {
   try {
+    console.log("veio no delete de usuário ", req);
+
     const user = await validateAuthUser(req);
 
     const userId = parseInt((await params).user_id, 10);
