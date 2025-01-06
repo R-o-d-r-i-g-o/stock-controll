@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-import SessionProvider from "@/common/context";
-import { getServerSession } from "next-auth";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -28,21 +25,13 @@ type RootLayoutProps = Readonly<{
   children: React.ReactNode;
 }>;
 
-const RootLayout = async ({ children }: RootLayoutProps) => {
-  const session = await getServerSession();
-
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <SessionProvider session={session!}>
-          {children}
-          <ToastContainer />
-        </SessionProvider>
-      </body>
-    </html>
-  );
-};
+const RootLayout = ({ children }: RootLayoutProps) => (
+  <html lang="en">
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      {children}
+      <ToastContainer />
+    </body>
+  </html>
+);
 
 export default RootLayout;
