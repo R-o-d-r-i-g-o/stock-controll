@@ -5,18 +5,18 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export const config = { matcher: ["/panel/:path*"] };
 
-export async function middleware(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.JWT_SECRET! });
+// export async function middleware(req: NextRequest) {
+//   const token = await getToken({ req, secret: process.env.JWT_SECRET! });
 
-  if (!token && req.nextUrl.pathname.startsWith("/panel"))
-    return NextResponse.redirect(new URL("/login", req.url));
+//   if (!token && req.nextUrl.pathname.startsWith("/panel"))
+//     return NextResponse.redirect(new URL("/login", req.url));
 
-  const requestHeaders = new Headers(req.headers);
-  requestHeaders.set("user-email", token?.email ?? "");
+//   const requestHeaders = new Headers(req.headers);
+//   requestHeaders.set("user-email", token?.email ?? "");
 
-  return NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  });
-}
+//   return NextResponse.next({
+//     request: {
+//       headers: requestHeaders,
+//     },
+//   });
+// }
