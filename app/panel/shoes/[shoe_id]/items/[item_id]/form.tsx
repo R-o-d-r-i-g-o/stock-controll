@@ -94,7 +94,7 @@ const ItemUpdateFormProps = ({ item }: ItemUpdateFormProps) => {
           <input
             id="sku"
             placeholder="Defina um código para o item"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("sku")}
           />
           {formState.errors.sku && (
@@ -114,7 +114,7 @@ const ItemUpdateFormProps = ({ item }: ItemUpdateFormProps) => {
             id="price"
             type="number"
             placeholder="Digite o preço do item"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("price")}
           />
           {formState.errors.price && (
@@ -132,7 +132,7 @@ const ItemUpdateFormProps = ({ item }: ItemUpdateFormProps) => {
           </label>
           <select
             id="size"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("size")}
           >
             {footSizesList?.map((footSize) => (

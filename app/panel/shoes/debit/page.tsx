@@ -61,7 +61,7 @@ const RegisterBuying = () => {
           type="text"
           name="sku"
           placeholder="Digite o SKU"
-          className="flex-grow p-2 text-sm focus:outline-none"
+          className="flex-grow p-2 text-sm focus:outline-none text-gray-700"
         />
         <IconButton type="submit" color="primary">
           <AddIcon fontSize="small" />

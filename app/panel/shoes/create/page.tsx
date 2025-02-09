@@ -55,7 +55,7 @@ const ShoeCreatePage = () => {
           <input
             id="name"
             placeholder="Digite o nome do produto"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 "
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300 "
             {...register("name")}
           />
           {formState.errors.name && (
@@ -74,7 +74,7 @@ const ShoeCreatePage = () => {
           <input
             id="sole"
             placeholder="Tipo de sola"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("sole")}
           />
           {formState.errors.sole && (
@@ -93,7 +93,7 @@ const ShoeCreatePage = () => {
           <input
             id="color"
             placeholder="Digite a cor do produto"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("color")}
           />
           {formState.errors.color && (
@@ -112,7 +112,7 @@ const ShoeCreatePage = () => {
           <input
             id="note"
             placeholder="Notas sobre o produto"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("note")}
           />
           {formState.errors.note && (

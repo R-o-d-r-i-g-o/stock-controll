@@ -55,7 +55,7 @@ const LoginForm = () => {
           <input
             id="email"
             placeholder="Digite seu email"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("email")}
           />
           {formState.errors.email && (
@@ -76,7 +76,7 @@ const LoginForm = () => {
             id="password"
             type="password"
             placeholder="Digite sua senha"
-            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+            className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("password")}
           />
           {formState.errors.password && (
