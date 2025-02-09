@@ -3,7 +3,7 @@
 import { NextRequest } from "next/server";
 import { getServerSession } from "next-auth";
 
-import jwt from "next-auth/jwt";
+import { getToken } from "next-auth/jwt";
 
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import * as svc from "@/backend";
@@ -12,11 +12,9 @@ const secret = process.env.NEXTAUTH_SECRET;
 
 async function validateAuthUser(req: NextRequest) {
   const [token, session] = await Promise.all([
-    jwt.getToken({ req, secret }),
+    getToken({ req, secret }),
     getServerSession(options),
   ]);
-
-  console.log("trouxe aqui no auth", token, session);
 
   // Note: the email field is check as unique in database.
   if (session) return await svc.getUserBy({ email: session.user.email });
