@@ -6,7 +6,7 @@ import { validateAuthUser } from "@/common";
 
 const getShoesAndItemsPaginated = async (req: NextRequest) => {
   try {
-    // await validateAuthUser(req);
+    await validateAuthUser(req);
 
     const searchParams = req.nextUrl.searchParams;
     const payload = {
@@ -32,7 +32,7 @@ const createShoe = async (req: NextRequest) => {
 
     const shoeId = await svc.createShoe(result.data);
     await svc.createAudit({
-      userId: user.id,
+      userId: user!.id,
       note: `O usuário cadastrou um novo calçado (#${shoeId})`,
     });
 

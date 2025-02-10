@@ -13,7 +13,7 @@ const debitItem = async (req: NextRequest) => {
 
     await svc.debitItems(payload.skuList);
     await svc.createAudit({
-      userId: user.id,
+      userId: user!.id,
       note: `O usuário debitou os itens: ${payload.skuList.join(", ")}`,
     });
 

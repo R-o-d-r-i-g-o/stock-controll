@@ -1,10 +1,11 @@
 import * as svc from "@/backend";
 
-// import { validateAuthUser } from "@/common";
+import { validateAuthUser } from "@/common";
+import { NextRequest } from "next/server";
 
-const getRoleList = async () => {
+const getRoleList = async (req: NextRequest) => {
   try {
-    // await validateAuthUser(req);
+    await validateAuthUser(req);
 
     const roles = await svc.getRoleList();
     return Response.json(roles, { status: 200 });

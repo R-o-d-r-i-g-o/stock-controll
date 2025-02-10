@@ -10,7 +10,7 @@ type UserParams = {
 
 const getItemById = async (req: NextRequest, { params }: UserParams) => {
   try {
-    // await validateAuthUser(req);
+    await validateAuthUser(req);
 
     const itemId = parseInt((await params).item_id, 10);
     const item = await svc.getItemBy({ id: itemId });
@@ -29,7 +29,7 @@ const deleteItem = async (req: NextRequest, { params }: UserParams) => {
 
     await svc.deleteItem(itemId);
     await svc.createAudit({
-      userId: user.id,
+      userId: user!.id,
       itemId: itemId,
       note: "O usuário deletou o item",
     });
@@ -52,7 +52,7 @@ const updateItem = async (req: NextRequest, { params }: UserParams) => {
 
     await svc.updateItem(result);
     await svc.createAudit({
-      userId: user.id,
+      userId: user!.id,
       itemId: result.id,
       note: "O usuário atualizou as informações do item",
     });

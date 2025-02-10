@@ -15,7 +15,7 @@ const createUser = async (req: NextRequest) => {
 
     const userId = await svc.createUser(result.data);
     await svc.createAudit({
-      userId: user.id,
+      userId: user!.id,
       note: `O usuário criou um registro de novo usuário (#${userId}).`,
     });
     return Response.json({ userId }, { status: 201 });
@@ -27,7 +27,7 @@ const createUser = async (req: NextRequest) => {
 
 const getUsersPaginated = async (req: NextRequest) => {
   try {
-    // await validateAuthUser(req);
+    await validateAuthUser(req);
 
     const searchParams = req.nextUrl.searchParams;
     const payload = {

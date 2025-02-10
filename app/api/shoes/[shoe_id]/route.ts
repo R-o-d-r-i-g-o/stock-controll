@@ -13,7 +13,7 @@ const getShoesAndRelatedItemsPaginated = async (
   { params }: UserParams
 ) => {
   try {
-    // await validateAuthUser(req);
+    await validateAuthUser(req);
 
     const shoeId = parseInt((await params).shoe_id, 10);
     const shoe = await svc.getShoeBy({ id: shoeId });
@@ -32,7 +32,7 @@ const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
     const shoeId = parseInt((await params).shoe_id, 10);
     await svc.deleteShoe(shoeId);
     await svc.createAudit({
-      userId: user.id,
+      userId: user!.id,
       note: `O usuário deletou o calçado #${shoeId}`,
     });
 
@@ -58,7 +58,7 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
 
     await svc.updateShoe(result.data);
     await svc.createAudit({
-      userId: user.id,
+      userId: user!.id,
       note: `O usuário editou as informações do calçado #${result.data.id}`,
     });
 
