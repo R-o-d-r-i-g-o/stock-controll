@@ -11,6 +11,7 @@ import { z } from "zod";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
+import AddTag from "@mui/icons-material/Sell";
 
 // ui
 import { Divider, IconButton } from "@mui/material";
@@ -80,6 +81,35 @@ const ProductDash = ({ data }: t.DashProps) => {
       }
     });
   };
+
+  const buttonRange = (
+    <div className="flex gap-2 items-center justify-center">
+      <IconButton
+        onClick={() => router.push(`/panel/shoes/${data.id}/items/create`)}
+        className=" !bg-green-500 !rounded-2xl !text-white"
+      >
+        <AddIcon />
+      </IconButton>
+      <IconButton
+        type="submit"
+        className=" !bg-blue-500 !rounded-2xl !text-white"
+      >
+        <EditIcon />
+      </IconButton>
+      <IconButton
+        onClick={handleDelete}
+        className="!bg-red-500 !rounded-2xl !text-white"
+      >
+        <DeleteIcon />
+      </IconButton>
+      <IconButton
+        // onClick={handleDelete}
+        className="!bg-yellow-500 !rounded-2xl !text-white"
+      >
+        <AddTag />
+      </IconButton>
+    </div>
+  );
 
   return (
     <React.Fragment>
@@ -167,31 +197,7 @@ const ProductDash = ({ data }: t.DashProps) => {
             </div>
           </div>
           <Divider sx={{ margin: "20px 0" }} />
-          <div className="flex gap-2 items-center justify-center">
-            <IconButton
-              onClick={() =>
-                router.push(`/panel/shoes/${data.id}/items/create`)
-              }
-              disabled={false}
-              className=" !bg-green-500 !rounded-2xl !text-white"
-            >
-              <AddIcon />
-            </IconButton>
-            <IconButton
-              type="submit"
-              disabled={false}
-              className=" !bg-blue-500 !rounded-2xl !text-white"
-            >
-              <EditIcon />
-            </IconButton>
-            <IconButton
-              onClick={handleDelete}
-              disabled={false}
-              className="!bg-red-500 !rounded-2xl !text-white"
-            >
-              <DeleteIcon />
-            </IconButton>
-          </div>
+          {buttonRange}
         </form>
       </div>
       <Table meta={{ shoeId: data.id }} data={data.items} />
