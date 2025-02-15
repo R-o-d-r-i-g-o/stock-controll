@@ -41,9 +41,6 @@ const LoginForm = () => {
 
   return (
     <React.Fragment>
-      <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800">
-        Login
-      </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-6">
           <label
