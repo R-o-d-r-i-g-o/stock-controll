@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "lint": "next lint",
-    "build": "next build",
+    "build": "npm run migrate && npm run seed && next build",
     "start": "next start",
     "migrate": "prisma generate",
     "seed": "tsx prisma/seed.ts"
