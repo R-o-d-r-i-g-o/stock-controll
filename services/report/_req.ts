@@ -1,7 +1,7 @@
 import { api } from "../api";
 
 const getReport = async () => {
-  const res = await api.get("/api/reports", { responseType: "text" });
+  const res = await api.get("/api/reports");
 
   return {
     data: res.data,

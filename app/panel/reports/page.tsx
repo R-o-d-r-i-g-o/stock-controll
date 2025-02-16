@@ -2,19 +2,22 @@
 
 import { ZoomAnimateBlock } from "@/components/ui";
 import * as svc from "@/services";
+import Link from "next/link";
 
-const downloadBlob = async () => {
-  const content = await svc.getReport();
+// const downloadBlob = async () => {
+//   const content = await svc.getReport();
 
-  // Note: prepare assets
-  const link = document.createElement("a");
-  const blob = new Blob([content.data], { type: "text/csv" });
+//   // Note: prepare assets
+//   const link = document.createElement("a");
+//   const blob = new Blob([content.data], {
+//     type: "application/vnd.ms-excel",
+//   });
 
-  // Note: trigger download
-  link.href = URL.createObjectURL(blob);
-  link.download = content.filename;
-  link.click();
-};
+//   // Note: trigger download
+//   link.href = URL.createObjectURL(blob);
+//   link.download = content.filename;
+//   link.click();
+// };
 
 const ReportPage = () => (
   <ZoomAnimateBlock className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md text-center">
@@ -26,12 +29,12 @@ const ReportPage = () => (
       Desculpe o transtorno. Por favor, tente novamente mais tarde.
     </p>
 
-    <button
-      onClick={downloadBlob}
+    <Link
+      href={`/api/reports`}
       className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 mb-4"
     >
       Baixar Relatório
-    </button>
+    </Link>
   </ZoomAnimateBlock>
 );
 
