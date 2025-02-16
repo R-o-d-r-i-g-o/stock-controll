@@ -14,16 +14,15 @@ datasource db {
 }
 
 model Shoe {
-  id        Int        @id @default(autoincrement()) @map("id")
-  color     String     @map("color")
-  sole      String     @map("sole")
-  name      String     @unique @map("name")
-  note      String     @map("note")
-  createdAt DateTime   @default(now()) @map("created_at")
-  deletedAt DateTime?  @map("deleted_at")
-  tagId     Int?       @map("tag_id")
-  CustomTag CustomTag? @relation(fields: [tagId], references: [id])
+  id        Int         @id @default(autoincrement()) @map("id")
+  color     String      @map("color")
+  sole      String      @map("sole")
+  name      String      @unique @map("name")
+  note      String      @map("note")
+  createdAt DateTime    @default(now()) @map("created_at")
+  deletedAt DateTime?   @map("deleted_at")
   Item      Item[]
+  CustomTag CustomTag[]
 
   @@map("tb_shoes")
 }
@@ -66,6 +65,7 @@ model User {
   Role       Role         @relation(fields: [roleId], references: [id])
   Expedition Expedition[]
   Audit      Audit[]
+  CustomTag  CustomTag[]
 
   @@map("tb_users")
 }
@@ -92,10 +92,15 @@ model Audit {
 }
 
 model CustomTag {
-  id       Int    @id @default(autoincrement()) @map("id")
-  sku      String @unique @default(uuid()) @map("sku")
-  metadata Json
-  Shoe     Shoe[]
+  id        Int       @id @default(autoincrement()) @map("id")
+  sku       String    @unique @default(uuid()) @map("sku")
+  shoeId    Int       @map("shoe_id")
+  userId    Int       @map("user_id")
+  createdAt DateTime  @default(now()) @map("created_at")
+  deletedAt DateTime? @map("deleted_at")
+  metadata  Json
+  Shoe      Shoe      @relation(fields: [shoeId], references: [id])
+  User      User      @relation(fields: [userId], references: [id])
 
   @@map("tb_custom_tag")
 }
