@@ -26,7 +26,7 @@ const getShoeBy = async (filter: t.getShoeBy) => {
 
 const getShoesGroupedBySizePaginated = async (
   filter: t.getShoesGroupedBySizePaginated
-) => {
+): Promise<t.getShoesGroupedByItemSizePaginatedRespose> => {
   const parsedFilter = {
     skip: (filter.page - 1) * filter.size,
     take: filter.size,

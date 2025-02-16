@@ -5,8 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 import * as XLSX from "xlsx";
 
 import * as svc from "@/backend";
-import { z } from "zod";
 import moment from "moment";
+import { z } from "zod";
 
 type ReportFilterData = z.infer<typeof getReportSchema>;
 
@@ -21,16 +21,22 @@ const generateReport = async (req: NextRequest) => {
       endDate: searchParams.get("endDate"),
     });
 
-    const data = await svc.getShoesGroupedBySizePaginated({
-      page: 1,
-      size: 10000000,
-      startDate: filter.startDate,
-      endDate: filter.endDate,
-    });
+    let reportData: Record<string, unknown>[] = [];
+
+    if (filter.reportType === ReportType.Sales) {
+      const data = await svc.getShoesGroupedBySizePaginated({
+        page: 1,
+        size: 10000000,
+        startDate: filter.startDate,
+        endDate: filter.endDate,
+      });
+
+      reportData = svc.formateStockReportColumnData(data.shoes);
+    }
 
     const { buffer, headers } = formatExcelFile(
       formatFilename(filter),
-      data.shoes
+      reportData
     );
 
     return new NextResponse(buffer, { status: 200, headers });
@@ -49,7 +55,7 @@ const formatFilename = (filter: ReportFilterData) => {
   };
 
   const el = {
-    name: reportTypeMap[filter.reportType] || "Relatório",
+    name: reportTypeMap[filter.reportType] || "Relatório-desconhecido",
     start: formatDate(filter.startDate),
     end: formatDate(filter.endDate),
   };

@@ -3,6 +3,32 @@ type getShoeBy = {
   name?: string;
 };
 
+type getShoesGroupedByItemSizePaginatedRespose = {
+  meta: {
+    page: number;
+    size: number;
+    total: number;
+    startDate?: Date;
+    endDate?: Date;
+  };
+  shoes: {
+    id: number;
+    name: string;
+    sole: string;
+    note: string;
+    color: string;
+    createdAt: Date;
+    deletedAt: Date | null;
+    groupedItems: {
+      size: number;
+      items: {
+        id: number;
+        price: number;
+      }[];
+    }[];
+  }[];
+};
+
 type getShoesGroupedBySizePaginated = {
   page: number;
   size: number;
@@ -35,4 +61,5 @@ export type {
   getShoeBy,
   Accumulator,
   getShoesGroupedBySizePaginated,
+  getShoesGroupedByItemSizePaginatedRespose,
 };

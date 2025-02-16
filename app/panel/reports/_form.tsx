@@ -77,7 +77,7 @@ const ReportPage = () => {
         </span>
         <div className="flex justify-start gap-6 mt-2">
           {reportTypes.map((rt) => (
-            <label className="flex items-center space-x-2">
+            <label key={rt.value} className="flex items-center space-x-2">
               <input
                 type="radio"
                 value={rt.value}
