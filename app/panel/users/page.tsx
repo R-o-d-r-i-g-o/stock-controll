@@ -5,6 +5,8 @@ import { defaultPageSize, NavigationPage } from "@/common";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
 
+import { ZoomAnimateBlock } from "@/components/ui";
+
 type UserListPageProps = {
   searchParams: Promise<{
     page: string;
@@ -32,10 +34,10 @@ const UserListPage = async ({ searchParams }: UserListPageProps) => {
   const usersPaginated = await svc.fetchUsersPaginated(filters);
 
   return (
-    <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
+    <ZoomAnimateBlock className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
       <CrateUserButton />
       <Table filter={filters} data={usersPaginated} />
-    </div>
+    </ZoomAnimateBlock>
   );
 };
 
