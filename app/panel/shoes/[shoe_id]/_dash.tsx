@@ -10,8 +10,8 @@ import { z } from "zod";
 // icons
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import ListTags from "@mui/icons-material/Sell";
 import AddIcon from "@mui/icons-material/Add";
-import AddTag from "@mui/icons-material/Sell";
 
 // ui
 import { Divider, IconButton } from "@mui/material";
@@ -87,26 +87,30 @@ const ProductDash = ({ data }: t.DashProps) => {
       <IconButton
         onClick={() => router.push(`/panel/shoes/${data.id}/items/create`)}
         className=" !bg-green-500 !rounded-2xl !text-white"
+        title="Adicionar novo item"
       >
         <AddIcon />
       </IconButton>
       <IconButton
         type="submit"
         className=" !bg-blue-500 !rounded-2xl !text-white"
+        title="Editar calçado"
       >
         <EditIcon />
       </IconButton>
       <IconButton
         onClick={handleDelete}
         className="!bg-red-500 !rounded-2xl !text-white"
+        title="Deletar calçado"
       >
         <DeleteIcon />
       </IconButton>
       <IconButton
-        // onClick={handleDelete}
+        onClick={() => router.push(`/panel/shoes/${data.id}/tags`)}
         className="!bg-yellow-500 !rounded-2xl !text-white"
+        title="Listar etiquetas do produto"
       >
-        <AddTag />
+        <ListTags />
       </IconButton>
     </div>
   );
