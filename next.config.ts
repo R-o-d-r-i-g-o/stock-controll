@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
         source: "/api/:path*",
         headers: [
           {
+            key: "Permissions-Policy",
+            value: "camera=()",
+          },
+          {
             key: "Access-Control-Allow-Origin",
             value: process.env.NEXT_PUBLIC_API_URL!,
           },
