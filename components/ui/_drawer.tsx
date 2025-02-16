@@ -19,6 +19,9 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import { menuItems, menuPositions, Anchor } from "@/common";
+import { Chip } from "@mui/material";
+
+import Warning from "@mui/icons-material/WarningRounded";
 
 const MenuDrawer = () => {
   const router = useRouter();
@@ -48,19 +51,27 @@ const MenuDrawer = () => {
 
   const list = (anchor: Anchor) => (
     <Box
-      sx={{ width: ["top", "bottom"].includes(anchor) ? "auto" : 250 }}
+      sx={{ width: ["top", "bottom"].includes(anchor) ? "auto" : 280 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {menuItems.map(({ lable, nav, icon: Icon }) => (
+        {menuItems.map(({ beta, lable, nav, icon: Icon }) => (
           <ListItem key={lable} disablePadding>
             <ListItemButton onClick={() => router.push(nav)}>
               <ListItemIcon>
                 <Icon />
               </ListItemIcon>
               <ListItemText primary={lable} />
+              {beta && (
+                <Chip
+                  size="small"
+                  label="Beta"
+                  className="!bg-yellow-300 !px-2"
+                  icon={<Warning fontSize="small" />}
+                />
+              )}
             </ListItemButton>
           </ListItem>
         ))}

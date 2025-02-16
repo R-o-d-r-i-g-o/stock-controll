@@ -4,6 +4,7 @@ type Anchor = "top" | "left" | "bottom" | "right";
 
 type MenuItem = {
   lable: string;
+  beta?: boolean;
   icon: SvgIconComponent;
   nav: NavigationPage;
 };

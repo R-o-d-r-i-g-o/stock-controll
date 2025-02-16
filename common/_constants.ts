@@ -27,11 +27,13 @@ const menuItems: Array<t.MenuItem> = [
     nav: t.NavigationPage.Users,
   },
   {
+    beta: true,
     lable: "Calçados",
     icon: LocalShippingIcon,
     nav: t.NavigationPage.Shoe,
   },
   {
+    beta: true,
     lable: "Relatórios",
     icon: SummarizeIcon,
     nav: t.NavigationPage.Reports,
