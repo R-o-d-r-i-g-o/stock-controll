@@ -69,10 +69,22 @@ const menuPositions: Array<t.MenuPosition> = [
   },
 ];
 
+const reportTypes = [
+  {
+    lable: "Vendas",
+    value: t.ReportType.Sales,
+  },
+  {
+    lable: "Estoque",
+    value: t.ReportType.Stock,
+  },
+];
+
 export {
   defaultPageSize,
   defaultDateMask,
   footSizesList,
   menuPositions,
   menuItems,
+  reportTypes,
 };

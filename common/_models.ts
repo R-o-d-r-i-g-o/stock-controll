@@ -30,4 +30,15 @@ enum NavigationPage {
   ProductsCreate = "/panel/shoes/items/create",
 }
 
-export { type Anchor, type MenuItem, type MenuPosition, NavigationPage };
+enum ReportType {
+  Stock = "stock",
+  Sales = "sales",
+}
+
+export {
+  type Anchor,
+  type MenuItem,
+  type MenuPosition,
+  ReportType,
+  NavigationPage,
+};

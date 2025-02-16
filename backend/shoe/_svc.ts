@@ -30,6 +30,8 @@ const getShoesGroupedBySizePaginated = async (
   const parsedFilter = {
     skip: (filter.page - 1) * filter.size,
     take: filter.size,
+    startDate: filter.startDate,
+    endDate: filter.endDate,
   };
 
   const shoesCount = await repo.getItemShoesCount(parsedFilter);

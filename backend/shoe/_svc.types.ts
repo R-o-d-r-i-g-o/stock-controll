@@ -6,6 +6,8 @@ type getShoeBy = {
 type getShoesGroupedBySizePaginated = {
   page: number;
   size: number;
+  startDate?: Date;
+  endDate?: Date;
 };
 
 type createShoe = {

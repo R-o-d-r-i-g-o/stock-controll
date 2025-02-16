@@ -21,6 +21,8 @@ type getShoeBy = {
 type getShoesPaginated = {
   skip: number;
   take: number;
+  startDate?: Date;
+  endDate?: Date;
 };
 
 export type { createShoe, updateShoe, getShoeBy, getShoesPaginated };

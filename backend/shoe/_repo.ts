@@ -23,9 +23,14 @@ const getShoeBy = async (filter: t.getShoeBy) => {
 };
 
 const getItemShoesCount = async (filter: t.getShoesPaginated) => {
-  console.log("filters", filter);
   const itemsGroupedByShoe = await prisma.shoe.count({
-    where: { deletedAt: null },
+    where: {
+      deletedAt: null,
+      createdAt: {
+        gte: filter.startDate,
+        lte: filter.endDate,
+      },
+    },
   });
 
   return itemsGroupedByShoe;
@@ -35,7 +40,13 @@ const getItemShoesPaginated = async (filter: t.getShoesPaginated) => {
   const itemsGroupedByShoe = await prisma.shoe.findMany({
     skip: filter.skip,
     take: filter.take,
-    where: { deletedAt: null },
+    where: {
+      deletedAt: null,
+      createdAt: {
+        gte: filter.startDate,
+        lte: filter.endDate,
+      },
+    },
     include: {
       Item: {
         where: { deletedAt: null },

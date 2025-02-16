@@ -6,15 +6,12 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { getReportSchema } from "@/schemas";
+import { reportTypes } from "@/common";
 
 type ReportFormData = z.infer<typeof getReportSchema>;
 
 const ReportPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ReportFormData>({
+  const { register, handleSubmit, formState } = useForm<ReportFormData>({
     resolver: zodResolver(getReportSchema),
   });
 
@@ -24,9 +21,9 @@ const ReportPage = () => {
     const { startDate, endDate, reportType } = data;
 
     const searchParams = new URLSearchParams({
-      reportType: reportType,
-      startDate: startDate,
-      endDate: endDate,
+      reportType: reportType.toString(),
+      startDate: startDate.toString(),
+      endDate: endDate.toString(),
     });
 
     router.push(`/api/reports?${searchParams.toString()}`);
@@ -47,9 +44,9 @@ const ReportPage = () => {
           {...register("startDate")}
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
         />
-        {errors.startDate && (
+        {formState.errors.startDate && (
           <p className="text-red-500 text-sm mt-1">
-            {errors.startDate.message}
+            {formState.errors.startDate.message}
           </p>
         )}
       </div>
@@ -67,8 +64,10 @@ const ReportPage = () => {
           {...register("endDate")}
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
         />
-        {errors.endDate && (
-          <p className="text-red-500 text-sm mt-1">{errors.endDate.message}</p>
+        {formState.errors.endDate && (
+          <p className="text-red-500 text-sm mt-1">
+            {formState.errors.endDate.message}
+          </p>
         )}
       </div>
 
@@ -77,34 +76,28 @@ const ReportPage = () => {
           Tipo de Relatório
         </span>
         <div className="flex justify-start gap-6 mt-2">
-          <label className="flex items-center space-x-2">
-            <input
-              type="radio"
-              value="summary"
-              {...register("reportType")}
-              className="text-indigo-600 focus:ring-indigo-500"
-            />
-            <span>Resumo</span>
-          </label>
-          <label className="flex items-center space-x-2">
-            <input
-              type="radio"
-              value="detailed"
-              {...register("reportType")}
-              className="text-indigo-600 focus:ring-indigo-500"
-            />
-            <span>Detalhado</span>
-          </label>
+          {reportTypes.map((rt) => (
+            <label className="flex items-center space-x-2">
+              <input
+                type="radio"
+                value={rt.value}
+                {...register("reportType")}
+                className="text-indigo-600 focus:ring-indigo-500"
+              />
+              <span>{rt.lable}</span>
+            </label>
+          ))}
         </div>
-        {errors.reportType && (
+        {formState.errors.reportType && (
           <p className="text-red-500 text-sm mt-1">
-            {errors.reportType.message}
+            {formState.errors.reportType.message}
           </p>
         )}
       </div>
 
       <button
         type="submit"
+        disabled={formState.isSubmitting}
         className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
       >
         Gerar Relatório

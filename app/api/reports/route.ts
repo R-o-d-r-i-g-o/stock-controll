@@ -1,30 +1,60 @@
-import { validateAuthUser } from "@/common";
-import { NextRequest, NextResponse } from "next/server";
+import { ReportType, validateAuthUser } from "@/common";
+import { getReportSchema } from "@/schemas";
 
+import { NextRequest, NextResponse } from "next/server";
 import * as XLSX from "xlsx";
 
-// import * as svc from "@/backend";
+import * as svc from "@/backend";
+import { z } from "zod";
+import moment from "moment";
+
+type ReportFilterData = z.infer<typeof getReportSchema>;
 
 const generateReport = async (req: NextRequest) => {
   try {
     await validateAuthUser(req);
     const searchParams = req.nextUrl.searchParams;
 
-    console.log("veio aqui ", searchParams);
+    const filter = getReportSchema.parse({
+      reportType: searchParams.get("reportType"),
+      startDate: searchParams.get("startDate"),
+      endDate: searchParams.get("endDate"),
+    });
 
-    const { buffer, headers } = formatExcelFile("testReport", [
-      { id: 1, name: "João", age: 30 },
-      { id: 2, name: "Maria", age: 25 },
-      { id: 3, name: "José", age: 35 },
-    ]);
+    const data = await svc.getShoesGroupedBySizePaginated({
+      page: 1,
+      size: 10000000,
+      startDate: filter.startDate,
+      endDate: filter.endDate,
+    });
 
-    console.log("veio aqui 123 ", headers, buffer);
+    const { buffer, headers } = formatExcelFile(
+      formatFilename(filter),
+      data.shoes
+    );
 
     return new NextResponse(buffer, { status: 200, headers });
   } catch (error) {
     console.error(error);
     return Response.json(error, { status: 500 });
   }
+};
+
+const formatFilename = (filter: ReportFilterData) => {
+  const formatDate = (date: Date) => moment(date).format("DD_MM_YYYY");
+
+  const reportTypeMap: Record<ReportType, string> = {
+    [ReportType.Sales]: "Relatório-de-venda",
+    [ReportType.Stock]: "Relatório-de-estoque",
+  };
+
+  const el = {
+    name: reportTypeMap[filter.reportType] || "Relatório",
+    start: formatDate(filter.startDate),
+    end: formatDate(filter.endDate),
+  };
+
+  return `${el.name}-from-${el.start}-to-${el.end}`;
 };
 
 const formatExcelFile = (filename: string, data: Record<string, unknown>[]) => {
