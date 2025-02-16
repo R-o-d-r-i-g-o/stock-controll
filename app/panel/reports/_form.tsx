@@ -22,8 +22,8 @@ const ReportPage = () => {
 
     const searchParams = new URLSearchParams({
       reportType: reportType.toString(),
-      startDate: startDate.toString(),
-      endDate: endDate.toString(),
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
     });
 
     router.push(`/api/reports?${searchParams.toString()}`);

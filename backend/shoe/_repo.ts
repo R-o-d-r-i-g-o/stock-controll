@@ -27,8 +27,8 @@ const getItemShoesCount = async (filter: t.getShoesPaginated) => {
     where: {
       deletedAt: null,
       createdAt: {
-        gte: filter.startDate,
-        lte: filter.endDate,
+        gte: filter.startDate || undefined,
+        lte: filter.endDate || undefined,
       },
     },
   });
@@ -43,8 +43,8 @@ const getItemShoesPaginated = async (filter: t.getShoesPaginated) => {
     where: {
       deletedAt: null,
       createdAt: {
-        gte: filter.startDate,
-        lte: filter.endDate,
+        gte: filter.startDate || undefined,
+        lte: filter.endDate || undefined,
       },
     },
     include: {
