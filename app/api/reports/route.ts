@@ -30,10 +30,13 @@ const generateReport = async (req: NextRequest) => {
         startDate: filter.startDate,
         endDate: filter.endDate,
       });
-
       reportData = svc.formateStockReportColumnData(data.shoes);
     } else {
-      reportData = [];
+      const data = await svc.getExpeditionShoes({
+        startDate: filter.startDate,
+        endDate: filter.endDate,
+      });
+      reportData = svc.formateExpeditionShoesReportColumnData(data);
     }
 
     const { buffer, headers } = formatExcelFile(

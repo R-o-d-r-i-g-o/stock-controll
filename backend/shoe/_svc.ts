@@ -70,6 +70,11 @@ const getShoesGroupedBySizePaginated = async (
   };
 };
 
+const getExpeditionShoes = async (filter: t.getExpeditionShoes) => {
+  const expeditionShoes = await repo.getExpeditionShoes(filter);
+  return expeditionShoes;
+};
+
 const deleteShoe = async (id: number) => {
   const deletedShoe = await repo.deleteShoe(id);
   return deletedShoe;
@@ -85,7 +90,8 @@ const updateShoe = async (data: t.updateShoe) => {
 
 export {
   getShoesGroupedBySizePaginated,
-  getShoeBy as getShoeBy,
+  getExpeditionShoes,
+  getShoeBy,
   createShoe,
   deleteShoe,
   updateShoe,

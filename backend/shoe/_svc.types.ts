@@ -51,6 +51,11 @@ type updateShoe = {
   note?: string;
 };
 
+type getExpeditionShoes = {
+  startDate: Date;
+  endDate: Date;
+};
+
 type Accumulator = {
   [size: number]: { size: number; items: { id: number; price: number }[] };
 };
@@ -60,6 +65,7 @@ export type {
   createShoe,
   getShoeBy,
   Accumulator,
+  getExpeditionShoes,
   getShoesGroupedBySizePaginated,
   getShoesGroupedByItemSizePaginatedRespose,
 };

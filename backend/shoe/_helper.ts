@@ -25,4 +25,12 @@ const formateStockReportColumnData = (
     };
   });
 
-export { formateStockReportColumnData };
+const formateExpeditionShoesReportColumnData = (
+  shoes: { shoeName: string; amount: BigInt }[]
+) =>
+  shoes.map((shoe) => ({
+    "Nome calçado": shoe.shoeName,
+    "Qntd.": Number(shoe.amount),
+  }));
+
+export { formateStockReportColumnData, formateExpeditionShoesReportColumnData };

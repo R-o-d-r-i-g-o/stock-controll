@@ -57,6 +57,23 @@ const getItemShoesPaginated = async (filter: t.getShoesPaginated) => {
   return itemsGroupedByShoe;
 };
 
+const getExpeditionShoes = async (filter: t.getExpeditionShoes) => {
+  const formateDate = (date: Date) => moment(date).format("YYYY-MM-DD");
+
+  const result = await prisma.$queryRaw<{ shoeName: string; amount: BigInt }[]>`
+    SELECT
+      s.name   as "shoeName",
+      COUNT(1) as "amount"
+    FROM go_live.tb_expeditions e
+    JOIN go_live.tb_items i ON e.item_id = i.id
+    JOIN go_live.tb_shoes s ON i.shoe_id = s.id
+    WHERE e.created_at >= CAST(${formateDate(filter.startDate)} AS DATE)
+      AND e.created_at <= CAST(${formateDate(filter.endDate)} AS DATE)
+    GROUP BY s.name;
+  `;
+  return result;
+};
+
 const deleteShoe = async (id: number) => {
   return await prismaTransaction(async () => {
     const deletedShoe = await prisma.shoe.update({
@@ -99,5 +116,6 @@ export {
   createShoe,
   getShoeBy,
   getItemShoesCount,
+  getExpeditionShoes,
   getItemShoesPaginated,
 };

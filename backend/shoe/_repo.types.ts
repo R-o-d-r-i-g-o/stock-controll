@@ -26,10 +26,8 @@ type getShoesPaginated = {
 };
 
 type getExpeditionShoes = {
-  skip: number;
-  take: number;
-  startDate?: Date;
-  endDate?: Date;
+  startDate: Date;
+  endDate: Date;
 };
 
 export type {
