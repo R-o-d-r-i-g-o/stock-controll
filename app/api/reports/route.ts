@@ -65,7 +65,7 @@ const formatFilename = (filter: ReportFilterData) => {
     end: formatDate(filter.endDate),
   };
 
-  return `${el.name}-de-${el.start}-até-${el.end}`;
+  return encodeURIComponent(`${el.name}-de-${el.start}-até-${el.end}`);
 };
 
 const formatExcelFile = (filename: string, data: Record<string, unknown>[]) => {
