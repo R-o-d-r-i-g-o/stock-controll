@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "tb_expeditions" ADD COLUMN     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ALTER COLUMN "note" DROP NOT NULL;

@@ -23,7 +23,7 @@ const generateReport = async (req: NextRequest) => {
 
     let reportData: Record<string, unknown>[] = [];
 
-    if (filter.reportType === ReportType.Sales) {
+    if (filter.reportType === ReportType.Stock) {
       const data = await svc.getShoesGroupedBySizePaginated({
         page: 1,
         size: 10000000,
@@ -32,6 +32,8 @@ const generateReport = async (req: NextRequest) => {
       });
 
       reportData = svc.formateStockReportColumnData(data.shoes);
+    } else {
+      reportData = [];
     }
 
     const { buffer, headers } = formatExcelFile(
@@ -60,7 +62,7 @@ const formatFilename = (filter: ReportFilterData) => {
     end: formatDate(filter.endDate),
   };
 
-  return `${el.name}-from-${el.start}-to-${el.end}`;
+  return `${el.name}-de-${el.start}-até-${el.end}`;
 };
 
 const formatExcelFile = (filename: string, data: Record<string, unknown>[]) => {

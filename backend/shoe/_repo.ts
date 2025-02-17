@@ -49,7 +49,7 @@ const getItemShoesPaginated = async (filter: t.getShoesPaginated) => {
     },
     include: {
       Item: {
-        where: { deletedAt: null },
+        where: { deletedAt: null, Expedition: { none: {} } },
         orderBy: { size: "asc" },
       },
     },

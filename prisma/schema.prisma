@@ -43,13 +43,14 @@ model Item {
 }
 
 model Expedition {
-  id     Int    @id @default(autoincrement()) @map("id")
-  code   String @unique @default(uuid()) @map("code")
-  note   String @map("note")
-  itemId Int    @map("item_id")
-  userId Int    @map("user_id")
-  Item   Item   @relation(fields: [itemId], references: [id])
-  User   User   @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement()) @map("id")
+  code      String   @unique @default(uuid()) @map("code")
+  note      String?  @map("note")
+  itemId    Int      @map("item_id")
+  userId    Int      @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  Item      Item     @relation(fields: [itemId], references: [id])
+  User      User     @relation(fields: [userId], references: [id])
 
   @@map("tb_expeditions")
 }
