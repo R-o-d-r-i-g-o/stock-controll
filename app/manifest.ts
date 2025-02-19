@@ -1,13 +1,18 @@
+import { appConfig } from "@/common";
 import type { MetadataRoute } from "next";
 
+const { name, description } = appConfig;
+
+appConfig.title;
+
 const manifest = (): MetadataRoute.Manifest => ({
-  name: "stock-controll",
-  short_name: "stock-controll",
-  description: "A Progressive Web App built with Next.js",
+  name,
+  description,
+  short_name: name,
   start_url: "/",
   display: "standalone",
-  background_color: "#ffffff",
   theme_color: "#000000",
+  background_color: "#ffffff",
   icons: [
     {
       src: "/icons/web-app-manifest-192x192.png",
