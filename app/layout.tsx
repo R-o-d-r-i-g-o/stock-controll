@@ -12,19 +12,22 @@ const geistSans = localFont({
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "../public/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
 
+const { name, title, titleTemplate, description } = appConfig;
+
 export const metadata: Metadata = {
   title: {
-    default: appConfig.title,
-    template: appConfig.titleTemplate,
+    default: title,
+    template: titleTemplate,
   },
-  description: appConfig.description,
-  applicationName: appConfig.name,
+  description,
+  applicationName: name,
 };
 
 type RootLayoutProps = Readonly<{

@@ -3,8 +3,6 @@ import type { MetadataRoute } from "next";
 
 const { name, description } = appConfig;
 
-appConfig.title;
-
 const manifest = (): MetadataRoute.Manifest => ({
   name,
   description,
