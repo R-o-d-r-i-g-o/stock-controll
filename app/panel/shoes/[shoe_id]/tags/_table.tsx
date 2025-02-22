@@ -83,7 +83,11 @@ const AuxTabela = ({ meta, data }: t.TableProps) => {
                   {moment(tag.createdAt).format(defaultDateMask)}
                 </TableCell>
                 <TableCell className="!text-center">
-                  <IconButton>
+                  <IconButton
+                    onClick={() =>
+                      router.push(`/panel/shoes/${meta.shoeId}/tags/${tag.id}`)
+                    }
+                  >
                     <MoreVert />
                   </IconButton>
                 </TableCell>
