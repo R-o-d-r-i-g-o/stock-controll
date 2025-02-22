@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 
-import { useToast } from "@/hooks";
-import { updateUser } from "@/services";
+import { useToast } from "@/lib/hooks";
+import { updateUser } from "@/lib/services";
 import { NavigationPage } from "@/common";
 
 import DeleteButton from "./delete";

@@ -1,4 +1,4 @@
-import * as svc from "@/services";
+import * as svc from "@/lib/services";
 import Form from "./form";
 import { notFound } from "next/navigation";
 

@@ -17,8 +17,8 @@ import AddIcon from "@mui/icons-material/Add";
 import { Divider, IconButton } from "@mui/material";
 
 // internal
-import { updateShoe, deleteShoeById } from "@/services";
-import { useToast } from "@/hooks/use-toast";
+import { updateShoe, deleteShoeById } from "@/lib/services";
+import { useToast } from "@/lib/hooks/use-toast";
 import * as t from "./_types";
 import Table from "./_table";
 

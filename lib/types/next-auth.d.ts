@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-unused-vars: "off" */
+
 import NextAuth from "next-auth";
 import { DefaultJWT } from "next-auth/jwt";
 

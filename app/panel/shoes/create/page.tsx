@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 
-import { useToast } from "@/hooks";
-import { createShoe } from "@/services";
+import { useToast } from "@/lib/hooks";
+import { createShoe } from "@/lib/services";
 
 const createShoeSchema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Table from "./_table";
 import { defaultPageSize, NavigationPage } from "@/common";
 
-import * as svc from "@/services";
+import * as svc from "@/lib/services";
 import { ZoomAnimateBlock } from "@/components/ui";
 
 import CropFreeIcon from "@mui/icons-material/CropFree";

@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import * as svc from "@/backend";
-import { itemUpdateSchema } from "@/schemas";
+import { itemUpdateSchema } from "@/lib/schemas";
 
 import { validateAuthUser } from "@/common";
 

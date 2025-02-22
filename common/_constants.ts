@@ -21,9 +21,9 @@ const footSizesList = [
 ];
 
 const appConfig = Object.freeze({
-  name: "marca passo 👟",
-  title: "ERP | Marca-Passo 👟",
-  titleTemplate: "ERP | Marca-Passo 👟 | %s",
+  name: "marca passo",
+  title: "ERP | Marca-Passo",
+  titleTemplate: "ERP | Marca-Passo | %s",
   description:
     "O ERP Marca-Passo é a solução ideal para gerenciar sua sapataria com eficiência. Controle de estoque, vendas, finanças e mais, tudo em um único sistema. Simplifique o seu dia a dia e maximize seus lucros!",
 });

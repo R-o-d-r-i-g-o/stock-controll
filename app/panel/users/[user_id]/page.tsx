@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import Form from "./form";
-import * as svc from "@/services";
+import * as svc from "@/lib/services";
 
 type UpdateUserPageProps = {
   params: Promise<{

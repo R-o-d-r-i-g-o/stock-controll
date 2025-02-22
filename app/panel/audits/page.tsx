@@ -1,7 +1,7 @@
 import Table from "./_table";
 import { defaultPageSize } from "@/common";
 
-import * as svc from "@/services";
+import * as svc from "@/lib/services";
 import { ZoomAnimateBlock } from "@/components/ui";
 
 type UserListPageProps = {

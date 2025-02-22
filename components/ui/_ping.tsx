@@ -3,7 +3,7 @@
 import React from "react";
 import InfoIcon from "@mui/icons-material/InfoOutlined";
 
-import * as src from "@/services";
+import * as src from "@/lib/services";
 import { defaultDateMask } from "@/common";
 import moment from "moment";
 

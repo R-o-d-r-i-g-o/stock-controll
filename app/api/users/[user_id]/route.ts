@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import * as svc from "@/backend";
 
-import { updateUserSchema } from "@/schemas";
+import { updateUserSchema } from "@/lib/schemas";
 import { validateAuthUser } from "@/common";
 
 type UserParams = {

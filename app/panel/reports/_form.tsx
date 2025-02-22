@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { getReportSchema } from "@/schemas";
+import { getReportSchema } from "@/lib/schemas";
 import { reportTypes } from "@/common";
 
 type ReportFormData = z.infer<typeof getReportSchema>;

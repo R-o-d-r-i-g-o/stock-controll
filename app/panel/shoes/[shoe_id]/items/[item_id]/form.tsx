@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import { z } from "zod";
 
-import { useToast } from "@/hooks";
+import { useToast } from "@/lib/hooks";
 import { footSizesList } from "@/common";
-import { updateItem, deleteShoeById } from "@/services";
+import { updateItem, deleteShoeById } from "@/lib/services";
 
 const itemUpdateSchema = z.object({
   sku: z.string().min(1, "SKU é obrigatório"),

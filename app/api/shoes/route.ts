@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import * as svc from "@/backend";
 
-import { createShoeSchema } from "@/schemas";
+import { createShoeSchema } from "@/lib/schemas";
 import { validateAuthUser } from "@/common";
 
 const getShoesAndItemsPaginated = async (req: NextRequest) => {

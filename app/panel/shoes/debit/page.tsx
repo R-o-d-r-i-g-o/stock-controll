@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
-import { useToast } from "@/hooks";
+import { useToast } from "@/lib/hooks";
 import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Scanner from "./_scanner";
 
-import * as svc from "@/services";
+import * as svc from "@/lib/services";
 
 const RegisterBuying = () => {
   const { failure, success } = useToast();

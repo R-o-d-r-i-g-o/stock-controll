@@ -1,5 +1,5 @@
 import Table from "./_table";
-import * as svc from "@/services";
+import * as svc from "@/lib/services";
 import { defaultPageSize, NavigationPage } from "@/common";
 
 import AddIcon from "@mui/icons-material/Add";

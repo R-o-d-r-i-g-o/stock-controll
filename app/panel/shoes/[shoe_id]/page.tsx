@@ -1,4 +1,4 @@
-import * as svc from "@/services";
+import * as svc from "@/lib/services";
 import Dash from "./_dash";
 import { notFound } from "next/navigation";
 

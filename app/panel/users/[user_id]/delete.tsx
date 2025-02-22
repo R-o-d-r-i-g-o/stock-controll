@@ -5,8 +5,8 @@ import React from "react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
-import { useToast } from "@/hooks";
-import { deleteUser } from "@/services";
+import { useToast } from "@/lib/hooks";
+import { deleteUser } from "@/lib/services";
 
 type DeleteButtonProps = {
   userId: number;

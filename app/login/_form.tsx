@@ -8,7 +8,7 @@ import { signIn } from "next-auth/react";
 import { z } from "zod";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useToast } from "@/hooks";
+import { useToast } from "@/lib/hooks";
 
 const loginSchema = z.object({
   email: z.string().email("Digite um email válido"),

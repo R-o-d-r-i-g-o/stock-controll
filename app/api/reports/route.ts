@@ -1,5 +1,5 @@
 import { ReportType, validateAuthUser } from "@/common";
-import { getReportSchema } from "@/schemas";
+import { getReportSchema } from "@/lib/schemas";
 
 import { NextRequest, NextResponse } from "next/server";
 import * as XLSX from "xlsx";

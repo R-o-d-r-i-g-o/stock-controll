@@ -5,9 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 
-import { useToast } from "@/hooks";
+import { useToast } from "@/lib/hooks";
 import { footSizesList } from "@/common";
-import { createItem } from "@/services";
+import { createItem } from "@/lib/services";
 
 const itemCreationSchema = z.object({
   sku: z.string().min(1, { message: "SKU é obrigatório" }),
