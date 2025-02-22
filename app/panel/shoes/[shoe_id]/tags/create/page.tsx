@@ -8,13 +8,16 @@ import { z } from "zod";
 import { useToast } from "@/lib/hooks";
 import { createShoe } from "@/lib/services";
 
+import IdentIcon from "@mui/icons-material/FormatIndentIncrease";
+
 const createTagSchema = z.object({
   tagSku: z.string().min(6, "O código é obrigatório"),
   metadata: z.string().refine((val) => {
     try {
       JSON.parse(val);
       return true;
-    } catch (e) {
+    } catch (err) {
+      console.error(err);
       return false;
     }
   }, "Formato JSON inválido"),
@@ -54,9 +57,9 @@ const TagCreatePage = () => {
         "metadata",
         JSON.stringify(JSON.parse(jsonInput.value), null, 2)
       );
-    } catch (e) {
+    } catch (err) {
       failure("Erro ao formatar JSON");
-      console.error(e);
+      console.error(err);
     }
   };
 
@@ -65,7 +68,7 @@ const TagCreatePage = () => {
       const parsedJson = JSON.parse(data.metadata);
       await createShoe(parsedJson);
       success("Nova etiqueta criada com sucesso!");
-      router.push("/panel/shoes");
+      router.back();
     } catch (err) {
       console.error(err);
       failure("Ocorreu um erro ao criar a etiqueta.");
@@ -108,16 +111,16 @@ const TagCreatePage = () => {
             <textarea
               id="metadata"
               placeholder="Digite aqui os meta-dados"
-              className="w-full p-3 pr-10 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
+              className="w-full overflow-y-hidden p-3 pr-10 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
               rows={6}
               {...register("metadata")}
             />
             <button
               type="button"
               onClick={handleIndentJson}
-              className="absolute top-2 right-2 px-2 bg-gray-200 rounded-full hover:bg-gray-300 focus:outline-none"
+              className="absolute top-2 p-1 right-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 focus:outline-none"
             >
-              <span className="text-xs text-gray-600">↺</span>
+              <IdentIcon fontSize="small" />
             </button>
           </div>
           {formState.errors.metadata && (
