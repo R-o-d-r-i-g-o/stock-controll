@@ -12,31 +12,44 @@ import {
 } from "@mui/material";
 
 import moment from "moment";
-import { ArrowBack, MoreVert } from "@mui/icons-material";
+import { ArrowBack, MoreVert, Add } from "@mui/icons-material";
 
 import { defaultDateMask } from "@/common";
 import * as t from "./_types";
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const CustomTableContainer = styled(TableContainer)({
   marginTop: "30px",
   overflowX: "scroll",
 });
 
-const AuxTabela = ({ data }: t.TableProps) => {
+const AuxTabela = ({ meta, data }: t.TableProps) => {
   const router = useRouter();
 
-  return (
-    <>
+  const actionButtons = (
+    <div className="flex justify-between">
       <button
         onClick={router.back}
-        className="flex items-center text-gray-700 transition-colors"
+        className="flex items-center text-gray-700 transition-colors hover:animate-jump animate-once"
       >
         <ArrowBack fontSize="small" className="mr-2" />
         Voltar
       </button>
 
+      <Link
+        className="text-gray-700 hover:animate-spin animate-once"
+        href={`/panel/shoes/${meta.shoeId}/tags/create`}
+      >
+        <Add />
+      </Link>
+    </div>
+  );
+
+  return (
+    <>
+      {actionButtons}
       <CustomTableContainer>
         <Table className="w-full">
           <TableHead>
