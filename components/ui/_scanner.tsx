@@ -63,12 +63,12 @@ const Scanner = ({
     if (loading) return;
     if (onResult) onResult(result);
     if (beepEnabled) handleBeepSound();
+    setLoading(true);
 
     return () => {
       torch.off();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result]);
+  }, [result, loading]);
 
   return (
     <React.Fragment>

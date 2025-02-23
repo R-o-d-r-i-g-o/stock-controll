@@ -20,7 +20,7 @@ type UserListPageProps = {
 const ActionButtons = () => (
   <div className="flex justify-end gap-4 mb-4">
     <Link
-      title="Baixa de itens"
+      title="Escanear itens"
       href={NavigationPage.ShoesSale}
       className="flex items-center space-x-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
     >
