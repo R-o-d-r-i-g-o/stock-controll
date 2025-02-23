@@ -1,3 +1,4 @@
+export * from "./tag";
 export * from "./ping";
 export * from "./user";
 export * from "./item";

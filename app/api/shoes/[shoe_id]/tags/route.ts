@@ -39,7 +39,7 @@ const createShoeRelatedTags = async (
     shoeId,
   });
 
-  return Response.json({ tagId }, { status: 204 });
+  return Response.json({ tagId }, { status: 200 });
 };
 
 export { getShoeRelatedTags as GET, createShoeRelatedTags as POST };

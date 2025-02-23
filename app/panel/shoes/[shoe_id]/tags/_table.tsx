@@ -75,7 +75,7 @@ const AuxTabela = ({ meta, data }: t.TableProps) => {
               <TableRow key={tag.id} className="hover:bg-gray-100">
                 <TableCell className="!text-center">{tag.id}</TableCell>
                 <TableCell className="!text-center">{tag.sku}</TableCell>
-                <TableCell className="!text-center">{tag.user}</TableCell>
+                <TableCell className="!text-center">{tag.userId}</TableCell>
                 <TableCell className="!text-center">
                   {tag.deletedAt != null ? "🔴 Desa." : "🟢 Ativo"}
                 </TableCell>

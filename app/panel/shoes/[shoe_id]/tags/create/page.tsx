@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 
 import { useToast } from "@/lib/hooks";
-import { createShoe } from "@/lib/services";
+import * as svc from "@/lib/services";
 
 import IdentIcon from "@mui/icons-material/FormatIndentIncrease";
 
@@ -65,8 +65,13 @@ const TagCreatePage = () => {
 
   const onSubmit = async (data: CreateShoeSchema) => {
     try {
-      const parsedJson = JSON.parse(data.metadata);
-      await createShoe(parsedJson);
+      await svc.createShoeRelatedTag({
+        shoeId: 1,
+        payload: {
+          sku: data.tagSku,
+          metadata: JSON.parse(data.metadata),
+        },
+      });
       success("Nova etiqueta criada com sucesso!");
       router.back();
     } catch (err) {

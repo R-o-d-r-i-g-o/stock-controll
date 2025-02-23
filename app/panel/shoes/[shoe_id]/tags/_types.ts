@@ -1,16 +1,16 @@
 type TableProps = {
   meta: {
-    page: number;
-    size: number;
+    total: number;
     shoeId: number;
   };
   data: {
     id: number;
     sku: string;
-    user: number;
-    metadata: number;
-    createdAt: string;
-    deletedAt: string | null;
+    shoeId: number;
+    userId: number;
+    metadata: { [key: string]: object };
+    createdAt: Date;
+    deletedAt: Date | null;
   }[];
 };
 

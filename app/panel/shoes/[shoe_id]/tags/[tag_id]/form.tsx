@@ -30,8 +30,12 @@ type EditTagSchema = z.infer<typeof editTagSchema>;
 type EditTagPageProps = {
   tag: {
     id: number;
-    tagSku: string;
+    sku: string;
+    shoeId: number;
+    userId: number;
     metadata: { [key: string]: object };
+    createdAt: Date;
+    deletedAt: Date | null;
   };
 };
 
@@ -43,7 +47,7 @@ const EditTagPage = ({ tag }: EditTagPageProps) => {
     useForm<EditTagSchema>({
       resolver: zodResolver(editTagSchema),
       defaultValues: {
-        tagSku: tag.tagSku,
+        tagSku: tag.sku,
         metadata: JSON.stringify(tag.metadata),
       },
     });
