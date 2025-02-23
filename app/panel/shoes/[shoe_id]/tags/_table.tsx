@@ -12,7 +12,8 @@ import {
 } from "@mui/material";
 
 import moment from "moment";
-import { ArrowBack, MoreVert, Add } from "@mui/icons-material";
+
+import { ArrowBack, OpenInNew, MoreVert, Add } from "@mui/icons-material";
 
 import { defaultDateMask } from "@/common";
 import * as t from "./_types";
@@ -74,7 +75,16 @@ const AuxTabela = ({ meta, data }: t.TableProps) => {
             {data?.map((tag) => (
               <TableRow key={tag.id} className="hover:bg-gray-100">
                 <TableCell className="!text-center">{tag.id}</TableCell>
-                <TableCell className="!text-center">{tag.sku}</TableCell>
+                <TableCell className="!text-center !text-blue-500 underline">
+                  <Link
+                    href={`/panel/shoes/${meta.shoeId}/items/sku/${tag.sku}`}
+                  >
+                    {tag.sku}
+                    <IconButton>
+                      <OpenInNew fontSize="small" />
+                    </IconButton>
+                  </Link>
+                </TableCell>
                 <TableCell className="!text-center">{tag.userId}</TableCell>
                 <TableCell className="!text-center">
                   {tag.deletedAt != null ? "🔴 Desa." : "🟢 Ativo"}

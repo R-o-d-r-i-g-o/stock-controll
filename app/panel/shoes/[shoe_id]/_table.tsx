@@ -47,7 +47,7 @@ const AuxTabela = ({ meta, data }: t.TableProps) => (
         {data?.map((shoe) => (
           <TableRow key={shoe.id} className="hover:bg-gray-100">
             <TableCell className="!text-center">{shoe.id}</TableCell>
-            <TableCell className="!text-center">
+            <TableCell className="!text-center !text-blue-500 underline">
               <Link href={`/panel/shoes/${meta.shoeId}/items/sku/${shoe.sku}`}>
                 {shoe.sku}
                 <IconButton>
