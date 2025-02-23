@@ -14,11 +14,10 @@ const getUniqueTag = async (req: NextRequest, { params }: UserParams) => {
     await validateAuthUser(req);
     const { tag_id, shoe_id } = await params;
 
-    const filter = {
-      tagId: parseInt(tag_id, 10),
+    const tag = await svc.getTagBy({
+      id: parseInt(tag_id, 10),
       shoeId: parseInt(shoe_id, 10),
-    };
-    const tag = await svc.getTagBy(filter);
+    });
 
     return Response.json(tag, { status: 200 });
   } catch (error) {
