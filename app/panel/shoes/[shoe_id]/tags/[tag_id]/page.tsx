@@ -20,8 +20,6 @@ const UpdateUserPage = async ({ params }: UpdateUserPageProps) => {
   const tag = await svc.getShoeRelatedTag(filter);
   if (!tag) notFound();
 
-  console.log("veio aqui no terorno da tag", tag);
-
   return <Form tag={tag} />;
 };
 

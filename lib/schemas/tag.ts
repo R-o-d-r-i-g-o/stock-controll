@@ -5,4 +5,6 @@ const createTagSchema = z.object({
   metadata: z.object({}).catchall(z.any()),
 });
 
-export { createTagSchema };
+const updateTagSchema = createTagSchema;
+
+export { createTagSchema, updateTagSchema };

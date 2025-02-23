@@ -6,14 +6,13 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 
 import { useToast } from "@/lib/hooks";
-// import { updateTag } from "@/lib/services";
+import { updateTag } from "@/lib/services";
 
 import IdentIcon from "@mui/icons-material/FormatIndentIncrease";
 import DeleteButton from "./delete";
 
-// Validação do esquema para o formulário de edição
 const editTagSchema = z.object({
-  tagSku: z.string().min(6, "O código é obrigatório"),
+  sku: z.string().min(6, "O código é obrigatório"),
   metadata: z.string().refine((val) => {
     try {
       JSON.parse(val);
@@ -47,8 +46,8 @@ const EditTagPage = ({ tag }: EditTagPageProps) => {
     useForm<EditTagSchema>({
       resolver: zodResolver(editTagSchema),
       defaultValues: {
-        tagSku: tag.sku,
-        metadata: JSON.stringify(tag.metadata),
+        sku: tag.sku,
+        metadata: JSON.stringify(tag.metadata, null, 2),
       },
     });
 
@@ -69,12 +68,13 @@ const EditTagPage = ({ tag }: EditTagPageProps) => {
 
   const onSubmit = async (data: EditTagSchema) => {
     try {
-      const parsedJson = JSON.parse(data.metadata);
-      console.log("veio aqui", parsedJson, data);
-
-      // await updateTag({ ...data, metadata: parsedJson });
+      await updateTag({
+        ...tag,
+        sku: data.sku,
+        metadata: JSON.parse(data.metadata),
+      });
       success("Tag editada com sucesso!");
-      router.push("/panel/tags"); // Volta para a página de tags
+      router.push(`/panel/shoes/${tag.shoeId}/tags`);
     } catch (err) {
       console.error(err);
       failure("Erro ao editar a tag.");
@@ -89,20 +89,20 @@ const EditTagPage = ({ tag }: EditTagPageProps) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-6">
           <label
-            htmlFor="tagSku"
+            htmlFor="sku"
             className="block text-sm font-medium text-gray-600"
           >
             Código da Tag
           </label>
           <input
-            id="tagSku"
+            id="sku"
             placeholder="Digite o código da tag"
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-            {...register("tagSku")}
+            {...register("sku")}
           />
-          {formState.errors.tagSku && (
+          {formState.errors.sku && (
             <p className="text-red-500 text-sm mt-1">
-              {formState.errors.tagSku.message}
+              {formState.errors.sku.message}
             </p>
           )}
         </div>

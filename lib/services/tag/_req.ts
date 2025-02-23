@@ -23,4 +23,14 @@ const createShoeRelatedTag = async (data: t.CreateShoeRelatedTag) => {
   return res.data;
 };
 
-export { getShoeRelatedTags, getShoeRelatedTag, createShoeRelatedTag };
+const updateTag = async (data: t.UpdateTag) => {
+  const res = await api.put(`/api/shoes/${data.shoeId}/tags/${data.id}`, data);
+  return res.data;
+};
+
+export {
+  getShoeRelatedTags,
+  getShoeRelatedTag,
+  createShoeRelatedTag,
+  updateTag,
+};

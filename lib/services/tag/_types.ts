@@ -45,7 +45,18 @@ type CreateShoeRelatedTagReponse = {
   tagId: number;
 };
 
+type UpdateTag = {
+  id: number;
+  sku: string;
+  shoeId: number;
+  userId: number;
+  metadata: { [key: string]: object };
+  createdAt: Date;
+  deletedAt: Date | null;
+};
+
 export type {
+  UpdateTag,
   GetShoeRelatedTags,
   GetShoeRelatedTag,
   CreateShoeRelatedTag,
