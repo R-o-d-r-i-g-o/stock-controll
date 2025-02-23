@@ -29,7 +29,6 @@ const createTag = async (data: t.CreateTag) => {
       metadata: data.metadata,
     },
   });
-
   return id;
 };
 

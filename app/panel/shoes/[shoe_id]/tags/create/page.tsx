@@ -31,10 +31,8 @@ const TagCreatePage = () => {
 
   const defaultMetadata = JSON.stringify(
     {
-      name: "Tênis Exemplo",
-      sole: "Borrachuda",
-      color: "Preto",
-      note: "Produto de alta qualidade",
+      size: 36,
+      price: 100.0,
     },
     null,
     2
