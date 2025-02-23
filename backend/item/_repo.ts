@@ -67,4 +67,13 @@ const debitItems = async (SKUs: string[]) => {
   await prisma.expedition.createMany({ data });
 };
 
-export { getItemBy, deleteItem, createItem, updateItem, debitItems };
+const createItems = async (SKUs: string[]) => {};
+
+export {
+  getItemBy,
+  deleteItem,
+  createItem,
+  updateItem,
+  debitItems,
+  createItems,
+};

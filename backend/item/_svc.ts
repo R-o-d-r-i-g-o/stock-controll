@@ -34,4 +34,15 @@ const debitItems = async (SKUs: string[]) => {
   await repo.debitItems(SKUs);
 };
 
-export { getItemBy, createItem, deleteItem, updateItem, debitItems };
+const createItems = async (SKUs: string[]) => {
+  await repo.createItems(SKUs);
+};
+
+export {
+  getItemBy,
+  createItem,
+  deleteItem,
+  updateItem,
+  debitItems,
+  createItems,
+};

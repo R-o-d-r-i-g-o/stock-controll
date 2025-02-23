@@ -24,7 +24,7 @@ enum NavigationPage {
   Products = "/panel/shoes/items",
 
   // create operations
-  ShoesSale = "/panel/shoes/scanner",
+  ShoesSale = "/panel/shoes/scan",
   UsersCreate = "/panel/users/create",
   ShoesCreate = "/panel/shoes/create",
   ProductsCreate = "/panel/shoes/items/create",

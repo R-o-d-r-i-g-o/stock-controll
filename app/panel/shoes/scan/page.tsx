@@ -76,13 +76,11 @@ const RegisterBuying = () => {
   };
 
   const handleScanResult = useCallback(
-    (scannedSKU: string) => {
-      if (!state.skus || state.skus.includes(scannedSKU)) return;
+    (scannedSKU: string) =>
       setState((prevState) => ({
         ...prevState,
         skus: [...prevState.skus, scannedSKU],
-      }));
-    },
+      })),
     [state.skus]
   );
 
