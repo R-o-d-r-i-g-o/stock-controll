@@ -17,6 +17,7 @@ type getShoesPaginatedProps = {
   skip: number;
   take: number;
 };
+
 type getShoeByProps = {
   id?: number;
   sku?: string;
@@ -24,8 +25,20 @@ type getShoeByProps = {
   price?: number;
 };
 
+type debitItemsProps = {
+  userId: number;
+  skus: string[];
+};
+
+type createItemsProps = {
+  userId: number;
+  skus: string[];
+};
+
 export type {
   getShoesPaginatedProps,
+  createItemsProps,
+  debitItemsProps,
   createShoeProps,
   updateShoeProps,
   getShoeByProps,

@@ -30,12 +30,12 @@ const deleteItem = async (id: number) => {
   return shoe;
 };
 
-const debitItems = async (SKUs: string[]) => {
-  await repo.debitItems(SKUs);
+const debitItems = async (data: t.debitItemsProps) => {
+  await repo.debitItems(data);
 };
 
-const createItems = async (SKUs: string[]) => {
-  await repo.createItems(SKUs);
+const createItems = async (data: t.createItemsProps) => {
+  await repo.createItems(data);
 };
 
 export {

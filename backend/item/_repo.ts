@@ -2,6 +2,26 @@ import { prisma, prismaTransaction } from "../prisma";
 import moment from "moment";
 import * as t from "./_repo.types";
 
+const findItemsByCustomTags = async (skus: string[]) => {
+  const customTags = await prisma.customTag.findMany({
+    where: { sku: { in: skus } },
+    select: { metadata: true, shoeId: true },
+  });
+
+  const itemPromises = customTags.map((tag) =>
+    prisma.item.findFirst({
+      where: {
+        ...(tag.metadata as { size: number; price: number }),
+        shoeId: tag.shoeId,
+      },
+      select: { id: true },
+    })
+  );
+
+  const items = await Promise.all(itemPromises);
+  return items.filter((item): item is { id: number } => item?.id != null);
+};
+
 const getItemBy = async (filter: t.getShoeByProps) => {
   return await prisma.item.findFirstOrThrow({
     where: {
@@ -52,22 +72,54 @@ const deleteItem = async (id: number) => {
   });
 };
 
-const debitItems = async (SKUs: string[]) => {
-  const shoes = await prisma.item.findMany({
-    where: { sku: { in: SKUs } },
+const debitItems = async (data: t.debitItemsProps) => {
+  const searchPredicate = {
+    where: { sku: { in: data.skus } },
     select: { id: true },
-  });
+  };
 
-  const data = shoes.map((u) => ({
-    itemId: u.id,
-    userId: 1,
-    note: "",
+  const [itemsFromTag, itemsFromSku] = await Promise.all([
+    findItemsByCustomTags(data.skus),
+    prisma.item.findMany(searchPredicate),
+  ]);
+
+  const mixedItemIDs = [...itemsFromSku, ...itemsFromTag];
+  const mixedItemIDsLen = mixedItemIDs.length;
+
+  if (data.skus.length !== mixedItemIDsLen)
+    throw new Error("nem todos itens escanados foram cadastrados");
+
+  const itemsToExpedition = mixedItemIDs.map((item) => ({
+    itemId: item.id,
+    userId: data.userId,
+    note: "item dado baixa no sistema",
   }));
 
-  await prisma.expedition.createMany({ data });
+  await prismaTransaction(
+    async () => await prisma.expedition.createMany({ data: itemsToExpedition })
+  );
 };
 
-const createItems = async (SKUs: string[]) => {};
+const createItems = async (data: t.createItemsProps) => {
+  const customTags = await prisma.customTag.findMany({
+    where: { sku: { in: data.skus } },
+    select: { metadata: true, shoeId: true },
+  });
+
+  if (data.skus.length !== customTags.length)
+    throw new Error("nem todas as etiquetas escanados foram encontradas");
+
+  const itemsToCreate = customTags.map((ct) => ({
+    ...(ct.metadata as { size: number; price: number }),
+    shoeId: ct.shoeId,
+  }));
+
+  prisma;
+
+  await prismaTransaction(
+    async () => await prisma.item.createMany({ data: itemsToCreate })
+  );
+};
 
 export {
   getItemBy,

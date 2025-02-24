@@ -32,7 +32,6 @@ const debitItem = async (req: NextRequest) => {
         userId: user!.id,
         note: `O usuário debitou os itens: ${result.data.skus.join(", ")}`,
       });
-
       return Response.json(null, { status: 200 });
     }
 
@@ -42,9 +41,8 @@ const debitItem = async (req: NextRequest) => {
         userId: user!.id,
         note: `O usuário criou os itens: ${result.data.skus.join(", ")}`,
       });
+      return Response.json({ skus: result.data.skus }, { status: 200 });
     }
-
-    return Response.json({ error: "operação inexistente" }, { status: 500 });
   } catch (error) {
     console.error(error);
     return Response.json(error, { status: 500 });

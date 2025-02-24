@@ -20,4 +20,20 @@ type updateShoeProps = {
   shoeId: number;
 };
 
-export type { createShoeProps, updateShoeProps, getShoeByProps };
+type debitItemsProps = {
+  userId: number;
+  skus: string[];
+};
+
+type createItemsProps = {
+  userId: number;
+  skus: string[];
+};
+
+export type {
+  createShoeProps,
+  updateShoeProps,
+  debitItemsProps,
+  createItemsProps,
+  getShoeByProps,
+};
