@@ -27,7 +27,7 @@ const debitItem = async (req: NextRequest) => {
       return Response.json({ errors: result.error.errors }, { status: 400 });
 
     if (result.data.oprationType === OperationType.Debit) {
-      await svc.debitItems(result.data.skus);
+      await svc.debitItems({ userId: user!.id, skus: result.data.skus });
       await svc.createAudit({
         userId: user!.id,
         note: `O usuário debitou os itens: ${result.data.skus.join(", ")}`,
@@ -36,7 +36,7 @@ const debitItem = async (req: NextRequest) => {
     }
 
     if (result.data.oprationType === OperationType.Register) {
-      await svc.createItems(result.data.skus);
+      await svc.createItems({ userId: user!.id, skus: result.data.skus });
       await svc.createAudit({
         userId: user!.id,
         note: `O usuário criou os itens: ${result.data.skus.join(", ")}`,
