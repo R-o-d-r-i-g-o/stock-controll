@@ -114,8 +114,6 @@ const createItems = async (data: t.createItemsProps) => {
     shoeId: ct.shoeId,
   }));
 
-  prisma;
-
   await prismaTransaction(
     async () => await prisma.item.createMany({ data: itemsToCreate })
   );

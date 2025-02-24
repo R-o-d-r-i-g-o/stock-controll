@@ -6,8 +6,8 @@ const getItemById = async (id: number) => {
   return res.data;
 };
 
-const debitItemsFromStorage = async (skuList: string[]) => {
-  const res = await api.post<t.GetItemById[]>("/api/items/scan", { skuList });
+const debitItemsFromStorage = async (data: t.debitItemsFromStorage) => {
+  const res = await api.post<t.GetItemById[]>("/api/items/scan", data);
   return res.data;
 };
 

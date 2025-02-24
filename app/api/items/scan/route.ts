@@ -18,7 +18,7 @@ const formSchema = z.object({
   }),
 });
 
-const debitItem = async (req: NextRequest) => {
+const scanItem = async (req: NextRequest) => {
   try {
     const user = await validateAuthUser(req);
 
@@ -49,4 +49,4 @@ const debitItem = async (req: NextRequest) => {
   }
 };
 
-export { debitItem as POST };
+export { scanItem as POST };

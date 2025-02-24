@@ -41,13 +41,16 @@ const RegisterBuying = () => {
 
   const sendSKUs = async () => {
     try {
-      if (state.oprationType === "debit") {
-        await svc.debitItemsFromStorage(state.skus);
-        success("SKUs debitados com sucesso!");
-      } else {
-        // await svc.registerItemsToStorage(state.skus);
-        success("SKUs cadastrados com sucesso!");
-      }
+      await svc.debitItemsFromStorage({
+        skus: state.skus,
+        oprationType: state.oprationType as "debit" | "register",
+      });
+      success(
+        state.oprationType === "debit"
+          ? "SKUs debitados com sucesso!"
+          : "SKUs cadastrados com sucesso!"
+      );
+
       setState((prevState) => ({ ...prevState, skus: [] }));
     } catch (error) {
       console.error(error);

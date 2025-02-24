@@ -8,6 +8,11 @@ type GetShoesById = {
   deletedAt: string | null;
 };
 
+type debitItemsFromStorage = {
+  skus: string[];
+  oprationType: "register" | "debit";
+};
+
 type CreateShoe = {
   sku: string;
   size: number;
@@ -24,6 +29,7 @@ type UpdateShoe = {
 };
 
 export type {
+  debitItemsFromStorage,
   GetShoesById as GetItemById,
   CreateShoe as CreateItem,
   UpdateShoe as UpdateItem,
