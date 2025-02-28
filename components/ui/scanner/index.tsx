@@ -103,6 +103,4 @@ const Scanner = ({
   );
 };
 
-const CodeScanner = memo(Scanner);
-
-export { CodeScanner };
+export default memo(Scanner);

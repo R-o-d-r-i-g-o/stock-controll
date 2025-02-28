@@ -1,16 +1,14 @@
 import React from "react";
 
-// docs: https://www.tailwindcss-animated.com/configurator.html
-
-type ZoomAnimateBlockProps = {
+type DashTemplateProps = {
   className?: string;
   children: React.ReactNode;
 };
 
-const ZoomAnimateBlock = ({
+const DashTemplate: React.FC<DashTemplateProps> = ({
   children,
   className = "",
-}: ZoomAnimateBlockProps) => (
+}) => (
   <div
     className={`animate-fade-up animate-once animate-duration-300 animate-ease-out ${className}`}
   >
@@ -18,4 +16,4 @@ const ZoomAnimateBlock = ({
   </div>
 );
 
-export { ZoomAnimateBlock };
+export default DashTemplate;

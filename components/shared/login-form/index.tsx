@@ -1,43 +1,16 @@
 "use client";
 
 import React from "react";
+import useLogin from "./use-login";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
-import { z } from "zod";
+type LoginFormProps = {
+  callbackUrl?: string;
+};
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useToast } from "@/lib/hooks";
-
-const loginSchema = z.object({
-  email: z.string().email("Digite um email válido"),
-  password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
-});
-
-type LoginSchema = z.infer<typeof loginSchema>;
-
-const LoginForm = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const { register, handleSubmit, formState } = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema),
+const LoginForm: React.FC<LoginFormProps> = ({ callbackUrl }) => {
+  const { register, formState, handleSubmit, onSubmit } = useLogin({
+    callbackUrl,
   });
-
-  const { failure } = useToast();
-
-  const onSubmit = async (data: LoginSchema) => {
-    try {
-      const auth = await signIn("credentials", { ...data, redirect: false });
-      if (!auth || !auth.ok) throw new Error();
-
-      router.push(searchParams.get("callbackUrl") ?? "/panel");
-    } catch (err) {
-      console.error(err);
-      failure("Usuário ou senha incorretos.");
-    }
-  };
 
   return (
     <React.Fragment>
@@ -94,4 +67,5 @@ const LoginForm = () => {
     </React.Fragment>
   );
 };
+
 export default LoginForm;

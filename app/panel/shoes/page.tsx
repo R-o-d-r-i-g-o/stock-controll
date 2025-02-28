@@ -5,7 +5,7 @@ import Table from "./_table";
 import { defaultPageSize, NavigationPage } from "@/common";
 
 import * as svc from "@/lib/services";
-import { ZoomAnimateBlock } from "@/components/ui";
+import DashTemplate from "@/components/templates/dash";
 
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import AddIcon from "@mui/icons-material/Add";
@@ -46,10 +46,10 @@ const ShoesListPage = async ({ searchParams }: UserListPageProps) => {
   const shoesPaginated = await svc.getShoesGroupedByItemSizePaginated(filters);
 
   return (
-    <ZoomAnimateBlock className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
+    <DashTemplate className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
       <ActionButtons />
       <Table filter={filters} data={shoesPaginated} />
-    </ZoomAnimateBlock>
+    </DashTemplate>
   );
 };
 

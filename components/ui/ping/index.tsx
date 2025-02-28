@@ -35,4 +35,4 @@ const InfoButton = async () => {
   );
 };
 
-export { InfoButton };
+export default InfoButton;

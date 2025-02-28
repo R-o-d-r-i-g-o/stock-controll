@@ -112,4 +112,4 @@ const MenuDrawer = () => {
   );
 };
 
-export { MenuDrawer };
+export default MenuDrawer;

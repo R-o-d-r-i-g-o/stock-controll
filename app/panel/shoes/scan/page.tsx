@@ -5,7 +5,8 @@ import { useToast } from "@/lib/hooks";
 import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { CodeScanner } from "@/components/ui";
+
+import Scanner from "@/components/ui/scanner";
 
 import * as svc from "@/lib/services";
 
@@ -110,7 +111,7 @@ const RegisterBuying = () => {
         </div>
       </div>
       {state.scannerActive && (
-        <CodeScanner
+        <Scanner
           beepEnabled
           onResult={handleScanResult}
           className="rounded-md mb-6"

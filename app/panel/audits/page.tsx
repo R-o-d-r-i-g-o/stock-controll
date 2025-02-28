@@ -2,7 +2,7 @@ import Table from "./_table";
 import { defaultPageSize } from "@/common";
 
 import * as svc from "@/lib/services";
-import { ZoomAnimateBlock } from "@/components/ui";
+import DashTemplate from "@/components/templates/dash";
 
 type UserListPageProps = {
   searchParams: Promise<{
@@ -21,9 +21,9 @@ const HistoryListPage = async ({ searchParams }: UserListPageProps) => {
   const usersPaginated = await svc.getAuditsPaginated(filters);
 
   return (
-    <ZoomAnimateBlock className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
+    <DashTemplate className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
       <Table filter={filters} data={usersPaginated} />
-    </ZoomAnimateBlock>
+    </DashTemplate>
   );
 };
 
