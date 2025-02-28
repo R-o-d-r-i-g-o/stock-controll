@@ -1,33 +1,10 @@
 "use client";
 
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import { getReportSchema } from "@/lib/schemas";
+import useReport from "./use-report";
 import { reportTypes } from "@/common";
 
-type ReportFormData = z.infer<typeof getReportSchema>;
-
 const ReportPage = () => {
-  const { register, handleSubmit, formState } = useForm<ReportFormData>({
-    resolver: zodResolver(getReportSchema),
-  });
-
-  const router = useRouter();
-
-  const onSubmit: SubmitHandler<ReportFormData> = (data) => {
-    const { startDate, endDate, reportType } = data;
-
-    const searchParams = new URLSearchParams({
-      reportType: reportType.toString(),
-      startDate: startDate.toISOString(),
-      endDate: endDate.toISOString(),
-    });
-
-    router.push(`/api/reports?${searchParams.toString()}`);
-  };
+  const { register, formState, handleSubmit, onSubmit } = useReport();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -50,7 +27,6 @@ const ReportPage = () => {
           </p>
         )}
       </div>
-
       <div>
         <label
           htmlFor="endDate"
@@ -70,7 +46,6 @@ const ReportPage = () => {
           </p>
         )}
       </div>
-
       <div>
         <span className="block text-left font-medium text-gray-600">
           Tipo de Relatório
@@ -94,7 +69,6 @@ const ReportPage = () => {
           </p>
         )}
       </div>
-
       <button
         type="submit"
         disabled={formState.isSubmitting}
