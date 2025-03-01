@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 import Ping from "@/components/ui/ping";
-import LoginForm from "@/components/shared/login-form";
+import LoginForm from "@/components/shared/form/login";
 import Container from "@/components/templates/container";
 import Background from "@/components/templates/background";
 import Title from "@/components/ui/title";

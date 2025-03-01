@@ -1,5 +1,5 @@
 import Container from "@/components/templates/container";
-import ReportForm from "@/components/shared/report-form";
+import ReportForm from "@/components/shared/form/report";
 
 const ReportPage = () => (
   <Container display="small">
