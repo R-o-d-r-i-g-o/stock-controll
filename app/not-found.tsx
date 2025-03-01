@@ -1,8 +1,10 @@
 import Link from "next/link";
+
 import { NavigationPage } from "@/common";
+import Background from "@/components/templates/background";
 
 const NotFoundPage = () => (
-  <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-red-500 via-yellow-500 to-orange-500">
+  <Background type="error">
     <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md text-center">
       <h2 className="text-5xl font-bold text-gray-800 mb-4">404</h2>
       <p className="text-xl font-medium text-gray-600 mb-6">
@@ -19,7 +21,7 @@ const NotFoundPage = () => (
         Voltar para a Página Inicial
       </Link>
     </div>
-  </div>
+  </Background>
 );
 
 export default NotFoundPage;
