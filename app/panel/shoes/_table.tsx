@@ -8,19 +8,19 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Pagination,
   IconButton,
   Collapse,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { styled } from "@mui/material/styles";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-
-import { useRouter } from "next/navigation";
-import { defaultDateMask, footSizesList, NavigationPage } from "@/common";
+import { defaultDateMask, footSizesList } from "@/common";
 
 import * as t from "./_types";
 import moment from "moment";
+import Title from "@/components/ui/title";
+import Pagination from "@/components/ui/pagination";
+import Link from "next/link";
 
 const CustomTableContainer = styled(TableContainer)({
   boxShadow: "0px 13px 20px 0px #80808029",
@@ -63,23 +63,13 @@ const AuxTabela = ({ groupedItems }: AuxTabelaProps) => {
 const Tabela = ({ filter, data }: t.TabelaProps) => {
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
-  const router = useRouter();
-  const totalPages = Math.ceil(data.meta?.total / filter.size);
-
-  const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
-    e?.preventDefault();
-    router.push(`${NavigationPage.Shoe}?page=${newPage}`);
-  };
-
   const handleRowClick = (index: number) => {
     setSelectedRow(index === selectedRow ? null : index);
   };
 
   return (
     <React.Fragment>
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        Calçados disponiveis
-      </h2>
+      <Title className="text-center mb-6 " text="Calçados disponiveis" />
       <CustomTableContainer>
         <Table>
           <TableHead>
@@ -122,13 +112,11 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                     </IconButton>
                   </TableCell>
                   <TableCell>
-                    <IconButton
-                      onClick={() =>
-                        router.push(`${NavigationPage.Shoe}/${c.id}`)
-                      }
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
+                    <Link href={`/panel/shoes/${c.id}`}>
+                      <IconButton>
+                        <MoreVertIcon />
+                      </IconButton>
+                    </Link>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -159,18 +147,12 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
           </TableBody>
         </Table>
       </CustomTableContainer>
-
-      <div className="flex justify-center items-center mt-4">
-        <Pagination
-          defaultPage={1}
-          count={totalPages}
-          page={filter.page}
-          onChange={handleChangePage}
-          siblingCount={1}
-          boundaryCount={1}
-          color="primary"
-        />
-      </div>
+      <Pagination
+        page={filter.page}
+        size={filter.size}
+        total={data.meta.total}
+        className="mt-4"
+      />
     </React.Fragment>
   );
 };

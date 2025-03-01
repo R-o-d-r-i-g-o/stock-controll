@@ -5,6 +5,7 @@ import Ping from "@/components/ui/ping";
 import LoginForm from "@/components/shared/login-form";
 import Container from "@/components/templates/container";
 import Background from "@/components/templates/background";
+import Title from "@/components/ui/title";
 
 type LoginPageProps = {
   searchParams: Promise<{
@@ -28,9 +29,7 @@ const LoginPage: React.FC<LoginPageProps> = async ({ searchParams }) => {
             />
           </div>
         </div>
-        <p className="text-2xl sm:text-3xl text-center font-bold mb-6 text-gray-800">
-          Entrar
-        </p>
+        <Title className="text-center mb-6 " text="Entrar" />
         <LoginForm callbackUrl={callbackUrl} />
       </Container>
       <Ping />
