@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 
 import Table from "./_table";
+import Container from "@/components/templates/container";
 import { defaultPageSize, NavigationPage } from "@/common";
 
 import * as svc from "@/lib/services";
-import DashTemplate from "@/components/templates/dash";
 
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import AddIcon from "@mui/icons-material/Add";
@@ -46,10 +46,10 @@ const ShoesListPage = async ({ searchParams }: UserListPageProps) => {
   const shoesPaginated = await svc.getShoesGroupedByItemSizePaginated(filters);
 
   return (
-    <DashTemplate className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
+    <Container className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
       <ActionButtons />
       <Table filter={filters} data={shoesPaginated} />
-    </DashTemplate>
+    </Container>
   );
 };
 

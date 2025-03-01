@@ -14,8 +14,10 @@ const Background: React.FC<BackgroundProps> = ({
   className,
   children,
   type = "default",
+  ...rest
 }) => (
   <div
+    {...rest}
     className={`flex items-center justify-center min-h-screen bg-gradient-to-r ${backgroundColorMap[type]} ${className}`}
   >
     {children}

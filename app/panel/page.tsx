@@ -1,7 +1,7 @@
-import DashTemplate from "@/components/templates/dash";
+import Container from "@/components/templates/container";
 
 const HomePage = () => (
-  <DashTemplate className="bg-gray-50 p-10 rounded-lg shadow-lg w-full max-w-4xl">
+  <Container className="bg-gray-50 p-10 rounded-lg shadow-lg w-full max-w-4xl">
     <h2 className="text-2xl font-bold text-gray-800 mb-4">
       Funcionalidades do Sistema
     </h2>
@@ -51,7 +51,7 @@ const HomePage = () => (
         Sempre faça logout em dispositivos compartilhados ou públicos.
       </li>
     </ul>
-  </DashTemplate>
+  </Container>
 );
 
 export default HomePage;

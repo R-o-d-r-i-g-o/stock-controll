@@ -1,8 +1,7 @@
 import React from "react";
 
-import DashTemplate from "@/components/templates/dash";
-
 import Table from "./_table";
+import Container from "@/components/templates/container";
 
 import * as svc from "@/lib/services";
 
@@ -17,9 +16,9 @@ const TagListPage = async ({ params }: TagListPageProps) => {
   const data = await svc.getShoeRelatedTags({ shoeId: shoe_id });
 
   return (
-    <DashTemplate className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
+    <Container className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
       <Table meta={data.meta} data={data.tags} />
-    </DashTemplate>
+    </Container>
   );
 };
 

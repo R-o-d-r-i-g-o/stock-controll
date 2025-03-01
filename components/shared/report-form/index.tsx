@@ -50,7 +50,7 @@ const ReportPage = () => {
         <span className="block text-left font-medium text-gray-600">
           Tipo de Relatório
         </span>
-        <div className="flex justify-start gap-6 mt-2">
+        <div className="flex justify-start gap-6 mt-2 text-gray-700">
           {reportTypes.map((rt) => (
             <label key={rt.value} className="flex items-center space-x-2">
               <input

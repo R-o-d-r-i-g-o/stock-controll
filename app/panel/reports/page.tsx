@@ -1,11 +1,13 @@
-import ReportForm from "@/components/shared/login-form";
-import FormTemplate from "@/components/templates/form";
+import Container from "@/components/templates/container";
+import ReportForm from "@/components/shared/report-form";
 
 const ReportPage = () => (
-  <FormTemplate className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md text-gray-700 text-center">
-    <h2 className="text-3xl font-bold text-gray-800 mb-6">Gerar Relatório</h2>
+  <Container display="small">
+    <h2 className="text-3xl text-center font-bold text-gray-800 mb-6">
+      Gerar Relatório
+    </h2>
     <ReportForm />
-  </FormTemplate>
+  </Container>
 );
 
 export default ReportPage;

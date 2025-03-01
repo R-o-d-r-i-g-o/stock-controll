@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import Ping from "@/components/ui/ping";
 import LoginForm from "@/components/shared/login-form";
+import Container from "@/components/templates/container";
 import Background from "@/components/templates/background";
 
 type LoginPageProps = {
@@ -16,7 +17,7 @@ const LoginPage: React.FC<LoginPageProps> = async ({ searchParams }) => {
 
   return (
     <Background>
-      <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-md mx-5 sm:mx-0">
+      <Container display="small">
         <div className="h-[30px] flex justify-center items-center">
           <div className="transform -translate-y-20 rounded-full overflow-hidden">
             <Image
@@ -31,8 +32,8 @@ const LoginPage: React.FC<LoginPageProps> = async ({ searchParams }) => {
           Entrar
         </p>
         <LoginForm callbackUrl={callbackUrl} />
-        <Ping />
-      </div>
+      </Container>
+      <Ping />
     </Background>
   );
 };
