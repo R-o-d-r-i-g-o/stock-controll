@@ -1,77 +1,72 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
-  Table,
+  Table as MuiTable,
+  Collapse,
+  TableRow,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
-  TableRow,
   IconButton,
-  Collapse,
+  TableContainer as MuiTableContainer,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 import { styled } from "@mui/material/styles";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { defaultDateMask, footSizesList } from "@/common";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import * as t from "./_types";
-import moment from "moment";
-import Title from "@/components/ui/title";
-import Pagination from "@/components/ui/pagination";
 import Link from "next/link";
+import moment from "moment";
 
-const CustomTableContainer = styled(TableContainer)({
+import useTable from "./use-table";
+import Pagination from "@/components/ui/pagination";
+import { AuxTable } from "./aux-table";
+import { defaultDateMask } from "@/common";
+
+const TableContainer = styled(MuiTableContainer)({
   boxShadow: "0px 13px 20px 0px #80808029",
   borderRadius: "10px",
   overflowX: "scroll",
 });
 
-type AuxTabelaProps = {
-  groupedItems: t.GroupedItems[];
-};
-
-const AuxTabela = ({ groupedItems }: AuxTabelaProps) => {
-  const itemCountBySize: { [size: number]: number } = {};
-
-  groupedItems.forEach((group) => {
-    itemCountBySize[group.size] =
-      (itemCountBySize[group.size] || 0) + group.items.length;
-  });
-
-  return (
-    <Table>
-      <TableHead>
-        <TableRow>
-          {footSizesList.map((size) => (
-            <TableCell key={size}>{size}</TableCell>
-          ))}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        <TableRow>
-          {footSizesList.map((size) => (
-            <TableCell key={size}>{itemCountBySize[size] || 0}</TableCell>
-          ))}
-        </TableRow>
-      </TableBody>
-    </Table>
-  );
-};
-
-const Tabela = ({ filter, data }: t.TabelaProps) => {
-  const [selectedRow, setSelectedRow] = useState<number | null>(null);
-
-  const handleRowClick = (index: number) => {
-    setSelectedRow(index === selectedRow ? null : index);
+type TableProps = {
+  filter: {
+    page: number;
+    size: number;
   };
+  data: {
+    meta: {
+      skip: number;
+      take: number;
+      total: number;
+    };
+    shoes: {
+      id: number;
+      name: string;
+      sole: string;
+      note: string;
+      color: string;
+      createdAt: string;
+      deletedAt: string | null;
+      groupedItems: {
+        size: number;
+        items: {
+          id: number;
+          price: number;
+        }[];
+      }[];
+    }[];
+  };
+};
+
+const Table = ({ filter, data }: TableProps) => {
+  const { handleRowClick, selectedRow } = useTable();
 
   return (
     <React.Fragment>
-      <Title className="text-center mb-6 " text="Calçados disponiveis" />
-      <CustomTableContainer>
-        <Table>
+      <TableContainer>
+        <MuiTable>
           <TableHead>
             <TableRow className="bg-indigo-500">
               <TableCell className="!text-white font-semibold">#</TableCell>
@@ -137,7 +132,7 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                         <p className="text-gray-700 mt-6">
                           <strong>Tamanho X Unidades:</strong>
                         </p>
-                        <AuxTabela groupedItems={c.groupedItems} />
+                        <AuxTable groupedItems={c.groupedItems} />
                       </div>
                     </Collapse>
                   </TableCell>
@@ -145,8 +140,8 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
               </React.Fragment>
             ))}
           </TableBody>
-        </Table>
-      </CustomTableContainer>
+        </MuiTable>
+      </TableContainer>
       <Pagination
         page={filter.page}
         size={filter.size}
@@ -157,4 +152,4 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
   );
 };
 
-export default Tabela;
+export default Table;

@@ -1,9 +1,11 @@
 import React from "react";
 import Link from "next/link";
 
-import Table from "./_table";
+import Title from "@/components/ui/title";
+import Table from "@/components/shared/table/shoe";
 import Container from "@/components/templates/container";
-import { defaultPageSize, NavigationPage } from "@/common";
+
+import { defaultPageSize } from "@/common";
 
 import * as svc from "@/lib/services";
 
@@ -20,15 +22,15 @@ type UserListPageProps = {
 const ActionButtons = () => (
   <div className="flex justify-end gap-4 mb-4">
     <Link
+      href="/panel/shoes/scan"
       title="Escanear itens"
-      href={NavigationPage.ShoesSale}
       className="flex items-center space-x-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
     >
       <CropFreeIcon />
     </Link>
     <Link
+      href="/panel/shoes/create"
       title="Adicionar Calçado"
-      href={NavigationPage.ShoesCreate}
       className="flex items-center space-x-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
     >
       <AddIcon />
@@ -48,6 +50,7 @@ const ShoesListPage = async ({ searchParams }: UserListPageProps) => {
   return (
     <Container className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
       <ActionButtons />
+      <Title className="text-center mb-6" text="Calçados disponiveis" />
       <Table filter={filters} data={shoesPaginated} />
     </Container>
   );
