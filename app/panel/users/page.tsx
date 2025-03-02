@@ -1,11 +1,11 @@
-import Table from "./_table";
-import * as svc from "@/lib/services";
-import { defaultPageSize, NavigationPage } from "@/common";
-
-import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
+import AddIcon from "@mui/icons-material/Add";
 
+import Title from "@/components/ui/title";
+import Table from "@/components/shared/table/user";
+import * as svc from "@/lib/services";
 import Container from "@/components/templates/container";
+import { defaultPageSize } from "@/common";
 
 type UserListPageProps = {
   searchParams: Promise<{
@@ -17,7 +17,7 @@ type UserListPageProps = {
 const CrateUserButton = () => (
   <Link
     title="Adicionar Usuário"
-    href={NavigationPage.UsersCreate}
+    href="/panel/users/create"
     className="flex items-center space-x-2 bg-blue-500 text-white ml-auto w-min py-2 px-4 mb-4 sm:mb-0 rounded hover:bg-blue-600 transition-colors"
   >
     <AddIcon />
@@ -34,8 +34,9 @@ const UserListPage = async ({ searchParams }: UserListPageProps) => {
   const usersPaginated = await svc.fetchUsersPaginated(filters);
 
   return (
-    <Container className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
+    <Container>
       <CrateUserButton />
+      <Title className="text-center mb-6" text="Usuários do sistema" />
       <Table filter={filters} data={usersPaginated} />
     </Container>
   );

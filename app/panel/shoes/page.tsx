@@ -48,7 +48,7 @@ const ShoesListPage = async ({ searchParams }: UserListPageProps) => {
   const shoesPaginated = await svc.getShoesGroupedByItemSizePaginated(filters);
 
   return (
-    <Container className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
+    <Container>
       <ActionButtons />
       <Title className="text-center mb-6" text="Calçados disponiveis" />
       <Table filter={filters} data={shoesPaginated} />
