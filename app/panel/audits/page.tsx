@@ -1,30 +1,32 @@
-import Table from "./_table";
+import * as svc from "@/lib/services";
 import { defaultPageSize } from "@/common";
 
-import * as svc from "@/lib/services";
+import Title from "@/components/ui/title";
+import Table from "@/components/shared/table/audit";
 import Container from "@/components/templates/container";
 
-type UserListPageProps = {
+type AuditListPageProps = {
   searchParams: Promise<{
     page: string;
     size: string;
   }>;
 };
 
-const HistoryListPage = async ({ searchParams }: UserListPageProps) => {
+const AuditListPage = async ({ searchParams }: AuditListPageProps) => {
   const req = await searchParams;
 
   const filters = {
     page: parseInt(req.page ?? "1"),
     size: parseInt(req.size ?? defaultPageSize.toString()),
   };
-  const usersPaginated = await svc.getAuditsPaginated(filters);
+  const auditsPaginated = await svc.getAuditsPaginated(filters);
 
   return (
-    <Container className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
-      <Table filter={filters} data={usersPaginated} />
+    <Container>
+      <Title className="text-center mb-6" text="Histórico de atividades" />
+      <Table filter={filters} data={auditsPaginated} />
     </Container>
   );
 };
 
-export default HistoryListPage;
+export default AuditListPage;

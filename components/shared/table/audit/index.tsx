@@ -2,41 +2,45 @@
 
 import React, { useState } from "react";
 import {
-  Table,
+  Table as MuiTable,
+  TableRow,
+  Collapse,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
-  TableRow,
-  Pagination,
   IconButton,
-  Collapse,
+  TableContainer,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { styled } from "@mui/material/styles";
 
-import { useRouter } from "next/navigation";
-import { defaultDateMask, NavigationPage } from "@/common";
-
-import * as t from "./_types";
 import moment from "moment";
 
-const CustomTableContainer = styled(TableContainer)({
-  boxShadow: "0px 13px 20px 0px #80808029",
-  borderRadius: "10px",
-  overflowX: "scroll",
-});
+import { defaultDateMask } from "@/common";
+import Pagination from "@/components/ui/pagination";
 
-const Tabela = ({ filter, data }: t.TabelaProps) => {
-  const [selectedRow, setSelectedRow] = useState<number | null>(null);
-
-  const router = useRouter();
-  const totalPages = Math.ceil(data.meta?.total / filter.size);
-
-  const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
-    e?.preventDefault();
-    router.push(`${NavigationPage.Audit}?page=${newPage}`);
+type TabelaProps = {
+  filter: {
+    page: number;
+    size: number;
   };
+  data: {
+    meta: {
+      skip: number;
+      take: number;
+      total: number;
+    };
+    audits: Array<{
+      id: number;
+      user: string;
+      note: string;
+      shoeId: number;
+      createdAt: string;
+    }>;
+  };
+};
+
+const Tabela = ({ filter, data }: TabelaProps) => {
+  const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
   const handleRowClick = (index: number) => {
     setSelectedRow(index === selectedRow ? null : index);
@@ -44,11 +48,14 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
 
   return (
     <React.Fragment>
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        Histórico de atividades
-      </h2>
-      <CustomTableContainer>
-        <Table>
+      <TableContainer
+        style={{
+          boxShadow: "0px 13px 20px 0px #80808029",
+          overflowX: "scroll",
+          borderRadius: "10px",
+        }}
+      >
+        <MuiTable>
           <TableHead>
             <TableRow className="bg-indigo-500">
               <TableCell className="!text-white font-semibold">#</TableCell>
@@ -72,8 +79,8 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
                 </TableRow>
               ))}
             {data.audits?.map((a, index) => (
-              <React.Fragment key={index}>
-                <TableRow key={index} className="hover:bg-indigo-100">
+              <React.Fragment key={a.id}>
+                <TableRow className="hover:bg-indigo-100">
                   <TableCell>{a.id}</TableCell>
                   <TableCell>
                     {moment(a.createdAt).format(defaultDateMask)}
@@ -108,20 +115,14 @@ const Tabela = ({ filter, data }: t.TabelaProps) => {
               </React.Fragment>
             ))}
           </TableBody>
-        </Table>
-      </CustomTableContainer>
-
-      <div className="flex justify-center items-center mt-4">
-        <Pagination
-          defaultPage={1}
-          count={totalPages}
-          page={filter.page}
-          onChange={handleChangePage}
-          siblingCount={1}
-          boundaryCount={1}
-          color="primary"
-        />
-      </div>
+        </MuiTable>
+      </TableContainer>
+      <Pagination
+        page={filter.page}
+        size={filter.size}
+        total={data.meta.total}
+        className="mt-4"
+      />
     </React.Fragment>
   );
 };
