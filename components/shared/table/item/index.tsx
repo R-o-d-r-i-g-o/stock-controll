@@ -1,30 +1,42 @@
+import Link from "next/link";
+import moment from "moment";
 import {
-  styled,
-  Table,
+  Table as MuiTable,
+  TableRow,
   TableCell,
-  TableContainer,
   TableHead,
   TableBody,
-  TableRow,
   IconButton,
-  Link,
+  TableContainer,
 } from "@mui/material";
 
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
-import * as t from "./_types";
 import { defaultDateMask } from "@/common";
-import moment from "moment";
 
-const CustomTableContainer = styled(TableContainer)({
-  marginTop: "30px",
-  overflowX: "scroll",
-});
+type TableProps = {
+  meta: {
+    shoeId: number;
+  };
+  data: {
+    id: number;
+    sku: string;
+    size: number;
+    price: number;
+    createdAt: string;
+    deletedAt: string | null;
+  }[];
+};
 
-const AuxTabela = ({ meta, data }: t.TableProps) => (
-  <CustomTableContainer>
-    <Table className="w-full">
+const Table = ({ meta, data }: TableProps) => (
+  <TableContainer
+    style={{
+      marginTop: "30px",
+      overflowX: "scroll",
+    }}
+  >
+    <MuiTable className="w-full">
       <TableHead>
         <TableRow>
           <TableCell className="!text-center">#</TableCell>
@@ -75,8 +87,8 @@ const AuxTabela = ({ meta, data }: t.TableProps) => (
           </TableRow>
         ))}
       </TableBody>
-    </Table>
-  </CustomTableContainer>
+    </MuiTable>
+  </TableContainer>
 );
 
-export default AuxTabela;
+export default Table;

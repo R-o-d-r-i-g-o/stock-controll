@@ -20,7 +20,7 @@ import { Divider, IconButton } from "@mui/material";
 import { updateShoe, deleteShoeById } from "@/lib/services";
 import { useToast } from "@/lib/hooks/use-toast";
 import * as t from "./_types";
-import Table from "./_table";
+import ItemTable from "@/components/shared/table/item";
 
 const shoeUpdateSchema = z.object({
   name: z.string().min(1, "Nome é obrigatório"),
@@ -204,7 +204,7 @@ const ProductDash = ({ data }: t.DashProps) => {
           {buttonRange}
         </form>
       </div>
-      <Table meta={{ shoeId: data.id }} data={data.items} />
+      <ItemTable meta={{ shoeId: data.id }} data={data.items} />
     </React.Fragment>
   );
 };

@@ -1,17 +1,3 @@
-type TableProps = {
-  meta: {
-    shoeId: number;
-  };
-  data: {
-    id: number;
-    sku: string;
-    size: number;
-    price: number;
-    createdAt: string;
-    deletedAt: string | null;
-  }[];
-};
-
 type DashProps = {
   data: {
     id: number;
@@ -45,9 +31,4 @@ type CreateUserFormEntries = {
   note: string;
 };
 
-export type {
-  InitialStateEntries,
-  CreateUserFormEntries,
-  TableProps,
-  DashProps,
-};
+export type { InitialStateEntries, CreateUserFormEntries, DashProps };
