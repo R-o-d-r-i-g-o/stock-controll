@@ -1,9 +1,11 @@
 import React from "react";
-
-import Table from "./_table";
-import Container from "@/components/templates/container";
+import Link from "next/link";
 
 import * as svc from "@/lib/services";
+import TagTable from "@/components/shared/table/tag";
+import Container from "@/components/templates/container";
+
+import { ArrowBack, Add } from "@mui/icons-material";
 
 type TagListPageProps = {
   params: Promise<{
@@ -16,8 +18,23 @@ const TagListPage = async ({ params }: TagListPageProps) => {
   const data = await svc.getShoeRelatedTags({ shoeId: shoe_id });
 
   return (
-    <Container className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
-      <Table meta={data.meta} data={data.tags} />
+    <Container>
+      <div className="flex justify-between">
+        <Link
+          href={`/panel/shoes/${data.meta.shoeId}`}
+          className="flex items-center gap-2 text-gray-700 transition-colors hover:animate-jump animate-once"
+        >
+          <ArrowBack fontSize="small" />
+          Voltar
+        </Link>
+        <Link
+          href={`/panel/shoes/${data.meta.shoeId}/tags/create`}
+          className="text-gray-700 hover:animate-spin animate-once"
+        >
+          <Add />
+        </Link>
+      </div>
+      <TagTable meta={data.meta} data={data.tags} />
     </Container>
   );
 };
