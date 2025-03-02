@@ -1,22 +1,18 @@
-"use client";
-
-import React from "react";
-
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
 import { useToast } from "@/lib/hooks";
 import { deleteUser } from "@/lib/services";
 
-type DeleteButtonProps = {
+type UseUserDeleteFormProps = {
   userId: number;
 };
 
-const DeleteButton = ({ userId }: DeleteButtonProps) => {
-  const { success, failure } = useToast();
+const useUserDeleteForm = ({ userId }: UseUserDeleteFormProps) => {
   const router = useRouter();
+  const { success, failure } = useToast();
 
-  const handleDelete = () => {
+  const handleUserDelete = () => {
     Swal.fire({
       title: "Tem certeza?",
       text: "Essa ação não pode ser desfeita!",
@@ -40,15 +36,7 @@ const DeleteButton = ({ userId }: DeleteButtonProps) => {
     });
   };
 
-  return (
-    <button
-      type="button"
-      onClick={handleDelete}
-      className="w-full py-3 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300"
-    >
-      Deletar Usuário
-    </button>
-  );
+  return { handleUserDelete };
 };
 
-export default DeleteButton;
+export default useUserDeleteForm;

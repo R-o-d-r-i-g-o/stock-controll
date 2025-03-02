@@ -1,10 +1,21 @@
-import Form from "./form";
+import { notFound } from "next/navigation";
 import * as svc from "@/lib/services";
 
-async function UserCreatePage() {
-  const listRolekxs = await svc.getRolesList();
+import Title from "@/components/ui/title";
+import Container from "@/components/templates/container";
+import UserCreateForm from "@/components/shared/form/user-create";
 
-  return <Form roles={listRolekxs.roles} />;
-}
+const UserCreatePage = async () => {
+  const rolesList = await svc.getRolesList();
+
+  if (!rolesList || rolesList.roles.length < 1) notFound();
+
+  return (
+    <Container display="small">
+      <Title className="text-center mb-6" text="Novo Usuário" />
+      <UserCreateForm roles={rolesList.roles} />;
+    </Container>
+  );
+};
 
 export default UserCreatePage;

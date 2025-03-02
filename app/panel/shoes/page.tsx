@@ -12,7 +12,7 @@ import * as svc from "@/lib/services";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import AddIcon from "@mui/icons-material/Add";
 
-type UserListPageProps = {
+type ShoesListPageProps = {
   searchParams: Promise<{
     page: string;
     size: string;
@@ -38,7 +38,7 @@ const ActionButtons = () => (
   </div>
 );
 
-const ShoesListPage = async ({ searchParams }: UserListPageProps) => {
+const ShoesListPage = async ({ searchParams }: ShoesListPageProps) => {
   const req = await searchParams;
 
   const filters = {
