@@ -59,7 +59,7 @@ const ShoeDetailPage = async ({ params }: ShoeDetailPageProps) => {
                 <ShoeDeleteFrom shoeId={shoe.id} />
                 <Link href={`/panel/shoes/${shoe.id}/tags`}>
                   <IconButton
-                    className="!bg-yellow-500 rounded-2xl !text-white"
+                    className="!bg-yellow-500 !rounded-2xl !text-white"
                     title="Listar etiquetas do produto"
                   >
                     <ListTags />
