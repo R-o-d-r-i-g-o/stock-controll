@@ -1,16 +1,19 @@
 import { notFound } from "next/navigation";
-
-import Form from "./form";
 import * as svc from "@/lib/services";
 
-type UpdateUserPageProps = {
+import Title from "@/components/ui/title";
+import Container from "@/components/templates/container";
+import TagEditForm from "@/components/shared/form/tag-edit";
+import TagDeleteForm from "@/components/shared/form/tag-delete";
+
+type TagEditPageProps = {
   params: Promise<{
     tag_id: string;
     shoe_id: string;
   }>;
 };
 
-const UpdateUserPage = async ({ params }: UpdateUserPageProps) => {
+const TagEditPage = async ({ params }: TagEditPageProps) => {
   const req = await params;
   const filter = {
     tagId: parseInt(req.tag_id, 10),
@@ -20,7 +23,16 @@ const UpdateUserPage = async ({ params }: UpdateUserPageProps) => {
   const tag = await svc.getShoeRelatedTag(filter);
   if (!tag) notFound();
 
-  return <Form tag={tag} />;
+  return (
+    <Container display="small">
+      <Title
+        className="text-center text-3xl mb-6"
+        text={`Editar etiqueta #${tag.id}`}
+      />
+      <TagEditForm tag={tag} />;
+      <TagDeleteForm tagId={tag.id} />
+    </Container>
+  );
 };
 
-export default UpdateUserPage;
+export default TagEditPage;
