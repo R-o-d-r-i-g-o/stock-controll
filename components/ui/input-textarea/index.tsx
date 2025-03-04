@@ -18,8 +18,9 @@ const InputTextarea: React.FC<InputTextareaProps> = ({
   return (
     <div className="relative">
       <textarea
-        {...{ rest, id }}
+        {...rest}
         className={`w-full overflow-y-hidden p-3 pr-10 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300 ${className}`}
+        id={id}
       />
       {allowIndent && (
         <button
