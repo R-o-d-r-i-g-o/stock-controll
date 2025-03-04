@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useToast } from "@/lib/hooks";
 import { updateItem } from "@/lib/services";
+import { footSizesList } from "@/common";
 import { itemEditSchema, ItemEditSchema } from "./schema";
 
 type UseItemEditFromProps = {
@@ -42,11 +43,17 @@ const useItemEditFrom = ({ item }: UseItemEditFromProps) => {
     }
   };
 
+  const footSizeOptions = footSizesList.map((footsize) => ({
+    lable: footsize,
+    value: footsize,
+  }));
+
   return {
     register,
     formState,
     handleSubmit,
     handleSubmitEditItem,
+    footSizeOptions,
   };
 };
 

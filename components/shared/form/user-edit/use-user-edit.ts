@@ -16,9 +16,13 @@ type UseUserEditFormProps = {
     createdAt: string;
     deletedAt: string | null;
   };
+  roles: Array<{
+    id: number;
+    name: string;
+  }>;
 };
 
-const useUserEditForm = ({ user }: UseUserEditFormProps) => {
+const useUserEditForm = ({ user, roles }: UseUserEditFormProps) => {
   const router = useRouter();
   const { success, failure } = useToast();
 
@@ -42,11 +46,17 @@ const useUserEditForm = ({ user }: UseUserEditFormProps) => {
     }
   };
 
+  const roleOptions = roles.map((role) => ({
+    lable: role.name,
+    value: role.id,
+  }));
+
   return {
     register,
     formState,
     handleSubmit,
     handleSubmitEditUser,
+    roleOptions,
   };
 };
 

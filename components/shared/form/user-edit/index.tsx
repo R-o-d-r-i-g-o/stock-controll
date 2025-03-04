@@ -4,6 +4,7 @@ import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import useUserEditForm from "./use-user-edit";
+import InputSelect from "@/components/ui/input-select";
 
 type UserEditFormProps = {
   user: {
@@ -21,8 +22,13 @@ type UserEditFormProps = {
 };
 
 const UserEditForm = ({ roles, user }: UserEditFormProps) => {
-  const { register, formState, handleSubmit, handleSubmitEditUser } =
-    useUserEditForm({ user });
+  const {
+    register,
+    formState,
+    handleSubmit,
+    handleSubmitEditUser,
+    roleOptions,
+  } = useUserEditForm({ roles, user });
 
   return (
     <form onSubmit={handleSubmit(handleSubmitEditUser)}>
@@ -33,7 +39,11 @@ const UserEditForm = ({ roles, user }: UserEditFormProps) => {
       </div>
       <div className="mb-6">
         <InputLable htmlFor="email" lable="E-mail" />
-        <InputText id="email" placeholder="j@mail.com" {...register("email")} />
+        <InputText
+          id="email"
+          placeholder="john@example.com"
+          {...register("email")}
+        />
         <InputError error={formState.errors.email} />
       </div>
       <div className="mb-6">
@@ -48,17 +58,7 @@ const UserEditForm = ({ roles, user }: UserEditFormProps) => {
       </div>
       <div className="mb-6">
         <InputLable htmlFor="roleId" lable="Cargo" />
-        <select
-          id="roleId"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("roleId")}
-        >
-          {roles?.map((r) => (
-            <option key={r.id} value={r.id}>
-              {r.name}
-            </option>
-          ))}
-        </select>
+        <InputSelect options={roleOptions} {...register("roleId")} />
         <InputError error={formState.errors.roleId} />
       </div>
       <button

@@ -1,101 +1,41 @@
 "use client";
 
-import React, { useState, useEffect, useRef, memo } from "react";
-import { useZxing, Result } from "react-zxing";
-import { useMediaDevices } from "react-media-devices";
-
-// Doc: https://www.npmjs.com/package/react-zxing
+import React from "react";
+import useScanner from "./use-scanner";
+import InputLable from "../input-lable";
+import InputSelect from "../input-select";
 
 type ScannerProps = {
-  onResult?: (sku: string) => void;
-  beepEnabled?: boolean;
-  className?: string;
   paused?: boolean;
+  onResult?: (sku: string) => void;
+  className?: string;
+  beepEnabled?: boolean;
 };
 
-const constraints: MediaStreamConstraints = {
-  video: true,
-  audio: false,
-};
-
-const Scanner = ({
-  beepEnabled = false,
-  paused = false,
-  className,
-  onResult,
-}: ScannerProps) => {
-  const [loading, setLoading] = useState(true);
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  const [selectedCamera, setSelectedCamera] = useState<string | undefined>();
-  const [result, setResult] = useState("");
-
-  const videoDevices = useMediaDevices({ constraints }).devices?.filter(
-    (device) => device.kind === "videoinput"
-  );
-
-  const handleBeepSound = () => {
-    if (!audioRef.current) return;
-    audioRef.current.currentTime = 0;
-    audioRef.current.play();
-  };
-
-  const handleCameraChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    e.preventDefault();
-    setSelectedCamera(e.target.value);
-  };
-
-  const handleScannerResult = (res: Result) => {
-    const newCode = res.getText();
-    if (newCode === "") return;
-
-    setResult(newCode);
-    setLoading(false);
-  };
-
-  const { ref, torch } = useZxing({
-    paused,
-    deviceId: selectedCamera,
-    onDecodeResult: handleScannerResult,
-  });
-
-  useEffect(() => {
-    if (loading) return;
-    if (onResult) onResult(result);
-    if (beepEnabled) handleBeepSound();
-    setLoading(true);
-
-    return () => {
-      torch.off();
-    };
-  }, [result, loading]);
+const Scanner: React.FC<ScannerProps> = ({ className, ...rest }) => {
+  const {
+    videoRef,
+    audioRef,
+    selectedCamera,
+    handleCameraChange,
+    cameraDeviceOpstions,
+  } = useScanner(rest);
 
   return (
     <React.Fragment>
-      {videoDevices && videoDevices.length > 0 && (
+      {cameraDeviceOpstions && cameraDeviceOpstions.length > 0 && (
         <div className="mb-4">
-          <label
-            htmlFor="camera-select"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Selecione a câmera
-          </label>
-          <select
+          <InputLable htmlFor="camera-select" lable="Selecione a câmera" />
+          <InputSelect
             id="camera-select"
-            className="mt-1 block w-full p-2 border text-gray-700 border-gray-300 rounded-md"
             value={selectedCamera}
+            options={cameraDeviceOpstions}
             onChange={handleCameraChange}
-          >
-            {videoDevices.map((device) => (
-              <option key={device.deviceId} value={device.deviceId}>
-                {device.label || `Câmera ${device.deviceId}`}
-              </option>
-            ))}
-          </select>
+          />
         </div>
       )}
       <div className="relative h-min rounded-md overflow-hidden">
-        <video className={className} ref={ref} />
+        <video className={className} ref={videoRef} />
         <div className="absolute top-1/2 left-0 w-full h-[1px] bg-red-500 transform -translate-y-1/2 pointer-events-none" />
       </div>
       <audio ref={audioRef} src="/sounds/beep.mp3" />
@@ -103,4 +43,4 @@ const Scanner = ({
   );
 };
 
-export default memo(Scanner);
+export default React.memo(Scanner);

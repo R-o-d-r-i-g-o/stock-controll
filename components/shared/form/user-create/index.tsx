@@ -3,18 +3,19 @@
 import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
+import InputSelect from "@/components/ui/input-select";
 import useUserCreateForm from "./use-user-create";
 
 type UserCreateFormProps = {
-  roles: Array<{
+  roles: {
     id: number;
     name: string;
-  }>;
+  }[];
 };
 
 const UserCreateForm = ({ roles }: UserCreateFormProps) => {
-  const { register, formState, handleSubmit, handleCrateUser } =
-    useUserCreateForm();
+  const { register, formState, handleSubmit, handleCrateUser, roleOptions } =
+    useUserCreateForm({ roles });
 
   return (
     <form onSubmit={handleSubmit(handleCrateUser)}>
@@ -25,7 +26,11 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
       </div>
       <div className="mb-6">
         <InputLable htmlFor="email" lable="E-mail" />
-        <InputText id="email" placeholder="j@mail.com" {...register("email")} />
+        <InputText
+          id="email"
+          placeholder="john@example.com"
+          {...register("email")}
+        />
         <InputError error={formState.errors.email} />
       </div>
       <div className="mb-6">
@@ -40,20 +45,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
       </div>
       <div className="mb-6">
         <InputLable htmlFor="roleId" lable="Cargo" />
-        <select
-          id="roleId"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("roleId")}
-        >
-          <option value="" disabled>
-            Selecione o cargo
-          </option>
-          {roles?.map((r) => (
-            <option key={r.id} value={r.id}>
-              {r.name}
-            </option>
-          ))}
-        </select>
+        <InputSelect options={roleOptions} {...register("roleId")} />
         <InputError error={formState.errors.roleId} />
       </div>
       <button

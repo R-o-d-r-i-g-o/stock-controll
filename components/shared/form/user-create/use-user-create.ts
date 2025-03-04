@@ -6,7 +6,14 @@ import { useToast } from "@/lib/hooks";
 import { createUser } from "@/lib/services";
 import { createUserSchema, CreateUserSchema } from "./schema";
 
-const useUserCreateForm = () => {
+type UseUserCreateFormProps = {
+  roles: {
+    id: number;
+    name: string;
+  }[];
+};
+
+const useUserCreateForm = ({ roles }: UseUserCreateFormProps) => {
   const router = useRouter();
   const { success, failure } = useToast();
 
@@ -25,11 +32,17 @@ const useUserCreateForm = () => {
     }
   };
 
+  const roleOptions = roles.map((role) => ({
+    lable: role.name,
+    value: role.id,
+  }));
+
   return {
     register,
     formState,
     handleSubmit,
     handleCrateUser,
+    roleOptions,
   };
 };
 

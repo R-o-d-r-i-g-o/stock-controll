@@ -5,7 +5,7 @@ import React from "react";
 import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
-import { footSizesList } from "@/common";
+import InputSelect from "@/components/ui/input-select";
 import useItemEditFrom from "./use-item-edit";
 
 type ItemEditFormProps = {
@@ -21,8 +21,13 @@ type ItemEditFormProps = {
 };
 
 const ItemEditForm: React.FC<ItemEditFormProps> = ({ item }) => {
-  const { register, formState, handleSubmit, handleSubmitEditItem } =
-    useItemEditFrom({ item });
+  const {
+    register,
+    formState,
+    handleSubmit,
+    handleSubmitEditItem,
+    footSizeOptions,
+  } = useItemEditFrom({ item });
 
   return (
     <form onSubmit={handleSubmit(handleSubmitEditItem)}>
@@ -43,17 +48,7 @@ const ItemEditForm: React.FC<ItemEditFormProps> = ({ item }) => {
       </div>
       <div className="mb-6">
         <InputLable htmlFor="size" lable="Tamanho" />
-        <select
-          id="size"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("size")}
-        >
-          {footSizesList?.map((footSize) => (
-            <option key={footSize} value={footSize}>
-              {footSize}
-            </option>
-          ))}
-        </select>
+        <InputSelect {...register("size")} options={footSizeOptions} />
         <InputError error={formState.errors.size} />
       </div>
       <button

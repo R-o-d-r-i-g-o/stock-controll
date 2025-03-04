@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useToast } from "@/lib/hooks";
 import { createItem } from "@/lib/services";
+import { footSizesList } from "@/common";
 import { itemCreateSchema, ItemCreateSchema } from "./schema";
 
 type useItemCreateFormProps = {
@@ -34,11 +35,17 @@ const useItemCreateForm = ({ shoeId }: useItemCreateFormProps) => {
     }
   };
 
+  const footSizeOptions = footSizesList.map((footsize) => ({
+    lable: footsize,
+    value: footsize,
+  }));
+
   return {
     register,
     formState,
     handleSubmit,
     handleSubmitTagEdit,
+    footSizeOptions,
   };
 };
 

@@ -5,7 +5,7 @@ import React from "react";
 import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
-import { footSizesList } from "@/common";
+import InputSelect from "@/components/ui/input-select";
 import useItemCreateForm from "./use-item-create";
 
 type ItemCreateformProps = {
@@ -13,8 +13,13 @@ type ItemCreateformProps = {
 };
 
 const ItemCreateForm: React.FC<ItemCreateformProps> = ({ shoeId }) => {
-  const { register, formState, handleSubmit, handleSubmitTagEdit } =
-    useItemCreateForm({ shoeId });
+  const {
+    register,
+    formState,
+    handleSubmit,
+    handleSubmitTagEdit,
+    footSizeOptions,
+  } = useItemCreateForm({ shoeId });
 
   return (
     <form onSubmit={handleSubmit(handleSubmitTagEdit)}>
@@ -35,17 +40,7 @@ const ItemCreateForm: React.FC<ItemCreateformProps> = ({ shoeId }) => {
       </div>
       <div className="mb-6">
         <InputLable htmlFor="size" lable="Tamanho" />
-        <select
-          id="size"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("size")}
-        >
-          {footSizesList?.map((footSize) => (
-            <option key={footSize} value={footSize}>
-              {footSize}
-            </option>
-          ))}
-        </select>
+        <InputSelect options={footSizeOptions} {...register("size")} />
         <InputError error={formState.errors.size} />
       </div>
       <button

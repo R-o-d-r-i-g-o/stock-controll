@@ -20,7 +20,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ callbackUrl }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-6">
         <InputLable htmlFor="email" lable="E-mail" />
-        <InputText id="email" placeholder="j@mail.com" {...register("email")} />
+        <InputText
+          id="email"
+          placeholder="john@example.com"
+          {...register("email")}
+        />
         <InputError error={formState.errors.email} />
       </div>
       <div className="mb-6">
