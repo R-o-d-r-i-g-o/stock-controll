@@ -1,57 +1,74 @@
+import Title from "@/components/ui/title";
+import TopicList from "@/components/ui/topic-list";
 import Container from "@/components/templates/container";
 
-const HomePage = () => (
-  <Container className="bg-gray-50 p-10 rounded-lg shadow-lg w-full max-w-4xl">
-    <h2 className="text-2xl font-bold text-gray-800 mb-4">
-      Funcionalidades do Sistema
-    </h2>
-    <ul className="list-disc pl-5 space-y-2 text-gray-700">
-      <li>
-        <strong className="text-blue-600">Cadastro de Produtos:</strong>{" "}
-        Adicionar, editar e excluir sapatos com informações detalhadas.
-      </li>
-      <li>
-        <strong className="text-blue-600">Controle de Quantidade:</strong>{" "}
-        Acompanhe o estoque em tempo real e ajuste automaticamente após vendas.
-      </li>
-      <li>
-        <strong className="text-blue-600">Relatórios de Vendas:</strong> Geração
-        de relatórios mensais e diários para análise de desempenho.
-      </li>
-      <li>
-        <strong className="text-blue-600">Notificação de Estoque Baixo:</strong>{" "}
-        Alertas automáticos para reposição de estoque.
-      </li>
-      <li>
-        <strong className="text-blue-600">Busca e Filtro de Produtos:</strong>{" "}
-        Facilite a pesquisa por categoria, tamanho, cor e preço.
-      </li>
-      <li>
-        <strong className="text-blue-600">Controle de Fornecedores:</strong>{" "}
-        Cadastre fornecedores e mantenha o estoque sempre abastecido.
-      </li>
-    </ul>
+const HomePage = () => {
+  const featuresNotes = [
+    {
+      title: "Cadastro de Calçados",
+      description:
+        "Adicionar, editar e excluir sapatos com informações detalhadas.",
+      titleStyle: "text-blue-600",
+    },
+    {
+      title: "Controle de Quantidade",
+      description:
+        "Acompanhe o estoque em tempo real e ajuste automaticamente após vendas.",
+      titleStyle: "text-blue-600",
+    },
+    {
+      title: "Relatórios de Vendas",
+      description:
+        "Geração de relatórios mensais e diários para análise de desempenho.",
+      titleStyle: "text-blue-600",
+    },
+    {
+      title: "Notificação de Estoque Baixo",
+      description: "Alertas automáticos para reposição de estoque.",
+      titleStyle: "text-blue-600",
+    },
+    {
+      title: "Busca e Filtro de Produtos",
+      description: "Facilite a pesquisa por categoria, tamanho, cor e preço.",
+      titleStyle: "text-blue-600",
+    },
+    {
+      title: "Controle de Fornecedores",
+      description:
+        "Cadastre fornecedores e mantenha o estoque sempre abastecido.",
+      titleStyle: "text-blue-600",
+    },
+  ];
 
-    <h2 className="text-2xl font-bold text-gray-800 mb-4 mt-8">
-      Notas de Segurança
-    </h2>
-    <ul className="list-disc pl-5 space-y-2 text-gray-700">
-      <li>
-        <strong className="text-red-600">Senha Forte:</strong> Utilize uma
-        combinação de letras, números e caracteres especiais.
-      </li>
-      <li>
-        <strong className="text-red-600">Autenticação de Dois Fatores:</strong>{" "}
-        Ative a 2FA para proteger sua conta contra acessos não autorizados.
-      </li>
-      <li>
-        <strong className="text-red-600">
-          Logout em Dispositivos Públicos:
-        </strong>{" "}
-        Sempre faça logout em dispositivos compartilhados ou públicos.
-      </li>
-    </ul>
-  </Container>
-);
+  const securityNotes = [
+    {
+      title: "Senha Forte",
+      description:
+        "Utilize uma combinação de letras, números e caracteres especiais.",
+      titleStyle: "text-red-600",
+    },
+    {
+      title: "Autenticação de Dois Fatores",
+      description:
+        "Ative a 2FA para proteger sua conta contra acessos não autorizados.",
+      titleStyle: "text-red-600",
+    },
+    {
+      title: "Logout em Dispositivos Públicos",
+      description:
+        "Sempre faça logout em dispositivos compartilhados ou públicos.",
+      titleStyle: "text-red-600",
+    },
+  ];
+
+  return (
+    <Container>
+      <Title className="mb-4" text="Funcionalidades do Sistema" />
+      <TopicList items={featuresNotes} />
+      <Title className="my-4" text="Notas de Segurança" />
+      <TopicList items={securityNotes} />
+    </Container>
+  );
+};
 
 export default HomePage;
