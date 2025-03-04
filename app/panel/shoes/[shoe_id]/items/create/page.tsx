@@ -1,4 +1,6 @@
-import Form from "./form";
+import Title from "@/components/ui/title";
+import Container from "@/components/templates/container";
+import ItemCreateForm from "@/components/shared/form/item-create";
 
 type UpdateUserPageProps = {
   params: Promise<{
@@ -9,7 +11,12 @@ type UpdateUserPageProps = {
 const CreateShoePage = async ({ params }: UpdateUserPageProps) => {
   const shoeId = parseInt((await params).shoe_id, 10);
 
-  return <Form shoeId={shoeId} />;
+  return (
+    <Container display="small">
+      <Title className="text-center text-3xl mb-6" text="Novo item" />
+      <ItemCreateForm shoeId={shoeId} />;
+    </Container>
+  );
 };
 
 export default CreateShoePage;
