@@ -23,29 +23,13 @@ const useTagEditForm = ({ tag }: UseTagEditFormProps) => {
   const { success, failure } = useToast();
   const router = useRouter();
 
-  const { register, handleSubmit, setValue, formState } =
-    useForm<TagEditSchema>({
-      resolver: zodResolver(tagEditSchema),
-      defaultValues: {
-        sku: tag.sku,
-        metadata: JSON.stringify(tag.metadata, null, 2),
-      },
-    });
-
-  const handleIndentJson = () => {
-    const jsonInput = document.getElementById(
-      "metadata"
-    ) as HTMLTextAreaElement;
-    try {
-      setValue(
-        "metadata",
-        JSON.stringify(JSON.parse(jsonInput.value), null, 2)
-      );
-    } catch (err) {
-      failure("Erro ao formatar JSON");
-      console.error(err);
-    }
-  };
+  const { register, handleSubmit, formState } = useForm<TagEditSchema>({
+    resolver: zodResolver(tagEditSchema),
+    defaultValues: {
+      sku: tag.sku,
+      metadata: JSON.stringify(tag.metadata, null, 2),
+    },
+  });
 
   const handleSubmitTagEdit = async (data: TagEditSchema) => {
     try {
@@ -67,7 +51,6 @@ const useTagEditForm = ({ tag }: UseTagEditFormProps) => {
     formState,
     handleSubmit,
     handleSubmitTagEdit,
-    handleIndentJson,
   };
 };
 

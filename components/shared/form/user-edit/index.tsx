@@ -3,8 +3,8 @@
 import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
-import useUserEditForm from "./use-user-edit";
 import InputSelect from "@/components/ui/input-select";
+import useUserEditForm from "./use-user-edit";
 
 type UserEditFormProps = {
   user: {
