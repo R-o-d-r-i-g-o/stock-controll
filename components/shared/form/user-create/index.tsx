@@ -1,5 +1,6 @@
 "use client";
 
+import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import useUserCreateForm from "./use-user-create";
@@ -19,30 +20,20 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
     <form onSubmit={handleSubmit(handleCrateUser)}>
       <div className="mb-6">
         <InputLable htmlFor="name" lable="Nome" />
-        <input
-          id="name"
-          placeholder="Digite seu nome completo"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("name")}
-        />
+        <InputText id="name" placeholder="John..." {...register("name")} />
         <InputError error={formState.errors.name} />
       </div>
       <div className="mb-6">
         <InputLable htmlFor="email" lable="E-mail" />
-        <input
-          id="email"
-          placeholder="Digite seu email"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("email")}
-        />
+        <InputText id="email" placeholder="j@mail.com" {...register("email")} />
         <InputError error={formState.errors.email} />
       </div>
       <div className="mb-6">
         <InputLable htmlFor="password" lable="Senha" />
-        <input
+        <InputText
           id="password"
-          placeholder="Digite sua senha"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
+          isPassword
+          placeholder="****"
           {...register("password")}
         />
         <InputError error={formState.errors.password} />

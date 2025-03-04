@@ -75,10 +75,11 @@ const Table: React.FC<TableProps> = ({ filter, data }) => (
                 {u.deletedAt != null ? "🔴 Desa." : "🟢 Ativo"}
               </TableCell>
               <TableCell>
-                <Link href={`/panel/users/${u.id}`}></Link>
-                <IconButton>
-                  <MoreVertIcon />
-                </IconButton>
+                <Link href={`/panel/users/${u.id}`}>
+                  <IconButton>
+                    <MoreVertIcon />
+                  </IconButton>
+                </Link>
               </TableCell>
             </TableRow>
           ))}

@@ -1,5 +1,6 @@
 "use client";
 
+import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import useShoeCreateForm from "./use-shoe-create";
@@ -12,42 +13,22 @@ const ShoeCreateForm = () => {
     <form onSubmit={handleSubmit(handleSubmitCreateShoe)}>
       <div className="mb-6">
         <InputLable htmlFor="name" lable="Nome" />
-        <input
-          id="name"
-          placeholder="Digite o nome do produto"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300 "
-          {...register("name")}
-        />
+        <InputText id="name" placeholder="bota..." {...register("name")} />
         <InputError error={formState.errors.name} />
       </div>
       <div className="mb-6">
         <InputLable htmlFor="sole" lable="Sola" />
-        <input
-          id="sole"
-          placeholder="Tipo de sola"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("sole")}
-        />
+        <InputText id="sole" placeholder="madeira..." {...register("sole")} />
         <InputError error={formState.errors.sole} />
       </div>
       <div className="mb-6">
         <InputLable htmlFor="color" lable="Cor" />
-        <input
-          id="color"
-          placeholder="Digite a cor do produto"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("color")}
-        />
+        <InputText id="color" placeholder="verde..." {...register("color")} />
         <InputError error={formState.errors.color} />
       </div>
       <div className="mb-6">
         <InputLable htmlFor="note" lable="Nota" />
-        <input
-          id="note"
-          placeholder="Notas sobre o produto"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("note")}
-        />
+        <InputText id="note" placeholder="Obs..." {...register("note")} />
         <InputError error={formState.errors.note} />
       </div>
       <button

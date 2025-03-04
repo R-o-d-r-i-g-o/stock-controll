@@ -11,7 +11,7 @@ const InputLable: React.FC<InputLableProps> = ({
 }) => (
   <label
     {...rest}
-    className={`block text-sm font-medium text-gray-600 ${className}`}
+    className={`block mb-2 text-sm font-medium text-gray-600 ${className}`}
   >
     {lable}
   </label>

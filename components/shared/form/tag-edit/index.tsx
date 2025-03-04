@@ -4,6 +4,7 @@ import React from "react";
 
 import IdentIcon from "@mui/icons-material/FormatIndentIncrease";
 
+import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import useTagEditForm from "./use-tag-edit";
@@ -33,12 +34,7 @@ const TagEditForm: React.FC<TagEditFormProps> = ({ tag }) => {
     <form onSubmit={handleSubmit(handleSubmitTagEdit)}>
       <div className="mb-6">
         <InputLable htmlFor="sku" lable="Cód. Etiqueta" />
-        <input
-          id="sku"
-          placeholder="Digite o código da tag"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("sku")}
-        />
+        <InputText id="sku" placeholder="código..." {...register("sku")} />
         <InputError error={formState.errors.sku} />
       </div>
       <div className="mb-6">

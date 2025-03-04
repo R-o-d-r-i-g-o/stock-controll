@@ -1,5 +1,6 @@
 "use client";
 
+import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import { reportTypes } from "@/common";
@@ -12,22 +13,12 @@ const ReportCreateForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
         <InputLable htmlFor="startDate" lable="Data inicial" />
-        <input
-          type="date"
-          id="startDate"
-          {...register("startDate")}
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-        />
+        <InputText id="startDate" type="date" {...register("startDate")} />
         <InputError error={formState.errors.startDate} />
       </div>
       <div>
         <InputLable htmlFor="endDate" lable="Data Final" />
-        <input
-          type="date"
-          id="endDate"
-          {...register("endDate")}
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-        />
+        <InputText id="endDate" type="date" {...register("endDate")} />
         <InputError error={formState.errors.endDate} />
       </div>
       <div>

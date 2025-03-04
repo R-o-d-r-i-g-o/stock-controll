@@ -2,6 +2,7 @@
 
 import IdentIcon from "@mui/icons-material/FormatIndentIncrease";
 
+import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import useTagCreateForm from "./use-tag-create";
@@ -19,12 +20,7 @@ const TagCreatePage = () => {
     <form onSubmit={handleSubmit(handleSubmitTagCreate)}>
       <div className="mb-6">
         <InputLable htmlFor="tag" lable="Cód. Etiqueta" />
-        <input
-          id="tag"
-          placeholder="Digite aqui o código da etiqueta"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("tag")}
-        />
+        <InputText id="tag" placeholder="código..." {...register("tag")} />
         <InputError error={formState.errors.tag} />
       </div>
       <div className="mb-6">

@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import { footSizesList } from "@/common";
@@ -19,21 +20,15 @@ const ItemCreateForm: React.FC<ItemCreateformProps> = ({ shoeId }) => {
     <form onSubmit={handleSubmit(handleSubmitTagEdit)}>
       <div className="mb-6">
         <InputLable htmlFor="sku" lable="SKU" />
-        <input
-          id="sku"
-          placeholder="Definal um código para o item"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
-          {...register("sku")}
-        />
+        <InputText id="sku" placeholder="Cód. do item" {...register("sku")} />
         <InputError error={formState.errors.sku} />
       </div>
       <div className="mb-6">
         <InputLable htmlFor="price" lable="Preço" />
-        <input
+        <InputText
           id="price"
           step={0.01}
-          placeholder="Digite o preço do item"
-          className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
+          placeholder="12.0"
           {...register("price")}
         />
         <InputError error={formState.errors.price} />
