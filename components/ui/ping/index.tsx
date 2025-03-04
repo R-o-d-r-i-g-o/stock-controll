@@ -7,11 +7,13 @@ import * as src from "@/lib/services";
 import { defaultDateMask } from "@/common";
 import moment from "moment";
 
-const InfoButton = async () => {
+type InfoButtonProps = React.HTMLAttributes<HTMLDivElement> & {};
+
+const InfoButton = async ({ className }: InfoButtonProps) => {
   const appData = await src.fetchHealthData();
 
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       <div className="fixed bottom-5 left-5 group">
         <div className="w-14 h-14 bg-white text-black rounded-full flex items-center justify-center shadow-lg group-hover:rounded-r-none">
           <InfoIcon className="text-black" />
@@ -23,7 +25,9 @@ const InfoButton = async () => {
           </p>
           <p className="flex justify-between">
             <span className="font-semibold">Banco:</span>
-            <span>{appData.database ? "🟢 Ok" : "🔴 Down"}</span>
+            <span>
+              {appData.database ? "🟢 Disponível" : "🔴 Indisponível"}
+            </span>
           </p>
           <p className="flex justify-between">
             <span className="font-semibold">Build:</span>

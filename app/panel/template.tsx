@@ -11,11 +11,11 @@ type TemplateProps = {
 
 const Template = ({ children }: TemplateProps) => (
   <Background className="flex-col gap-6 p-4">
-    <Drawer />
-    <React.Suspense fallback={<Loader />}>{children}</React.Suspense>
-    <div className="hidden sm:block">
-      <Ping />
-    </div>
+    <React.Suspense fallback={<Loader />}>
+      <Drawer />
+      {children}
+    </React.Suspense>
+    <Ping className="hidden sm:block" />
   </Background>
 );
 

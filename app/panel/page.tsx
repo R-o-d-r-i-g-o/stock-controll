@@ -28,8 +28,9 @@ const HomePage = () => {
       titleStyle: "text-blue-600",
     },
     {
-      title: "Busca e Filtro de Produtos",
-      description: "Facilite a pesquisa por categoria, tamanho, cor e preço.",
+      title: "Busca e Filtro de Calçados",
+      description:
+        "Facilite a pesquisa por nome, tamanho, etiqueta cor e preço.",
       titleStyle: "text-blue-600",
     },
     {
