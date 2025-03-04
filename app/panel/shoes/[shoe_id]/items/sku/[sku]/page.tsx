@@ -1,5 +1,13 @@
-import QrCodeCreator from "@/components/ui/qrcode-creator";
-import BarCodeCreator from "@/components/ui/barcode-creator";
+import React from "react";
+
+import Title from "@/components/ui/title";
+import Loader from "@/components/ui/loader";
+import Container from "@/components/templates/container";
+
+const [QrCodeCreator, BarCodeCreator] = [
+  React.lazy(() => import("@/components/ui/qrcode-creator")),
+  React.lazy(() => import("@/components/ui/barcode-creator")),
+];
 
 type SkuPageProps = {
   params: Promise<{
@@ -11,30 +19,28 @@ const SkuPage = async ({ params }: SkuPageProps) => {
   const itemSku = (await params).sku;
 
   return (
-    <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full max-w-4xl mx-5 sm:mx-0">
-      <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
-        Detalhes do SKU
-      </h2>
-      <p className="text-center text-lg mb-10">
-        Código SKU: <strong>{itemSku}</strong>
-      </p>
-
+    <Container>
+      <Title className="text-center mb-6" text="Detalhes do SKU" />
+      <Title className="text-center sm:text-lg mb-6" text={itemSku} />
       <div className="mb-8 overflow-x-auto">
         <h3 className="text-lg font-medium mb-2 text-gray-700">QR Code:</h3>
-        <div className="flex justify-center">
-          <QrCodeCreator text={itemSku} />
+        <div className="flex w-full justify-center">
+          <React.Suspense fallback={<Loader />}>
+            <QrCodeCreator text={itemSku} />
+          </React.Suspense>
         </div>
       </div>
-
       <div className="mb-8 overflow-x-auto">
         <h3 className="text-lg font-medium mb-2 text-gray-700">
           Código de Barras:
         </h3>
-        <div className="flex justify-center">
-          <BarCodeCreator text={itemSku} />
+        <div className="flex w-full justify-center">
+          <React.Suspense fallback={<Loader />}>
+            <BarCodeCreator text={itemSku} />
+          </React.Suspense>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
