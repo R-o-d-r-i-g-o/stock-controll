@@ -1,5 +1,6 @@
 "use client";
 
+import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import { reportTypes } from "@/common";
 import useReportCreateForm from "./use-report";
@@ -10,12 +11,7 @@ const ReportCreateForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
-        <label
-          htmlFor="startDate"
-          className="block text-left font-medium text-gray-600"
-        >
-          Data Inicial
-        </label>
+        <InputLable htmlFor="startDate" lable="Data inicial" />
         <input
           type="date"
           id="startDate"
@@ -25,12 +21,7 @@ const ReportCreateForm = () => {
         <InputError error={formState.errors.startDate} />
       </div>
       <div>
-        <label
-          htmlFor="endDate"
-          className="block text-left font-medium text-gray-600"
-        >
-          Data Final
-        </label>
+        <InputLable htmlFor="endDate" lable="Data Final" />
         <input
           type="date"
           id="endDate"
@@ -40,9 +31,7 @@ const ReportCreateForm = () => {
         <InputError error={formState.errors.endDate} />
       </div>
       <div>
-        <span className="block text-left font-medium text-gray-600">
-          Tipo de Relatório
-        </span>
+        <InputLable lable="Tipo de Relatório" />
         <div className="flex justify-start gap-6 mt-2 text-gray-700">
           {reportTypes.map((rt) => (
             <label key={rt.value} className="flex items-center space-x-2">

@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import useLoginForm from "./use-login";
 
@@ -17,12 +18,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ callbackUrl }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-6">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Email
-        </label>
+        <InputLable htmlFor="email" lable="E-mail" />
         <input
           id="email"
           placeholder="Digite seu email"
@@ -32,12 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ callbackUrl }) => {
         <InputError error={formState.errors.email} />
       </div>
       <div className="mb-6">
-        <label
-          htmlFor="password"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Senha
-        </label>
+        <InputLable htmlFor="password" lable="Senha" />
         <input
           id="password"
           type="password"

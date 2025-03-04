@@ -1,5 +1,6 @@
 "use client";
 
+import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import useShoeCreateForm from "./use-shoe-create";
 
@@ -10,12 +11,7 @@ const ShoeCreateForm = () => {
   return (
     <form onSubmit={handleSubmit(handleSubmitCreateShoe)}>
       <div className="mb-6">
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Nome
-        </label>
+        <InputLable htmlFor="name" lable="Nome" />
         <input
           id="name"
           placeholder="Digite o nome do produto"
@@ -25,12 +21,7 @@ const ShoeCreateForm = () => {
         <InputError error={formState.errors.name} />
       </div>
       <div className="mb-6">
-        <label
-          htmlFor="sole"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Sola
-        </label>
+        <InputLable htmlFor="sole" lable="Sola" />
         <input
           id="sole"
           placeholder="Tipo de sola"
@@ -40,12 +31,7 @@ const ShoeCreateForm = () => {
         <InputError error={formState.errors.sole} />
       </div>
       <div className="mb-6">
-        <label
-          htmlFor="color"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Cor
-        </label>
+        <InputLable htmlFor="color" lable="Cor" />
         <input
           id="color"
           placeholder="Digite a cor do produto"
@@ -55,12 +41,7 @@ const ShoeCreateForm = () => {
         <InputError error={formState.errors.color} />
       </div>
       <div className="mb-6">
-        <label
-          htmlFor="note"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Nota
-        </label>
+        <InputLable htmlFor="note" lable="Nota" />
         <input
           id="note"
           placeholder="Notas sobre o produto"

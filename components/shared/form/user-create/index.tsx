@@ -1,5 +1,6 @@
 "use client";
 
+import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
 import useUserCreateForm from "./use-user-create";
 
@@ -17,12 +18,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
   return (
     <form onSubmit={handleSubmit(handleCrateUser)}>
       <div className="mb-6">
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Nome
-        </label>
+        <InputLable htmlFor="name" lable="Nome" />
         <input
           id="name"
           placeholder="Digite seu nome completo"
@@ -32,12 +28,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
         <InputError error={formState.errors.name} />
       </div>
       <div className="mb-6">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Email
-        </label>
+        <InputLable htmlFor="email" lable="E-mail" />
         <input
           id="email"
           placeholder="Digite seu email"
@@ -47,12 +38,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
         <InputError error={formState.errors.email} />
       </div>
       <div className="mb-6">
-        <label
-          htmlFor="password"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Senha
-        </label>
+        <InputLable htmlFor="password" lable="Senha" />
         <input
           id="password"
           placeholder="Digite sua senha"
@@ -62,12 +48,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
         <InputError error={formState.errors.password} />
       </div>
       <div className="mb-6">
-        <label
-          htmlFor="roleId"
-          className="block text-sm font-medium text-gray-600"
-        >
-          Cargo
-        </label>
+        <InputLable htmlFor="roleId" lable="Cargo" />
         <select
           id="roleId"
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
