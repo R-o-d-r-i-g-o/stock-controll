@@ -1,11 +1,11 @@
-import BarCode from "./_barCode";
-import QrCode from "./_qrCode";
+import QrCodeCreator from "@/components/ui/qrcode-creator";
+import BarCodeCreator from "@/components/ui/barcode-creator";
 
 type SkuPageProps = {
   params: Promise<{
     sku: string;
   }>;
-}
+};
 
 const SkuPage = async ({ params }: SkuPageProps) => {
   const itemSku = (await params).sku;
@@ -22,18 +22,20 @@ const SkuPage = async ({ params }: SkuPageProps) => {
       <div className="mb-8 overflow-x-auto">
         <h3 className="text-lg font-medium mb-2 text-gray-700">QR Code:</h3>
         <div className="flex justify-center">
-          <QrCode text={itemSku} />
+          <QrCodeCreator text={itemSku} />
         </div>
       </div>
 
       <div className="mb-8 overflow-x-auto">
-        <h3 className="text-lg font-medium mb-2 text-gray-700">Código de Barras:</h3>
+        <h3 className="text-lg font-medium mb-2 text-gray-700">
+          Código de Barras:
+        </h3>
         <div className="flex justify-center">
-          <BarCode text={itemSku} />
+          <BarCodeCreator text={itemSku} />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default SkuPage;
