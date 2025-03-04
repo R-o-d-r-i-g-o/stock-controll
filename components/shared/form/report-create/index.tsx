@@ -1,5 +1,6 @@
 "use client";
 
+import InputError from "@/components/ui/input-error";
 import { reportTypes } from "@/common";
 import useReportCreateForm from "./use-report";
 
@@ -21,11 +22,7 @@ const ReportCreateForm = () => {
           {...register("startDate")}
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
         />
-        {formState.errors.startDate && (
-          <p className="text-red-500 text-sm mt-1">
-            {formState.errors.startDate.message}
-          </p>
-        )}
+        <InputError error={formState.errors.startDate} />
       </div>
       <div>
         <label
@@ -40,11 +37,7 @@ const ReportCreateForm = () => {
           {...register("endDate")}
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
         />
-        {formState.errors.endDate && (
-          <p className="text-red-500 text-sm mt-1">
-            {formState.errors.endDate.message}
-          </p>
-        )}
+        <InputError error={formState.errors.endDate} />
       </div>
       <div>
         <span className="block text-left font-medium text-gray-600">
@@ -63,11 +56,7 @@ const ReportCreateForm = () => {
             </label>
           ))}
         </div>
-        {formState.errors.reportType && (
-          <p className="text-red-500 text-sm mt-1">
-            {formState.errors.reportType.message}
-          </p>
-        )}
+        <InputError error={formState.errors.reportType} />
       </div>
       <button
         type="submit"

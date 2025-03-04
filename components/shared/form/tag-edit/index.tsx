@@ -3,6 +3,8 @@
 import React from "react";
 
 import IdentIcon from "@mui/icons-material/FormatIndentIncrease";
+
+import InputError from "@/components/ui/input-error";
 import useTagEditForm from "./use-tag-edit";
 
 type TagEditFormProps = {
@@ -41,11 +43,7 @@ const TagEditForm: React.FC<TagEditFormProps> = ({ tag }) => {
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
           {...register("sku")}
         />
-        {formState.errors.sku && (
-          <p className="text-red-500 text-sm mt-1">
-            {formState.errors.sku.message}
-          </p>
-        )}
+        <InputError error={formState.errors.sku} />
       </div>
       <div className="mb-6">
         <label
@@ -70,11 +68,7 @@ const TagEditForm: React.FC<TagEditFormProps> = ({ tag }) => {
             <IdentIcon fontSize="small" />
           </button>
         </div>
-        {formState.errors.metadata && (
-          <p className="text-red-500 text-sm mt-1">
-            {formState.errors.metadata.message}
-          </p>
-        )}
+        <InputError error={formState.errors.metadata} />
       </div>
       <button
         type="submit"

@@ -1,5 +1,6 @@
 "use client";
 
+import InputError from "@/components/ui/input-error";
 import useUserCreateForm from "./use-user-create";
 
 type UserCreateFormProps = {
@@ -28,11 +29,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
           {...register("name")}
         />
-        {formState.errors.name && (
-          <span className="text-red-600 text-sm">
-            {formState.errors.name.message}
-          </span>
-        )}
+        <InputError error={formState.errors.name} />
       </div>
       <div className="mb-6">
         <label
@@ -47,11 +44,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
           {...register("email")}
         />
-        {formState.errors.email && (
-          <span className="text-red-600 text-sm">
-            {formState.errors.email.message}
-          </span>
-        )}
+        <InputError error={formState.errors.email} />
       </div>
       <div className="mb-6">
         <label
@@ -66,11 +59,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
           {...register("password")}
         />
-        {formState.errors.password && (
-          <span className="text-red-600 text-sm">
-            {formState.errors.password.message}
-          </span>
-        )}
+        <InputError error={formState.errors.password} />
       </div>
       <div className="mb-6">
         <label
@@ -93,11 +82,7 @@ const UserCreateForm = ({ roles }: UserCreateFormProps) => {
             </option>
           ))}
         </select>
-        {formState.errors.roleId && (
-          <span className="text-red-600 text-sm">
-            {formState.errors.roleId.message}
-          </span>
-        )}
+        <InputError error={formState.errors.roleId} />
       </div>
       <button
         type="submit"

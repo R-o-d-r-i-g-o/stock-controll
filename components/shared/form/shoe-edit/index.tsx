@@ -1,5 +1,6 @@
 "use client";
 
+import InputError from "@/components/ui/input-error";
 import useShoeEditForm from "./use-shoe-edit";
 
 type ShoeEditFormProps = {
@@ -35,11 +36,7 @@ const ShoeEditForm = ({ data, customSubmitButton }: ShoeEditFormProps) => {
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("name")}
           />
-          {formState.errors.name && (
-            <p className="text-red-500 text-sm mt-1">
-              {formState.errors.name.message}
-            </p>
-          )}
+          <InputError error={formState.errors.name} />
         </div>
         <div>
           <label
@@ -54,11 +51,7 @@ const ShoeEditForm = ({ data, customSubmitButton }: ShoeEditFormProps) => {
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("sole")}
           />
-          {formState.errors.sole && (
-            <p className="text-red-500 text-sm mt-1">
-              {formState.errors.sole.message}
-            </p>
-          )}
+          <InputError error={formState.errors.sole} />
         </div>
         <div>
           <label
@@ -73,11 +66,7 @@ const ShoeEditForm = ({ data, customSubmitButton }: ShoeEditFormProps) => {
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("color")}
           />
-          {formState.errors.color && (
-            <p className="text-red-500 text-sm mt-1">
-              {formState.errors.color.message}
-            </p>
-          )}
+          <InputError error={formState.errors.color} />
         </div>
         <div>
           <label
@@ -92,11 +81,7 @@ const ShoeEditForm = ({ data, customSubmitButton }: ShoeEditFormProps) => {
             className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
             {...register("note")}
           />
-          {formState.errors.note && (
-            <p className="text-red-500 text-sm mt-1">
-              {formState.errors.note.message}
-            </p>
-          )}
+          <InputError error={formState.errors.note} />
         </div>
       </div>
       {customSubmitButton && customSubmitButton}

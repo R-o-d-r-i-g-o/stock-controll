@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import InputError from "@/components/ui/input-error";
 import { footSizesList } from "@/common";
 import useItemEditFrom from "./use-item-edit";
 
@@ -36,9 +37,7 @@ const ItemEditForm: React.FC<ItemEditFormProps> = ({ item }) => {
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
           {...register("sku")}
         />
-        {formState.errors.sku && (
-          <p className="text-red-600 text-sm">{formState.errors.sku.message}</p>
-        )}
+        <InputError error={formState.errors.sku} />
       </div>
       <div className="mb-6">
         <label
@@ -54,11 +53,7 @@ const ItemEditForm: React.FC<ItemEditFormProps> = ({ item }) => {
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
           {...register("price")}
         />
-        {formState.errors.price && (
-          <p className="text-red-600 text-sm">
-            {formState.errors.price.message}
-          </p>
-        )}
+        <InputError error={formState.errors.price} />
       </div>
       <div className="mb-6">
         <label
@@ -78,11 +73,7 @@ const ItemEditForm: React.FC<ItemEditFormProps> = ({ item }) => {
             </option>
           ))}
         </select>
-        {formState.errors.size && (
-          <p className="text-red-600 text-sm">
-            {formState.errors.size.message}
-          </p>
-        )}
+        <InputError error={formState.errors.size} />
       </div>
       <button
         type="submit"

@@ -1,7 +1,9 @@
 "use client";
 
-import useTagCreateForm from "./use-tag-create";
 import IdentIcon from "@mui/icons-material/FormatIndentIncrease";
+
+import InputError from "@/components/ui/input-error";
+import useTagCreateForm from "./use-tag-create";
 
 const TagCreatePage = () => {
   const {
@@ -27,11 +29,7 @@ const TagCreatePage = () => {
           className="w-full mt-2 p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300"
           {...register("tag")}
         />
-        {formState.errors.tag && (
-          <p className="text-red-500 text-sm mt-1">
-            {formState.errors.tag.message}
-          </p>
-        )}
+        <InputError error={formState.errors.tag} />
       </div>
       <div className="mb-6">
         <label
@@ -56,11 +54,7 @@ const TagCreatePage = () => {
             <IdentIcon fontSize="small" />
           </button>
         </div>
-        {formState.errors.metadata && (
-          <p className="text-red-500 text-sm mt-1">
-            {formState.errors.metadata.message}
-          </p>
-        )}
+        <InputError error={formState.errors.metadata} />
       </div>
       <button
         type="submit"
