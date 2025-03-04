@@ -9,6 +9,7 @@ type InputTextProps = React.InputHTMLAttributes<HTMLInputElement> & {
 };
 
 const InputText: React.FC<InputTextProps> = ({
+  type = "text",
   className,
   isPassword,
   ...rest
@@ -19,10 +20,9 @@ const InputText: React.FC<InputTextProps> = ({
     <div className="relative">
       <input
         {...rest}
-        type={isPassword && !showPassword ? "password" : "text"}
-        className={`w-full p-3 pr-10 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300 ${className}`}
+        type={isPassword && !showPassword ? "password" : type}
+        className={`w-full p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300 ${className}`}
       />
-
       {isPassword && (
         <button
           type="button"

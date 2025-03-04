@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useZxing, Result } from "react-zxing";
 import { useMediaDevices } from "react-media-devices";
 
@@ -26,16 +26,15 @@ const useScanner = ({
   const [selectedCamera, setSelectedCamera] = useState<string | undefined>();
   const [result, setResult] = useState("");
 
-  const handleVideoDeviceOptions = () => {
-    const videoDevices = useMediaDevices({ constraints }).devices?.filter(
-      (device) => device.kind === "videoinput"
-    );
+  const videoDevices = useMediaDevices({ constraints }).devices?.filter(
+    (device) => device.kind === "videoinput"
+  );
 
-    return videoDevices?.map((device) => ({
+  const handleVideoDeviceOptions = () =>
+    videoDevices?.map((device) => ({
       lable: device.label,
       value: device.deviceId,
     }));
-  };
 
   const handleBeepSound = () => {
     if (!audioRef.current) return;
