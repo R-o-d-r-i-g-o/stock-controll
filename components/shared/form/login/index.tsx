@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import useLogin from "./use-login";
+import useLoginForm from "./use-login";
 
 type LoginFormProps = {
   callbackUrl?: string;
 };
 
 const LoginForm: React.FC<LoginFormProps> = ({ callbackUrl }) => {
-  const { register, formState, handleSubmit, onSubmit } = useLogin({
+  const { register, formState, handleSubmit, onSubmit } = useLoginForm({
     callbackUrl,
   });
 

@@ -1,10 +1,10 @@
 "use client";
 
-import useReport from "./use-report";
 import { reportTypes } from "@/common";
+import useReportCreateForm from "./use-report";
 
-const ReportPage = () => {
-  const { register, formState, handleSubmit, onSubmit } = useReport();
+const ReportCreateForm = () => {
+  const { register, formState, handleSubmit, onSubmit } = useReportCreateForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -80,4 +80,4 @@ const ReportPage = () => {
   );
 };
 
-export default ReportPage;
+export default ReportCreateForm;

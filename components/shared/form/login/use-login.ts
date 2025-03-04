@@ -7,11 +7,11 @@ import { loginSchema, LoginSchema } from "./schema";
 
 import { useRouter } from "next/navigation";
 
-type useLoginProps = {
+type UseLoginFormProps = {
   callbackUrl?: string;
 };
 
-const useLogin = ({ callbackUrl }: useLoginProps) => {
+const useLoginForm = ({ callbackUrl }: UseLoginFormProps) => {
   const router = useRouter();
   const { failure } = useToast();
 
@@ -39,4 +39,4 @@ const useLogin = ({ callbackUrl }: useLoginProps) => {
   };
 };
 
-export default useLogin;
+export default useLoginForm;

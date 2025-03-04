@@ -11,7 +11,7 @@ const setEndOfDay = (date: Date): Date => {
   return date;
 };
 
-const reportSchema = z
+const reportCreateSchema = z
   .object({
     startDate: z
       .string()
@@ -44,6 +44,6 @@ const reportSchema = z
     }
   );
 
-type ReportSchema = z.infer<typeof reportSchema>;
+type ReportCreateSchema = z.infer<typeof reportCreateSchema>;
 
-export { reportSchema, type ReportSchema };
+export { reportCreateSchema, type ReportCreateSchema };

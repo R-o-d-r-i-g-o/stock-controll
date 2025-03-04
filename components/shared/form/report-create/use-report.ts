@@ -1,18 +1,17 @@
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { reportSchema, ReportSchema } from "./schema";
+import { reportCreateSchema, ReportCreateSchema } from "./schema";
 
-import { useRouter } from "next/navigation";
-
-const useReport = () => {
+const useReportCreateForm = () => {
   const router = useRouter();
 
-  const { register, handleSubmit, formState } = useForm<ReportSchema>({
-    resolver: zodResolver(reportSchema),
+  const { register, handleSubmit, formState } = useForm<ReportCreateSchema>({
+    resolver: zodResolver(reportCreateSchema),
   });
 
-  const onSubmit: SubmitHandler<ReportSchema> = (data) => {
+  const onSubmit: SubmitHandler<ReportCreateSchema> = (data) => {
     const { startDate, endDate, reportType } = data;
 
     const searchParams = new URLSearchParams({
@@ -31,4 +30,4 @@ const useReport = () => {
   };
 };
 
-export default useReport;
+export default useReportCreateForm;
