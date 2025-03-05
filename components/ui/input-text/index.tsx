@@ -1,13 +1,13 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 
 import Visibility from "@mui/icons-material/Visibility";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import Scanner from "@/components/ui/scanner";
-import useInputPassword from "./use-input-password";
 import Container from "@/components/templates/container";
 import useInputScanner from "./use-input-scanner";
+import useInputPassword from "./use-input-password";
 
 type InputTextProps = React.InputHTMLAttributes<HTMLInputElement> & {
   isPassword?: boolean;
