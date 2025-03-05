@@ -1,12 +1,13 @@
 import React from "react";
 
 type ContainerTemplateProps = React.HTMLProps<HTMLDivElement> & {
-  display?: "large" | "small";
+  display?: "large" | "small" | "minimum";
 };
 
 const contaninerTemplateSize = {
   large: "max-w-4xl w-full",
   small: "max-w-md w-full",
+  minimum: "max-w-xs w-full",
 };
 
 const ContainerTemplate: React.FC<ContainerTemplateProps> = ({

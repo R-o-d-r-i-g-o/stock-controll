@@ -14,7 +14,12 @@ const TagCreatePage = () => {
     <form onSubmit={handleSubmit(handleSubmitTagCreate)}>
       <div className="mb-6">
         <InputLable htmlFor="tag" lable="Cód. Etiqueta" />
-        <InputText id="tag" placeholder="código..." {...register("tag")} />
+        <InputText
+          id="tag"
+          isScanner
+          placeholder="código..."
+          {...register("tag")}
+        />
         <InputError error={formState.errors.tag} />
       </div>
       <div className="mb-6">

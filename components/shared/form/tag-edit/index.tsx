@@ -28,7 +28,12 @@ const TagEditForm: React.FC<TagEditFormProps> = ({ tag }) => {
     <form onSubmit={handleSubmit(handleSubmitTagEdit)}>
       <div className="mb-6">
         <InputLable htmlFor="sku" lable="Cód. Etiqueta" />
-        <InputText id="sku" placeholder="código..." {...register("sku")} />
+        <InputText
+          id="sku"
+          isScanner
+          placeholder="código..."
+          {...register("sku")}
+        />
         <InputError error={formState.errors.sku} />
       </div>
       <div className="mb-6">
