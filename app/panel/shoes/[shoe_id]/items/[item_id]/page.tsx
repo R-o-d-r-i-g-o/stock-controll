@@ -24,7 +24,7 @@ const UpdateShoePage = async ({ params }: UpdateShoePageProps) => {
         className="text-center text-3xl mb-6"
         text={`Editar item #${item.id}`}
       />
-      <ItemEditForm item={item} />;
+      <ItemEditForm item={item} />
       <ItemDeleteForm itemId={item.id} shoeId={item.shoeId} />
     </Container>
   );

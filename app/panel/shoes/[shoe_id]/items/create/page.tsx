@@ -14,7 +14,7 @@ const CreateShoePage = async ({ params }: UpdateUserPageProps) => {
   return (
     <Container display="small">
       <Title className="text-center text-3xl mb-6" text="Novo item" />
-      <ItemCreateForm shoeId={shoeId} />;
+      <ItemCreateForm shoeId={shoeId} />
     </Container>
   );
 };

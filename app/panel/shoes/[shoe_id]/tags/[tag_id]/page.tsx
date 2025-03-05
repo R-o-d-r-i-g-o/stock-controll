@@ -29,7 +29,7 @@ const TagEditPage = async ({ params }: TagEditPageProps) => {
         className="text-center text-3xl mb-6"
         text={`Editar etiqueta #${tag.id}`}
       />
-      <TagEditForm tag={tag} />;
+      <TagEditForm tag={tag} />
       <TagDeleteForm tagId={tag.id} />
     </Container>
   );

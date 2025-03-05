@@ -13,7 +13,7 @@ const UserCreatePage = async () => {
   return (
     <Container display="small">
       <Title className="text-center mb-6" text="Novo Usuário" />
-      <UserCreateForm roles={rolesList.roles} />;
+      <UserCreateForm roles={rolesList.roles} />
     </Container>
   );
 };
