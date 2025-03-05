@@ -3,6 +3,7 @@ import * as svc from "@/app/api/_backend";
 
 import { validateAuthUser } from "@/common";
 import { createTagSchema } from "@/lib/schemas/tag";
+import { errorHandler } from "@/app/api/_backend/common/api.error";
 
 type UserParams = {
   params: Promise<{ shoe_id: string }>;
@@ -16,9 +17,8 @@ const getShoeRelatedTags = async (req: NextRequest, { params }: UserParams) => {
     const tags = await svc.getShoeRelatedTags(shoeId);
 
     return Response.json(tags, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 

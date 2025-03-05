@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import * as svc from "@/app/api/_backend";
 
 import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
+import { errorHandler } from "@/app/api/_backend/common/api.error";
 
 import { validateAuthUser } from "@/common";
 import { z } from "zod";
@@ -45,9 +46,8 @@ const scanItem = async (req: NextRequest) => {
       });
       return Response.json({ skus: result.data.skus }, { status: 200 });
     }
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 

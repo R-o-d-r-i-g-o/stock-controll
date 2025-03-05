@@ -3,6 +3,7 @@ import { getReportSchema } from "@/lib/schemas";
 
 import { NextRequest, NextResponse } from "next/server";
 import * as XLSX from "xlsx";
+import { errorHandler } from "@/app/api/_backend/common/api.error";
 
 import * as svc from "@/app/api/_backend";
 import moment from "moment";
@@ -45,9 +46,8 @@ const generateReport = async (req: NextRequest) => {
     );
 
     return new NextResponse(buffer, { status: 200, headers });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 

@@ -3,6 +3,8 @@ import { NextRequest } from "next/server";
 import { itemCreationSchema } from "@/lib/schemas";
 import * as svc from "@/app/api/_backend";
 
+import { errorHandler } from "@/app/api/_backend/common/api.error";
+
 const createItem = async (req: NextRequest) => {
   try {
     const payload = await itemCreationSchema.validate(await req.json());
@@ -14,9 +16,8 @@ const createItem = async (req: NextRequest) => {
     });
 
     return Response.json({ itemId }, { status: 201 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 

@@ -5,6 +5,7 @@ import { itemUpdateSchema } from "@/lib/schemas";
 import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
 
 import { validateAuthUser } from "@/common";
+import { errorHandler } from "@/app/api/_backend/common/api.error";
 
 type UserParams = {
   params: Promise<{ item_id: string }>;
@@ -18,9 +19,8 @@ const getItemById = async (req: NextRequest, { params }: UserParams) => {
     const item = await svc.getItemBy({ id: itemId });
 
     return Response.json(item, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 
@@ -36,9 +36,8 @@ const deleteItem = async (req: NextRequest, { params }: UserParams) => {
       note: "O usuário deletou o item",
     });
     return Response.json(null, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 
@@ -59,9 +58,8 @@ const updateItem = async (req: NextRequest, { params }: UserParams) => {
       note: "O usuário atualizou as informações do item",
     });
     return Response.json(null, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 

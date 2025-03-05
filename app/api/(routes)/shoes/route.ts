@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import * as svc from "@/app/api/_backend";
 
 import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
+import { errorHandler } from "@/app/api/_backend/common/api.error";
 
 import { createShoeSchema } from "@/lib/schemas";
 import { validateAuthUser } from "@/common";
@@ -18,9 +19,8 @@ const getShoesAndItemsPaginated = async (req: NextRequest) => {
 
     const groupedItems = await svc.getShoesGroupedBySizePaginated(payload);
     return Response.json(groupedItems, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 
@@ -39,9 +39,8 @@ const createShoe = async (req: NextRequest) => {
     });
 
     return Response.json({ shoeId }, { status: 201 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 

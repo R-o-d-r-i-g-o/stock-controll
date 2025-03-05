@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import * as svc from "@/app/api/_backend";
 
 import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
+import { errorHandler } from "@/app/api/_backend/common/api.error";
 
 import { updateUserSchema } from "@/lib/schemas";
 import { validateAuthUser } from "@/common";
@@ -18,9 +19,8 @@ const getUserByID = async (req: NextRequest, { params }: UserParams) => {
     const user = await svc.getUserBy({ id: userId });
 
     return Response.json(user, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 
@@ -38,9 +38,8 @@ const deleteUser = async (req: NextRequest, { params }: UserParams) => {
     });
 
     return Response.json(null, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 
@@ -63,9 +62,8 @@ const updateUser = async (req: NextRequest, { params }: UserParams) => {
     });
 
     return Response.json(null, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 

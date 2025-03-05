@@ -4,6 +4,8 @@ import * as svc from "@/app/api/_backend";
 import { validateAuthUser } from "@/common";
 import { updateTagSchema } from "@/lib/schemas/tag";
 
+import { errorHandler } from "@/app/api/_backend/common/api.error";
+
 type UserParams = {
   params: Promise<{
     tag_id: string;
@@ -22,9 +24,8 @@ const getUniqueTag = async (req: NextRequest, { params }: UserParams) => {
     });
 
     return Response.json(tag, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 
@@ -45,9 +46,8 @@ const updateTag = async (req: NextRequest, { params }: UserParams) => {
     });
 
     return Response.json(null, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 

@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 
 import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
+import { errorHandler } from "@/app/api/_backend/common/api.error";
 
 import { createUserSchema } from "@/lib/schemas";
 import * as svc from "@/app/api/_backend";
@@ -21,9 +22,8 @@ const createUser = async (req: NextRequest) => {
       note: `O usuário criou um registro de novo usuário (#${userId}).`,
     });
     return Response.json({ userId }, { status: 201 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 
@@ -39,9 +39,8 @@ const getUsersPaginated = async (req: NextRequest) => {
 
     const userList = await svc.getUsersPaginated(payload);
     return Response.json(userList, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return Response.json(error, { status: 500 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
   }
 };
 
