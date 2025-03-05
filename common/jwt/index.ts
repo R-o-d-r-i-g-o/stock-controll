@@ -6,7 +6,7 @@ import { getServerSession } from "next-auth/next";
 import { getToken } from "next-auth/jwt";
 
 import { options } from "@/app/api/(routes)/auth/[...nextauth]/options";
-import * as svc from "@/app/api/_backend";
+import * as svc from "@/app/api/_backend/features/user/user.svc";
 
 const secret = process.env.NEXTAUTH_SECRET;
 

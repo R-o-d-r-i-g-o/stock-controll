@@ -1,4 +1,4 @@
-import * as repo from "./_repo";
+import * as repo from "./ping.repo";
 
 /**
  * Função para verificar a conexão com o banco de dados.

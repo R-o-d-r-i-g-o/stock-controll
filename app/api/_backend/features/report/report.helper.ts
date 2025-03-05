@@ -1,4 +1,4 @@
-import * as t from "./_svc.types";
+import * as t from "../shoe/_svc.types";
 import { footSizesList } from "../../../../../common";
 
 const formateStockReportColumnData = (

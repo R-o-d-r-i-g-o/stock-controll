@@ -1,70 +1,7 @@
-import { NextRequest } from "next/server";
-import * as svc from "@/app/api/_backend";
-
-import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
-import { errorHandler } from "@/app/api/_backend/common/api.error";
-
-import { updateUserSchema } from "@/lib/schemas";
-import { validateAuthUser } from "@/common";
-
-type UserParams = {
-  params: Promise<{ user_id: string }>;
-};
-
-const getUserByID = async (req: NextRequest, { params }: UserParams) => {
-  try {
-    await validateAuthUser(req);
-
-    const userId = parseInt((await params).user_id, 10);
-    const user = await svc.getUserBy({ id: userId });
-
-    return Response.json(user, { status: 200 });
-  } catch (err) {
-    return errorHandler(err).ToNextApiError();
-  }
-};
-
-const deleteUser = async (req: NextRequest, { params }: UserParams) => {
-  try {
-    console.log("veio no delete de usuário ", req);
-
-    const user = await validateAuthUser(req);
-
-    const userId = parseInt((await params).user_id, 10);
-    await svc.deleteUser(userId);
-    await auditSvc.createAuditRecord({
-      userId: user!.id,
-      note: `O usuário deletou o registro de usuário #${userId}`,
-    });
-
-    return Response.json(null, { status: 200 });
-  } catch (err) {
-    return errorHandler(err).ToNextApiError();
-  }
-};
-
-const updateUser = async (req: NextRequest, { params }: UserParams) => {
-  try {
-    const userId = await validateAuthUser(req);
-
-    const payload = {
-      ...(await req.json()),
-      id: parseInt((await params).user_id, 10),
-    };
-    const result = updateUserSchema.safeParse(payload);
-    if (result.error)
-      return Response.json({ errors: result.error.errors }, { status: 400 });
-
-    await svc.updateUser(result.data);
-    await auditSvc.createAuditRecord({
-      userId: userId!.id,
-      note: `O usuário atualizou os dadas do usuário #${userId}`,
-    });
-
-    return Response.json(null, { status: 200 });
-  } catch (err) {
-    return errorHandler(err).ToNextApiError();
-  }
-};
+import {
+  updateUser,
+  deleteUser,
+  getUserByID,
+} from "@/app/api/_backend/features/user/user.handler";
 
 export { updateUser as PUT, deleteUser as DELETE, getUserByID as GET };

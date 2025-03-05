@@ -1,4 +1,4 @@
-import * as repo from "./_repo";
+import * as repo from "./item.repo";
 import * as t from "./_svc.types";
 
 const getItemBy = async (filter: t.getShoeByProps) => {
