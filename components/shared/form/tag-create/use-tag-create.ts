@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import * as svc from "@/lib/services";
-import { useToast } from "@/lib/hooks";
+import { useToast } from "@/lib/hooks/use-toast";
 import { createTagSchema, CreateShoeSchema } from "./schema";
 
 const useTagCreateForm = () => {

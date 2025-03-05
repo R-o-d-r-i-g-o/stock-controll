@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
-import { useToast } from "@/lib/hooks";
+import { useToast } from "@/lib/hooks/use-toast";
 import { deleteItemById } from "@/lib/services";
 
 type useItemDeleteFormProps = {

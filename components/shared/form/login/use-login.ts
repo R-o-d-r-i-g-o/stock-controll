@@ -2,7 +2,7 @@ import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useToast } from "@/lib/hooks";
+import { useToast } from "@/lib/hooks/use-toast";
 import { loginSchema, LoginSchema } from "./schema";
 
 import { useRouter } from "next/navigation";

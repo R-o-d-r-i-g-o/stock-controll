@@ -1,5 +1,5 @@
 import React from "react";
-import { useToast } from "@/lib/hooks";
+import { useToast } from "@/lib/hooks/use-toast";
 
 import * as svc from "@/lib/services";
 

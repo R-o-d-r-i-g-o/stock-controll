@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useToast } from "@/lib/hooks";
+import { useToast } from "@/lib/hooks/use-toast";
 import { updateItem } from "@/lib/services";
 import { footSizesList } from "@/common";
 import { itemEditSchema, ItemEditSchema } from "./schema";
