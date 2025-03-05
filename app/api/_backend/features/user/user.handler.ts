@@ -1,9 +1,6 @@
 import { NextRequest } from "next/server";
 import { errorHandler, launchError } from "../../common/api.error";
 
-import NextAuth from "next-auth";
-import { nextAuthOptions } from "./user.option";
-
 import auditSvc from "../audit/audit.svc";
 import * as userSvc from "./user.svc";
 
@@ -123,8 +120,6 @@ const getRoleList = async (req: NextRequest) => {
   }
 };
 
-const nextAuthHandler = NextAuth(nextAuthOptions);
-
 export {
   createUser,
   getUsersPaginated,
@@ -132,5 +127,4 @@ export {
   deleteUser,
   getUserByID,
   getRoleList,
-  nextAuthHandler,
 };

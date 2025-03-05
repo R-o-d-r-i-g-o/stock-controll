@@ -2,7 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt from "next-auth/jwt";
 
-import { getAuthUser } from "./user.svc";
+import { getAuthUser } from "../user/user.svc";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
