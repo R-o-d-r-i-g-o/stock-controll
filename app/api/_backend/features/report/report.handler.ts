@@ -1,4 +1,4 @@
-import { ReportType, validateAuthUser } from "@/common";
+import { ReportType } from "@/common";
 import { getReportSchema } from "./report.schema";
 
 import { NextRequest, NextResponse } from "next/server";
@@ -10,6 +10,7 @@ import * as h from "./report.helper";
 import * as svc from "../shoe/shoe.svc";
 import moment from "moment";
 import { z } from "zod";
+import { validateAuthUser } from "../../common/api.auth";
 
 type ReportFilterData = z.infer<typeof getReportSchema>;
 

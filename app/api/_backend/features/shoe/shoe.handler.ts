@@ -7,7 +7,7 @@ import { errorHandler } from "../../common/api.error";
 
 import { createShoeSchema, updateShoeSchema } from "./shoe.schema";
 
-import { validateAuthUser } from "@/common";
+import { validateAuthUser } from "../../common/api.auth";
 
 type UserParams = {
   params: Promise<{ shoe_id: string }>;

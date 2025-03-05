@@ -1,23 +1,13 @@
-"use server";
-
 import { NextRequest } from "next/server";
-import { getServerSession } from "next-auth/next";
-
 import { getToken } from "next-auth/jwt";
 
-import { options } from "@/app/api/(routes)/auth/[...nextauth]/options";
-import * as svc from "@/app/api/_backend/features/user/user.svc";
+import * as svc from "../features/user/user.svc";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
 async function validateAuthUser(req: NextRequest) {
-  const [token, session] = await Promise.all([
-    getToken({ req, secret }),
-    getServerSession(options),
-  ]);
+  const token = await getToken({ req, secret });
 
-  // Note: the email field is check as unique in database.
-  if (session) return await svc.getUserBy({ email: session.user.email });
   if (token) return await svc.getUserBy({ email: token.email });
 
   // Note: allow get requests to be made 'cause cors in setted to application only.

@@ -2,8 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt from "next-auth/jwt";
 
-import { getAuthUser } from "@/app/api/_backend/features/user/user.svc";
-import { NavigationPage } from "@/common";
+import { getAuthUser } from "./user.svc";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
@@ -48,15 +47,15 @@ const callbacks: NextAuthOptions["callbacks"] = {
   },
 };
 
-const options: NextAuthOptions = {
+const nextAuthOptions: NextAuthOptions = {
   providers,
   callbacks,
   pages: {
-    signIn: NavigationPage.Login,
+    signIn: "/login",
   },
   session: {
     strategy: "jwt",
   },
 };
 
-export { options };
+export { nextAuthOptions };

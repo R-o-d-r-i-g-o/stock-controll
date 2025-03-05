@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
 import { errorHandler, launchError } from "../../common/api.error";
 
+import NextAuth from "next-auth";
+import { nextAuthOptions } from "./user.option";
+
 import auditSvc from "../audit/audit.svc";
 import * as userSvc from "./user.svc";
 
@@ -10,7 +13,7 @@ import {
   updateUserSchema,
 } from "./user.schema";
 
-import { validateAuthUser } from "@/common";
+import { validateAuthUser } from "../../common/api.auth";
 
 type UserParams = {
   params: Promise<{ user_id: string }>;
@@ -120,6 +123,8 @@ const getRoleList = async (req: NextRequest) => {
   }
 };
 
+const nextAuthHandler = NextAuth(nextAuthOptions);
+
 export {
   createUser,
   getUsersPaginated,
@@ -127,4 +132,5 @@ export {
   deleteUser,
   getUserByID,
   getRoleList,
+  nextAuthHandler,
 };

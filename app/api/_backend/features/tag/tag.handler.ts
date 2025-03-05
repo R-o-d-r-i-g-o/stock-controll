@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import * as svc from "./tag.svc";
 
-import { validateAuthUser } from "@/common";
+import { validateAuthUser } from "../../common/api.auth";
 import { createTagSchema, updateTagSchema } from "./tag.schema";
 import { errorHandler } from "../../common/api.error";
 

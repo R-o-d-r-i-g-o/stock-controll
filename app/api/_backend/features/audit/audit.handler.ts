@@ -4,8 +4,12 @@ import svc from "./audit.svc";
 import { getUsersPaginatedSchema } from "./audit.schema";
 import { errorHandler, launchError } from "../../common/api.error";
 
+import { validateAuthUser } from "../../common/api.auth";
+
 const getUsersPaginated = async (req: NextRequest) => {
   try {
+    await validateAuthUser(req);
+
     const searchParams = req.nextUrl.searchParams;
 
     const result = getUsersPaginatedSchema.safeParse({

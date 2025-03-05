@@ -9,7 +9,7 @@ import {
 import * as svc from "./item.svc";
 
 import { errorHandler } from "../../common/api.error";
-import { validateAuthUser } from "@/common";
+import { validateAuthUser } from "../../common/api.auth";
 import auditSvc from "../audit/audit.svc";
 
 type UserParams = {

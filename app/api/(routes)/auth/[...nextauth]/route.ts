@@ -1,6 +1,3 @@
-import NextAuth from "next-auth";
-import { options } from "./options";
+import { nextAuthHandler } from "@/app/api/_backend/features/user/user.handler";
 
-const handler = NextAuth(options);
-
-export { handler as GET, handler as POST };
+export { nextAuthHandler as GET, nextAuthHandler as POST };
