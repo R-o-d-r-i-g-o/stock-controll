@@ -1,4 +1,4 @@
-import { prisma, prismaTransaction } from "../prisma";
+import { prisma, prismaTransaction } from "../../prisma";
 import * as t from "./_repo.types";
 
 const createAudit = async (audit: t.createHistoryProps) => {

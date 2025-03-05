@@ -1,5 +1,5 @@
 import * as t from "./_svc.types";
-import { footSizesList } from "../../common";
+import { footSizesList } from "../../../../../common";
 
 const formateStockReportColumnData = (
   shoes: t.getShoesGroupedByItemSizePaginatedRespose["shoes"]
@@ -26,7 +26,7 @@ const formateStockReportColumnData = (
   });
 
 const formateExpeditionShoesReportColumnData = (
-  shoes: { shoeName: string; amount: BigInt }[]
+  shoes: { shoeName: string; amount: bigint }[]
 ) =>
   shoes.map((shoe) => ({
     "Nome calçado": shoe.shoeName,

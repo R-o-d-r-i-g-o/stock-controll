@@ -1,4 +1,4 @@
-import { prisma } from "../prisma";
+import { prisma } from "../../prisma";
 
 const pingDatabase = async () => {
   const result = await prisma.$queryRaw<number>`SELECT 1`;

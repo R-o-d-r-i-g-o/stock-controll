@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 
 import { itemCreationSchema } from "@/lib/schemas";
-import * as svc from "@/backend";
+import * as svc from "@/app/api/_backend";
 
 const createItem = async (req: NextRequest) => {
   try {

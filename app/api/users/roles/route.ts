@@ -1,4 +1,4 @@
-import * as svc from "@/backend";
+import * as svc from "@/app/api/_backend";
 
 import { validateAuthUser } from "@/common";
 import { NextRequest } from "next/server";

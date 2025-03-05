@@ -1,4 +1,4 @@
-import { prismaTransaction, prisma } from "@/backend";
+import { prismaTransaction, prisma } from "@/app/api/_backend";
 
 const main = async () => {
   await prismaTransaction(async () => {

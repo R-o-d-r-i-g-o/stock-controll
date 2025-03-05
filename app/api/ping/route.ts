@@ -2,7 +2,7 @@ import moment from "moment";
 import getConfig from "next/config";
 
 import app from "@/package.json";
-import { pingDatabase } from "@/backend";
+import { pingDatabase } from "@/app/api/_backend";
 
 const setupPing = async () => {
   const { publicRuntimeConfig } = getConfig();

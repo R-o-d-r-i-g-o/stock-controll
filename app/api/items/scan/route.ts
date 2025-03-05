@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import * as svc from "@/backend";
+import * as svc from "@/app/api/_backend";
 
 import { validateAuthUser } from "@/common";
 import { z } from "zod";

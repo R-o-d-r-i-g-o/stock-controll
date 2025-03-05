@@ -1,4 +1,4 @@
-import { prisma, prismaTransaction } from "../prisma";
+import { prisma, prismaTransaction } from "../../prisma";
 import moment from "moment";
 import * as t from "./_repo.types";
 
@@ -60,7 +60,7 @@ const getItemShoesPaginated = async (filter: t.getShoesPaginated) => {
 const getExpeditionShoes = async (filter: t.getExpeditionShoes) => {
   const formateDate = (date: Date) => moment(date).format("YYYY-MM-DD");
 
-  const result = await prisma.$queryRaw<{ shoeName: string; amount: BigInt }[]>`
+  const result = await prisma.$queryRaw<{ shoeName: string; amount: bigint }[]>`
     SELECT
       s.name   as "shoeName",
       COUNT(1) as "amount"

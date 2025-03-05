@@ -2,7 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt from "next-auth/jwt";
 
-import { getAuthUser } from "@/backend";
+import { getAuthUser } from "@/app/api/_backend";
 import { NavigationPage } from "@/common";
 
 const secret = process.env.NEXTAUTH_SECRET;

@@ -1,4 +1,4 @@
-import { prisma, prismaTransaction } from "../prisma";
+import { prisma, prismaTransaction } from "../../prisma";
 import moment from "moment";
 import * as t from "./_repo.types";
 
