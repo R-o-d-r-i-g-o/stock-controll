@@ -1,16 +1,28 @@
 import { prisma, prismaTransaction } from "../../prisma/prisma.client";
 import moment from "moment";
-import * as t from "./_repo.types";
+import * as t from "./user.types";
 
-const createUser = async (user: t.createUser) => {
+type UserRepository = {
+  createUser(user: t.createUser): Promise<number>;
+  updateUser(user: t.updateUser): Promise<void>;
+  deleteUser(id: number): t.DeleteUserRepoOutput;
+  getUserBy(filter: t.getUser): t.GetUserByRepoOutput;
+  getUsersCount(filter: t.getUsersPaginated): Promise<number>;
+  getUsersPaginated(filter: t.getUsersPaginated): t.GetUsersPaginatedRepoOutput;
+  getRolesList(): t.GetRolesListRepoOutput;
+};
+
+const userRepository = {} as UserRepository;
+
+userRepository.createUser = async (user) => {
   return await prismaTransaction(async () => {
     const { id } = await prisma.user.create({ data: user });
     return id;
   });
 };
 
-const updateUser = async (user: t.updateUser) => {
-  return await prismaTransaction(async () => {
+userRepository.updateUser = async (user) => {
+  await prismaTransaction(async () => {
     await prisma.user.update({
       where: { id: user.id },
       data: {
@@ -23,26 +35,25 @@ const updateUser = async (user: t.updateUser) => {
   });
 };
 
-const deleteUser = async (id: number) => {
+userRepository.deleteUser = async (id) => {
   return await prismaTransaction(async () => {
-    const userdeleted = await prisma.user.update({
+    return await prisma.user.update({
       where: { id },
       data: { deletedAt: moment.utc().toDate() },
     });
-    return userdeleted;
   });
 };
 
-const getUserBy = async (filter: t.getUser) => {
+userRepository.getUserBy = async (filter) => {
   return await prisma.user.findFirstOrThrow({ where: { ...filter } });
 };
 
-const getusersCount = async (filter: t.getUsersPaginated) => {
+userRepository.getUsersCount = async (filter) => {
   console.log("filter", filter);
   return await prisma.user.count();
 };
 
-const getUsersPaginated = async (filter: t.getUsersPaginated) => {
+userRepository.getUsersPaginated = async (filter) => {
   return await prisma.user.findMany({
     take: filter.take,
     skip: filter.skip,
@@ -50,16 +61,8 @@ const getUsersPaginated = async (filter: t.getUsersPaginated) => {
   });
 };
 
-const getRolesList = async () => {
+userRepository.getRolesList = async () => {
   return await prisma.role.findMany();
 };
 
-export {
-  updateUser,
-  createUser,
-  deleteUser,
-  getUserBy,
-  getusersCount,
-  getUsersPaginated,
-  getRolesList,
-};
+export default userRepository;

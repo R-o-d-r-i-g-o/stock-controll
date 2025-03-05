@@ -1,1 +1,1 @@
-export * from "./_svc";
+export * from "./user.svc";

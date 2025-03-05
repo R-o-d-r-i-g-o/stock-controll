@@ -1,6 +1,6 @@
-import * as repo from "./_repo";
-import * as h from "./_helper";
-import * as t from "./_svc.types";
+import repo from "./user.repo";
+import * as h from "./user.helper";
+import * as t from "./user.types";
 
 const { comparePasswords, encryptPassword } = h.hashHelper();
 
@@ -45,8 +45,10 @@ const getUsersPaginated = async (filter: t.getUsersPaginatedProps) => {
     take: filter.size,
   };
 
-  const userCount = await repo.getusersCount(parsedFilter);
-  const userList = await repo.getUsersPaginated(parsedFilter);
+  const [userCount, userList] = await Promise.all([
+    repo.getUsersCount(parsedFilter),
+    repo.getUsersPaginated(parsedFilter),
+  ]);
 
   return {
     meta: {
