@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient({
   log: ["query", "info", "warn", "error"],
@@ -11,6 +11,6 @@ const prismaTransaction = async <T>(func: () => Promise<T>) => {
   return obj;
 };
 
-export { prisma, prismaTransaction };
+export { prisma, Prisma, prismaTransaction };
 
 export default prisma;

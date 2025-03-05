@@ -1,4 +1,4 @@
-import prisma from "../../prisma";
+import prisma from "../../prisma/prisma.client";
 import * as t from "./_repo.types";
 
 const getShoeRelatedTags = async (shoeId: number) => {

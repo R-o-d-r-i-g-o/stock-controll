@@ -1,6 +1,8 @@
 import { NextRequest } from "next/server";
 import * as svc from "@/app/api/_backend";
 
+import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
+
 import { updateShoeSchema } from "@/lib/schemas";
 import { validateAuthUser } from "@/common";
 
@@ -31,7 +33,7 @@ const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
 
     const shoeId = parseInt((await params).shoe_id, 10);
     await svc.deleteShoe(shoeId);
-    await svc.createAudit({
+    await auditSvc.createAuditRecord({
       userId: user!.id,
       note: `O usuário deletou o calçado #${shoeId}`,
     });
@@ -57,7 +59,7 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
       return Response.json({ errors: result.error.errors }, { status: 400 });
 
     await svc.updateShoe(result.data);
-    await svc.createAudit({
+    await auditSvc.createAuditRecord({
       userId: user!.id,
       note: `O usuário editou as informações do calçado #${result.data.id}`,
     });

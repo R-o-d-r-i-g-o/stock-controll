@@ -1,6 +1,8 @@
 import { NextRequest } from "next/server";
 import * as svc from "@/app/api/_backend";
 
+import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
+
 import { createShoeSchema } from "@/lib/schemas";
 import { validateAuthUser } from "@/common";
 
@@ -31,7 +33,7 @@ const createShoe = async (req: NextRequest) => {
       return Response.json({ errors: result.error.errors }, { status: 400 });
 
     const shoeId = await svc.createShoe(result.data);
-    await svc.createAudit({
+    await auditSvc.createAuditRecord({
       userId: user!.id,
       note: `O usuário cadastrou um novo calçado (#${shoeId})`,
     });

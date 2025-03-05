@@ -1,6 +1,8 @@
 import { NextRequest } from "next/server";
 import * as svc from "@/app/api/_backend";
 
+import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
+
 import { validateAuthUser } from "@/common";
 import { z } from "zod";
 
@@ -28,7 +30,7 @@ const scanItem = async (req: NextRequest) => {
 
     if (result.data.oprationType === OperationType.Debit) {
       await svc.debitItems({ userId: user!.id, skus: result.data.skus });
-      await svc.createAudit({
+      await auditSvc.createAuditRecord({
         userId: user!.id,
         note: `O usuário debitou os itens: ${result.data.skus.join(", ")}`,
       });
@@ -37,7 +39,7 @@ const scanItem = async (req: NextRequest) => {
 
     if (result.data.oprationType === OperationType.Register) {
       await svc.createItems({ userId: user!.id, skus: result.data.skus });
-      await svc.createAudit({
+      await auditSvc.createAuditRecord({
         userId: user!.id,
         note: `O usuário criou os itens: ${result.data.skus.join(", ")}`,
       });

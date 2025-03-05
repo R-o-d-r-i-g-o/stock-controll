@@ -1,5 +1,7 @@
 import { NextRequest } from "next/server";
 
+import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
+
 import { createUserSchema } from "@/lib/schemas";
 import * as svc from "@/app/api/_backend";
 
@@ -14,7 +16,7 @@ const createUser = async (req: NextRequest) => {
       return Response.json({ errors: result.error.errors }, { status: 400 });
 
     const userId = await svc.createUser(result.data);
-    await svc.createAudit({
+    await auditSvc.createAuditRecord({
       userId: user!.id,
       note: `O usuário criou um registro de novo usuário (#${userId}).`,
     });

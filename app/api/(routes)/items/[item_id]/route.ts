@@ -2,6 +2,8 @@ import { NextRequest } from "next/server";
 import * as svc from "@/app/api/_backend";
 import { itemUpdateSchema } from "@/lib/schemas";
 
+import auditSvc from "@/app/api/_backend/features/audit/audit.svc";
+
 import { validateAuthUser } from "@/common";
 
 type UserParams = {
@@ -28,7 +30,7 @@ const deleteItem = async (req: NextRequest, { params }: UserParams) => {
     const itemId = parseInt((await params).item_id, 10);
 
     await svc.deleteItem(itemId);
-    await svc.createAudit({
+    await auditSvc.createAuditRecord({
       userId: user!.id,
       itemId: itemId,
       note: "O usuário deletou o item",
@@ -51,7 +53,7 @@ const updateItem = async (req: NextRequest, { params }: UserParams) => {
     const result = await itemUpdateSchema.validate(payload);
 
     await svc.updateItem(result);
-    await svc.createAudit({
+    await auditSvc.createAuditRecord({
       userId: user!.id,
       itemId: result.id,
       note: "O usuário atualizou as informações do item",
