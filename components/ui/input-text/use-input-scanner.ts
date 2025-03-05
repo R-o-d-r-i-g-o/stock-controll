@@ -8,6 +8,7 @@ const useInputScanner = () => {
     if (inputRef.current) {
       inputRef.current.value = result;
     }
+    toggleVisibleScanner();
   };
 
   const toggleVisibleScanner = () => {
