@@ -1,10 +1,11 @@
-type useInputTextareaProps = {
-  fieldId: string;
-};
+import React from "react";
 
-const useInputTextarea = ({ fieldId }: useInputTextareaProps) => {
+const useInputTextarea = () => {
+  const textareaRef = React.useRef<HTMLTextAreaElement | null>(null);
+
   const handleIndentJson = () => {
-    const inputArea = document.getElementById(fieldId)! as HTMLTextAreaElement;
+    if (!textareaRef.current) return;
+    const inputArea = textareaRef.current;
 
     try {
       const jsonInput = JSON.parse(inputArea.value);
@@ -15,6 +16,7 @@ const useInputTextarea = ({ fieldId }: useInputTextareaProps) => {
   };
 
   return {
+    textareaRef,
     handleIndentJson,
   };
 };
