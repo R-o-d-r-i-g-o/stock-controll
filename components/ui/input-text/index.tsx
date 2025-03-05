@@ -9,12 +9,14 @@ import Container from "@/components/templates/container";
 import useInputScanner from "./use-input-scanner";
 import useInputPassword from "./use-input-password";
 
-type InputTextProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  isPassword?: boolean;
-  isScanner?: boolean;
-};
+type InputTextProps = React.InputHTMLAttributes<HTMLInputElement> &
+  React.RefAttributes<HTMLInputElement> & {
+    isPassword?: boolean;
+    isScanner?: boolean;
+  };
 
 const InputText: React.FC<InputTextProps> = ({
+  ref,
   type = "text",
   className,
   isScanner,
@@ -71,9 +73,12 @@ const InputText: React.FC<InputTextProps> = ({
     <div className="relative">
       <input
         {...rest}
-        ref={inputRef}
         type={isPassword && !showPassword ? "password" : type}
         className={`w-full p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300 ${className}`}
+        ref={(e) => {
+          if (typeof ref === "function") ref(e);
+          inputRef.current = e;
+        }}
       />
       {isPassword && isPasswordContent}
       {isScanner && isScannerContent}

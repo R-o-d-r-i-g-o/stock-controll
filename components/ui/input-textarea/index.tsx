@@ -2,11 +2,13 @@ import React from "react";
 import IdentIcon from "@mui/icons-material/FormatIndentIncrease";
 import useInputTextarea from "./use-input-text-area";
 
-type InputTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  allowIndent?: boolean;
-};
+type InputTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> &
+  React.RefAttributes<HTMLTextAreaElement> & {
+    allowIndent?: boolean;
+  };
 
 const InputTextarea: React.FC<InputTextareaProps> = ({
+  ref,
   className,
   allowIndent,
   ...rest
@@ -18,7 +20,10 @@ const InputTextarea: React.FC<InputTextareaProps> = ({
       <textarea
         {...rest}
         className={`w-full overflow-y-hidden p-3 pr-10 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 transition duration-300 ${className}`}
-        ref={textareaRef}
+        ref={(e) => {
+          if (typeof ref === "function") ref(e);
+          textareaRef.current = e;
+        }}
       />
       {allowIndent && (
         <button
