@@ -22,7 +22,7 @@ import moment from "moment";
 import useTable from "./use-table";
 import Pagination from "@/components/ui/pagination";
 import { AuxTable } from "./aux-table";
-import { defaultDateMask } from "@/common";
+import { defaultDateMask } from "@/common/constants";
 
 const TableContainer = styled(MuiTableContainer)({
   boxShadow: "0px 13px 20px 0px #80808029",

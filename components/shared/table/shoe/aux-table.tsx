@@ -1,4 +1,4 @@
-import { footSizesList } from "@/common";
+import { footSizesList } from "@/common/constants";
 import {
   Table,
   TableBody,

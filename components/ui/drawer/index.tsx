@@ -1,53 +1,40 @@
 "use client";
 
-import * as React from "react";
+import React from "react";
 
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import {
+  Box,
+  List,
+  Button,
+  Drawer as MuiDrawer,
+  Divider,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Chip,
+} from "@mui/material";
 
-import UndoIcon from "@mui/icons-material/Undo";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { WarningRounded } from "@mui/icons-material";
 
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { Anchor, MenuItem } from "./types";
+import useDrawer from "./use-drawer";
 
-import { menuItems, menuPositions, Anchor } from "@/common";
-import { Chip } from "@mui/material";
+type DrawerProps = {
+  menuOptions: MenuItem[];
+};
 
-import Warning from "@mui/icons-material/WarningRounded";
+const Drawer: React.FC<DrawerProps> = ({ menuOptions }) => {
+  const { state, actionItem, toggleDrawer, menuPositions, handleNavigation } =
+    useDrawer();
 
-const MenuDrawer = () => {
-  const router = useRouter();
-
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
-
-  const actionItem = [
-    {
-      lable: "Voltar",
-      icon: UndoIcon,
-      action: router.back,
-    },
-    {
-      lable: "Sair",
-      icon: ExitToAppIcon,
-      action: () => signOut().then(),
-    },
-  ];
-
-  const toggleDrawer = (anchor: Anchor, open: boolean) => () =>
-    setState({ ...state, [anchor]: open });
+  const betaLable = (
+    <Chip
+      size="small"
+      label="Beta"
+      className="!bg-yellow-300 !px-2"
+      icon={<WarningRounded fontSize="small" />}
+    />
+  );
 
   const list = (anchor: Anchor) => (
     <Box
@@ -57,21 +44,14 @@ const MenuDrawer = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {menuItems.map(({ beta, lable, nav, icon: Icon }) => (
+        {menuOptions.map(({ beta, lable, nav, icon: Icon }) => (
           <ListItem key={lable} disablePadding>
-            <ListItemButton onClick={() => router.push(nav)}>
-              <ListItemIcon>
+            <ListItemButton onClick={() => handleNavigation(nav)}>
+              <ListItem>
                 <Icon />
-              </ListItemIcon>
+              </ListItem>
               <ListItemText primary={lable} />
-              {beta && (
-                <Chip
-                  size="small"
-                  label="Beta"
-                  className="!bg-yellow-300 !px-2"
-                  icon={<Warning fontSize="small" />}
-                />
-              )}
+              {beta && betaLable}
             </ListItemButton>
           </ListItem>
         ))}
@@ -81,9 +61,9 @@ const MenuDrawer = () => {
         {actionItem.map(({ lable, action, icon: Icon }) => (
           <ListItem key={lable} disablePadding>
             <ListItemButton onClick={action}>
-              <ListItemIcon>
+              <ListItem>
                 <Icon />
-              </ListItemIcon>
+              </ListItem>
               <ListItemText primary={lable} />
             </ListItemButton>
           </ListItem>
@@ -99,17 +79,17 @@ const MenuDrawer = () => {
           <Button onClick={toggleDrawer(anchor, true)}>
             <Icon />
           </Button>
-          <Drawer
+          <MuiDrawer
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
           >
             {list(anchor)}
-          </Drawer>
+          </MuiDrawer>
         </React.Fragment>
       ))}
     </div>
   );
 };
 
-export default MenuDrawer;
+export default Drawer;

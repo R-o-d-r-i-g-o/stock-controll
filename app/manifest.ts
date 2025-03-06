@@ -1,4 +1,4 @@
-import { appConfig } from "@/common";
+import { appConfig } from "@/common/constants";
 import type { MetadataRoute } from "next";
 
 const { name, description } = appConfig;

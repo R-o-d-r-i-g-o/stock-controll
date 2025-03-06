@@ -15,7 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import moment from "moment";
 
-import { defaultDateMask } from "@/common";
+import { defaultDateMask } from "@/common/constants";
 import Pagination from "@/components/ui/pagination";
 
 type TabelaProps = {

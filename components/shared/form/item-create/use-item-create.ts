@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useToast } from "@/lib/hooks/use-toast";
 import { createItem } from "@/lib/services";
-import { footSizesList } from "@/common";
+import { footSizesList } from "@/common/constants";
 import { itemCreateSchema, ItemCreateSchema } from "./schema";
 
 type useItemCreateFormProps = {

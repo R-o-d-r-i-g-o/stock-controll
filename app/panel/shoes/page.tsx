@@ -5,7 +5,7 @@ import Title from "@/components/ui/title";
 import Table from "@/components/shared/table/shoe";
 import Container from "@/components/templates/container";
 
-import { defaultPageSize } from "@/common";
+import { defaultPageSize } from "@/common/constants";
 
 import * as svc from "@/lib/services";
 

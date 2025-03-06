@@ -11,7 +11,7 @@ import {
   IconButton,
 } from "@mui/material";
 
-import { defaultDateMask } from "@/common";
+import { defaultDateMask } from "@/common/constants";
 
 type TableProps = {
   meta: {

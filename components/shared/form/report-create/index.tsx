@@ -3,11 +3,11 @@
 import InputText from "@/components/ui/input-text";
 import InputLable from "@/components/ui/input-lable";
 import InputError from "@/components/ui/input-error";
-import { reportTypes } from "@/common";
 import useReportCreateForm from "./use-report";
 
 const ReportCreateForm = () => {
-  const { register, formState, handleSubmit, onSubmit } = useReportCreateForm();
+  const { register, formState, handleSubmit, onSubmit, reportOptions } =
+    useReportCreateForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -24,15 +24,15 @@ const ReportCreateForm = () => {
       <div>
         <InputLable lable="Tipo de Relatório" />
         <div className="flex justify-start gap-6 mt-2 text-gray-700">
-          {reportTypes.map((rt) => (
-            <label key={rt.value} className="flex items-center space-x-2">
+          {reportOptions.map((opt) => (
+            <label key={opt.value} className="flex items-center space-x-2">
               <input
                 type="radio"
-                value={rt.value}
+                value={opt.value}
                 {...register("reportType")}
                 className="text-indigo-600 focus:ring-indigo-500"
               />
-              <span>{rt.lable}</span>
+              <span>{opt.lable}</span>
             </label>
           ))}
         </div>

@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 
 import { useToast } from "@/lib/hooks/use-toast";
 import { updateUser } from "@/lib/services";
-import { NavigationPage } from "@/common";
 import { EditUserSchema, editUserSchema } from "./schema";
 
 type UseUserEditFormProps = {
@@ -39,7 +38,7 @@ const useUserEditForm = ({ user, roles }: UseUserEditFormProps) => {
     try {
       await updateUser({ ...data, id: user.id });
       success("Usuário atualizado com sucesso!");
-      router.push(NavigationPage.Users);
+      router.push("/panel/users");
     } catch (err) {
       console.error(err);
       failure("Erro ao atualizar usuário. Tente novamente.");

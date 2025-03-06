@@ -13,7 +13,7 @@ import {
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
-import { defaultDateMask } from "@/common";
+import { defaultDateMask } from "@/common/constants";
 
 type TableProps = {
   meta: {

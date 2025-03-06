@@ -5,7 +5,7 @@ import Title from "@/components/ui/title";
 import Table from "@/components/shared/table/user";
 import * as svc from "@/lib/services";
 import Container from "@/components/templates/container";
-import { defaultPageSize } from "@/common";
+import { defaultPageSize } from "@/common/constants";
 
 type UserListPageProps = {
   searchParams: Promise<{

@@ -5,7 +5,7 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { appConfig } from "@/common";
+import { appConfig } from "@/common/constants";
 
 const geistSans = localFont({
   src: "../public/fonts/GeistVF.woff",

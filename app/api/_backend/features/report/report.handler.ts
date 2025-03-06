@@ -1,4 +1,4 @@
-import { ReportType } from "@/common";
+import { ReportType } from "./report.enum";
 import { getReportSchema } from "./report.schema";
 
 import { NextRequest, NextResponse } from "next/server";

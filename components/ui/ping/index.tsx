@@ -4,7 +4,7 @@ import React from "react";
 import InfoIcon from "@mui/icons-material/InfoOutlined";
 
 import * as src from "@/lib/services";
-import { defaultDateMask } from "@/common";
+import { defaultDateMask } from "@/common/constants";
 import moment from "moment";
 
 type InfoButtonProps = React.HTMLAttributes<HTMLDivElement> & {};

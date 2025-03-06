@@ -1,5 +1,5 @@
-import { ReportType } from "@/common";
 import { z } from "zod";
+import { ReportType } from "./enums";
 
 const getDateDifferenceInDays = (startDate: Date, endDate: Date): number => {
   const timeDiff = endDate.getTime() - startDate.getTime();
