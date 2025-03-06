@@ -71,7 +71,7 @@ const getUniqueTag = async (req: NextRequest, { params }: TagParams) => {
 
 const deleteTag = async (req: NextRequest, { params }: TagParams) => {
   try {
-    const user = await validateAuthUser(req);
+    await validateAuthUser(req);
     const { tag_id, shoe_id } = await params;
 
     const result = deleteTagSchema.safeParse({
