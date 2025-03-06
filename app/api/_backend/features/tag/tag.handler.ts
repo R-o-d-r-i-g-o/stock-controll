@@ -1,9 +1,13 @@
 import { NextRequest } from "next/server";
 import * as svc from "./tag.svc";
 
-import { validateAuthUser } from "../../common/api.auth";
-import { createTagSchema, updateTagSchema } from "./tag.schema";
 import { errorHandler } from "../../common/api.error";
+import { validateAuthUser } from "../../common/api.auth";
+import {
+  deleteTagSchema,
+  createTagSchema,
+  updateTagSchema,
+} from "./tag.schema";
 
 type UserParams = {
   params: Promise<{ shoe_id: string }>;
@@ -65,6 +69,26 @@ const getUniqueTag = async (req: NextRequest, { params }: TagParams) => {
   }
 };
 
+const deleteTag = async (req: NextRequest, { params }: TagParams) => {
+  try {
+    const user = await validateAuthUser(req);
+    const { tag_id, shoe_id } = await params;
+
+    const result = deleteTagSchema.safeParse({
+      shoeId: shoe_id,
+      tagId: tag_id,
+    });
+    if (result.error)
+      return Response.json({ errors: result.error.errors }, { status: 400 });
+
+    await svc.deleteTag(result.data);
+
+    return Response.json(null, { status: 200 });
+  } catch (err) {
+    return errorHandler(err).ToNextApiError();
+  }
+};
+
 const updateTag = async (req: NextRequest, { params }: TagParams) => {
   try {
     const user = await validateAuthUser(req);
@@ -87,4 +111,10 @@ const updateTag = async (req: NextRequest, { params }: TagParams) => {
   }
 };
 
-export { getShoeRelatedTags, createShoeRelatedTags, getUniqueTag, updateTag };
+export {
+  getShoeRelatedTags,
+  createShoeRelatedTags,
+  getUniqueTag,
+  deleteTag,
+  updateTag,
+};

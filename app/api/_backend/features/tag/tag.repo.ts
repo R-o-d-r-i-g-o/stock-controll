@@ -46,10 +46,20 @@ const updateTag = async (data: t.UpdateTag) => {
   });
 };
 
+const deleteTag = async (data: t.DeleteTag) => {
+  await prisma.customTag.delete({
+    where: {
+      shoeId: data.shoeId,
+      id: data.tagId,
+    },
+  });
+};
+
 export {
   getShoeRelatedTags,
   createShoeRelateTags,
   getTagBy,
   createTag,
   updateTag,
+  deleteTag,
 };

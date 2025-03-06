@@ -13,10 +13,15 @@ type UpdateTag = {
   metadata?: { [key: string]: object };
 };
 
+type DeleteTag = {
+  tagId: number;
+  shoeId: number;
+};
+
 type GetTagBy = {
   id?: number;
   sku?: string;
   shoeId?: number;
 };
 
-export type { CreateTag, UpdateTag, GetTagBy };
+export type { CreateTag, UpdateTag, DeleteTag, GetTagBy };

@@ -28,10 +28,15 @@ const updateTag = async (data: t.UpdateTag) => {
   await repo.updateTag(data);
 };
 
+const deleteTag = async (data: t.DeleteTag) => {
+  await repo.deleteTag(data);
+};
+
 export {
   getShoeRelatedTags,
   createShoeRelateTags,
   getTagBy,
   createTag,
   updateTag,
+  deleteTag,
 };
