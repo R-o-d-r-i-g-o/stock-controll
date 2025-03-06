@@ -28,9 +28,14 @@ const updateTag = async (data: t.UpdateTag) => {
   return res.data;
 };
 
+const deleteTag = async ({ shoeId, tagId }: t.DeleteTag) => {
+  await api.delete(`/api/shoes/${shoeId}/tags/${tagId}`);
+};
+
 export {
   getShoeRelatedTags,
   getShoeRelatedTag,
   createShoeRelatedTag,
+  deleteTag,
   updateTag,
 };

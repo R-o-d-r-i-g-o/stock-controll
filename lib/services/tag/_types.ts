@@ -23,6 +23,11 @@ type GetShoeRelatedTag = {
   shoeId: number;
 };
 
+type DeleteTag = {
+  tagId: number;
+  shoeId: number;
+};
+
 type GetShoeRelatedTagReponse = {
   sku: string;
   shoeId: number;
@@ -57,6 +62,7 @@ type UpdateTag = {
 
 export type {
   UpdateTag,
+  DeleteTag,
   GetShoeRelatedTags,
   GetShoeRelatedTag,
   CreateShoeRelatedTag,
