@@ -1,6 +1,6 @@
 import { prisma, prismaTransaction } from "../../prisma/prisma.client";
 import moment from "moment";
-import * as t from "./_repo.types";
+import * as t from "./item.types";
 
 const findItemsByCustomTags = async (skus: string[]) => {
   const customTags = await prisma.customTag.findMany({
@@ -13,6 +13,7 @@ const findItemsByCustomTags = async (skus: string[]) => {
       where: {
         ...(tag.metadata as { size: number; price: number }),
         shoeId: tag.shoeId,
+        Expedition: { none: {} },
       },
       select: { id: true },
     })
@@ -22,7 +23,7 @@ const findItemsByCustomTags = async (skus: string[]) => {
   return items.filter((item): item is { id: number } => item?.id != null);
 };
 
-const getItemBy = async (filter: t.getShoeByProps) => {
+const getItemBy = async (filter: t.GetShoeRepoInput) => {
   return await prisma.item.findFirstOrThrow({
     where: {
       id: filter.id || undefined,
@@ -33,7 +34,7 @@ const getItemBy = async (filter: t.getShoeByProps) => {
   });
 };
 
-const createItem = async (shoe: t.createShoeProps) => {
+const createItem = async (shoe: t.CreateShoeRepoInput) => {
   return await prismaTransaction(async () => {
     const { id } = await prisma.item.create({
       data: {
@@ -47,7 +48,7 @@ const createItem = async (shoe: t.createShoeProps) => {
   });
 };
 
-const updateItem = async (data: t.updateShoeProps) => {
+const updateItem = async (data: t.UpdateShoeRepoInput) => {
   return await prismaTransaction(async () => {
     const shoe = await prisma.item.update({
       where: { id: data.id },
@@ -72,7 +73,7 @@ const deleteItem = async (id: number) => {
   });
 };
 
-const debitItems = async (data: t.debitItemsProps) => {
+const debitItems = async (data: t.DebitItemsRepoInput) => {
   const searchPredicate = {
     where: { sku: { in: data.skus } },
     select: { id: true },
@@ -100,7 +101,7 @@ const debitItems = async (data: t.debitItemsProps) => {
   );
 };
 
-const createItems = async (data: t.createItemsProps) => {
+const createItems = async (data: t.CreateItemsRepoInput) => {
   const customTags = await prisma.customTag.findMany({
     where: { sku: { in: data.skus } },
     select: { metadata: true, shoeId: true },
