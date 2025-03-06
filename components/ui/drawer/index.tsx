@@ -9,6 +9,7 @@ import {
   Drawer as MuiDrawer,
   Divider,
   ListItem,
+  ListItemIcon,
   ListItemButton,
   ListItemText,
   Chip,
@@ -47,9 +48,9 @@ const Drawer: React.FC<DrawerProps> = ({ menuOptions }) => {
         {menuOptions.map(({ beta, lable, nav, icon: Icon }) => (
           <ListItem key={lable} disablePadding>
             <ListItemButton onClick={() => handleNavigation(nav)}>
-              <ListItem>
+              <ListItemIcon>
                 <Icon />
-              </ListItem>
+              </ListItemIcon>
               <ListItemText primary={lable} />
               {beta && betaLable}
             </ListItemButton>
@@ -61,9 +62,9 @@ const Drawer: React.FC<DrawerProps> = ({ menuOptions }) => {
         {actionItem.map(({ lable, action, icon: Icon }) => (
           <ListItem key={lable} disablePadding>
             <ListItemButton onClick={action}>
-              <ListItem>
+              <ListItemIcon>
                 <Icon />
-              </ListItem>
+              </ListItemIcon>
               <ListItemText primary={lable} />
             </ListItemButton>
           </ListItem>
