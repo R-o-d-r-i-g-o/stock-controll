@@ -5,11 +5,11 @@ type getAuthUserProps = {
   password: string;
 };
 
-type getAuthUserResponse = {
+type GetAuthUserSvcOutput = Promise<{
   id: number;
   name: string;
   email: string;
-};
+}>;
 
 type createUserProps = {
   name: string;
@@ -69,6 +69,34 @@ type GetUsersPaginatedRepoOutput = Promise<
   })[]
 >;
 
+type GetUsersPaginatedSvcOutput = Promise<{
+  meta: {
+    total: number;
+    page: number;
+    size: number;
+  };
+  users: {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    createdAt: Date;
+    deletedAt: Date | null;
+  }[];
+}>;
+
+type GetRolesSvcOutput = Promise<{
+  meta: {
+    total: number;
+  };
+  roles: {
+    id: number;
+    name: string;
+  }[];
+}>;
+
+type GetUserBySvcOutput = Promise<Omit<UserEntity, "password">>;
+
 type GetUserByRepoOutput = Promise<UserEntity>;
 
 type DeleteUserRepoOutput = Promise<UserEntity>;
@@ -77,7 +105,7 @@ type GetRolesListRepoOutput = Promise<RoleEntity[]>;
 
 export type {
   getUsersPaginatedProps,
-  getAuthUserResponse,
+  GetAuthUserSvcOutput,
   getAuthUserProps,
   updateUserProps,
   createUserProps,
@@ -87,6 +115,9 @@ export type {
   GetUserByRepoOutput,
   GetRolesListRepoOutput,
   GetUsersPaginatedRepoOutput,
+  GetUserBySvcOutput,
+  GetUsersPaginatedSvcOutput,
+  GetRolesSvcOutput,
   updateUser,
   createUser,
   getUser,

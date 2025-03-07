@@ -2,7 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt from "next-auth/jwt";
 
-import { getAuthUser } from "../user/user.svc";
+import userSvc from "../user/user.svc";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
@@ -16,7 +16,7 @@ const providers: NextAuthOptions["providers"] = [
       try {
         if (!credentials) throw new Error("Credenciais não encontradas");
 
-        return await getAuthUser(credentials);
+        return await userSvc.getAuthUser(credentials);
       } catch (err) {
         console.error(err);
         return null;

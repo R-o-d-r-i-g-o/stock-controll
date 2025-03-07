@@ -1,7 +1,18 @@
 import * as repo from "./item.repo";
-import * as t from "./_svc.types";
+import * as t from "./item.types";
 
-const getItemBy = async (filter: t.getShoeByProps) => {
+type ItemService = {
+  getItemBy(input: t.GetShoeSvcInput): t.GetItemBySvcOutput;
+  createItem(input: t.CreateShoeSvcInput): Promise<number>;
+  updateItem(input: t.UpdateShoeSvcInput): Promise<void>;
+  debitItems(input: t.DebitItemsSvcInput): Promise<void>;
+  createItems(input: t.CreateItemsSvcInput): Promise<void>;
+  deleteItem(input: number): Promise<void>;
+};
+
+const itemService = {} as ItemService;
+
+itemService.getItemBy = async (filter) => {
   const s = await repo.getItemBy({ ...filter });
 
   return {
@@ -15,34 +26,25 @@ const getItemBy = async (filter: t.getShoeByProps) => {
   };
 };
 
-const createItem = async (data: t.createShoeProps) => {
+itemService.createItem = async (data) => {
   const shoeId = await repo.createItem(data);
   return shoeId;
 };
 
-const updateItem = async (data: t.updateShoeProps) => {
-  const shoe = await repo.updateItem(data);
-  return shoe;
+itemService.updateItem = async (data) => {
+  await repo.updateItem(data);
 };
 
-const deleteItem = async (id: number) => {
-  const shoe = await repo.deleteItem(id);
-  return shoe;
+itemService.deleteItem = async (id) => {
+  await repo.deleteItem(id);
 };
 
-const debitItems = async (data: t.debitItemsProps) => {
+itemService.debitItems = async (data) => {
   await repo.debitItems(data);
 };
 
-const createItems = async (data: t.createItemsProps) => {
+itemService.createItems = async (data) => {
   await repo.createItems(data);
 };
 
-export {
-  getItemBy,
-  createItem,
-  deleteItem,
-  updateItem,
-  debitItems,
-  createItems,
-};
+export default itemService;

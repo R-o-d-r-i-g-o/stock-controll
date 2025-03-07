@@ -1,3 +1,5 @@
+import { ItemEntity } from "../../prisma/prisma.entity";
+
 type GetShoeSvcInput = {
   id?: number;
   sku?: string;
@@ -67,6 +69,8 @@ type CreateItemsRepoInput = {
   skus: string[];
 };
 
+type GetItemBySvcOutput = Promise<ItemEntity>;
+
 export type {
   GetShoeSvcInput,
   CreateShoeSvcInput,
@@ -75,6 +79,7 @@ export type {
   CreateItemsSvcInput,
   CreateItemsRepoInput,
   UpdateShoeRepoInput,
+  GetItemBySvcOutput,
   GetShoePaginatedRepoInput,
   GetShoeRepoInput,
   DebitItemsRepoInput,

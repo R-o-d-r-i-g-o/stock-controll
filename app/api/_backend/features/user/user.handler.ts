@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { errorHandler, launchError } from "../../common/api.error";
 
 import auditSvc from "../audit/audit.svc";
-import * as userSvc from "./user.svc";
+import userSvc from "./user.svc";
 
 import {
   createUserSchema,

@@ -6,7 +6,7 @@ import {
   itemCreationSchema,
   itemUpdateSchema,
 } from "./item.schema";
-import * as svc from "./item.svc";
+import itemSvc from "./item.svc";
 
 import { errorHandler } from "../../common/api.error";
 import { validateAuthUser } from "../../common/api.auth";
@@ -21,7 +21,7 @@ const createItem = async (req: NextRequest) => {
     await validateAuthUser(req);
 
     const payload = await itemCreationSchema.validate(await req.json());
-    const itemId = await svc.createItem({
+    const itemId = await itemSvc.createItem({
       sku: payload.sku,
       size: payload.size,
       price: payload.price,
@@ -39,7 +39,7 @@ const getItemById = async (req: NextRequest, { params }: UserParams) => {
     await validateAuthUser(req);
 
     const itemId = parseInt((await params).item_id, 10);
-    const item = await svc.getItemBy({ id: itemId });
+    const item = await itemSvc.getItemBy({ id: itemId });
 
     return Response.json(item, { status: 200 });
   } catch (err) {
@@ -52,7 +52,7 @@ const deleteItem = async (req: NextRequest, { params }: UserParams) => {
     const user = await validateAuthUser(req);
     const itemId = parseInt((await params).item_id, 10);
 
-    await svc.deleteItem(itemId);
+    await itemSvc.deleteItem(itemId);
     await auditSvc.createAuditRecord({
       userId: user!.id,
       itemId: itemId,
@@ -74,7 +74,7 @@ const updateItem = async (req: NextRequest, { params }: UserParams) => {
     };
     const result = await itemUpdateSchema.validate(payload);
 
-    await svc.updateItem(result);
+    await itemSvc.updateItem(result);
     await auditSvc.createAuditRecord({
       userId: user!.id,
       itemId: result.id,
@@ -95,7 +95,7 @@ const scanItem = async (req: NextRequest) => {
       return Response.json({ errors: result.error.errors }, { status: 400 });
 
     if (result.data.oprationType === OperationType.Debit) {
-      await svc.debitItems({ userId: user!.id, skus: result.data.skus });
+      await itemSvc.debitItems({ userId: user!.id, skus: result.data.skus });
       await auditSvc.createAuditRecord({
         userId: user!.id,
         note: `O usuário debitou os itens: ${result.data.skus.join(", ")}`,
@@ -104,7 +104,7 @@ const scanItem = async (req: NextRequest) => {
     }
 
     if (result.data.oprationType === OperationType.Register) {
-      await svc.createItems({ userId: user!.id, skus: result.data.skus });
+      await itemSvc.createItems({ userId: user!.id, skus: result.data.skus });
       await auditSvc.createAuditRecord({
         userId: user!.id,
         note: `O usuário criou os itens: ${result.data.skus.join(", ")}`,

@@ -2,11 +2,23 @@ import repo from "./user.repo";
 import * as h from "./user.helper";
 import * as t from "./user.types";
 
+type UserService = {
+  getRoleList(): t.GetRolesSvcOutput;
+  getUserBy(input: t.getUserProps): t.GetUserBySvcOutput;
+  getAuthUser(input: t.getAuthUserProps): t.GetAuthUserSvcOutput;
+  createUser(input: t.createUserProps): Promise<number>;
+  updateUser(input: t.updateUserProps): Promise<void>;
+  deleteUser(input: number): Promise<void>;
+  getUsersPaginated(
+    input: t.getUsersPaginatedProps
+  ): t.GetUsersPaginatedSvcOutput;
+};
+
+const userService = {} as UserService;
+
 const { comparePasswords, encryptPassword } = h.hashHelper();
 
-const getAuthUser = async (
-  filter: t.getAuthUserProps
-): Promise<t.getAuthUserResponse> => {
+userService.getAuthUser = async (filter) => {
   const { email, password } = filter;
 
   const user = await repo.getUserBy({ email });
@@ -22,7 +34,7 @@ const getAuthUser = async (
   };
 };
 
-const getUserBy = async (filter: t.getUserProps) => {
+userService.getUserBy = async (filter) => {
   const user = await repo.getUserBy({ ...filter });
 
   return {
@@ -35,11 +47,11 @@ const getUserBy = async (filter: t.getUserProps) => {
   };
 };
 
-const deleteUser = async (id: number) => {
+userService.deleteUser = async (id) => {
   await repo.deleteUser(id);
 };
 
-const getUsersPaginated = async (filter: t.getUsersPaginatedProps) => {
+userService.getUsersPaginated = async (filter) => {
   const parsedFilter = {
     skip: (filter.page - 1) * filter.size,
     take: filter.size,
@@ -66,7 +78,7 @@ const getUsersPaginated = async (filter: t.getUsersPaginatedProps) => {
   };
 };
 
-const getRoleList = async () => {
+userService.getRoleList = async () => {
   const roles = await repo.getRolesList();
 
   return {
@@ -80,24 +92,16 @@ const getRoleList = async () => {
   };
 };
 
-const createUser = async (user: t.createUserProps) => {
+userService.createUser = async (user) => {
   user.password = await encryptPassword(user.password);
   return await repo.createUser(user);
 };
 
-const updateUser = async (user: t.updateUserProps) => {
-  if (user.password && user.password !== "")
+userService.updateUser = async (user) => {
+  if (user.password && user.password !== "") {
     user.password = await encryptPassword(user.password);
-
-  return await repo.updateUser(user);
+  }
+  await repo.updateUser(user);
 };
 
-export {
-  getUserBy,
-  createUser,
-  updateUser,
-  deleteUser,
-  getAuthUser,
-  getRoleList,
-  getUsersPaginated,
-};
+export default userService;
