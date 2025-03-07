@@ -1,8 +1,14 @@
 import { prisma } from "../../prisma/prisma.client";
+import * as t from "./ping.type";
 
-const pingDatabase = async () => {
-  const result = await prisma.$queryRaw<number>`SELECT 1`;
-  return result;
+type PingRepository = {
+  pingDatabase(): t.PingDatabaseRepoOutput;
 };
 
-export { pingDatabase };
+const pingRepository = {} as PingRepository;
+
+pingRepository.pingDatabase = async () => {
+  await prisma.$queryRaw<number>`SELECT 1`;
+};
+
+export default pingRepository;

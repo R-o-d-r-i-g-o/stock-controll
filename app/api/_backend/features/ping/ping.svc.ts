@@ -1,17 +1,19 @@
-import * as repo from "./ping.repo";
+import pingRepo from "./ping.repo";
+import * as t from "./ping.type";
 
-/**
- * Função para verificar a conexão com o banco de dados.
- * @returns {Promise<boolean>} Retorna `true` se a conexão foi bem-sucedida, `false` caso contrário.
- */
-const pingDatabase = async () => {
+type PingService = {
+  pingDatabase(): t.PingDatabaseSvcOutput;
+};
+
+const pingService = {} as PingService;
+
+pingService.pingDatabase = async () => {
   try {
-    await repo.pingDatabase();
+    await pingRepo.pingDatabase();
     return true;
   } catch (err) {
-    console.error(err);
     return false;
   }
 };
 
-export { pingDatabase };
+export default pingService;
