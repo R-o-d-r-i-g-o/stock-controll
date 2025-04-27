@@ -1,8 +1,27 @@
-import { prisma, prismaTransaction } from "../../prisma/prisma.client";
 import moment from "moment";
-import * as t from "./_repo.types";
 
-const getShoeBy = async (filter: t.getShoeBy) => {
+import * as t from "./shoe.types";
+import { prisma } from "../../prisma/prisma.client";
+
+type ShoeRepository = {
+  getShoeBy(filter: t.getShoeBy): t.GetShoeByRepoOutput;
+  getItemShoesCount(filter: t.getShoesPaginated): Promise<number>;
+  deleteShoe(id: number): Promise<void>;
+  updateShoe(user: t.updateShoe): Promise<void>;
+  createShoe(data: t.createShoe): Promise<number>;
+
+  getItemShoesPaginated(
+    filter: t.getShoesPaginated
+  ): t.GetItemShoesPaginatedRepoOutput;
+
+  getExpeditionShoes(
+    filter: t.getExpeditionShoes
+  ): t.GetExpeditionShoesRepoOutput;
+};
+
+const shoeRepository = {} as ShoeRepository;
+
+shoeRepository.getShoeBy = async (filter) => {
   const shoe = await prisma.shoe.findFirstOrThrow({
     where: {
       id: filter.id || undefined,
@@ -22,7 +41,7 @@ const getShoeBy = async (filter: t.getShoeBy) => {
   return shoe;
 };
 
-const getItemShoesCount = async (filter: t.getShoesPaginated) => {
+shoeRepository.getItemShoesCount = async (filter) => {
   const itemsGroupedByShoe = await prisma.shoe.count({
     where: {
       deletedAt: null,
@@ -36,7 +55,7 @@ const getItemShoesCount = async (filter: t.getShoesPaginated) => {
   return itemsGroupedByShoe;
 };
 
-const getItemShoesPaginated = async (filter: t.getShoesPaginated) => {
+shoeRepository.getItemShoesPaginated = async (filter) => {
   const itemsGroupedByShoe = await prisma.shoe.findMany({
     skip: filter.skip,
     take: filter.take,
@@ -57,7 +76,7 @@ const getItemShoesPaginated = async (filter: t.getShoesPaginated) => {
   return itemsGroupedByShoe;
 };
 
-const getExpeditionShoes = async (filter: t.getExpeditionShoes) => {
+shoeRepository.getExpeditionShoes = async (filter) => {
   const formateDate = (date: Date) => moment(date).format("YYYY-MM-DD");
 
   const result = await prisma.$queryRaw<{ shoeName: string; amount: bigint }[]>`
@@ -74,31 +93,26 @@ const getExpeditionShoes = async (filter: t.getExpeditionShoes) => {
   return result;
 };
 
-const deleteShoe = async (id: number) => {
-  return await prismaTransaction(async () => {
-    const deletedShoe = await prisma.shoe.update({
-      where: { id },
-      data: { deletedAt: moment.utc().toDate() },
-    });
-    return deletedShoe;
+shoeRepository.deleteShoe = async (id) => {
+  await prisma.shoe.update({
+    where: { id },
+    data: { deletedAt: moment.utc().toDate() },
   });
 };
 
-const updateShoe = async (user: t.updateShoe) => {
-  return await prismaTransaction(async () => {
-    await prisma.shoe.update({
-      where: { id: user.id },
-      data: {
-        name: user.name || undefined,
-        sole: user.sole || undefined,
-        note: user.note || undefined,
-        color: user.color || undefined,
-      },
-    });
+shoeRepository.updateShoe = async (user) => {
+  await prisma.shoe.update({
+    where: { id: user.id },
+    data: {
+      name: user.name || undefined,
+      sole: user.sole || undefined,
+      note: user.note || undefined,
+      color: user.color || undefined,
+    },
   });
 };
 
-const createShoe = async (data: t.createShoe) => {
+shoeRepository.createShoe = async (data) => {
   const { id } = await prisma.shoe.create({
     data: {
       name: data.name,
@@ -110,12 +124,4 @@ const createShoe = async (data: t.createShoe) => {
   return id;
 };
 
-export {
-  deleteShoe,
-  updateShoe,
-  createShoe,
-  getShoeBy,
-  getItemShoesCount,
-  getExpeditionShoes,
-  getItemShoesPaginated,
-};
+export default shoeRepository;

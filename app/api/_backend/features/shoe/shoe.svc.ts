@@ -1,8 +1,19 @@
-import * as repo from "./shoe.repo";
-import * as t from "./_svc.types";
+import shoeRepo from './shoe.repo';
+import * as t from './shoe.types';
 
-const getShoeBy = async (filter: t.getShoeBy) => {
-  const shoe = await repo.getShoeBy(filter);
+type ShoeService = {
+  getShoeBy(filter: t.getShoeBy): t.GetShoeBySvcOutput;
+  deleteShoe(id: number): Promise<void>;
+  createShoe(data: t.createShoe): Promise<number>;
+  updateShoe(data: t.updateShoe): Promise<void>;
+  getExpeditionShoes(filter: t.getExpeditionShoes): t.GetExpeditionShoesSvcOutput;
+  getShoesGroupedBySizePaginated(filter: t.getShoesGroupedBySizePaginated): Promise<t.getShoesGroupedByItemSizePaginatedRespose>;
+};
+
+const shoeService = {} as ShoeService;
+
+shoeService.getShoeBy = async (filter) => {
+  const shoe = await shoeRepo.getShoeBy(filter);
   const { id, name, sole, note, color, createdAt, deletedAt, Item } = shoe;
 
   return {
@@ -24,9 +35,7 @@ const getShoeBy = async (filter: t.getShoeBy) => {
   };
 };
 
-const getShoesGroupedBySizePaginated = async (
-  filter: t.getShoesGroupedBySizePaginated
-): Promise<t.getShoesGroupedByItemSizePaginatedRespose> => {
+shoeService.getShoesGroupedBySizePaginated = async (filter) => {
   const parsedFilter = {
     skip: (filter.page - 1) * filter.size,
     take: filter.size,
@@ -34,8 +43,7 @@ const getShoesGroupedBySizePaginated = async (
     endDate: filter.endDate,
   };
 
-  const shoesCount = await repo.getItemShoesCount(parsedFilter);
-  const shoesList = await repo.getItemShoesPaginated(parsedFilter);
+  const [shoesCount, shoesList] = await Promise.all([shoeRepo.getItemShoesCount(parsedFilter), shoeRepo.getItemShoesPaginated(parsedFilter)]);
 
   const ShoesGrouped = shoesList?.map((shoe) => {
     const { id, name, sole, note, color, createdAt, deletedAt, Item } = shoe;
@@ -70,29 +78,21 @@ const getShoesGroupedBySizePaginated = async (
   };
 };
 
-const getExpeditionShoes = async (filter: t.getExpeditionShoes) => {
-  const expeditionShoes = await repo.getExpeditionShoes(filter);
+shoeService.getExpeditionShoes = async (filter) => {
+  const expeditionShoes = await shoeRepo.getExpeditionShoes(filter);
   return expeditionShoes;
 };
 
-const deleteShoe = async (id: number) => {
-  const deletedShoe = await repo.deleteShoe(id);
-  return deletedShoe;
+shoeService.createShoe = async (data) => {
+  return await shoeRepo.createShoe(data);
 };
 
-const createShoe = async (data: t.createShoe) => {
-  return await repo.createShoe(data);
+shoeService.deleteShoe = async (id) => {
+  await shoeRepo.deleteShoe(id);
 };
 
-const updateShoe = async (data: t.updateShoe) => {
-  await repo.updateShoe(data);
+shoeService.updateShoe = async (data) => {
+  await shoeRepo.updateShoe(data);
 };
 
-export {
-  getShoesGroupedBySizePaginated,
-  getExpeditionShoes,
-  getShoeBy,
-  createShoe,
-  deleteShoe,
-  updateShoe,
-};
+export default shoeService;

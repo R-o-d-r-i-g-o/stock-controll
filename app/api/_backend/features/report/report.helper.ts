@@ -1,4 +1,4 @@
-import * as t from "../shoe/_svc.types";
+import * as t from "../shoe/shoe.types";
 
 // TODO: remove it latter.
 const footSizesList = [
