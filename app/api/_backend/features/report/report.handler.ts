@@ -7,7 +7,7 @@ import { errorHandler } from "../../common/api.error";
 
 import * as h from "./report.helper";
 
-import * as svc from "../shoe/shoe.svc";
+import shoeSvc from "../shoe/shoe.svc";
 import moment from "moment";
 import { z } from "zod";
 import { validateAuthUser } from "../../common/api.auth";
@@ -28,7 +28,7 @@ const generateReport = async (req: NextRequest) => {
     let reportData: Record<string, unknown>[] = [];
 
     if (filter.reportType === ReportType.Stock) {
-      const data = await svc.getShoesGroupedBySizePaginated({
+      const data = await shoeSvc.getShoesGroupedBySizePaginated({
         page: 1,
         size: 10000000,
         startDate: filter.startDate,
@@ -36,17 +36,14 @@ const generateReport = async (req: NextRequest) => {
       });
       reportData = h.formateStockReportColumnData(data.shoes);
     } else {
-      const data = await svc.getExpeditionShoes({
+      const data = await shoeSvc.getExpeditionShoes({
         startDate: filter.startDate,
         endDate: filter.endDate,
       });
       reportData = h.formateExpeditionShoesReportColumnData(data);
     }
 
-    const { buffer, headers } = formatExcelFile(
-      formatFilename(filter),
-      reportData
-    );
+    const { buffer, headers } = formatExcelFile(formatFilename(filter), reportData);
 
     return new NextResponse(buffer, { status: 200, headers });
   } catch (err) {

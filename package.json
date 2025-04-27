@@ -7,6 +7,7 @@
     "lint": "next lint",
     "build": "npm run migrate && npm run seed && next build",
     "start": "next start",
+    "format": "prettier --write \"**/*.{ts,tsx,json}\"",
     "migrate": "prisma generate --schema=./app/api/_backend/prisma/resource/schema.prisma",
     "seed": "tsx app/api/_backend/prisma/resource/seed.ts "
   },
@@ -50,6 +51,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.0.4",
     "postcss": "^8",
+    "prettier": "^3.5.3",
     "prisma": "^6.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

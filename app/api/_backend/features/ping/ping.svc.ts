@@ -12,6 +12,7 @@ pingService.pingDatabase = async () => {
     await pingRepo.pingDatabase();
     return true;
   } catch (err) {
+    console.error(err);
     return false;
   }
 };

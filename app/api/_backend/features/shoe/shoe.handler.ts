@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 
-import * as shoeSvc from "./shoe.svc";
+import shoeSvc from "./shoe.svc";
 import auditSvc from "../audit/audit.svc";
 
 import { errorHandler } from "../../common/api.error";
@@ -35,8 +35,7 @@ const createShoe = async (req: NextRequest) => {
     const user = await validateAuthUser(req);
 
     const result = createShoeSchema.safeParse(await req.json());
-    if (result.error)
-      return Response.json({ errors: result.error.errors }, { status: 400 });
+    if (result.error) return Response.json({ errors: result.error.errors }, { status: 400 });
 
     const shoeId = await shoeSvc.createShoe(result.data);
     await auditSvc.createAuditRecord({
@@ -50,10 +49,7 @@ const createShoe = async (req: NextRequest) => {
   }
 };
 
-const getShoesAndRelatedItemsPaginated = async (
-  req: NextRequest,
-  { params }: UserParams
-) => {
+const getShoesAndRelatedItemsPaginated = async (req: NextRequest, { params }: UserParams) => {
   try {
     await validateAuthUser(req);
 
@@ -93,8 +89,7 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
     };
 
     const result = updateShoeSchema.safeParse(payload);
-    if (result.error)
-      return Response.json({ errors: result.error.errors }, { status: 400 });
+    if (result.error) return Response.json({ errors: result.error.errors }, { status: 400 });
 
     await shoeSvc.updateShoe(result.data);
     await auditSvc.createAuditRecord({
@@ -108,10 +103,4 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
   }
 };
 
-export {
-  getShoesAndItemsPaginated,
-  createShoe,
-  getShoesAndRelatedItemsPaginated,
-  deleteShoe,
-  updateShoe,
-};
+export { getShoesAndItemsPaginated, createShoe, getShoesAndRelatedItemsPaginated, deleteShoe, updateShoe };
