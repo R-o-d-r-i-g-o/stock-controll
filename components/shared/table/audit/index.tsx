@@ -1,16 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Table as MuiTable,
-  TableRow,
-  Collapse,
-  TableBody,
-  TableCell,
-  TableHead,
-  IconButton,
-  TableContainer,
-} from "@mui/material";
+import { Table as MuiTable, TableRow, Collapse, TableBody, TableCell, TableHead, IconButton, TableContainer } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import moment from "moment";
@@ -61,12 +52,8 @@ const Tabela = ({ filter, data }: TabelaProps) => {
               <TableCell className="!text-white font-semibold">#</TableCell>
               <TableCell className="!text-white font-semibold">Data</TableCell>
               <TableCell className="!text-white font-semibold">User</TableCell>
-              <TableCell className="!text-white font-semibold">
-                Calçado
-              </TableCell>
-              <TableCell className="!text-white font-semibold">
-                Config.
-              </TableCell>
+              <TableCell className="!text-white font-semibold">Calçado</TableCell>
+              <TableCell className="!text-white font-semibold">Config.</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -82,9 +69,7 @@ const Tabela = ({ filter, data }: TabelaProps) => {
               <React.Fragment key={a.id}>
                 <TableRow className="hover:bg-indigo-100">
                   <TableCell>{a.id}</TableCell>
-                  <TableCell>
-                    {moment(a.createdAt).format(defaultDateMask)}
-                  </TableCell>
+                  <TableCell>{moment(a.createdAt).format(defaultDateMask)}</TableCell>
                   <TableCell>{a.user}</TableCell>
                   <TableCell>{a.shoeId ?? "--"}</TableCell>
                   <TableCell>
@@ -94,15 +79,8 @@ const Tabela = ({ filter, data }: TabelaProps) => {
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell
-                    colSpan={5}
-                    style={{ paddingBottom: 0, paddingTop: 0 }}
-                  >
-                    <Collapse
-                      in={selectedRow === index}
-                      timeout="auto"
-                      unmountOnExit
-                    >
+                  <TableCell colSpan={5} style={{ paddingBottom: 0, paddingTop: 0 }}>
+                    <Collapse in={selectedRow === index} timeout="auto" unmountOnExit>
                       <div className="p-4">
                         <p className="text-gray-700">
                           <strong>Descrição:</strong>
@@ -117,12 +95,7 @@ const Tabela = ({ filter, data }: TabelaProps) => {
           </TableBody>
         </MuiTable>
       </TableContainer>
-      <Pagination
-        page={filter.page}
-        size={filter.size}
-        total={data.meta.total}
-        className="mt-4"
-      />
+      <Pagination page={filter.page} size={filter.size} total={data.meta.total} className="mt-4" />
     </React.Fragment>
   );
 };

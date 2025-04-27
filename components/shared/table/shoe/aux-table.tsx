@@ -1,11 +1,5 @@
 import { footSizesList } from "@/common/constants";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 
 type AuxTableProps = {
   groupedItems: {
@@ -21,8 +15,7 @@ const AuxTable = ({ groupedItems }: AuxTableProps) => {
   const itemCountBySize: { [size: number]: number } = {};
 
   groupedItems.forEach((group) => {
-    itemCountBySize[group.size] =
-      (itemCountBySize[group.size] || 0) + group.items.length;
+    itemCountBySize[group.size] = (itemCountBySize[group.size] || 0) + group.items.length;
   });
 
   return (

@@ -13,11 +13,7 @@ const ShoeDeleteFrom: React.FC<ShoeDeleteFromProps> = ({ shoeId }) => {
   const { handleDelete } = useShoeDeleteForm({ shoeId });
 
   return (
-    <IconButton
-      onClick={handleDelete}
-      className="!bg-red-500 !rounded-2xl !text-white"
-      title="Deletar calçado"
-    >
+    <IconButton onClick={handleDelete} className="!bg-red-500 !rounded-2xl !text-white" title="Deletar calçado">
       <DeleteIcon />
     </IconButton>
   );

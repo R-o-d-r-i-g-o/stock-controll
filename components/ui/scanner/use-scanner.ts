@@ -15,20 +15,14 @@ type UseScannerProps = {
   beepEnabled?: boolean;
 };
 
-const useScanner = ({
-  onResult,
-  paused = false,
-  beepEnabled = false,
-}: UseScannerProps) => {
+const useScanner = ({ onResult, paused = false, beepEnabled = false }: UseScannerProps) => {
   const [loading, setLoading] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const [selectedCamera, setSelectedCamera] = useState<string | undefined>();
   const [result, setResult] = useState("");
 
-  const videoDevices = useMediaDevices({ constraints }).devices?.filter(
-    (device) => device.kind === "videoinput"
-  );
+  const videoDevices = useMediaDevices({ constraints }).devices?.filter((device) => device.kind === "videoinput");
 
   const handleVideoDeviceOptions = () =>
     videoDevices?.map((device) => ({

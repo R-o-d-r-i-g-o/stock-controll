@@ -60,10 +60,4 @@ type CreateShoe = {
   color: string;
 };
 
-export type {
-  getShoesGroupedByItemSizePaginatedRespose,
-  GetItemsGroupedByShoePaginated,
-  GetShoeByIdResponse,
-  Updateshoe,
-  CreateShoe,
-};
+export type { getShoesGroupedByItemSizePaginatedRespose, GetItemsGroupedByShoePaginated, GetShoeByIdResponse, Updateshoe, CreateShoe };

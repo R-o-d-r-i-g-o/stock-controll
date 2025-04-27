@@ -4,11 +4,7 @@ import { errorHandler, launchError } from "../../common/api.error";
 import auditSvc from "../audit/audit.svc";
 import userSvc from "./user.svc";
 
-import {
-  createUserSchema,
-  getUsersPaginatedSchema,
-  updateUserSchema,
-} from "./user.schema";
+import { createUserSchema, getUsersPaginatedSchema, updateUserSchema } from "./user.schema";
 
 import { validateAuthUser } from "../../common/api.auth";
 
@@ -21,8 +17,7 @@ const createUser = async (req: NextRequest) => {
     const user = await validateAuthUser(req);
 
     const result = createUserSchema.safeParse(await req.json());
-    if (result.error)
-      return launchError(result.error.errors[0].message, 400).ToNextApiError();
+    if (result.error) return launchError(result.error.errors[0].message, 400).ToNextApiError();
 
     const userId = await userSvc.createUser(result.data);
     await auditSvc.createAuditRecord({
@@ -45,8 +40,7 @@ const getUsersPaginated = async (req: NextRequest) => {
       page: searchParams.get("page"),
       size: searchParams.get("size"),
     });
-    if (result.error)
-      return launchError(result.error.errors[0].message, 400).ToNextApiError();
+    if (result.error) return launchError(result.error.errors[0].message, 400).ToNextApiError();
 
     const users = await userSvc.getUsersPaginated(result.data);
     return Response.json(users, { status: 200 });
@@ -94,8 +88,7 @@ const updateUser = async (req: NextRequest, { params }: UserParams) => {
       id: parseInt((await params).user_id, 10),
     };
     const result = updateUserSchema.safeParse(payload);
-    if (result.error)
-      return Response.json({ errors: result.error.errors }, { status: 400 });
+    if (result.error) return Response.json({ errors: result.error.errors }, { status: 400 });
 
     await userSvc.updateUser(result.data);
     await auditSvc.createAuditRecord({
@@ -120,11 +113,4 @@ const getRoleList = async (req: NextRequest) => {
   }
 };
 
-export {
-  createUser,
-  getUsersPaginated,
-  updateUser,
-  deleteUser,
-  getUserByID,
-  getRoleList,
-};
+export { createUser, getUsersPaginated, updateUser, deleteUser, getUserByID, getRoleList };

@@ -42,11 +42,4 @@ const deleteUser = async (id: number) => {
   await api.delete(`/api/users/${id}`);
 };
 
-export {
-  fetchUsersPaginated,
-  getUserById,
-  getRolesList,
-  createUser,
-  updateUser,
-  deleteUser,
-};
+export { fetchUsersPaginated, getUserById, getRolesList, createUser, updateUser, deleteUser };

@@ -1,15 +1,7 @@
 import Link from "next/link";
 import moment from "moment";
 import { OpenInNew, MoreVert } from "@mui/icons-material";
-import {
-  Table as MuiTable,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableBody,
-  TableRow,
-  IconButton,
-} from "@mui/material";
+import { Table as MuiTable, TableCell, TableContainer, TableHead, TableBody, TableRow, IconButton } from "@mui/material";
 
 import { defaultDateMask } from "@/common/constants";
 
@@ -68,12 +60,8 @@ const Table = ({ meta, data }: TableProps) => (
               </Link>
             </TableCell>
             <TableCell className="!text-center">{tag.userId}</TableCell>
-            <TableCell className="!text-center">
-              {tag.deletedAt != null ? "🔴 Desa." : "🟢 Ativo"}
-            </TableCell>
-            <TableCell className="!text-center">
-              {moment(tag.createdAt).format(defaultDateMask)}
-            </TableCell>
+            <TableCell className="!text-center">{tag.deletedAt != null ? "🔴 Desa." : "🟢 Ativo"}</TableCell>
+            <TableCell className="!text-center">{moment(tag.createdAt).format(defaultDateMask)}</TableCell>
             <TableCell className="!text-center">
               <Link href={`/panel/shoes/${meta.shoeId}/tags/${tag.id}`}>
                 <IconButton>

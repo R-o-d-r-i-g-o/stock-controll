@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Table as MuiTable,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  IconButton,
-} from "@mui/material";
+import { Table as MuiTable, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton } from "@mui/material";
 
 import Pagination from "@/components/ui/pagination";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -71,9 +63,7 @@ const Table: React.FC<TableProps> = ({ filter, data }) => (
               <TableCell>{u.name}</TableCell>
               <TableCell>{u.email}</TableCell>
               <TableCell>{u.role}</TableCell>
-              <TableCell>
-                {u.deletedAt != null ? "🔴 Desa." : "🟢 Ativo"}
-              </TableCell>
+              <TableCell>{u.deletedAt != null ? "🔴 Desa." : "🟢 Ativo"}</TableCell>
               <TableCell>
                 <Link href={`/panel/users/${u.id}`}>
                   <IconButton>
@@ -86,12 +76,7 @@ const Table: React.FC<TableProps> = ({ filter, data }) => (
         </TableBody>
       </MuiTable>
     </TableContainer>
-    <Pagination
-      page={filter.page}
-      size={filter.size}
-      total={data.meta.total}
-      className="mt-4"
-    />
+    <Pagination page={filter.page} size={filter.size} total={data.meta.total} className="mt-4" />
   </React.Fragment>
 );
 

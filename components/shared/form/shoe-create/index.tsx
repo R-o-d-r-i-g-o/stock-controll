@@ -6,8 +6,7 @@ import InputError from "@/components/ui/input-error";
 import useShoeCreateForm from "./use-shoe-create";
 
 const ShoeCreateForm = () => {
-  const { register, formState, handleSubmit, handleSubmitCreateShoe } =
-    useShoeCreateForm();
+  const { register, formState, handleSubmit, handleSubmitCreateShoe } = useShoeCreateForm();
 
   return (
     <form onSubmit={handleSubmit(handleSubmitCreateShoe)}>
@@ -31,11 +30,7 @@ const ShoeCreateForm = () => {
         <InputText id="note" placeholder="Obs..." {...register("note")} />
         <InputError error={formState.errors.note} />
       </div>
-      <button
-        type="submit"
-        disabled={formState.isSubmitting}
-        className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-      >
+      <button type="submit" disabled={formState.isSubmitting} className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
         {formState.isSubmitting ? "Processando..." : "Cadastrar"}
       </button>
     </form>

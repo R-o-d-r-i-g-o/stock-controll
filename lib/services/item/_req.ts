@@ -31,10 +31,4 @@ const updateItem = async (data: t.UpdateItem) => {
   return res.data;
 };
 
-export {
-  getItemById,
-  debitItemsFromStorage,
-  deleteItemById,
-  createItem,
-  updateItem,
-};
+export { getItemById, debitItemsFromStorage, deleteItemById, createItem, updateItem };

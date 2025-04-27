@@ -4,9 +4,7 @@ import * as t from "./audit.types";
 type AuditService = {
   createAuditRecord(input: t.CreateAuditSvcInput): t.CreateAuditRecordSvcOutput;
 
-  getAuditsPaginated(
-    input: t.GetAuditsPaginatedSvcInput
-  ): t.GetAuditsPaginatedSvcOutput;
+  getAuditsPaginated(input: t.GetAuditsPaginatedSvcInput): t.GetAuditsPaginatedSvcOutput;
 };
 
 const auditService = {} as AuditService;
@@ -22,10 +20,7 @@ auditService.getAuditsPaginated = async (filter) => {
     take: filter.size,
   };
 
-  const [auditCount, auditList] = await Promise.all([
-    repo.getAuditsCount(parsedFilter),
-    repo.getAuditsPaginated(parsedFilter),
-  ]);
+  const [auditCount, auditList] = await Promise.all([repo.getAuditsCount(parsedFilter), repo.getAuditsPaginated(parsedFilter)]);
 
   return {
     meta: {

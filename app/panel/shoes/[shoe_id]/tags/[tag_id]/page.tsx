@@ -25,10 +25,7 @@ const TagEditPage = async ({ params }: TagEditPageProps) => {
 
   return (
     <Container display="small">
-      <Title
-        className="text-center text-3xl mb-6"
-        text={`Editar etiqueta #${tag.id}`}
-      />
+      <Title className="text-center text-3xl mb-6" text={`Editar etiqueta #${tag.id}`} />
       <TagEditForm tag={tag} />
       <TagDeleteForm shoeId={tag.shoeId} tagId={tag.id} />
     </Container>

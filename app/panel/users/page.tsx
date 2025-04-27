@@ -15,11 +15,7 @@ type UserListPageProps = {
 };
 
 const CrateUserButton = () => (
-  <Link
-    title="Adicionar Usuário"
-    href="/panel/users/create"
-    className="flex items-center space-x-2 bg-blue-500 text-white ml-auto w-min py-2 px-4 mb-4 sm:mb-0 rounded hover:bg-blue-600 transition-colors"
-  >
+  <Link title="Adicionar Usuário" href="/panel/users/create" className="flex items-center space-x-2 bg-blue-500 text-white ml-auto w-min py-2 px-4 mb-4 sm:mb-0 rounded hover:bg-blue-600 transition-colors">
     <AddIcon />
   </Link>
 );

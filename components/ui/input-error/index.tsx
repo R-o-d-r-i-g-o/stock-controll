@@ -5,11 +5,7 @@ type InputErrorProps = React.HTMLAttributes<HTMLParagraphElement> & {
   error?: FieldError | Error;
 };
 
-const InputError: React.FC<InputErrorProps> = ({
-  error,
-  className,
-  ...rest
-}) => {
+const InputError: React.FC<InputErrorProps> = ({ error, className, ...rest }) => {
   if (!error) return null;
 
   return (

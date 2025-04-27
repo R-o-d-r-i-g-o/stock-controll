@@ -13,25 +13,14 @@ type ScannerProps = {
 };
 
 const Scanner: React.FC<ScannerProps> = ({ className, ...rest }) => {
-  const {
-    videoRef,
-    audioRef,
-    selectedCamera,
-    handleCameraChange,
-    cameraDeviceOpstions,
-  } = useScanner(rest);
+  const { videoRef, audioRef, selectedCamera, handleCameraChange, cameraDeviceOpstions } = useScanner(rest);
 
   return (
     <React.Fragment>
       {cameraDeviceOpstions && cameraDeviceOpstions.length > 0 && (
         <div className="mb-4">
           <InputLable htmlFor="camera-select" lable="Selecione a câmera" />
-          <InputSelect
-            id="camera-select"
-            value={selectedCamera}
-            options={cameraDeviceOpstions}
-            onChange={handleCameraChange}
-          />
+          <InputSelect id="camera-select" value={selectedCamera} options={cameraDeviceOpstions} onChange={handleCameraChange} />
         </div>
       )}
       <div className="relative h-min rounded-md overflow-hidden">

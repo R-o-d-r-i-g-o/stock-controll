@@ -57,12 +57,4 @@ type CreateNewUserResponse = {
   userId: number;
 };
 
-export type {
-  GetUsersPaginatedResponse,
-  CreateNewUserResponse,
-  GetRolesListResponse,
-  GetUserByIdResponse,
-  GetUsersPaginated,
-  CreateNewUser,
-  UpdateUser,
-};
+export type { GetUsersPaginatedResponse, CreateNewUserResponse, GetRolesListResponse, GetUserByIdResponse, GetUsersPaginated, CreateNewUser, UpdateUser };

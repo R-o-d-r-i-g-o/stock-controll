@@ -2,8 +2,7 @@ import { PrismaErrorMessageMap } from "./api.types";
 
 const prismaErrorMessages: PrismaErrorMessageMap = {
   P1000: {
-    message:
-      "Erro de autenticação: Não foi possível conectar ao banco de dados.",
+    message: "Erro de autenticação: Não foi possível conectar ao banco de dados.",
     status: 401, // (Unauthorized: Quando as credenciais ou autenticação falham)
   },
   P1001: {
@@ -11,8 +10,7 @@ const prismaErrorMessages: PrismaErrorMessageMap = {
     status: 502, // (Bad Gateway: Problema de comunicação entre servidores, geralmente devido a falhas na conexão)
   },
   P1002: {
-    message:
-      "Erro de tempo de conexão: Tempo limite ao tentar conectar ao banco de dados.",
+    message: "Erro de tempo de conexão: Tempo limite ao tentar conectar ao banco de dados.",
     status: 504, // (Gateway Timeout: Quando o servidor não responde a tempo)
   },
   P1003: {
@@ -20,8 +18,7 @@ const prismaErrorMessages: PrismaErrorMessageMap = {
     status: 404, // (Not Found: Quando um recurso não é encontrado no banco de dados)
   },
   P1008: {
-    message:
-      "Erro de tempo de execução: A operação ultrapassou o tempo limite.",
+    message: "Erro de tempo de execução: A operação ultrapassou o tempo limite.",
     status: 408, // (Request Timeout: Quando a requisição demora demais para ser completada)
   },
   P1009: {
@@ -29,48 +26,39 @@ const prismaErrorMessages: PrismaErrorMessageMap = {
     status: 409, // (Conflict: Quando há um conflito, como uma violação de chave única)
   },
   P1010: {
-    message:
-      "Acesso negado: Você não tem permissão para acessar este banco de dados.",
+    message: "Acesso negado: Você não tem permissão para acessar este banco de dados.",
     status: 403, // (Forbidden: Quando o usuário não tem permissão para acessar o recurso)
   },
   P1011: {
-    message:
-      "Erro TLS: Não foi possível estabelecer uma conexão segura com o banco de dados.",
+    message: "Erro TLS: Não foi possível estabelecer uma conexão segura com o banco de dados.",
     status: 500, // (Internal Server Error: Erros gerais do servidor ou problemas inesperados)
   },
   P1012: {
-    message:
-      "Erro de validação de esquema: O esquema do banco de dados não é válido.",
+    message: "Erro de validação de esquema: O esquema do banco de dados não é válido.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2000: {
-    message:
-      "Valor muito longo para o campo: O valor fornecido ultrapassou o limite do campo.",
+    message: "Valor muito longo para o campo: O valor fornecido ultrapassou o limite do campo.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2001: {
-    message:
-      "Registro não encontrado: O item solicitado não existe no banco de dados.",
+    message: "Registro não encontrado: O item solicitado não existe no banco de dados.",
     status: 404, // (Not Found: Quando um recurso não é encontrado no banco de dados)
   },
   P2002: {
-    message:
-      "Falha na restrição única: Tentativa de inserir um valor que já existe no banco.",
+    message: "Falha na restrição única: Tentativa de inserir um valor que já existe no banco.",
     status: 409, // (Conflict: Quando há um conflito, como uma violação de chave única)
   },
   P2003: {
-    message:
-      "Falha na chave estrangeira: Violação de chave estrangeira ao tentar salvar o dado.",
+    message: "Falha na chave estrangeira: Violação de chave estrangeira ao tentar salvar o dado.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2004: {
-    message:
-      "Erro no banco de dados: Ocorreu um erro ao tentar acessar ou manipular o banco.",
+    message: "Erro no banco de dados: Ocorreu um erro ao tentar acessar ou manipular o banco.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2005: {
-    message:
-      "Valor inválido para o campo: O valor fornecido não é compatível com o tipo de dado esperado.",
+    message: "Valor inválido para o campo: O valor fornecido não é compatível com o tipo de dado esperado.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2006: {
@@ -78,13 +66,11 @@ const prismaErrorMessages: PrismaErrorMessageMap = {
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2007: {
-    message:
-      "Erro de validação de dados: Não foi possível validar os dados fornecidos.",
+    message: "Erro de validação de dados: Não foi possível validar os dados fornecidos.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2008: {
-    message:
-      "Falha ao processar a consulta: A consulta não pôde ser executada.",
+    message: "Falha ao processar a consulta: A consulta não pôde ser executada.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2009: {
@@ -96,43 +82,35 @@ const prismaErrorMessages: PrismaErrorMessageMap = {
     status: 500, // (Internal Server Error: Erros gerais do servidor ou problemas inesperados)
   },
   P2011: {
-    message:
-      "Violação de restrição de campo nulo: Um campo obrigatório não foi preenchido.",
+    message: "Violação de restrição de campo nulo: Um campo obrigatório não foi preenchido.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2012: {
-    message:
-      "Faltando valor obrigatório: Um valor obrigatório não foi fornecido.",
+    message: "Faltando valor obrigatório: Um valor obrigatório não foi fornecido.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2013: {
-    message:
-      "Faltando argumento obrigatório: Um argumento necessário não foi enviado na requisição.",
+    message: "Faltando argumento obrigatório: Um argumento necessário não foi enviado na requisição.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2014: {
-    message:
-      "Alteração violaria relação obrigatória: Você não pode alterar dados que têm dependências obrigatórias.",
+    message: "Alteração violaria relação obrigatória: Você não pode alterar dados que têm dependências obrigatórias.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2015: {
-    message:
-      "Registro relacionado não encontrado: Não foi possível encontrar um registro relacionado.",
+    message: "Registro relacionado não encontrado: Não foi possível encontrar um registro relacionado.",
     status: 404, // (Not Found: Quando um recurso não é encontrado no banco de dados)
   },
   P2016: {
-    message:
-      "Erro ao interpretar a consulta: Não conseguimos interpretar sua consulta.",
+    message: "Erro ao interpretar a consulta: Não conseguimos interpretar sua consulta.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2017: {
-    message:
-      "Relação entre os dados não foi conectada: A relação entre os dados não pôde ser estabelecida.",
+    message: "Relação entre os dados não foi conectada: A relação entre os dados não pôde ser estabelecida.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2018: {
-    message:
-      "Registros necessários não encontrados: Não encontramos todos os registros necessários para a operação.",
+    message: "Registros necessários não encontrados: Não encontramos todos os registros necessários para a operação.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2019: {
@@ -140,43 +118,35 @@ const prismaErrorMessages: PrismaErrorMessageMap = {
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2020: {
-    message:
-      "Valor fora do intervalo: O valor fornecido está fora do intervalo permitido.",
+    message: "Valor fora do intervalo: O valor fornecido está fora do intervalo permitido.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2021: {
-    message:
-      "Tabela não existe: A tabela que você está tentando acessar não foi encontrada.",
+    message: "Tabela não existe: A tabela que você está tentando acessar não foi encontrada.",
     status: 404, // (Not Found: Quando um recurso não é encontrado no banco de dados)
   },
   P2022: {
-    message:
-      "Coluna não existe: A coluna que você está tentando acessar não foi encontrada.",
+    message: "Coluna não existe: A coluna que você está tentando acessar não foi encontrada.",
     status: 404, // (Not Found: Quando um recurso não é encontrado no banco de dados)
   },
   P2023: {
-    message:
-      "Dados inconsistentes: O banco de dados contém dados inconsistentes.",
+    message: "Dados inconsistentes: O banco de dados contém dados inconsistentes.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2024: {
-    message:
-      "Tempo limite de conexão excedido: O tempo limite para conexão foi atingido.",
+    message: "Tempo limite de conexão excedido: O tempo limite para conexão foi atingido.",
     status: 408, // (Request Timeout: Quando a requisição demora demais para ser completada)
   },
   P2025: {
-    message:
-      "Registros obrigatórios não encontrados: Faltando registros essenciais para concluir a operação.",
+    message: "Registros obrigatórios não encontrados: Faltando registros essenciais para concluir a operação.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2026: {
-    message:
-      "Recurso não suportado pelo banco de dados: O banco de dados não suporta essa operação.",
+    message: "Recurso não suportado pelo banco de dados: O banco de dados não suporta essa operação.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2027: {
-    message:
-      "Múltiplos erros ao executar a consulta: Erros múltiplos foram detectados na consulta.",
+    message: "Múltiplos erros ao executar a consulta: Erros múltiplos foram detectados na consulta.",
     status: 500, // (Internal Server Error: Erros gerais do servidor ou problemas inesperados)
   },
   P2028: {
@@ -184,13 +154,11 @@ const prismaErrorMessages: PrismaErrorMessageMap = {
     status: 500, // (Internal Server Error: Erros gerais do servidor ou problemas inesperados)
   },
   P2029: {
-    message:
-      "Limite de parâmetros da consulta excedido: A consulta excedeu o limite de parâmetros.",
+    message: "Limite de parâmetros da consulta excedido: A consulta excedeu o limite de parâmetros.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2030: {
-    message:
-      "Índice de texto completo não encontrado: O índice de texto completo não foi encontrado no banco de dados.",
+    message: "Índice de texto completo não encontrado: O índice de texto completo não foi encontrado no banco de dados.",
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2031: {
@@ -202,8 +170,7 @@ const prismaErrorMessages: PrismaErrorMessageMap = {
     status: 400, // (Bad Request: Quando os dados da requisição são inválidos)
   },
   P2034: {
-    message:
-      "Conflito de transação ou deadlock: Ocorrência de deadlock ou conflito de transação.",
+    message: "Conflito de transação ou deadlock: Ocorrência de deadlock ou conflito de transação.",
     status: 409, // (Conflict: Quando há um conflito, como uma violação de chave única)
   },
   P2035: {

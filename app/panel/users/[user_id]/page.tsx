@@ -14,10 +14,7 @@ type EditUserPageProps = {
 
 const EditUserPage = async ({ params }: EditUserPageProps) => {
   const userId = (await params).user_id;
-  const [rolesList, user] = await Promise.all([
-    svc.getRolesList(),
-    svc.getUserById(userId),
-  ]);
+  const [rolesList, user] = await Promise.all([svc.getRolesList(), svc.getUserById(userId)]);
 
   if (!user) notFound();
   if (!rolesList || rolesList.roles.length < 1) notFound();

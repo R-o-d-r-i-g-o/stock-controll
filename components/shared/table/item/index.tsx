@@ -1,14 +1,6 @@
 import Link from "next/link";
 import moment from "moment";
-import {
-  Table as MuiTable,
-  TableRow,
-  TableCell,
-  TableHead,
-  TableBody,
-  IconButton,
-  TableContainer,
-} from "@mui/material";
+import { Table as MuiTable, TableRow, TableCell, TableHead, TableBody, IconButton, TableContainer } from "@mui/material";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -74,9 +66,7 @@ const Table = ({ meta, data }: TableProps) => (
                 currency: "BRL",
               }).format(shoe.price)}
             </TableCell>
-            <TableCell className="!text-center">
-              {moment(shoe.createdAt).format(defaultDateMask)}
-            </TableCell>
+            <TableCell className="!text-center">{moment(shoe.createdAt).format(defaultDateMask)}</TableCell>
             <TableCell className="!text-center">
               <Link href={`/panel/shoes/${meta.shoeId}/items/${shoe.id}`}>
                 <IconButton>

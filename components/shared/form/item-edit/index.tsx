@@ -21,13 +21,7 @@ type ItemEditFormProps = {
 };
 
 const ItemEditForm: React.FC<ItemEditFormProps> = ({ item }) => {
-  const {
-    register,
-    formState,
-    handleSubmit,
-    handleSubmitEditItem,
-    footSizeOptions,
-  } = useItemEditFrom({ item });
+  const { register, formState, handleSubmit, handleSubmitEditItem, footSizeOptions } = useItemEditFrom({ item });
 
   return (
     <form onSubmit={handleSubmit(handleSubmitEditItem)}>
@@ -38,12 +32,7 @@ const ItemEditForm: React.FC<ItemEditFormProps> = ({ item }) => {
       </div>
       <div className="mb-6">
         <InputLable htmlFor="price" lable="Preço" />
-        <InputText
-          id="price"
-          type="number"
-          placeholder="12.0"
-          {...register("price")}
-        />
+        <InputText id="price" type="number" placeholder="12.0" {...register("price")} />
         <InputError error={formState.errors.price} />
       </div>
       <div className="mb-6">
@@ -51,11 +40,7 @@ const ItemEditForm: React.FC<ItemEditFormProps> = ({ item }) => {
         <InputSelect {...register("size")} options={footSizeOptions} />
         <InputError error={formState.errors.size} />
       </div>
-      <button
-        type="submit"
-        disabled={formState.isSubmitting}
-        className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-      >
+      <button type="submit" disabled={formState.isSubmitting} className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
         {formState.isSubmitting ? "Processando..." : "Cadastrar"}
       </button>
     </form>

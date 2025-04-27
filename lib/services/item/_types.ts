@@ -28,9 +28,4 @@ type UpdateShoe = {
   shoeId: number;
 };
 
-export type {
-  debitItemsFromStorage,
-  GetShoesById as GetItemById,
-  CreateShoe as CreateItem,
-  UpdateShoe as UpdateItem,
-};
+export type { debitItemsFromStorage, GetShoesById as GetItemById, CreateShoe as CreateItem, UpdateShoe as UpdateItem };

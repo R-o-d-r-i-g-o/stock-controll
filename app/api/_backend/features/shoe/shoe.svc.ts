@@ -1,5 +1,5 @@
-import shoeRepo from './shoe.repo';
-import * as t from './shoe.types';
+import shoeRepo from "./shoe.repo";
+import * as t from "./shoe.types";
 
 type ShoeService = {
   getShoeBy(filter: t.getShoeBy): t.GetShoeBySvcOutput;

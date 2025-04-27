@@ -21,12 +21,7 @@ const LoginPage: React.FC<LoginPageProps> = async ({ searchParams }) => {
       <Container display="small">
         <div className="h-[30px] flex justify-center items-center">
           <div className="transform -translate-y-20 rounded-full overflow-hidden">
-            <Image
-              alt="Logo"
-              src="/icons/logo_shoe.png"
-              width={200}
-              height={200}
-            />
+            <Image alt="Logo" src="/icons/logo_shoe.png" width={200} height={200} />
           </div>
         </div>
         <Title className="text-center mb-6 " text="Entrar" />

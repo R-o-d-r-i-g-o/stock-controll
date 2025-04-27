@@ -2,17 +2,11 @@ import { prisma, prismaTransaction } from "../../prisma/prisma.client";
 import * as t from "./audit.types";
 
 type AuditRepository = {
-  createAuditRecord(
-    input: t.CreateAuditRecordRepoInput
-  ): t.CreateAuditRecordRepoOutput;
+  createAuditRecord(input: t.CreateAuditRecordRepoInput): t.CreateAuditRecordRepoOutput;
 
-  getAuditsCount(
-    input: t.GetAuditsPaginatedRepoInput
-  ): t.GetAuditsCountRepoOutput;
+  getAuditsCount(input: t.GetAuditsPaginatedRepoInput): t.GetAuditsCountRepoOutput;
 
-  getAuditsPaginated(
-    input: t.GetAuditsPaginatedRepoInput
-  ): t.GetAuditsPaginatedRepoOutput;
+  getAuditsPaginated(input: t.GetAuditsPaginatedRepoInput): t.GetAuditsPaginatedRepoOutput;
 };
 
 const auditRepository = {} as AuditRepository;

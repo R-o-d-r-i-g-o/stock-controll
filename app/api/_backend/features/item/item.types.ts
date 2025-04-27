@@ -71,17 +71,4 @@ type CreateItemsRepoInput = {
 
 type GetItemBySvcOutput = Promise<ItemEntity>;
 
-export type {
-  GetShoeSvcInput,
-  CreateShoeSvcInput,
-  UpdateShoeSvcInput,
-  DebitItemsSvcInput,
-  CreateItemsSvcInput,
-  CreateItemsRepoInput,
-  UpdateShoeRepoInput,
-  GetItemBySvcOutput,
-  GetShoePaginatedRepoInput,
-  GetShoeRepoInput,
-  DebitItemsRepoInput,
-  CreateShoeRepoInput,
-};
+export type { GetShoeSvcInput, CreateShoeSvcInput, UpdateShoeSvcInput, DebitItemsSvcInput, CreateItemsSvcInput, CreateItemsRepoInput, UpdateShoeRepoInput, GetItemBySvcOutput, GetShoePaginatedRepoInput, GetShoeRepoInput, DebitItemsRepoInput, CreateShoeRepoInput };

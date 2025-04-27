@@ -12,14 +12,7 @@ type PaginationProps = React.HTMLAttributes<HTMLDivElement> & {
   size: number;
 };
 
-const Pagination: React.FC<PaginationProps> = ({
-  total,
-  page,
-  size,
-  defaultPage = 1,
-  className,
-  ...rest
-}) => {
+const Pagination: React.FC<PaginationProps> = ({ total, page, size, defaultPage = 1, className, ...rest }) => {
   const router = useRouter();
 
   const handleChangePage = (e: React.ChangeEvent<unknown>, newPage: number) => {
@@ -34,15 +27,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <div {...rest} className={`flex justify-center items-center ${className}`}>
-      <MuiPagination
-        page={page}
-        color="primary"
-        count={Math.ceil(total / size)}
-        onChange={handleChangePage}
-        defaultPage={defaultPage}
-        siblingCount={1}
-        boundaryCount={1}
-      />
+      <MuiPagination page={page} color="primary" count={Math.ceil(total / size)} onChange={handleChangePage} defaultPage={defaultPage} siblingCount={1} boundaryCount={1} />
     </div>
   );
 };

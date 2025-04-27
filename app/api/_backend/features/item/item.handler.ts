@@ -1,11 +1,6 @@
 import { NextRequest } from "next/server";
 
-import {
-  OperationType,
-  formSchema,
-  itemCreationSchema,
-  itemUpdateSchema,
-} from "./item.schema";
+import { OperationType, formSchema, itemCreationSchema, itemUpdateSchema } from "./item.schema";
 import itemSvc from "./item.svc";
 
 import { errorHandler } from "../../common/api.error";
@@ -91,8 +86,7 @@ const scanItem = async (req: NextRequest) => {
     const user = await validateAuthUser(req);
 
     const result = formSchema.safeParse(await req.json());
-    if (result.error)
-      return Response.json({ errors: result.error.errors }, { status: 400 });
+    if (result.error) return Response.json({ errors: result.error.errors }, { status: 400 });
 
     if (result.data.oprationType === OperationType.Debit) {
       await itemSvc.debitItems({ userId: user!.id, skus: result.data.skus });

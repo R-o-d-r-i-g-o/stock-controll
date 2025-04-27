@@ -1,13 +1,6 @@
 import React from "react";
 
-import {
-  SwipeUpSharp,
-  SwipeDownSharp,
-  SwipeLeftSharp,
-  SwipeRightSharp,
-  Undo,
-  ExitToApp,
-} from "@mui/icons-material";
+import { SwipeUpSharp, SwipeDownSharp, SwipeLeftSharp, SwipeRightSharp, Undo, ExitToApp } from "@mui/icons-material";
 
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -26,8 +19,7 @@ const useDrawer = () => {
 
   const handleNavigation = (path: string) => router.push(path);
 
-  const toggleDrawer = (anchor: Anchor, open: boolean) => () =>
-    setState({ ...state, [anchor]: open });
+  const toggleDrawer = (anchor: Anchor, open: boolean) => () => setState({ ...state, [anchor]: open });
 
   const actionItem = [
     {

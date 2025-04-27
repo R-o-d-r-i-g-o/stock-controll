@@ -60,13 +60,4 @@ type UpdateTag = {
   deletedAt: Date | null;
 };
 
-export type {
-  UpdateTag,
-  DeleteTag,
-  GetShoeRelatedTags,
-  GetShoeRelatedTag,
-  CreateShoeRelatedTag,
-  GetShoeRelatedTagsReponse,
-  GetShoeRelatedTagReponse,
-  CreateShoeRelatedTagReponse,
-};
+export type { UpdateTag, DeleteTag, GetShoeRelatedTags, GetShoeRelatedTag, CreateShoeRelatedTag, GetShoeRelatedTagsReponse, GetShoeRelatedTagReponse, CreateShoeRelatedTagReponse };

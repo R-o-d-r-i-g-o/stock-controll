@@ -7,12 +7,7 @@ type InputTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> &
     allowIndent?: boolean;
   };
 
-const InputTextarea: React.FC<InputTextareaProps> = ({
-  ref,
-  className,
-  allowIndent,
-  ...rest
-}) => {
+const InputTextarea: React.FC<InputTextareaProps> = ({ ref, className, allowIndent, ...rest }) => {
   const { textareaRef, handleIndentJson } = useInputTextarea();
 
   return (
@@ -26,11 +21,7 @@ const InputTextarea: React.FC<InputTextareaProps> = ({
         }}
       />
       {allowIndent && (
-        <button
-          type="button"
-          onClick={handleIndentJson}
-          className="absolute right-3 top-6 transform -translate-y-1/2 text-gray-500"
-        >
+        <button type="button" onClick={handleIndentJson} className="absolute right-3 top-6 transform -translate-y-1/2 text-gray-500">
           <IdentIcon />
         </button>
       )}

@@ -25,9 +25,7 @@ const InfoButton = async ({ className }: InfoButtonProps) => {
           </p>
           <p className="flex justify-between">
             <span className="font-semibold">Banco:</span>
-            <span>
-              {appData.database ? "🟢 Disponível" : "🔴 Indisponível"}
-            </span>
+            <span>{appData.database ? "🟢 Disponível" : "🔴 Indisponível"}</span>
           </p>
           <p className="flex justify-between">
             <span className="font-semibold">Build:</span>

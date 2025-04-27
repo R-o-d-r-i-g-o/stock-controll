@@ -42,19 +42,13 @@ class ApiErrorBuilder {
   }
 
   formatResponseError() {
-    const stackTrace =
-      process.env.NODE_ENV === "development"
-        ? this.responseError.stackTrace
-        : null;
+    const stackTrace = process.env.NODE_ENV === "development" ? this.responseError.stackTrace : null;
 
     return { ...this.responseError, stackTrace };
   }
 
   ToNextApiError() {
-    return Response.json(
-      { error: this.formatResponseError() },
-      { status: this.httpStatus }
-    );
+    return Response.json({ error: this.formatResponseError() }, { status: this.httpStatus });
   }
 }
 
@@ -72,12 +66,7 @@ const errorHandler = (err: unknown): ApiErrorBuilder => {
 
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
     const mappedError = handleFormatPrismaError(err.code);
-    builder
-      .setStatus(mappedError.status)
-      .setMessage(mappedError.message)
-      .setStackTrace(err.stack)
-      .setInternalStatus(ErrorCode.Database)
-      .setDeveloperMessage(err.message);
+    builder.setStatus(mappedError.status).setMessage(mappedError.message).setStackTrace(err.stack).setInternalStatus(ErrorCode.Database).setDeveloperMessage(err.message);
   }
 
   return builder;

@@ -36,13 +36,10 @@ const reportCreateSchema = z
     message: "A data final não pode ser anterior à data inicial",
     path: ["endDate"],
   })
-  .refine(
-    (data) => getDateDifferenceInDays(data.startDate, data.endDate) <= 30,
-    {
-      message: "O intervalo entre as datas não pode ser superior a 30 dias",
-      path: ["endDate"],
-    }
-  );
+  .refine((data) => getDateDifferenceInDays(data.startDate, data.endDate) <= 30, {
+    message: "O intervalo entre as datas não pode ser superior a 30 dias",
+    path: ["endDate"],
+  });
 
 type ReportCreateSchema = z.infer<typeof reportCreateSchema>;
 

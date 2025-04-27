@@ -40,8 +40,7 @@ const main = async () => {
           name: "RodrigoDev",
           email: "rodrigomarqribeiro@gmail.com",
           roleId: 1,
-          password:
-            "$2a$10$4LKt3sxs0/i5vBirA6k9sOhp7KLkYBNIf48Je.4qDyx2i1bEn2q96", // 123456
+          password: "$2a$10$4LKt3sxs0/i5vBirA6k9sOhp7KLkYBNIf48Je.4qDyx2i1bEn2q96", // 123456
         },
       });
   });

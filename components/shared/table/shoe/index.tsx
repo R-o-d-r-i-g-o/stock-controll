@@ -1,16 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  Table as MuiTable,
-  Collapse,
-  TableRow,
-  TableBody,
-  TableCell,
-  TableHead,
-  IconButton,
-  TableContainer as MuiTableContainer,
-} from "@mui/material";
+import { Table as MuiTable, Collapse, TableRow, TableBody, TableCell, TableHead, IconButton, TableContainer as MuiTableContainer } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -73,12 +64,8 @@ const Table = ({ filter, data }: TableProps) => {
               <TableCell className="!text-white font-semibold">Nome</TableCell>
               <TableCell className="!text-white font-semibold">Data</TableCell>
               <TableCell className="!text-white font-semibold">Cor</TableCell>
-              <TableCell className="!text-white font-semibold">
-                Solado
-              </TableCell>
-              <TableCell className="!text-white font-semibold">
-                Config.
-              </TableCell>
+              <TableCell className="!text-white font-semibold">Solado</TableCell>
+              <TableCell className="!text-white font-semibold">Config.</TableCell>
               <TableCell className="!text-white font-semibold"></TableCell>
             </TableRow>
           </TableHead>
@@ -96,9 +83,7 @@ const Table = ({ filter, data }: TableProps) => {
                 <TableRow className="hover:bg-indigo-100">
                   <TableCell>{c.id}</TableCell>
                   <TableCell>{c.name}</TableCell>
-                  <TableCell>
-                    {moment(c.createdAt).format(defaultDateMask)}
-                  </TableCell>
+                  <TableCell>{moment(c.createdAt).format(defaultDateMask)}</TableCell>
                   <TableCell>{c.color}</TableCell>
                   <TableCell>{c.sole}</TableCell>
                   <TableCell>
@@ -115,15 +100,8 @@ const Table = ({ filter, data }: TableProps) => {
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell
-                    colSpan={7}
-                    style={{ paddingBottom: 0, paddingTop: 0 }}
-                  >
-                    <Collapse
-                      in={selectedRow === c.id}
-                      timeout="auto"
-                      unmountOnExit
-                    >
+                  <TableCell colSpan={7} style={{ paddingBottom: 0, paddingTop: 0 }}>
+                    <Collapse in={selectedRow === c.id} timeout="auto" unmountOnExit>
                       <div className="p-4">
                         <p className="text-gray-700">
                           <strong>Descrição:</strong>
@@ -142,12 +120,7 @@ const Table = ({ filter, data }: TableProps) => {
           </TableBody>
         </MuiTable>
       </TableContainer>
-      <Pagination
-        page={filter.page}
-        size={filter.size}
-        total={data.meta.total}
-        className="mt-4"
-      />
+      <Pagination page={filter.page} size={filter.size} total={data.meta.total} className="mt-4" />
     </React.Fragment>
   );
 };

@@ -15,53 +15,26 @@ type InputTextProps = React.InputHTMLAttributes<HTMLInputElement> &
     isScanner?: boolean;
   };
 
-const InputText: React.FC<InputTextProps> = ({
-  ref,
-  type = "text",
-  className,
-  isScanner,
-  isPassword,
-  ...rest
-}) => {
+const InputText: React.FC<InputTextProps> = ({ ref, type = "text", className, isScanner, isPassword, ...rest }) => {
   const { showPassword, handleToggleVisibility } = useInputPassword();
 
-  const {
-    inputRef,
-    isScannerVisible,
-    handleScannerResult,
-    toggleVisibleScanner,
-  } = useInputScanner();
+  const { inputRef, isScannerVisible, handleScannerResult, toggleVisibleScanner } = useInputScanner();
 
   const isPasswordContent = (
-    <button
-      type="button"
-      onClick={handleToggleVisibility}
-      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-    >
+    <button type="button" onClick={handleToggleVisibility} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
       {showPassword ? <VisibilityOff /> : <Visibility />}
     </button>
   );
 
   const isScannerContent = (
     <React.Fragment>
-      <button
-        type="button"
-        onClick={toggleVisibleScanner}
-        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-      >
+      <button type="button" onClick={toggleVisibleScanner} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
         <CropFreeIcon />
       </button>
 
       {isScannerVisible && (
-        <div
-          onClick={toggleVisibleScanner}
-          className="fixed inset-0 bg-gray-500 bg-opacity-70 flex justify-center items-center z-50"
-        >
-          <Container
-            className="!p-4"
-            display="minimum"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div onClick={toggleVisibleScanner} className="fixed inset-0 bg-gray-500 bg-opacity-70 flex justify-center items-center z-50">
+          <Container className="!p-4" display="minimum" onClick={(e) => e.stopPropagation()}>
             <Scanner beepEnabled onResult={handleScannerResult} />
           </Container>
         </div>

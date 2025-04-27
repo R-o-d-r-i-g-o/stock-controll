@@ -21,18 +21,10 @@ type ShoesListPageProps = {
 
 const ActionButtons = () => (
   <div className="flex justify-end gap-4 mb-4">
-    <Link
-      href="/panel/shoes/scan"
-      title="Escanear itens"
-      className="flex items-center space-x-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
-    >
+    <Link href="/panel/shoes/scan" title="Escanear itens" className="flex items-center space-x-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
       <CropFreeIcon />
     </Link>
-    <Link
-      href="/panel/shoes/create"
-      title="Adicionar Calçado"
-      className="flex items-center space-x-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
-    >
+    <Link href="/panel/shoes/create" title="Adicionar Calçado" className="flex items-center space-x-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
       <AddIcon />
     </Link>
   </div>

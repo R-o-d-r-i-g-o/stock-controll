@@ -16,8 +16,7 @@ const getUsersPaginated = async (req: NextRequest) => {
       page: searchParams.get("page"),
       size: searchParams.get("size"),
     });
-    if (result.error)
-      return launchError(result.error.errors[0].message, 400).ToNextApiError();
+    if (result.error) return launchError(result.error.errors[0].message, 400).ToNextApiError();
 
     const audits = await svc.getAuditsPaginated(result.data);
     return Response.json(audits, { status: 200 });

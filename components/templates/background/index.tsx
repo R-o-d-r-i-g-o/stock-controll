@@ -10,16 +10,8 @@ const backgroundColorMap = {
   error: "from-red-500 via-yellow-500 to-orange-500",
 };
 
-const Background: React.FC<BackgroundProps> = ({
-  className,
-  children,
-  type = "default",
-  ...rest
-}) => (
-  <div
-    {...rest}
-    className={`flex items-center justify-center min-h-screen bg-gradient-to-r ${backgroundColorMap[type]} ${className}`}
-  >
+const Background: React.FC<BackgroundProps> = ({ className, children, type = "default", ...rest }) => (
+  <div {...rest} className={`flex items-center justify-center min-h-screen bg-gradient-to-r ${backgroundColorMap[type]} ${className}`}>
     {children}
   </div>
 );

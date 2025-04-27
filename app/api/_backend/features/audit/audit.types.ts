@@ -1,8 +1,4 @@
-import {
-  AuditEntity,
-  ItemEntity,
-  UserEntity,
-} from "../../prisma/prisma.entity";
+import { AuditEntity, ItemEntity, UserEntity } from "../../prisma/prisma.entity";
 
 type CreateAuditSvcInput = {
   note: string;
@@ -54,14 +50,4 @@ type CreateAuditRecordRepoOutput = Promise<number>;
 
 type GetAuditsCountRepoOutput = Promise<number>;
 
-export type {
-  CreateAuditSvcInput,
-  GetAuditsCountRepoOutput,
-  CreateAuditRecordSvcOutput,
-  CreateAuditRecordRepoInput,
-  GetAuditsPaginatedSvcInput,
-  GetAuditsPaginatedSvcOutput,
-  GetAuditsPaginatedRepoInput,
-  GetAuditsPaginatedRepoOutput,
-  CreateAuditRecordRepoOutput,
-};
+export type { CreateAuditSvcInput, GetAuditsCountRepoOutput, CreateAuditRecordSvcOutput, CreateAuditRecordRepoInput, GetAuditsPaginatedSvcInput, GetAuditsPaginatedSvcOutput, GetAuditsPaginatedRepoInput, GetAuditsPaginatedRepoOutput, CreateAuditRecordRepoOutput };

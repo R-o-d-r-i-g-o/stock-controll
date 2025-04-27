@@ -32,11 +32,4 @@ const deleteTag = async (data: t.DeleteTag) => {
   await repo.deleteTag(data);
 };
 
-export {
-  getShoeRelatedTags,
-  createShoeRelateTags,
-  getTagBy,
-  createTag,
-  updateTag,
-  deleteTag,
-};
+export { getShoeRelatedTags, createShoeRelateTags, getTagBy, createTag, updateTag, deleteTag };

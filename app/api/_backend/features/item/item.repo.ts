@@ -79,16 +79,12 @@ const debitItems = async (data: t.DebitItemsRepoInput) => {
     select: { id: true },
   };
 
-  const [itemsFromTag, itemsFromSku] = await Promise.all([
-    findItemsByCustomTags(data.skus),
-    prisma.item.findMany(searchPredicate),
-  ]);
+  const [itemsFromTag, itemsFromSku] = await Promise.all([findItemsByCustomTags(data.skus), prisma.item.findMany(searchPredicate)]);
 
   const mixedItemIDs = [...itemsFromSku, ...itemsFromTag];
   const mixedItemIDsLen = mixedItemIDs.length;
 
-  if (data.skus.length !== mixedItemIDsLen)
-    throw new Error("nem todos itens escanados foram cadastrados");
+  if (data.skus.length !== mixedItemIDsLen) throw new Error("nem todos itens escanados foram cadastrados");
 
   const itemsToExpedition = mixedItemIDs.map((item) => ({
     itemId: item.id,
@@ -96,9 +92,7 @@ const debitItems = async (data: t.DebitItemsRepoInput) => {
     note: "item dado baixa no sistema",
   }));
 
-  await prismaTransaction(
-    async () => await prisma.expedition.createMany({ data: itemsToExpedition })
-  );
+  await prismaTransaction(async () => await prisma.expedition.createMany({ data: itemsToExpedition }));
 };
 
 const createItems = async (data: t.CreateItemsRepoInput) => {
@@ -107,24 +101,14 @@ const createItems = async (data: t.CreateItemsRepoInput) => {
     select: { metadata: true, shoeId: true },
   });
 
-  if (data.skus.length !== customTags.length)
-    throw new Error("nem todas as etiquetas escanados foram encontradas");
+  if (data.skus.length !== customTags.length) throw new Error("nem todas as etiquetas escanados foram encontradas");
 
   const itemsToCreate = customTags.map((ct) => ({
     ...(ct.metadata as { size: number; price: number }),
     shoeId: ct.shoeId,
   }));
 
-  await prismaTransaction(
-    async () => await prisma.item.createMany({ data: itemsToCreate })
-  );
+  await prismaTransaction(async () => await prisma.item.createMany({ data: itemsToCreate }));
 };
 
-export {
-  getItemBy,
-  deleteItem,
-  createItem,
-  updateItem,
-  debitItems,
-  createItems,
-};
+export { getItemBy, deleteItem, createItem, updateItem, debitItems, createItems };

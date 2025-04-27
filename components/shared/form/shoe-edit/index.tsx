@@ -19,8 +19,7 @@ type ShoeEditFormProps = {
 };
 
 const ShoeEditForm = ({ data, customSubmitButton }: ShoeEditFormProps) => {
-  const { register, formState, handleSubmit, handleSubmitUserEdit } =
-    useShoeEditForm({ data });
+  const { register, formState, handleSubmit, handleSubmitUserEdit } = useShoeEditForm({ data });
 
   return (
     <form onSubmit={handleSubmit(handleSubmitUserEdit)} className="space-y-6">
@@ -48,11 +47,7 @@ const ShoeEditForm = ({ data, customSubmitButton }: ShoeEditFormProps) => {
       </div>
       {customSubmitButton && customSubmitButton}
       {!customSubmitButton && (
-        <button
-          type="submit"
-          disabled={formState.isSubmitting}
-          className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
-        >
+        <button type="submit" disabled={formState.isSubmitting} className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300">
           {formState.isSubmitting ? "Processando..." : "Editar"}
         </button>
       )}

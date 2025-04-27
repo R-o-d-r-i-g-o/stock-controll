@@ -3,11 +3,7 @@ import * as svc from "./tag.svc";
 
 import { errorHandler } from "../../common/api.error";
 import { validateAuthUser } from "../../common/api.auth";
-import {
-  deleteTagSchema,
-  createTagSchema,
-  updateTagSchema,
-} from "./tag.schema";
+import { deleteTagSchema, createTagSchema, updateTagSchema } from "./tag.schema";
 
 type UserParams = {
   params: Promise<{ shoe_id: string }>;
@@ -33,16 +29,12 @@ const getShoeRelatedTags = async (req: NextRequest, { params }: UserParams) => {
   }
 };
 
-const createShoeRelatedTags = async (
-  req: NextRequest,
-  { params }: UserParams
-) => {
+const createShoeRelatedTags = async (req: NextRequest, { params }: UserParams) => {
   const user = await validateAuthUser(req);
   const shoeId = parseInt((await params).shoe_id, 10);
 
   const result = createTagSchema.safeParse(await req.json());
-  if (result.error)
-    return Response.json({ errors: result.error.errors }, { status: 400 });
+  if (result.error) return Response.json({ errors: result.error.errors }, { status: 400 });
 
   const tagId = await svc.createTag({
     ...result.data,
@@ -78,8 +70,7 @@ const deleteTag = async (req: NextRequest, { params }: TagParams) => {
       shoeId: shoe_id,
       tagId: tag_id,
     });
-    if (result.error)
-      return Response.json({ errors: result.error.errors }, { status: 400 });
+    if (result.error) return Response.json({ errors: result.error.errors }, { status: 400 });
 
     await svc.deleteTag(result.data);
 
@@ -95,8 +86,7 @@ const updateTag = async (req: NextRequest, { params }: TagParams) => {
     const { tag_id, shoe_id } = await params;
 
     const result = updateTagSchema.safeParse(await req.json());
-    if (result.error)
-      return Response.json({ errors: result.error.errors }, { status: 400 });
+    if (result.error) return Response.json({ errors: result.error.errors }, { status: 400 });
 
     await svc.updateTag({
       ...result.data,
@@ -111,10 +101,4 @@ const updateTag = async (req: NextRequest, { params }: TagParams) => {
   }
 };
 
-export {
-  getShoeRelatedTags,
-  createShoeRelatedTags,
-  getUniqueTag,
-  deleteTag,
-  updateTag,
-};
+export { getShoeRelatedTags, createShoeRelatedTags, getUniqueTag, deleteTag, updateTag };

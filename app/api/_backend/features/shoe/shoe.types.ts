@@ -1,5 +1,5 @@
-import { Decimal } from '@prisma/client/runtime/library';
-import { ItemEntity, ShoeEntity } from '../../prisma/prisma.entity';
+import { Decimal } from "@prisma/client/runtime/library";
+import { ItemEntity, ShoeEntity } from "../../prisma/prisma.entity";
 
 type getShoeBy = {
   id?: number;

@@ -9,9 +9,7 @@ type UserService = {
   createUser(input: t.createUserProps): Promise<number>;
   updateUser(input: t.updateUserProps): Promise<void>;
   deleteUser(input: number): Promise<void>;
-  getUsersPaginated(
-    input: t.getUsersPaginatedProps
-  ): t.GetUsersPaginatedSvcOutput;
+  getUsersPaginated(input: t.getUsersPaginatedProps): t.GetUsersPaginatedSvcOutput;
 };
 
 const userService = {} as UserService;
@@ -57,10 +55,7 @@ userService.getUsersPaginated = async (filter) => {
     take: filter.size,
   };
 
-  const [userCount, userList] = await Promise.all([
-    repo.getUsersCount(parsedFilter),
-    repo.getUsersPaginated(parsedFilter),
-  ]);
+  const [userCount, userList] = await Promise.all([repo.getUsersCount(parsedFilter), repo.getUsersPaginated(parsedFilter)]);
 
   return {
     meta: {

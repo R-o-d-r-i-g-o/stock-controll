@@ -20,17 +20,11 @@ const TagListPage = async ({ params }: TagListPageProps) => {
   return (
     <Container>
       <div className="flex justify-between">
-        <Link
-          href={`/panel/shoes/${data.meta.shoeId}`}
-          className="flex items-center gap-2 text-gray-700 transition-colors hover:animate-jump animate-once"
-        >
+        <Link href={`/panel/shoes/${data.meta.shoeId}`} className="flex items-center gap-2 text-gray-700 transition-colors hover:animate-jump animate-once">
           <ArrowBack fontSize="small" />
           Voltar
         </Link>
-        <Link
-          href={`/panel/shoes/${data.meta.shoeId}/tags/create`}
-          className="text-gray-700 hover:animate-spin animate-once"
-        >
+        <Link href={`/panel/shoes/${data.meta.shoeId}/tags/create`} className="text-gray-700 hover:animate-spin animate-once">
           <Add />
         </Link>
       </div>

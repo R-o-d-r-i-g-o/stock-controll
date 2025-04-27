@@ -1,15 +1,10 @@
 import { api } from "../api";
 import * as t from "./_types";
 
-const getShoesGroupedByItemSizePaginated = async (
-  req: t.GetItemsGroupedByShoePaginated
-) => {
-  const res = await api.get<t.getShoesGroupedByItemSizePaginatedRespose>(
-    "/api/shoes",
-    {
-      params: req,
-    }
-  );
+const getShoesGroupedByItemSizePaginated = async (req: t.GetItemsGroupedByShoePaginated) => {
+  const res = await api.get<t.getShoesGroupedByItemSizePaginatedRespose>("/api/shoes", {
+    params: req,
+  });
   return res.data;
 };
 
@@ -38,10 +33,4 @@ const createShoe = async (req: t.CreateShoe) => {
   return res.data;
 };
 
-export {
-  getShoesGroupedByItemSizePaginated,
-  createShoe as createShoe,
-  updateShoe as updateShoe,
-  deleteShoeById as deleteShoeById,
-  getShoeById as getShoeById,
-};
+export { getShoesGroupedByItemSizePaginated, createShoe as createShoe, updateShoe as updateShoe, deleteShoeById as deleteShoeById, getShoeById as getShoeById };

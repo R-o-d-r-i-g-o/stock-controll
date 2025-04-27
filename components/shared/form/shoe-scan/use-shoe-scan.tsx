@@ -34,11 +34,7 @@ const useShoeScanForm = () => {
         skus: state.skus,
         oprationType: state.oprationType as "debit" | "register",
       });
-      success(
-        state.oprationType === "debit"
-          ? "SKUs debitados com sucesso!"
-          : "SKUs cadastrados com sucesso!"
-      );
+      success(state.oprationType === "debit" ? "SKUs debitados com sucesso!" : "SKUs cadastrados com sucesso!");
 
       setState((prevState) => ({ ...prevState, skus: [] }));
     } catch (error) {

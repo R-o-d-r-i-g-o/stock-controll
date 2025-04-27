@@ -2,18 +2,7 @@
 
 import React from "react";
 
-import {
-  Box,
-  List,
-  Button,
-  Drawer as MuiDrawer,
-  Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemButton,
-  ListItemText,
-  Chip,
-} from "@mui/material";
+import { Box, List, Button, Drawer as MuiDrawer, Divider, ListItem, ListItemIcon, ListItemButton, ListItemText, Chip } from "@mui/material";
 
 import { WarningRounded } from "@mui/icons-material";
 
@@ -25,25 +14,12 @@ type DrawerProps = {
 };
 
 const Drawer: React.FC<DrawerProps> = ({ menuOptions }) => {
-  const { state, actionItem, toggleDrawer, menuPositions, handleNavigation } =
-    useDrawer();
+  const { state, actionItem, toggleDrawer, menuPositions, handleNavigation } = useDrawer();
 
-  const betaLable = (
-    <Chip
-      size="small"
-      label="Beta"
-      className="!bg-yellow-300 !px-2"
-      icon={<WarningRounded fontSize="small" />}
-    />
-  );
+  const betaLable = <Chip size="small" label="Beta" className="!bg-yellow-300 !px-2" icon={<WarningRounded fontSize="small" />} />;
 
   const list = (anchor: Anchor) => (
-    <Box
-      sx={{ width: ["top", "bottom"].includes(anchor) ? "auto" : 280 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
+    <Box sx={{ width: ["top", "bottom"].includes(anchor) ? "auto" : 280 }} role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}>
       <List>
         {menuOptions.map(({ beta, lable, nav, icon: Icon }) => (
           <ListItem key={lable} disablePadding>
@@ -80,11 +56,7 @@ const Drawer: React.FC<DrawerProps> = ({ menuOptions }) => {
           <Button onClick={toggleDrawer(anchor, true)}>
             <Icon />
           </Button>
-          <MuiDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
+          <MuiDrawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             {list(anchor)}
           </MuiDrawer>
         </React.Fragment>
