@@ -1,7 +1,7 @@
-import moment from "moment";
+import moment from 'moment';
 
-import * as t from "./shoe.types";
-import { prisma } from "../../prisma/prisma.client";
+import * as t from './shoe.types';
+import { prisma } from '../../prisma/prisma.client';
 
 type ShoeRepository = {
   getShoeBy(filter: t.getShoeBy): t.GetShoeByRepoOutput;
@@ -9,14 +9,8 @@ type ShoeRepository = {
   deleteShoe(id: number): Promise<void>;
   updateShoe(user: t.updateShoe): Promise<void>;
   createShoe(data: t.createShoe): Promise<number>;
-
-  getItemShoesPaginated(
-    filter: t.getShoesPaginated
-  ): t.GetItemShoesPaginatedRepoOutput;
-
-  getExpeditionShoes(
-    filter: t.getExpeditionShoes
-  ): t.GetExpeditionShoesRepoOutput;
+  getItemShoesPaginated(filter: t.getShoesPaginated): t.GetItemShoesPaginatedRepoOutput;
+  getExpeditionShoes(filter: t.getExpeditionShoes): t.GetExpeditionShoesRepoOutput;
 };
 
 const shoeRepository = {} as ShoeRepository;
@@ -33,7 +27,7 @@ shoeRepository.getShoeBy = async (filter) => {
           deletedAt: null,
           Expedition: { none: {} },
         },
-        orderBy: { size: "asc" },
+        orderBy: { size: 'asc' },
       },
     },
   });
@@ -69,7 +63,7 @@ shoeRepository.getItemShoesPaginated = async (filter) => {
     include: {
       Item: {
         where: { deletedAt: null, Expedition: { none: {} } },
-        orderBy: { size: "asc" },
+        orderBy: { size: 'asc' },
       },
     },
   });
@@ -77,7 +71,7 @@ shoeRepository.getItemShoesPaginated = async (filter) => {
 };
 
 shoeRepository.getExpeditionShoes = async (filter) => {
-  const formateDate = (date: Date) => moment(date).format("YYYY-MM-DD");
+  const formateDate = (date: Date) => moment(date).format('YYYY-MM-DD');
 
   const result = await prisma.$queryRaw<{ shoeName: string; amount: bigint }[]>`
     SELECT

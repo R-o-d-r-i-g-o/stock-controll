@@ -1,3 +1,4 @@
+import { Decimal } from '@prisma/client/runtime/library';
 import { ItemEntity, ShoeEntity } from '../../prisma/prisma.entity';
 
 type getShoeBy = {
@@ -70,9 +71,24 @@ type GetShoeByRepoOutput = Promise<
 >;
 
 type GetItemShoesPaginatedRepoOutput = Promise<
-  ShoeEntity & {
-    Item: ItemEntity[];
-  }
+  {
+    id: number;
+    color: string;
+    sole: string;
+    name: string;
+    note: string;
+    createdAt: Date;
+    deletedAt: Date | null;
+    Item: {
+      id: number;
+      createdAt: Date;
+      deletedAt: Date | null;
+      size: number;
+      sku: string;
+      price: Decimal;
+      shoeId: number;
+    }[];
+  }[]
 >;
 
 type getShoesGroupedBySizePaginated = {
@@ -113,4 +129,18 @@ type getShoesPaginated = {
   endDate?: Date;
 };
 
-export type { updateShoe, createShoe, GetShoeByRepoOutput, GetExpeditionShoesRepoOutput, getShoesPaginated, GetShoeBySvcOutput, GetItemShoesPaginatedRepoOutput, GetExpeditionShoesSvcOutput, getShoeBy, Accumulator, getExpeditionShoes, getShoesGroupedBySizePaginated, getShoesGroupedByItemSizePaginatedRespose };
+export type {
+  updateShoe,
+  createShoe,
+  GetShoeByRepoOutput,
+  GetExpeditionShoesRepoOutput,
+  getShoesPaginated,
+  GetShoeBySvcOutput,
+  GetItemShoesPaginatedRepoOutput,
+  GetExpeditionShoesSvcOutput,
+  getShoeBy,
+  Accumulator,
+  getExpeditionShoes,
+  getShoesGroupedBySizePaginated,
+  getShoesGroupedByItemSizePaginatedRespose,
+};
