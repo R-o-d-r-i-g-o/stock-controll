@@ -1,3 +1,3 @@
-import { nextAuthHandler } from "@/app/api/_backend/features/auth/auth.handler";
+import { handlers } from "@/app/api/_backend/features/auth/auth.handler";
 
-export { nextAuthHandler as GET, nextAuthHandler as POST };
+export const { GET, POST } = handlers;

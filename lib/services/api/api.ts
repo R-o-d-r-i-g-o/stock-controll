@@ -1,4 +1,5 @@
 import axios from "axios";
+import { auth } from "@/app/api/_backend/features/auth/auth.handler"; //TODO: improve it later.
 
 const { isAxiosError, create } = axios;
 
@@ -21,6 +22,15 @@ const api = create({
     next: { revalidate: false },
   },
 });
+
+// Authentication middleware proxy
+api.interceptors.request.use(async (req) => {
+  const session = await auth.auth();
+  if (session) {
+    req.headers["Authorization"] = session.accessToken;
+  }
+  return req;
+}, Promise.reject);
 
 export { isAxiosError, api };
 

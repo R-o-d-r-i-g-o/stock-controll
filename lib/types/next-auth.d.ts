@@ -8,21 +8,12 @@ declare module "next-auth" {
     id: number;
     name: string;
     email: string;
+    image: string;
+    accessToken: string;
   }
 
   interface Session {
     user: User;
-    jwt: string;
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT {
-    id: number;
-    name: string;
-    email: string;
-    iat?: number;
-    exp?: number;
-    jti?: string;
+    accessToken: string;
   }
 }

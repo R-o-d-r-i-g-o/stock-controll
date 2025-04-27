@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth/next";
+import { auth } from "@/app/api/_backend/features/auth/auth.handler"; //TODO: improve it later.
 
 const Page = async () => {
-  const session = await getServerSession();
+  const session = await auth.auth();
 
   const handleRedirect = () => {
     const destiny = session ? "/panel" : "/login";
