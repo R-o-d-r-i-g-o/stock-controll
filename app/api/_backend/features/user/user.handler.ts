@@ -21,7 +21,7 @@ const createUser = async (req: NextRequest) => {
 
     const userId = await userSvc.createUser(result.data);
     await auditSvc.createAuditRecord({
-      userId: user!.id,
+      userId: user.id,
       note: `O usuário criou um registro de novo usuário (#${userId}).`,
     });
     return Response.json({ userId }, { status: 201 });
@@ -69,7 +69,7 @@ const deleteUser = async (req: NextRequest, { params }: UserParams) => {
     const userId = parseInt((await params).user_id, 10);
     await userSvc.deleteUser(userId);
     await auditSvc.createAuditRecord({
-      userId: user!.id,
+      userId: user.id,
       note: `O usuário deletou o registro de usuário #${userId}`,
     });
 

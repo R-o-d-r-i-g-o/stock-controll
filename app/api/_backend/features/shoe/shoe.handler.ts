@@ -39,7 +39,7 @@ const createShoe = async (req: NextRequest) => {
 
     const shoeId = await shoeSvc.createShoe(result.data);
     await auditSvc.createAuditRecord({
-      userId: user!.id,
+      userId: user.id,
       note: `O usuário cadastrou um novo calçado (#${shoeId})`,
     });
 
@@ -69,7 +69,7 @@ const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
     const shoeId = parseInt((await params).shoe_id, 10);
     await shoeSvc.deleteShoe(shoeId);
     await auditSvc.createAuditRecord({
-      userId: user!.id,
+      userId: user.id,
       note: `O usuário deletou o calçado #${shoeId}`,
     });
 
@@ -93,7 +93,7 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
 
     await shoeSvc.updateShoe(result.data);
     await auditSvc.createAuditRecord({
-      userId: user!.id,
+      userId: user.id,
       note: `O usuário editou as informações do calçado #${result.data.id}`,
     });
 

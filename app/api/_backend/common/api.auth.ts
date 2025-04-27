@@ -10,7 +10,12 @@ async function validateAuthUser(req: NextRequest) {
   }
 
   const userAuth = authSvc.verifyToken(authToken);
-  return await userSvc.getUserBy({ email: userAuth.email });
+  const userData = await userSvc.getUserBy({ email: userAuth.email });
+  if (!userData) {
+    throw new Error("No user data found");
+  }
+
+  return userData;
 }
 
 export { validateAuthUser };

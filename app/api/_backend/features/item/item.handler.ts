@@ -49,7 +49,7 @@ const deleteItem = async (req: NextRequest, { params }: UserParams) => {
 
     await itemSvc.deleteItem(itemId);
     await auditSvc.createAuditRecord({
-      userId: user!.id,
+      userId: user.id,
       itemId: itemId,
       note: "O usuário deletou o item",
     });
@@ -71,7 +71,7 @@ const updateItem = async (req: NextRequest, { params }: UserParams) => {
 
     await itemSvc.updateItem(result);
     await auditSvc.createAuditRecord({
-      userId: user!.id,
+      userId: user.id,
       itemId: result.id,
       note: "O usuário atualizou as informações do item",
     });
@@ -89,18 +89,18 @@ const scanItem = async (req: NextRequest) => {
     if (result.error) return Response.json({ errors: result.error.errors }, { status: 400 });
 
     if (result.data.oprationType === OperationType.Debit) {
-      await itemSvc.debitItems({ userId: user!.id, skus: result.data.skus });
+      await itemSvc.debitItems({ userId: user.id, skus: result.data.skus });
       await auditSvc.createAuditRecord({
-        userId: user!.id,
+        userId: user.id,
         note: `O usuário debitou os itens: ${result.data.skus.join(", ")}`,
       });
       return Response.json(null, { status: 200 });
     }
 
     if (result.data.oprationType === OperationType.Register) {
-      await itemSvc.createItems({ userId: user!.id, skus: result.data.skus });
+      await itemSvc.createItems({ userId: user.id, skus: result.data.skus });
       await auditSvc.createAuditRecord({
-        userId: user!.id,
+        userId: user.id,
         note: `O usuário criou os itens: ${result.data.skus.join(", ")}`,
       });
       return Response.json({ skus: result.data.skus }, { status: 200 });

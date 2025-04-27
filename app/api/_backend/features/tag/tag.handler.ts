@@ -38,7 +38,7 @@ const createShoeRelatedTags = async (req: NextRequest, { params }: UserParams) =
 
   const tagId = await svc.createTag({
     ...result.data,
-    userId: user!.id,
+    userId: user.id,
     shoeId,
   });
 
@@ -92,7 +92,7 @@ const updateTag = async (req: NextRequest, { params }: TagParams) => {
       ...result.data,
       id: parseInt(tag_id, 10),
       shoeId: parseInt(shoe_id, 10),
-      userId: user!.id,
+      userId: user.id,
     });
 
     return Response.json(null, { status: 200 });
