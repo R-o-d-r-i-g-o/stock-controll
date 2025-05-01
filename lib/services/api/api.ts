@@ -30,11 +30,7 @@ api.interceptors.request.use(async (req) => {
 
   const handleClientCheck = () => fetch("/api/auth/session", { method: "GET", cache: "force-cache" });
 
-  console.log("config do server", isServerSide());
-
   if (!isServerSide()) {
-    console.log("caiu aqui client");
-
     const response = await handleClientCheck();
 
     if (response.ok) {
@@ -43,8 +39,6 @@ api.interceptors.request.use(async (req) => {
     }
     return req;
   }
-
-  console.log("caiu aqui server");
 
   const session = await auth.auth();
   if (session) handleAuth(session.accessToken);
