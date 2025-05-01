@@ -19,8 +19,10 @@ model Shoe {
   sole      String      @map("sole")
   name      String      @unique @map("name")
   note      String      @map("note")
+  companyId Int         @map("company_id")
   createdAt DateTime    @default(now()) @map("created_at")
   deletedAt DateTime?   @map("deleted_at")
+  Company   Company     @relation(fields: [companyId], references: [id])
   Item      Item[]
   CustomTag CustomTag[]
 
@@ -48,27 +50,43 @@ model Expedition {
   note      String?  @map("note")
   itemId    Int      @map("item_id")
   userId    Int      @map("user_id")
+  companyId Int      @map("company_id")
   createdAt DateTime @default(now()) @map("created_at")
   Item      Item     @relation(fields: [itemId], references: [id])
   User      User     @relation(fields: [userId], references: [id])
+  Company   Company  @relation(fields: [companyId], references: [id])
 
   @@map("tb_expeditions")
 }
 
 model User {
   id         Int          @id @default(autoincrement()) @map("id")
+  code       String       @unique @default(uuid()) @map("code")
   name       String       @map("name")
   email      String       @unique @map("email")
   password   String       @map("password")
   roleId     Int          @map("role_id")
+  companyId  Int          @map("company_id")
   createdAt  DateTime     @default(now()) @map("created_at")
   deletedAt  DateTime?    @map("deleted_at")
   Role       Role         @relation(fields: [roleId], references: [id])
+  Company    Company      @relation(fields: [companyId], references: [id])
   Expedition Expedition[]
   Audit      Audit[]
   CustomTag  CustomTag[]
 
   @@map("tb_users")
+}
+
+model Company {
+  id         Int          @id @default(autoincrement()) @map("id")
+  name       String       @unique @map("name")
+  User       User[]
+  Shoe       Shoe[]
+  Audit      Audit[]
+  Expedition Expedition[]
+
+  @@map("tb_company")
 }
 
 model Role {
@@ -86,8 +104,10 @@ model Audit {
   note      String   @map("note")
   userId    Int      @map("user_id")
   itemId    Int?     @map("item_id")
+  companyId Int      @map("company_id")
   Item      Item?    @relation(fields: [itemId], references: [id])
   User      User     @relation(fields: [userId], references: [id])
+  Company   Company  @relation(fields: [companyId], references: [id])
 
   @@map("tb_audits")
 }

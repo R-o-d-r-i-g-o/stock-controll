@@ -1,5 +1,3 @@
-"use server";
-
 import React from "react";
 import InfoIcon from "@mui/icons-material/InfoOutlined";
 
@@ -28,7 +26,7 @@ const InfoButton = async ({ className }: InfoButtonProps) => {
             <span>{appData.database ? "🟢 Disponível" : "🔴 Indisponível"}</span>
           </p>
           <p className="flex justify-between">
-            <span className="font-semibold">Build:</span>
+            <span className="font-semibold">Comp.:</span>
             <span>{moment(appData.lastBuild).format(defaultDateMask)}</span>
           </p>
         </div>

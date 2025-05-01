@@ -15,7 +15,7 @@ function NavBar() {
     { name: "Sobre", href: "/#sobre" },
     { name: "Contato", href: "/#contato" },
     { name: "Entrar", href: "/login" },
-    { name: "Cadastrar", href: "/register" },
+    { name: "Registrar", href: "/register" },
   ];
 
   return (
