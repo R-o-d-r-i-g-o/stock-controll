@@ -28,7 +28,7 @@ const api = create({
 api.interceptors.request.use(async (req) => {
   const handleAuth = (token: string) => (req.headers["Authorization"] = token);
 
-  const handleClientCheck = () => fetch("/api/auth/session", { method: "GET", cache: "force-cache" });
+  const handleClientCheck = () => fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/session`, { method: "GET", cache: "force-cache" });
 
   if (!isServerSide()) {
     const response = await handleClientCheck();

@@ -23,7 +23,7 @@ const EditUserPage = async ({ params }: EditUserPageProps) => {
     <Container display="small">
       <Title className="text-center mb-6" text={`Editar usuário #${user.id}`} />
       <UserEditForm user={user} roles={rolesList.roles} />
-      <UserDeleteForm userId={user.id} />
+      <UserDeleteForm className="mt-6" userId={user.id} />
     </Container>
   );
 };
