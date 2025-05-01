@@ -10,7 +10,7 @@ function HeroSection() {
   return (
     <section id="home" className="flex justify-between flex-col md:flex-row gap-4 items-center">
       <div>
-        <p className="font-[850] md:leading-[5.0625rem] text-2xl md:text-[4.375rem] text-darkBlue">Conheça nossas ferramentas totalmente gratuitas</p>
+        <p className="font-[850] md:leading-[5.0625rem] text-2xl md:text-[4.375rem] text-darkBlue">Conheça nosso sistema gerenciador de stoque de sapatos!!</p>
         <p className="text-[1.375rem] font-[500]">Nosso objetivo é fornecer acesso a diversas ferramentas de maneira totalmente gratuita, focando na usabilidade de nossos usuários</p>
         <div className="flex gap-[1.75rem] items-center mt-[3rem]">
           <MainButton text="Dê uma olhada!" classes="shadow-none w-[10.125rem]" action={() => router.push("/menu")} />
