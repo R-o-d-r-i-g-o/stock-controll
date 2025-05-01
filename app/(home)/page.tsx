@@ -9,24 +9,27 @@ import NewsletterSection from "@/components/presentation/sections/NewsletterSect
 import HeroSection from "@/components/presentation/sections/HeroSection";
 import TestimonialSection from "@/components/presentation/sections/TestimonialSection";
 import FooterSection from "@/components/presentation/sections/FooterSection";
+import Background from "@/components/templates/background";
 
 const Page = async () => {
   const session = await auth.auth();
   if (session) redirect("/panel");
 
   return (
-    <main>
-      <NavBar />
-      <div className="mt-24 md:32 lg:mt-8 px-4 md:px-[9rem]">
-        <HeroSection />
-        <ServiceSection />
-        <VideoPlayerSection />
-        <TestimonialSection />
-        <TeamSection />
-        <NewsletterSection />
-        <FooterSection />
-      </div>
-    </main>
+    <Background>
+      <main>
+        <NavBar />
+        <div className="mt-24 md:32 lg:mt-8 px-4 md:px-[9rem]">
+          <HeroSection />
+          <ServiceSection />
+          <VideoPlayerSection />
+          <TestimonialSection />
+          <TeamSection />
+          <NewsletterSection />
+          <FooterSection />
+        </div>
+      </main>
+    </Background>
   );
 };
 
