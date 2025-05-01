@@ -20,10 +20,11 @@ function NavBar() {
 
   return (
     <>
-      <AppBar position="sticky" sx={{ background: "#fff", maxWidth: "96%", boxShadow: 3, borderRadius: "12px", margin: "12px auto", padding: "4px 8%", zIndex: 1200 }}>
+      <AppBar position="sticky" sx={{ background: "#fff", maxWidth: "96%", boxShadow: 3, borderRadius: "22px", margin: "12px auto", padding: "4px 8%", zIndex: 1200 }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "4px 16px" }}>
-          <Link href="/">
-            <Image src="/images/logo.png" alt="logo" width={100} height={50} style={{ cursor: "pointer" }} />
+          <Link href="/" className="flex items-center gap-1">
+            <Image src="/icons/logo_shoe.png" alt="logo" width={60} height={60} style={{ cursor: "pointer" }} />
+            <span className="text-base font-bold text-gray-400">ERP | Marca-Passo</span>
           </Link>
           <IconButton onClick={() => setMenuOpen(true)} className="lg:hidden">
             <MenuIcon fontSize="large" sx={{ color: "#333" }} />
@@ -40,6 +41,7 @@ function NavBar() {
           </ListItem>
           {links.map((item) => (
             <Link href={item.href} key={item.name} onClick={() => setMenuOpen(false)} className="text-gray font-semibold hover:text-primary">
+              {/* @ts-ignore */}
               <ListItem sx={{ justifyContent: "center" }} button>
                 <ListItemText primary={item.name} sx={{ textAlign: "center", fontSize: "16px" }} />
               </ListItem>
