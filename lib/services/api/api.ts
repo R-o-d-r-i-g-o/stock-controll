@@ -1,5 +1,6 @@
 import axios from "axios";
 import { auth } from "@/app/api/_backend/features/auth/auth.handler"; //TODO: improve it later.
+import { isServerSide } from "@/common/utilities";
 
 const { isAxiosError, create } = axios;
 
@@ -25,10 +26,28 @@ const api = create({
 
 // Authentication middleware proxy
 api.interceptors.request.use(async (req) => {
-  const session = await auth.auth();
-  if (session) {
-    req.headers["Authorization"] = session.accessToken;
+  const handleAuth = (token: string) => (req.headers["Authorization"] = token);
+
+  const handleClientCheck = () => fetch("/api/auth/session", { method: "GET", cache: "force-cache" });
+
+  console.log("config do server", isServerSide());
+
+  if (!isServerSide()) {
+    console.log("caiu aqui client");
+
+    const response = await handleClientCheck();
+
+    if (response.ok) {
+      const session = await response.json();
+      if (session) handleAuth(session.accessToken);
+    }
+    return req;
   }
+
+  console.log("caiu aqui server");
+
+  const session = await auth.auth();
+  if (session) handleAuth(session.accessToken);
   return req;
 }, Promise.reject);
 
