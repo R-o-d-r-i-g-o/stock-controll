@@ -1,27 +1,25 @@
-"use client";
-
-import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 import MainButton from "../common/MainButton";
-import { useRouter } from "next/navigation";
 
 function HeroSection() {
-  const router = useRouter();
-
   return (
     <section id="home" className="flex justify-between flex-col md:flex-row gap-4 items-center">
       <div>
-        <p className="font-[850] md:leading-[5.0625rem] text-2xl md:text-[4.375rem] text-darkBlue">Conheça nosso sistema gerenciador de stoque de sapatos!!</p>
-        <p className="text-[1.375rem] font-[500]">Nosso objetivo é fornecer acesso a diversas ferramentas de maneira totalmente gratuita, focando na usabilidade de nossos usuários</p>
-        <div className="flex gap-[1.75rem] items-center mt-[3rem]">
-          <MainButton text="Dê uma olhada!" classes="shadow-none w-[10.125rem]" action={() => router.push("/menu")} />
-          <div className="flex gap-[1.56rem] items-center">
-            <img src="/images/fancy_play_icon.png" alt="play icon" />
-            <p className="font-bold text-normal">Ver mais</p>
+        <h1 className="font-extrabold md:leading-[5rem] text-2xl md:text-6xl">Um passo de cada vez rumo a gestão ágil e eficiente!</h1>
+        <p className="text-lg md:text-xl font-medium text-gray-600">Criado para sapatarias e fábricas! Otimize seu estoque, reduza desperdícios e acelere sua produção com tecnologia de ponta</p>
+        <div className="flex gap-6 items-center mt-12">
+          <Link href="/menu">
+            <MainButton text="Dê uma olhada!" classes="shadow-none w-[10rem]" />
+          </Link>
+          <div className="flex gap-4 items-center cursor-pointer">
+            <Image src="/images/fancy_play_icon.png" alt="play icon" width={50} height={50} />
+            <p className="font-bold text-lg">Ver mais</p>
           </div>
         </div>
       </div>
       <div>
-        <img src="/images/happy_guy.png" alt="guy with phone surrounded by action icons" />
+        <Image src="/images/happy_guy.png" alt="Pessoa feliz com ícones de ação" width={1100} height={1100} />
       </div>
     </section>
   );
