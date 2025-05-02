@@ -130,5 +130,5 @@ model CustomTag {
   User      User      @relation(fields: [userId], references: [id])
   Company   Company   @relation(fields: [companyId], references: [id])
 
-  @@map("tb_custom_tag")
+  @@map("tb_custom_tags")
 }
