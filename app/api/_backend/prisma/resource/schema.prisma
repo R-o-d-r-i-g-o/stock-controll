@@ -81,14 +81,17 @@ model User {
 
 model Company {
   id         Int          @id @default(autoincrement()) @map("id")
+  code       String       @unique @default(uuid()) @map("code")
   name       String       @unique @map("name")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  deletedAt  DateTime?    @map("deleted_at")
   User       User[]
   Shoe       Shoe[]
   Audit      Audit[]
   CustomTag  CustomTag[]
   Expedition Expedition[]
 
-  @@map("tb_company")
+  @@map("tb_companies")
 }
 
 model Role {
