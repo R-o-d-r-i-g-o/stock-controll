@@ -15,13 +15,25 @@ const providers: NextAuthConfig["providers"] = [
       password: { type: "password" },
     },
     async authorize(credentials) {
-      const data = loginSchema.parse(credentials);
-      const user = await userSvc.getAuthUser(data);
+      try {
+        console.log("veio aqui", credentials);
 
-      // TODO: return accessToken on its own object when beta version of next-auth correct it.
-      const accessToken = authSvc.generateToken(user);
+        const data = loginSchema.parse(credentials);
 
-      return { ...user, image: accessToken, accessToken };
+        console.log("veio aqui 2 ", data);
+
+        const user = await userSvc.getAuthUser(data);
+
+        // TODO: return accessToken on its own object when beta version of next-auth correct it.
+        const accessToken = authSvc.generateToken(user);
+
+        console.log('veio aqui 3', user, accessToken)
+
+        return { ...user, image: accessToken, accessToken };
+      } catch (err) {
+        console.error(err);
+        return null;
+      }
     },
   }),
 ];
