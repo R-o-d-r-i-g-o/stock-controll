@@ -32,6 +32,15 @@ const main = async () => {
         },
       });
 
+    console.info("creating root company");
+    if (!(await prisma.company.findUnique({ where: { id: 1 } })))
+      await prisma.company.create({
+        data: {
+          id: 1,
+          name: "RodrigoDev - Company",
+        },
+      });
+
     console.info("creating root user");
     if (!(await prisma.user.findUnique({ where: { id: 1 } })))
       await prisma.user.create({
@@ -41,6 +50,7 @@ const main = async () => {
           email: "rodrigomarqribeiro@gmail.com",
           roleId: 1,
           password: "$2a$10$4LKt3sxs0/i5vBirA6k9sOhp7KLkYBNIf48Je.4qDyx2i1bEn2q96", // 123456
+          companyId: 1,
         },
       });
   });

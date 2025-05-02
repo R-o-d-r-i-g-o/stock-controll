@@ -4,6 +4,7 @@ type CreateAuditSvcInput = {
   note: string;
   userId: number;
   itemId?: number;
+  companyId: number;
 };
 
 type GetAuditsPaginatedSvcInput = {
@@ -15,6 +16,7 @@ type CreateAuditRecordRepoInput = {
   note: string;
   userId: number;
   itemId?: number;
+  companyId: number;
 };
 
 type GetAuditsPaginatedRepoInput = {
