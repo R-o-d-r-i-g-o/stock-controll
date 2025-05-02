@@ -84,6 +84,7 @@ model Company {
   User       User[]
   Shoe       Shoe[]
   Audit      Audit[]
+  CustomTag  CustomTag[]
   Expedition Expedition[]
 
   @@map("tb_company")
@@ -119,9 +120,11 @@ model CustomTag {
   userId    Int       @map("user_id")
   createdAt DateTime  @default(now()) @map("created_at")
   deletedAt DateTime? @map("deleted_at")
-  metadata  Json
+  companyId Int       @map("company_id")
+  metadata  Json      @map("metadata")
   Shoe      Shoe      @relation(fields: [shoeId], references: [id])
   User      User      @relation(fields: [userId], references: [id])
+  Company   Company   @relation(fields: [companyId], references: [id])
 
   @@map("tb_custom_tag")
 }

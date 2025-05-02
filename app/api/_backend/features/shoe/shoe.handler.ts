@@ -37,9 +37,10 @@ const createShoe = async (req: NextRequest) => {
     const result = createShoeSchema.safeParse(await req.json());
     if (result.error) return Response.json({ errors: result.error.errors }, { status: 400 });
 
-    const shoeId = await shoeSvc.createShoe(result.data);
+    const shoeId = await shoeSvc.createShoe({ ...result.data, companyId: user.companyId });
     await auditSvc.createAuditRecord({
       userId: user.id,
+      companyId: user.companyId,
       note: `O usuário cadastrou um novo calçado (#${shoeId})`,
     });
 
@@ -70,6 +71,7 @@ const deleteShoe = async (req: NextRequest, { params }: UserParams) => {
     await shoeSvc.deleteShoe(shoeId);
     await auditSvc.createAuditRecord({
       userId: user.id,
+      companyId: user.companyId,
       note: `O usuário deletou o calçado #${shoeId}`,
     });
 
@@ -94,6 +96,7 @@ const updateShoe = async (req: NextRequest, { params }: UserParams) => {
     await shoeSvc.updateShoe(result.data);
     await auditSvc.createAuditRecord({
       userId: user.id,
+      companyId: user.companyId,
       note: `O usuário editou as informações do calçado #${result.data.id}`,
     });
 

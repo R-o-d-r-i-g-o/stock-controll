@@ -16,6 +16,7 @@ type createUserProps = {
   email: string;
   roleId: number;
   password: string;
+  companyId: number;
 };
 
 type updateUserProps = {
@@ -35,6 +36,7 @@ type getUserProps = {
   id?: number;
   name?: string;
   email?: string;
+  companyId?: number;
 };
 
 type createUser = {
@@ -42,6 +44,7 @@ type createUser = {
   email: string;
   roleId: number;
   password: string;
+  companyId: number;
 };
 
 type updateUser = {

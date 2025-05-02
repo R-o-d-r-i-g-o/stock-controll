@@ -2,6 +2,7 @@ type CreateTag = {
   sku: string;
   shoeId: number;
   userId: number;
+  companyId: number;
   metadata: { [key: string]: object };
 };
 

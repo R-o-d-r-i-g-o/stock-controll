@@ -27,6 +27,7 @@ const createTag = async (data: t.CreateTag) => {
       shoeId: data.shoeId,
       userId: data.userId,
       metadata: data.metadata,
+      companyId: data.companyId,
     },
   });
   return id;

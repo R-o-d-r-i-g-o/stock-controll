@@ -113,6 +113,7 @@ shoeRepository.createShoe = async (data) => {
       sole: data.sole,
       note: data.note,
       color: data.color,
+      companyId: data.companyId,
     },
   });
   return id;

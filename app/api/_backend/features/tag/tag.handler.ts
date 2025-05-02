@@ -39,6 +39,7 @@ const createShoeRelatedTags = async (req: NextRequest, { params }: UserParams) =
   const tagId = await svc.createTag({
     ...result.data,
     userId: user.id,
+    companyId: user.companyId,
     shoeId,
   });
 

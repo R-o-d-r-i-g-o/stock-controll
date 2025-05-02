@@ -37,9 +37,11 @@ userService.getUserBy = async (filter) => {
 
   return {
     id: user.id,
+    code: user.code,
     name: user.name,
     email: user.email,
     roleId: user.roleId,
+    companyId: user.companyId,
     createdAt: user.createdAt,
     deletedAt: user.deletedAt,
   };

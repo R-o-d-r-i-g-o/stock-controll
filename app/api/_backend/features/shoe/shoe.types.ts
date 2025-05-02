@@ -103,6 +103,7 @@ type createShoe = {
   sole: string;
   name: string;
   note: string;
+  companyId: number;
 };
 
 type updateShoe = {

@@ -89,6 +89,7 @@ const debitItems = async (data: t.DebitItemsRepoInput) => {
   const itemsToExpedition = mixedItemIDs.map((item) => ({
     itemId: item.id,
     userId: data.userId,
+    companyId: data.companyId,
     note: "item dado baixa no sistema",
   }));
 

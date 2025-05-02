@@ -23,8 +23,9 @@ type UpdateShoeSvcInput = {
 };
 
 type DebitItemsSvcInput = {
-  userId: number;
   skus: string[];
+  userId: number;
+  companyId: number;
 };
 
 type CreateItemsSvcInput = {
@@ -60,8 +61,9 @@ type GetShoeRepoInput = {
 };
 
 type DebitItemsRepoInput = {
-  userId: number;
   skus: string[];
+  userId: number;
+  companyId: number;
 };
 
 type CreateItemsRepoInput = {

@@ -19,9 +19,10 @@ const createUser = async (req: NextRequest) => {
     const result = createUserSchema.safeParse(await req.json());
     if (result.error) return launchError(result.error.errors[0].message, 400).ToNextApiError();
 
-    const userId = await userSvc.createUser(result.data);
+    const userId = await userSvc.createUser({ ...result.data, companyId: user.companyId });
     await auditSvc.createAuditRecord({
       userId: user.id,
+      companyId: user.companyId,
       note: `O usuário criou um registro de novo usuário (#${userId}).`,
     });
     return Response.json({ userId }, { status: 201 });
@@ -70,6 +71,7 @@ const deleteUser = async (req: NextRequest, { params }: UserParams) => {
     await userSvc.deleteUser(userId);
     await auditSvc.createAuditRecord({
       userId: user.id,
+      companyId: user.companyId,
       note: `O usuário deletou o registro de usuário #${userId}`,
     });
 
@@ -81,7 +83,7 @@ const deleteUser = async (req: NextRequest, { params }: UserParams) => {
 
 const updateUser = async (req: NextRequest, { params }: UserParams) => {
   try {
-    const userId = await validateAuthUser(req);
+    const user = await validateAuthUser(req);
 
     const payload = {
       ...(await req.json()),
@@ -92,8 +94,9 @@ const updateUser = async (req: NextRequest, { params }: UserParams) => {
 
     await userSvc.updateUser(result.data);
     await auditSvc.createAuditRecord({
-      userId: userId!.id,
-      note: `O usuário atualizou os dadas do usuário #${userId}`,
+      userId: user.id,
+      companyId: user.companyId,
+      note: `O usuário atualizou os dadas do usuário #${user}`,
     });
 
     return Response.json(null, { status: 200 });
