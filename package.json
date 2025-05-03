@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "v20.10.0"
+    "node": ">=v20.10.0"
   },
   "scripts": {
     "dev": "next dev --turbopack",
     "lint": "next lint",
-    "build": "pnpm prisma:generate && pnpm prisma:migrate && next build",
+    "seed": "tsx app/api/_backend/prisma/resource/seed.ts",
+    "build": "pnpm prisma:generate && pnpm prisma:migrate && pnpm seed && next build",
     "start": "next start",
     "format": "prettier --write \"**/*.{ts,tsx,json}\"",
     "prisma:migrate": "prisma migrate deploy --schema=./app/api/_backend/prisma/resource/schema.prisma",
     "prisma:generate": "prisma generate --schema=./app/api/_backend/prisma/resource/schema.prisma",
-    "seed": "tsx app/api/_backend/prisma/resource/seed.ts",
     "postinstall": "pnpm prisma:generate"
   },
   "dependencies": {
