@@ -22,10 +22,10 @@ function NavBar() {
     <>
       <AppBar position="sticky" sx={{ background: "#fff", maxWidth: "96%", boxShadow: 3, borderRadius: "22px", margin: "12px auto", padding: "4px 8%", zIndex: 1200 }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "4px 16px" }}>
-          <span className="flex items-center gap-1 cursor-pointer">
+          <Link href="/" className="flex items-center gap-1 cursor-pointer hover:animate-wiggle hover:animate-twice hover:animate-ease-out">
             <Image src="/icons/logo_shoe.png" alt="logo" width={60} height={60} />
             <span className="text-base font-bold text-gray-400">ERP | Marca-Passo</span>
-          </span>
+          </Link>
           <IconButton onClick={() => setMenuOpen(true)} className="lg:hidden">
             <MenuIcon fontSize="large" sx={{ color: "#333" }} />
           </IconButton>

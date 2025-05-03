@@ -16,6 +16,8 @@ const useRegisterForm = () => {
 
   const onSubmit = async (data: RegisterSchema) => {
     try {
+      console.log("veio aqui ", data);
+
       router.push("/login");
     } catch (err) {
       console.error(err);
