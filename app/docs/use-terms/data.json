@@ -1,0 +1,71 @@
+[
+    {
+        "id": 1,
+        "title": "Aceitação dos Termos",
+        "desc": "Ao acessar e utilizar o sistema de gestão empresarial (doravante denominado \"Plataforma\"), você concorda em cumprir integralmente os presentes Termos de Uso. Caso não concorde com qualquer cláusula, recomendamos que interrompa imediatamente o uso da Plataforma."
+    },
+    {
+        "id": 2,
+        "title": "Finalidade e Licenciamento de Uso",
+        "desc": "A Plataforma é destinada exclusivamente a empresas do setor calçadista, para fins de gestão operacional e comercial. O acesso é restrito a usuários devidamente cadastrados por seus administradores e o uso é pessoal, intransferível e limitado à finalidade contratada. É vedada a reutilização de credenciais entre diferentes indivíduos ou unidades da empresa, salvo mediante autorização expressa da contratante e da fornecedora do ERP."
+    },
+    {
+        "id": 3,
+        "title": "Conta de Acesso",
+        "desc": "Cada usuário receberá credenciais individuais após a formalização contratual e habilitação pela equipe técnica. Essas credenciais são de uso exclusivo do colaborador designado e devem ser mantidas em sigilo. O titular da conta é responsável por todas as atividades executadas sob seu login."
+    },
+    {
+        "id": 4,
+        "title": "Confidencialidade e Dados Empresariais",
+        "desc": "Todas as informações inseridas na Plataforma, incluindo dados de produtos, fornecedores, clientes e relatórios financeiros, são de responsabilidade da empresa contratante. A fornecedora do ERP compromete-se a adotar medidas de segurança para proteger tais dados, mas não se responsabiliza por compartilhamentos indevidos realizados por usuários autorizados."
+    },
+    {
+        "id": 5,
+        "title": "Conduta do Usuário",
+        "desc": "Os usuários comprometem-se a utilizar a Plataforma de maneira ética, legal e conforme os princípios corporativos. É expressamente proibido:",
+        "topics": [
+            {
+                "id": 5.1,
+                "desc": "a. Violar qualquer legislação aplicável, inclusive normas fiscais e trabalhistas;"
+            },
+            {
+                "id": 5.2,
+                "desc": "b. Inserir dados falsos ou manipulados intencionalmente para burlar controles do sistema;"
+            },
+            {
+                "id": 5.3,
+                "desc": "c. Tentar acessar módulos ou dados confidenciais para os quais não possui permissão explícita."
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "title": "Planos, Pagamentos e Cancelamentos",
+        "desc": "A contratação da Plataforma está sujeita a planos comerciais específicos. Pagamentos devem ser realizados conforme acordado em contrato. Em caso de cancelamento, poderá haver cobrança proporcional ao uso ou retenção de valores, conforme as cláusulas de rescisão previstas no contrato assinado entre as partes."
+    },
+    {
+        "id": 7,
+        "title": "Direitos Autorais e Propriedade Intelectual",
+        "desc": "Todo o conteúdo, código-fonte, fluxos operacionais, manuais e interfaces da Plataforma são protegidos por direitos autorais e pertencem à fornecedora do ERP ou seus parceiros licenciados. É proibida a reprodução, distribuição ou engenharia reversa sem autorização formal."
+    },
+    {
+        "id": 8,
+        "title": "Limitação de Responsabilidade",
+        "desc": "A fornecedora do ERP não se responsabiliza por perdas decorrentes de uso indevido da Plataforma, interrupções de serviço por fatores externos (como falhas de internet ou de terceiros) ou pela má interpretação de dados por parte do usuário. A responsabilidade está limitada ao valor contratual do serviço."
+    },
+    {
+        "id": 9,
+        "title": "Atualizações dos Termos",
+        "desc": "Estes Termos de Uso podem ser atualizados periodicamente. As alterações serão comunicadas via email e/ou notificações dentro da própria Plataforma. O uso contínuo da Plataforma após tais atualizações implica concordância automática com os novos termos."
+    },
+    {
+        "id": 10,
+        "title": "Suspensão ou Encerramento de Conta",
+        "desc": "O acesso à Plataforma poderá ser suspenso ou encerrado, a exclusivo critério da fornecedora, em caso de descumprimento dos Termos de Uso, inadimplência contratual ou uso indevido da ferramenta por qualquer membro da equipe da empresa contratante."
+    },
+    {
+        "id": 11,
+        "title": "Disposições Finais",
+        "desc": "Estes Termos constituem o acordo integral entre a fornecedora do ERP e a empresa contratante, prevalecendo sobre quaisquer entendimentos anteriores, verbais ou escritos. Em caso de controvérsias, será competente o foro da comarca da sede da fornecedora, salvo disposição contratual em contrário."
+    }
+]

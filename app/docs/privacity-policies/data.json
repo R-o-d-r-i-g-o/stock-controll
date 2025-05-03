@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1,
+        "title": "Introdução",
+        "desc": "A sua privacidade é prioridade para nós. Esta Política de Privacidade descreve como coletamos, utilizamos, armazenamos e protegemos as informações pessoais fornecidas pelas empresas e seus colaboradores ao utilizar o sistema de gestão empresarial (doravante denominado \"Plataforma\"). Ao acessar a Plataforma, você declara estar ciente e de acordo com os termos aqui descritos."
+    },
+    {
+        "id": 2,
+        "title": "Dados Coletados",
+        "topics": [
+            {
+                "id": 2.1,
+                "title": "Dados Cadastrais",
+                "desc": "Ao registrar sua empresa e seus usuários no sistema, poderemos coletar informações como razão social, CNPJ, nome completo dos colaboradores, e-mails corporativos e cargos."
+            },
+            {
+                "id": 2.2,
+                "title": "Dados de Transações",
+                "desc": "Durante o uso da Plataforma, poderão ser registradas informações sobre transações comerciais, como ordens de compra, vendas, controle de estoque e dados financeiros. Informações sensíveis de pagamento (como dados bancários) são processadas por plataformas integradas, e não são armazenadas por nós."
+            },
+            {
+                "id": 2.3,
+                "title": "Dados Operacionais",
+                "desc": "Registramos atividades dentro da Plataforma, como histórico de acessos, ações realizadas por usuários, alterações em cadastros e movimentações de sistema, com o intuito de garantir rastreabilidade e segurança operacional."
+            },
+            {
+                "id": 2.4,
+                "title": "Dados Técnicos",
+                "desc": "Coletamos automaticamente dados técnicos como endereço IP, navegador utilizado, tipo de dispositivo e sistema operacional, a fim de monitorar a integridade e desempenho da Plataforma."
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Finalidade do Uso das Informações",
+        "topics": [
+            {
+                "id": 3.1,
+                "title": "Aprimoramento da Plataforma",
+                "desc": "Utilizamos os dados coletados para melhorias contínuas na experiência do usuário, na estabilidade do sistema e na eficácia das funcionalidades disponíveis para a gestão do negócio calçadista."
+            },
+            {
+                "id": 3.2,
+                "title": "Comunicação Corporativa",
+                "desc": "Poderemos utilizar os dados de contato para envio de atualizações sobre a Plataforma, alterações contratuais, notificações técnicas ou legais, bem como materiais informativos relevantes ao setor calçadista."
+            },
+            {
+                "id": 3.3,
+                "title": "Gestão de Acesso e Segurança",
+                "desc": "Dados de usuários são utilizados para autenticação, controle de permissões e auditoria de ações, garantindo que cada colaborador atue dentro de suas responsabilidades."
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Compartilhamento de Dados",
+        "topics": [
+            {
+                "id": 4.1,
+                "title": "Prestadores de Serviço",
+                "desc": "Os dados poderão ser compartilhados com parceiros tecnológicos e prestadores de serviço contratados para garantir o bom funcionamento da Plataforma, como serviços de hospedagem, envio de e-mails e integrações financeiras."
+            },
+            {
+                "id": 4.2,
+                "title": "Cumprimento de Obrigações Legais",
+                "desc": "Reservamo-nos o direito de compartilhar dados com autoridades legais ou fiscais sempre que exigido por lei ou mediante solicitação formal de órgãos competentes."
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "title": "Segurança da Informação",
+        "desc": "Aplicamos padrões avançados de segurança da informação, incluindo criptografia, firewalls, backups automatizados e controle de acesso, visando proteger os dados contra perda, uso indevido, acesso não autorizado ou alterações indevidas."
+    },
+    {
+        "id": 6,
+        "title": "Direitos dos Titulares de Dados",
+        "desc": "Nos termos da Lei Geral de Proteção de Dados (LGPD), os usuários e representantes legais das empresas têm o direito de acessar, corrigir, atualizar ou solicitar a exclusão de suas informações. Para isso, disponibilizamos canais específicos de atendimento."
+    },
+    {
+        "id": 7,
+        "title": "Atualizações desta Política",
+        "desc": "Esta Política de Privacidade poderá ser atualizada periodicamente para refletir mudanças legislativas, tecnológicas ou comerciais. Toda modificação será comunicada com antecedência por e-mail e/ou dentro da própria Plataforma. O uso contínuo após tais notificações representa concordância com os novos termos."
+    },
+    {
+        "id": 8,
+        "title": "Contato",
+        "desc": "Em caso de dúvidas sobre esta Política de Privacidade ou para exercer seus direitos de titular, entre em contato conosco por meio dos canais oficiais disponíveis na Plataforma."
+    }
+]

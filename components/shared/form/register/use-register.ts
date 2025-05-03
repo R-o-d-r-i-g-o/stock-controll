@@ -1,4 +1,3 @@
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -17,9 +16,6 @@ const useRegisterForm = () => {
 
   const onSubmit = async (data: RegisterSchema) => {
     try {
-      const auth = await signIn("credentials", { ...data, redirect: false });
-      if (!auth || !auth.ok) throw new Error();
-
       router.push("/login");
     } catch (err) {
       console.error(err);
