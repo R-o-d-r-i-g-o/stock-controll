@@ -16,12 +16,12 @@ companyRepository.createCompany = async (input) => {
 companyRepository.getCompanyBy = (input) => {
   return prisma.company.findFirst({
     where: {
-      id: input.id,
-      name: input.name,
-      code: input.code,
+      id: input.id || undefined,
+      name: input.name || undefined,
+      code: input.code || undefined,
       User: {
         some: {
-          id: input.userId,
+          id: input.userId || undefined,
         },
       },
     },
