@@ -1,20 +1,14 @@
 "use client";
 
-import { RedocStandalone, type ResolvedThemeInterface } from "redoc";
-import type { AdvancedThemeObject } from "redoc/typings/theme";
+import data from "./data.json";
+import Loader from "@/components/ui/loader";
+import dynamic from "next/dynamic";
 
-const theme = { colors: { primary: { main: "#000000" } } } satisfies AdvancedThemeObject<ResolvedThemeInterface>;
+const RedocStandalone = dynamic(() => import("redoc").then((mod) => mod.RedocStandalone), {
+  ssr: false,
+  loading: Loader,
+});
 
-const Home = () => (
-  <RedocStandalone
-    specUrl={`${process.env.NEXT_PUBLIC_API_URL}/docs/swagger.json`}
-    options={{
-      theme,
-      hideLoading: true,
-      disableSearch: true,
-      nativeScrollbars: true,
-    }}
-  />
-);
+const ApiDocumentation = () => <RedocStandalone spec={data} />;
 
-export default Home;
+export default ApiDocumentation;
