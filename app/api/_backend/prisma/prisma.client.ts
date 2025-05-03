@@ -1,8 +1,12 @@
 import { PrismaClient, Prisma } from "@prisma/client";
 
-const prisma = new PrismaClient({
-  log: ["query", "info", "warn", "error"],
-});
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+
+const prisma = globalForPrisma.prisma ?? new PrismaClient();
+
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
+}
 
 const prismaTransaction = async <T>(func: () => Promise<T>) => {
   await prisma.$connect();
