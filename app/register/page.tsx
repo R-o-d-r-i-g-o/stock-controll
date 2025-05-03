@@ -2,34 +2,24 @@ import React from "react";
 import Image from "next/image";
 
 import Ping from "@/components/ui/ping";
-import LoginForm from "@/components/shared/form/login";
+import Title from "@/components/ui/title";
 import Container from "@/components/templates/container";
 import Background from "@/components/templates/background";
-import Title from "@/components/ui/title";
+import RegisterForm from "@/components/shared/form/register";
 
-type RegsiterPageProps = {
-  searchParams: Promise<{
-    callbackUrl?: string;
-  }>;
-};
-
-const RegisterPage: React.FC<RegsiterPageProps> = async ({ searchParams }) => {
-  const { callbackUrl } = await searchParams;
-
-  return (
-    <Background>
-      <Container display="small">
-        <div className="h-[30px] flex justify-center items-center">
-          <div className="transform -translate-y-20 rounded-full overflow-hidden">
-            <Image alt="Logo" src="/icons/logo_shoe.png" width={200} height={200} />
-          </div>
+const RegisterPage: React.FC = () => (
+  <Background className="py-32">
+    <Container display="small">
+      <div className="h-[30px] flex justify-center items-center">
+        <div className="transform -translate-y-20 rounded-full overflow-hidden">
+          <Image alt="Logo" src="/icons/logo_shoe.png" width={200} height={200} />
         </div>
-        <Title className="text-center mb-6 " text="Entrar" />
-        <LoginForm callbackUrl={callbackUrl} />
-      </Container>
-      <Ping />
-    </Background>
-  );
-};
+      </div>
+      <Title className="text-center mb-6" text="Registro" />
+      <RegisterForm />
+    </Container>
+    <Ping />
+  </Background>
+);
 
 export default RegisterPage;
