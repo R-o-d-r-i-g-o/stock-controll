@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "lint": "next lint",
-    "build": "pnpm prisma:migrate && pnpm prisma:generate && npm run seed && next build",
+    "build": "pnpm prisma:generate && pnpm prisma:migrate && pnpm seed && next build",
     "start": "next start",
     "format": "prettier --write \"**/*.{ts,tsx,json}\"",
     "prisma:migrate": "npx prisma migrate deploy --schema=./app/api/_backend/prisma/resource/schema.prisma",
