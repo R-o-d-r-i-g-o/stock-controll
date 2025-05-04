@@ -3,8 +3,8 @@ import LottieHandler from "../ui/lottie-handler";
 
 import mailSent from "@/public/animations/mail-sent.json";
 
-const ContactSession = () => (
-  <div id="contact" className="mx-4 md:mx-32 mt-14">
+const ContactSection = () => (
+  <section id="contact" className="mx-4 md:mx-32 mt-14">
     <div className="container mx-auto flex flex-col md:flex-row items-center md:justify-between">
       <div className="md:w-1/2">
         <LottieHandler lottie={mailSent} height={250} maxWidth={250} minWidth={"60%"} />
@@ -19,7 +19,7 @@ const ContactSession = () => (
         </p>
       </div>
     </div>
-  </div>
+  </section>
 );
 
-export default ContactSession;
+export default ContactSection;

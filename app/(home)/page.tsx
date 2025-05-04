@@ -7,8 +7,9 @@ import HeroSection from "@/components/presentation/sections/HeroSection";
 import TeamSection from "@/components/presentation/sections/TeamSection";
 import SpecialOffer from "@/components/presentation/sections/SpecialOffer";
 import FooterSection from "@/components/presentation/sections/FooterSection";
-import ContactSession from "@/components/presentation/sections/ContactSession";
+import ContactSection from "@/components/presentation/sections/ContactSection";
 import ServiceSection from "@/components/presentation/sections/ServiceSection";
+import ObjetionSection from "@/components/presentation/sections/ObjetionSection";
 import TestimonialSection from "@/components/presentation/sections/TestimonialSection";
 
 const Page = async () => {
@@ -22,10 +23,11 @@ const Page = async () => {
         <div className="mt-24 md:32 lg:mt-8 px-4 md:px-[9rem]">
           <HeroSection />
           <SpecialOffer />
+          <ObjetionSection />
           <TeamSection />
           <ServiceSection />
           <TestimonialSection />
-          <ContactSession />
+          <ContactSection />
           <FooterSection />
         </div>
       </main>
