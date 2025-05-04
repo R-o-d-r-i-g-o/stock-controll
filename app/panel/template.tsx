@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Group, Summarize, AccessAlarm, LocalShipping, Cottage } from "@mui/icons-material";
+import { Group, Summarize, AccessAlarm, LocalShipping, Cottage, AccountCircle } from "@mui/icons-material";
 
 import Ping from "@/components/ui/ping";
 import Loader from "@/components/ui/loader";
@@ -36,6 +36,12 @@ const Template = ({ children }: TemplateProps) => {
       beta: false,
       icon: AccessAlarm,
       nav: "/panel/audits",
+    },
+    {
+      lable: "Minha conta",
+      beta: false,
+      icon: AccountCircle,
+      nav: "/panel/account",
     },
     {
       lable: "Home",

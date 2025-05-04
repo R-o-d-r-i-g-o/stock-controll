@@ -18,7 +18,7 @@ type ShoeEditFormProps = {
   };
 };
 
-const ShoeEditForm = ({ data, customSubmitButton }: ShoeEditFormProps) => {
+const ShoeEditForm: React.FC<ShoeEditFormProps> = ({ data, customSubmitButton }) => {
   const { register, formState, handleSubmit, handleSubmitUserEdit } = useShoeEditForm({ data });
 
   return (
