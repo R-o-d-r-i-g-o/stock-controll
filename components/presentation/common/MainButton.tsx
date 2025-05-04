@@ -1,6 +1,7 @@
-import { forwardRef, ReactElement } from "react";
-import { Button } from "../ui/button";
+import React from "react";
+import Image from "next/image";
 import Loader from "@/components/ui/loader";
+import { Button } from "../ui/button";
 
 type MainButtonProps = {
   text: string;
@@ -17,11 +18,11 @@ type MainButtonProps = {
   iconRoute?: string;
   rightIconRoute?: string;
   rightIconClass?: string;
-  iconComponent?: ReactElement;
+  iconComponent?: React.ReactElement;
   size?: "small" | "normal" | "large";
 };
 
-const MainButton = forwardRef<HTMLButtonElement, MainButtonProps>(
+const MainButton = React.forwardRef<HTMLButtonElement, MainButtonProps>(
   (
     {
       text,
@@ -54,13 +55,13 @@ const MainButton = forwardRef<HTMLButtonElement, MainButtonProps>(
         ref={ref}
         disabled={disabled}
       >
-        {iconRoute && <img src={iconRoute} alt="left button icon" className="w-[24px] h-[24px]" />}
+        {iconRoute && <Image src={iconRoute} alt="left button icon" height={24} width={24} />}
         {iconRoute && <span>&nbsp;</span>}
         {iconComponent}
         {iconComponent && <span>&nbsp;</span>}
         {text}
         {rightIconRoute && <span>&nbsp;</span>}
-        {rightIconRoute && <img src={rightIconRoute} alt="right button icon" className={rightIconClass} />}
+        {rightIconRoute && <Image src={rightIconRoute} alt="right button icon" height={24} width={24} className={rightIconClass} />}
       </Button>
     ) : (
       <Button className={`bg-blue-600 text-white border-white border-2 ${propWidth} md:${propWidth} select-none rounded-[0.625rem] cursor-not-allowed ${size_height} ${classes ? classes : ""}`} ref={ref} disabled>
