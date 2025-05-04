@@ -12,8 +12,9 @@ function NavBar() {
 
   const links = [
     { name: "Home", href: "/#home" },
-    { name: "Sobre", href: "/#sobre" },
-    { name: "Oferta", href: "/#oferta" },
+    { name: "Sobre", href: "/#about" },
+    { name: "Oferta", href: "/#offer" },
+    { name: "Contato", href: "/#contact" },
     { name: "Entrar", href: "/login" },
     { name: "Registrar-se", href: "/register" },
   ];
@@ -22,7 +23,7 @@ function NavBar() {
     <>
       <AppBar position="sticky" sx={{ background: "#fff", maxWidth: "96%", boxShadow: 3, borderRadius: "22px", margin: "12px auto", padding: "4px 8%", zIndex: 1200 }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "4px 16px" }}>
-          <Link href="/" className="flex items-center gap-1 cursor-pointer hover:animate-wiggle hover:animate-twice hover:animate-ease-out">
+          <Link href="/#home" className="flex items-center gap-1 cursor-pointer hover:animate-wiggle hover:animate-twice hover:animate-ease-out">
             <Image src="/icons/logo_shoe.png" alt="logo" width={60} height={60} />
             <span className="text-base font-bold text-gray-400">ERP | Marca-Passo</span>
           </Link>

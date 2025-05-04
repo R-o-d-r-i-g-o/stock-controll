@@ -7,7 +7,7 @@ import carrierSuccess from "@/public/animations/carrier-success.json";
 
 function SpecialOffer() {
   return (
-    <section id="oferta" className="mt-14 pt-4 border-white border-2 rounded-lg shadow-md">
+    <section id="offer" className="mt-14 pt-4 border-white border-2 rounded-lg shadow-md">
       <div className="px-6 md:px-10 lg:px-16 py-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="flex justify-center">
           <LottieHandler lottie={carrierSuccess} height={300} maxWidth={300} minWidth={"60%"} />

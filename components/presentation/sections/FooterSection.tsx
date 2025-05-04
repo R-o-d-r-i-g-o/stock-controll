@@ -17,7 +17,7 @@ const FooterSection = () => {
         <div className="flex-shrink-0 hover:scale-105 transition-transform duration-300">
           <Image src="/icons/logo_shoe.png" alt="Marca-Passo ERP - Gestão para Sapatarias" width={90} height={90} className="object-contain" priority />
         </div>
-        <div className="text-center md:text-left text-sm text-white">© {currentYear} **Marca-Passo ERP**. Potencializando a gestão de sapatarias e fábricas de calçados.</div>
+        <div className="text-center md:text-left text-sm text-white">© {currentYear} ERP | Marca-Passo. Potencializando a gestão de sapatarias e fábricas de calçados.</div>
         <nav className="flex gap-6 text-sm font-medium">
           {helperLinks.map((h) => (
             <Link key={h.link} href={h.link} className="hover:text-white transition-colors duration-300">
@@ -27,7 +27,7 @@ const FooterSection = () => {
         </nav>
       </div>
       <Separator className="my-6 border-white" />
-      <div className="text-center text-sm text-white leading-relaxed max-w-2xl mx-auto">A **Marca-Passo ERP** é a aliada ideal para **gestores de sapatarias e fábricas de calçados**. Facilitamos sua rotina com ferramentas eficientes de estoque, vendas e produção.</div>
+      <div className="text-center text-sm text-white leading-relaxed max-w-2xl mx-auto">A Marca-Passo é a aliada ideal para gestores de sapatarias e fábricas de calçados. Facilitamos sua rotina com ferramentas eficientes de estoque, vendas e produção.</div>
     </footer>
   );
 };
