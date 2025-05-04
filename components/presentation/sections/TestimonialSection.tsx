@@ -13,26 +13,26 @@ function TestimonialSection() {
     {
       id: 0,
       imageUrl: "/images/rayhan.jpg",
-      reviewerName: "Rayhan Curran",
-      review: "Get a fully retina ready site when you build with Startup Framework. Websites look sharper and more gorgeous on devices with retina display support",
+      reviewerName: "Rayhan Curran (Proprietário de Sapataria)",
+      review: "Finalmente tenho controle total do meu estoque de sapatos! Consigo saber exatamente quantos pares de cada modelo e tamanho eu tenho, evitando vendas perdidas por falta de produto e otimizando meus pedidos aos fornecedores.",
     },
     {
       id: 1,
       imageUrl: "/images/kayley.jpg",
-      reviewerName: "Kayley Frame",
-      review: "As a business targeting high net worth individuals, we were looking for a slick, cool and mini-malistic design for our website",
+      reviewerName: "Kayley Frame (Gerente de Boutique de Calçados)",
+      review: "O sistema de controle de estoque nos ajudou a organizar nosso estoque de forma impecável. Agora é muito mais fácil encontrar um tamanho específico para um cliente e garantir que não haja erros nos pedidos, o que melhora a experiência de compra.",
     },
     {
       id: 2,
       imageUrl: "/images/gene.jpg",
-      reviewerName: "Gene Whitfield",
-      review: "The most important part of the Startup Framework is the samples",
+      reviewerName: "Gene Whitfield (Consultor de Sapatarias Multimarcas)",
+      review: "Para sapatarias com muitas marcas e modelos, um bom controle de estoque é essencial. Essa plataforma oferece uma maneira simples e eficiente de gerenciar a entrada e saída de calçados, facilitando a organização e a tomada de decisões de compra.",
     },
     {
       id: 3,
       imageUrl: "/images/alan.jpg",
-      reviewerName: "Allan Kim",
-      review: "I've built my website with Startup just in one day, and it was ready-to-go. ",
+      reviewerName: "Allan Kim (Empreendedor de Sapataria Online)",
+      review: "Com o controle de estoque integrado à minha loja online, nunca mais vendi um sapato que não tinha! O sistema me dá uma visão clara da disponibilidade dos produtos, evitando frustrações dos clientes e garantindo que meu estoque esteja sempre atualizado.",
     },
   ];
 
