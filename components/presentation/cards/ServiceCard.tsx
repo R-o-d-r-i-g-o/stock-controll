@@ -16,7 +16,7 @@ function ServiceCard({ iconUrl, title, description, action }: IProps) {
       </div>
       <p className="text-[2.25rem] font-[700]">{title}</p>
       <p className="text-normal">{description}</p>
-      <MainButton text="Saiba mais" action={action} classes="w-[10.125rem]" />
+      <MainButton text="Venha conhecer" action={action} classes="w-[10.125rem]" />
     </div>
   );
 }

@@ -63,7 +63,7 @@ function TestimonialSection() {
   };
 
   return (
-    <section className="mt-[9rem] py-10">
+    <section className="mt-16 pt-10">
       <Header title="testemunhas" subtitle="O que nossos usuários comentam" />
       <div className="mt-8 mx-auto max-w-sm md:max-w-screen-md lg:max-w-screen-lg">
         <Slider {...settings}>

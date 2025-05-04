@@ -24,7 +24,7 @@ function TeamSection() {
     },
   ];
   return (
-    <section className="mt-[9rem]">
+    <section className="mt-14">
       <Header title="Nosso time" subtitle="Conheça nosso time" />
       <div className="grid grid-cols-1 gap-16  md:grid-cols-2 lg:grid-cols-3 mt-8 md:mt-[3.31rem]">
         {teamData.map((team) => (

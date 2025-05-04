@@ -13,7 +13,7 @@ function NavBar() {
   const links = [
     { name: "Home", href: "/#home" },
     { name: "Sobre", href: "/#sobre" },
-    { name: "Contato", href: "/#contato" },
+    { name: "Oferta especial", href: "/#oferta" },
     { name: "Entrar", href: "/login" },
     { name: "Registrar", href: "/register" },
   ];
