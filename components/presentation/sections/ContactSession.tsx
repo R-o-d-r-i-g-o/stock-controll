@@ -15,7 +15,7 @@ const ContactSession = () => (
           Por favor fale diretamente com nosso suporte. Todo e qualquer outro canal de comunicação não sendo este é considerado golpe.
           <br />
           <br />
-          email: contato@marca_passo.com
+          email: contato@marca-passo.com
         </p>
       </div>
     </div>
