@@ -19,6 +19,7 @@ const Page = async () => {
   return (
     <Background>
       <main>
+        <span id="home" />
         <NavBar />
         <div className="px-4 md:px-[9rem]">
           <HeroSection />
