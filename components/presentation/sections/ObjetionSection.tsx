@@ -53,6 +53,7 @@ const ObjetionSection = () => {
             key={item.id}
             sx={{
               border: "2px solid white",
+              boxShadow: "none",
               borderRadius: "0.5rem",
               backgroundColor: "transparent",
             }}
@@ -62,8 +63,8 @@ const ObjetionSection = () => {
                 {item.question}
               </Typography>
             </AccordionSummary>
-            <AccordionDetails className="p-4 rounded-b-md bg-white/10 text-sm text-gray-300">
-              <Typography>{item.answer}</Typography>
+            <AccordionDetails className=" bg-white/40">
+              <Typography sx={{ fontSize: 14 }}>{item.answer}</Typography>
             </AccordionDetails>
           </Accordion>
         ))}
