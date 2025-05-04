@@ -10,8 +10,8 @@ const ContactSection = () => (
         <LottieHandler lottie={mailSent} height={250} maxWidth={250} minWidth={"60%"} />
       </div>
       <div className="md:w-1/2">
-        <h1 className="text-2xl md:text-3xl text-white font-bold mb-4 leading-relaxed">Ainda tem alguma dúvida?</h1>
-        <p className="text-xs md:text-lg">
+        <h1 className="text-2xl md:text-2xl text-white font-bold mb-4 leading-relaxed">Ainda tem alguma dúvida?</h1>
+        <p className="text-xs md:text-base">
           Por favor fale diretamente com nosso suporte. Todo e qualquer outro canal de comunicação não sendo este é considerado golpe.
           <br />
           <br />

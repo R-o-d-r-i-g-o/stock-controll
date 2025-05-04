@@ -1,23 +1,14 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
+import { Inter } from "next/font/google";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { appConfig } from "@/common/constants";
 
-const geistSans = localFont({
-  src: "../public/fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
+import "./globals.css";
 
-const geistMono = localFont({
-  src: "../public/fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 const { name, title, titleTemplate, description } = appConfig;
 
@@ -36,7 +27,7 @@ type RootLayoutProps = Readonly<{
 
 const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang="en">
-    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <body className={`${inter.className} antialiased`}>
       {children}
       <ToastContainer />
     </body>
