@@ -40,6 +40,11 @@ const ObjetionSection = () => {
       answer:
         "Oferecemos um suporte ao cliente dedicado e eficiente. Nossa equipe está pronta para ajudar você com qualquer dúvida técnica ou funcional que possa surgir, seja por e-mail, telefone ou chat online. Além disso, disponibilizamos uma base de conhecimento completa com artigos, tutoriais e vídeos para que você possa aproveitar ao máximo todos os recursos da plataforma. Nosso sucesso é o seu sucesso!",
     },
+    {
+      id: 6,
+      question: "E se eu não quiser continuar após o período de teste?",
+      answer: "Nosso teste gratuito de um mês é sem compromisso. Se, por qualquer motivo, você decidir não continuar com a assinatura, não haverá custos. Além disso, para sua total tranquilidade, oferecemos uma garantia de reembolso de 7 dias úteis após a compra, caso mude de ideia.",
+    },
   ];
 
   const expandIcon = <ExpandMoreIcon style={{ color: "white" }} />;
