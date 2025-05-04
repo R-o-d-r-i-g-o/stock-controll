@@ -1,9 +1,7 @@
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import { updateShoe } from "@/lib/services";
 import { useToast } from "@/lib/hooks/use-toast";
+import { updateShoe } from "@/lib/services";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ShoeEditSchema, shoeEditSchema } from "./schema";
 
@@ -21,7 +19,6 @@ type UseShoeEditFormProps = {
 
 const useShoeEditForm = ({ data }: UseShoeEditFormProps) => {
   const { success, failure } = useToast();
-  const router = useRouter();
 
   const { register, handleSubmit, formState } = useForm<ShoeEditSchema>({
     resolver: zodResolver(shoeEditSchema),
@@ -33,11 +30,10 @@ const useShoeEditForm = ({ data }: UseShoeEditFormProps) => {
     },
   });
 
-  const handleSubmitUserEdit = async (formData: ShoeEditSchema) => {
+  const handleSubmitShoeEdit = async (formData: ShoeEditSchema) => {
     try {
       await updateShoe({ ...formData, id: data.id });
       success("Calçado atualizado com sucesso!");
-      router.push("/panel/shoes");
     } catch (err) {
       console.error(err);
       failure("Erro ao atualizar o calçado. Tente novamente mais tarde.");
@@ -48,7 +44,7 @@ const useShoeEditForm = ({ data }: UseShoeEditFormProps) => {
     register,
     formState,
     handleSubmit,
-    handleSubmitUserEdit,
+    handleSubmitShoeEdit,
   };
 };
 

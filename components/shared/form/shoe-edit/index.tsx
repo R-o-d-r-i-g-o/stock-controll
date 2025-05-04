@@ -19,10 +19,10 @@ type ShoeEditFormProps = {
 };
 
 const ShoeEditForm: React.FC<ShoeEditFormProps> = ({ data, customSubmitButton }) => {
-  const { register, formState, handleSubmit, handleSubmitUserEdit } = useShoeEditForm({ data });
+  const { register, formState, handleSubmit, handleSubmitShoeEdit } = useShoeEditForm({ data });
 
   return (
-    <form onSubmit={handleSubmit(handleSubmitUserEdit)} className="space-y-6">
+    <form onSubmit={handleSubmit(handleSubmitShoeEdit)} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <InputLable htmlFor="name" lable="Nome" />
