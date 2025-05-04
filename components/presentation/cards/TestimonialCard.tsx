@@ -16,10 +16,10 @@ function TestimonialCard({ imageUrl, review, reviewerName, className = "" }: IPr
       </div>
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-center gap-2 text-gray-600">
-          <QuoteLeftIcon className="text-blue-500 text-sm" />
-          <p className="text-gray-800 italic text-sm md:text-base">{review}</p>
+          <QuoteLeftIcon className="text-white text-sm" />
+          <p className="text-white italic text-sm md:text-base">{review}</p>
         </div>
-        <p className="text-gray-500 font-semibold text-sm">- {reviewerName}</p>
+        <p className="text-gray-600 font-semibold text-sm">- {reviewerName}</p>
       </div>
     </div>
   );
