@@ -12,7 +12,7 @@ const FooterSection = () => {
   ];
 
   return (
-    <footer className="w-full mt-32 px-6 md:px-16 text-gray-300 py-12">
+    <footer className="w-full px-6 md:px-16 text-gray-300 py-12">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex-shrink-0 hover:scale-105 transition-transform duration-300">
           <Image src="/icons/logo_shoe.png" alt="Marca-Passo ERP - Gestão para Sapatarias" width={90} height={90} className="object-contain" priority />

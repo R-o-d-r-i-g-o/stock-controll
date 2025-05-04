@@ -7,6 +7,7 @@ import HeroSection from "@/components/presentation/sections/HeroSection";
 import TeamSection from "@/components/presentation/sections/TeamSection";
 import SpecialOffer from "@/components/presentation/sections/SpecialOffer";
 import FooterSection from "@/components/presentation/sections/FooterSection";
+import ContactSession from "@/components/presentation/sections/ContactSession";
 import ServiceSection from "@/components/presentation/sections/ServiceSection";
 import TestimonialSection from "@/components/presentation/sections/TestimonialSection";
 
@@ -24,6 +25,7 @@ const Page = async () => {
           <TeamSection />
           <ServiceSection />
           <TestimonialSection />
+          <ContactSession />
           <FooterSection />
         </div>
       </main>
