@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import MainButton from "../common/MainButton";
+import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 
 const HeroSection = () => (
   <section id="home" className="flex justify-between flex-col md:flex-row gap-4 items-center">
@@ -11,8 +12,8 @@ const HeroSection = () => (
         <Link href="/register">
           <MainButton text="Criar conta gratis!" classes="shadow-none w-[10rem]" />
         </Link>
-        <div className="flex gap-4 items-center cursor-pointer">
-          <Image src="/images/fancy_play_icon.png" alt="play icon" width={50} height={50} />
+        <div className="flex gap-2 items-center cursor-pointer">
+          <PlayCircleFilledIcon style={{ fontSize: 30 }} />
           <p className="font-bold text-lg">Ver mais</p>
         </div>
       </div>
