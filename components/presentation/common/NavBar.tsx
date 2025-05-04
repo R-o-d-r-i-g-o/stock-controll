@@ -13,9 +13,9 @@ function NavBar() {
   const links = [
     { name: "Home", href: "/#home" },
     { name: "Sobre", href: "/#sobre" },
-    { name: "Oferta especial", href: "/#oferta" },
+    { name: "Oferta", href: "/#oferta" },
     { name: "Entrar", href: "/login" },
-    { name: "Registrar", href: "/register" },
+    { name: "Registrar-se", href: "/register" },
   ];
 
   return (
@@ -31,7 +31,6 @@ function NavBar() {
           </IconButton>
         </Toolbar>
       </AppBar>
-
       <Drawer anchor="right" open={menuOpen} onClose={() => setMenuOpen(false)} sx={{ backdropFilter: "blur(6px)" }}>
         <List sx={{ width: 240, padding: 2 }}>
           <ListItem sx={{ justifyContent: "center" }}>

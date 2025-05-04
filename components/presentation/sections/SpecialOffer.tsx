@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import Header from "../common/Header";
 import MainButton from "../common/MainButton";
@@ -14,9 +15,9 @@ function SpecialOffer() {
           <p className="text-gray-700 mb-7 leading-relaxed">
             Descubra como nosso software pode otimizar suas vendas, gerenciar seu estoque com eficiência e melhorar o relacionamento com seus clientes <span className="font-medium">sem nenhum custo inicial</span>.
           </p>
-          <div className="mt-6 flex justify-center">
-            <MainButton text="Conhecer os Planos" width="md:w-auto w-full" />
-          </div>
+          <Link href="/register" className="mt-6 flex justify-center">
+            <MainButton text="Quero começar agora!" width="md:w-auto w-full" />
+          </Link>
         </div>
       </div>
     </section>

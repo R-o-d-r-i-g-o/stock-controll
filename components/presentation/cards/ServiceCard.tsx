@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import MainButton from "../common/MainButton";
 
@@ -16,7 +17,9 @@ function ServiceCard({ iconUrl, title, description, action }: IProps) {
       </div>
       <p className="text-[2.25rem] font-[700]">{title}</p>
       <p className="text-normal">{description}</p>
-      <MainButton text="Venha conhecer" action={action} classes="w-[10.125rem]" />
+      <Link href="/register">
+        <MainButton text="Venha conhecer" action={action} classes="w-[10.125rem]" />
+      </Link>
     </div>
   );
 }
