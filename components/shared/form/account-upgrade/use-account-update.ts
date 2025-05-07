@@ -4,7 +4,7 @@ type UseAccountUpdateForm = {
   shoeId: number;
 };
 
-const useAccountUpdateForm = ({ shoeId }: UseAccountUpdateForm) => {
+const useAccountUpdateForm = ({}: UseAccountUpdateForm) => {
   const handleDelete = () => {
     Swal.fire({
       title: "Tem certeza?",
@@ -15,7 +15,7 @@ const useAccountUpdateForm = ({ shoeId }: UseAccountUpdateForm) => {
       cancelButtonColor: "#3085d6",
       confirmButtonText: "Sim, deletar!",
       cancelButtonText: "Cancelar",
-    }).then(async (result) => {});
+    });
   };
 
   return { handleDelete };
