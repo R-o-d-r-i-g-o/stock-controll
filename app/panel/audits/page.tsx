@@ -1,4 +1,4 @@
-import * as svc from "@/lib/services";
+import { getAuditsPaginatedAction } from "@/app/api/_backend/features/audit/audit.actions";
 import { defaultPageSize } from "@/common/constants";
 
 import Title from "@/components/ui/title";
@@ -19,12 +19,16 @@ const AuditListPage = async ({ searchParams }: AuditListPageProps) => {
     page: parseInt(req.page ?? "1"),
     size: parseInt(req.size ?? defaultPageSize.toString()),
   };
-  const auditsPaginated = await svc.getAuditsPaginated(filters);
+  const result = await getAuditsPaginatedAction(filters);
+  
+  if (!result.success) {
+    throw new Error(result.error);
+  }
 
   return (
     <Container>
       <Title className="text-center mb-6" text="Histórico de atividades" />
-      <Table filter={filters} data={auditsPaginated} />
+      <Table filter={filters} data={result.data} />
     </Container>
   );
 };

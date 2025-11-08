@@ -1,11 +1,2 @@
-import { api } from "../api";
-import * as t from "./_types";
-
-const getAuditsPaginated = async (req: t.GetAuditsPaginated) => {
-  const res = await api.get<t.GetAuditsPaginatedResponse>("/api/audits", {
-    params: req,
-  });
-  return res.data;
-};
-
-export { getAuditsPaginated };
+// All audit listing operations have been migrated to Server Actions
+// See: app/api/_backend/features/audit/audit.actions.ts

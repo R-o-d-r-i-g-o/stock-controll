@@ -15,5 +15,5 @@ export default auth.auth(async function middleware(req) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  NextResponse.next();
+  return NextResponse.next();
 });

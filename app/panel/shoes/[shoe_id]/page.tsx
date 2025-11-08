@@ -1,4 +1,4 @@
-import * as svc from "@/lib/services";
+import { getShoeByIdAction } from "@/app/api/_backend/features/shoe/shoe.actions";
 
 import React from "react";
 import Link from "next/link";
@@ -24,9 +24,11 @@ type ShoeDetailPageProps = {
 
 const ShoeDetailPage = async ({ params }: ShoeDetailPageProps) => {
   const shoeId = (await params).shoe_id;
-  const shoe = await svc.getShoeById(shoeId);
+  const result = await getShoeByIdAction(shoeId);
 
-  if (!shoe) notFound();
+  if (!result.success || !result.data) notFound();
+  
+  const shoe = result.data;
 
   return (
     <Container>

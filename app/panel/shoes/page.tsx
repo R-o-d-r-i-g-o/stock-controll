@@ -7,7 +7,7 @@ import Container from "@/components/templates/container";
 
 import { defaultPageSize } from "@/common/constants";
 
-import * as svc from "@/lib/services";
+import { getShoesGroupedByItemSizePaginatedAction } from "@/app/api/_backend/features/shoe/shoe.actions";
 
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import AddIcon from "@mui/icons-material/Add";
@@ -37,13 +37,17 @@ const ShoesListPage = async ({ searchParams }: ShoesListPageProps) => {
     page: parseInt(req.page ?? "1"),
     size: parseInt(req.size ?? defaultPageSize.toString()),
   };
-  const shoesPaginated = await svc.getShoesGroupedByItemSizePaginated(filters);
+  const result = await getShoesGroupedByItemSizePaginatedAction(filters);
+  
+  if (!result.success) {
+    throw new Error(result.error);
+  }
 
   return (
     <Container>
       <ActionButtons />
       <Title className="text-center mb-6" text="Calçados disponiveis" />
-      <Table filter={filters} data={shoesPaginated} />
+      <Table filter={filters} data={result.data} />
     </Container>
   );
 };

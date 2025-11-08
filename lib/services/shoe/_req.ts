@@ -1,17 +1,8 @@
 import { api } from "../api";
 import * as t from "./_types";
 
-const getShoesGroupedByItemSizePaginated = async (req: t.GetItemsGroupedByShoePaginated) => {
-  const res = await api.get<t.getShoesGroupedByItemSizePaginatedRespose>("/api/shoes", {
-    params: req,
-  });
-  return res.data;
-};
-
-const getShoeById = async (id: number) => {
-  const res = await api.get<t.GetShoeByIdResponse>(`/api/shoes/${id}`);
-  return res.data;
-};
+// Note: GET operations (getShoesGroupedByItemSizePaginated, getShoeById) have been migrated to Server Actions
+// See: app/api/_backend/features/shoe/shoe.actions.ts
 
 const deleteShoeById = async (id: number) => {
   const res = await api.delete(`/api/shoes/${id}`);
@@ -33,4 +24,4 @@ const createShoe = async (req: t.CreateShoe) => {
   return res.data;
 };
 
-export { getShoesGroupedByItemSizePaginated, createShoe as createShoe, updateShoe as updateShoe, deleteShoeById as deleteShoeById, getShoeById as getShoeById };
+export { createShoe as createShoe, updateShoe as updateShoe, deleteShoeById as deleteShoeById };

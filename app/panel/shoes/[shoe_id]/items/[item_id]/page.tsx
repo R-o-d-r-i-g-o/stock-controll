@@ -1,4 +1,4 @@
-import * as svc from "@/lib/services";
+import { getItemByIdAction } from "@/app/api/_backend/features/item/item.actions";
 import { notFound } from "next/navigation";
 
 import Title from "@/components/ui/title";
@@ -14,15 +14,15 @@ type UpdateShoePageProps = {
 
 const UpdateShoePage = async ({ params }: UpdateShoePageProps) => {
   const itemId = (await params).item_id;
-  const item = await svc.getItemById(itemId);
+  const result = await getItemByIdAction(itemId);
 
-  if (!item) notFound();
+  if (!result.success || !result.data) notFound();
 
   return (
     <Container display="small">
-      <Title className="text-center text-3xl mb-6" text={`Editar item #${item.id}`} />
-      <ItemEditForm item={item} />
-      <ItemDeleteForm itemId={item.id} shoeId={item.shoeId} />
+      <Title className="text-center text-3xl mb-6" text={`Editar item #${result.data.id}`} />
+      <ItemEditForm item={result.data} />
+      <ItemDeleteForm itemId={result.data.id} shoeId={result.data.shoeId} />
     </Container>
   );
 };

@@ -1,10 +1,8 @@
 import { api } from "../api";
 import * as t from "./_types";
 
-const getItemById = async (id: number) => {
-  const res = await api.get<t.GetItemById>(`/api/items/${id}`);
-  return res.data;
-};
+// Note: GET operation (getItemById) has been migrated to Server Actions
+// See: app/api/_backend/features/item/item.actions.ts
 
 const debitItemsFromStorage = async (data: t.debitItemsFromStorage) => {
   const res = await api.post<t.GetItemById[]>("/api/items/scan", data);
@@ -31,4 +29,4 @@ const updateItem = async (data: t.UpdateItem) => {
   return res.data;
 };
 
-export { getItemById, debitItemsFromStorage, deleteItemById, createItem, updateItem };
+export { debitItemsFromStorage, deleteItemById, createItem, updateItem };

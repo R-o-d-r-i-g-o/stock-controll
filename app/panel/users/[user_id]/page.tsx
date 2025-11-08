@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import * as svc from "@/lib/services";
+import { getUserByIdAction, getRoleListAction } from "@/app/api/_backend/features/user/user.actions";
 
 import Title from "@/components/ui/title";
 import Container from "@/components/templates/container";
@@ -14,10 +14,13 @@ type EditUserPageProps = {
 
 const EditUserPage = async ({ params }: EditUserPageProps) => {
   const userId = (await params).user_id;
-  const [rolesList, user] = await Promise.all([svc.getRolesList(), svc.getUserById(userId)]);
+  const [rolesResult, userResult] = await Promise.all([getRoleListAction(), getUserByIdAction(userId)]);
 
-  if (!user) notFound();
-  if (!rolesList || rolesList.roles.length < 1) notFound();
+  if (!userResult.success || !userResult.data) notFound();
+  if (!rolesResult.success || !rolesResult.data || rolesResult.data.roles.length < 1) notFound();
+  
+  const user = userResult.data;
+  const rolesList = rolesResult.data;
 
   return (
     <Container display="small">
