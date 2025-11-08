@@ -1,7 +1,6 @@
 import React from "react";
 import { useToast } from "@/lib/hooks/use-toast";
-
-import * as svc from "@/lib/services";
+import { scanItemAction } from "@/lib/features/item/item.actions";
 
 type StateManagement = {
   skus: string[];
@@ -30,10 +29,14 @@ const useShoeScanForm = () => {
 
   const handleSendSkus = async () => {
     try {
-      await svc.debitItemsFromStorage({
+      const result = await scanItemAction({
         skus: state.skus,
         oprationType: state.oprationType as "debit" | "register",
       });
+      if (!result.success) {
+        failure(result.error);
+        return;
+      }
       success(state.oprationType === "debit" ? "SKUs debitados com sucesso!" : "SKUs cadastrados com sucesso!");
 
       setState((prevState) => ({ ...prevState, skus: [] }));

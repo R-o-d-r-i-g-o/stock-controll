@@ -6,8 +6,12 @@ import InputError from "@/components/ui/input-error";
 import InputTextarea from "@/components/ui/input-textarea";
 import useTagCreateForm from "./use-tag-create";
 
-const TagCreatePage = () => {
-  const { register, formState, handleSubmit, handleSubmitTagCreate } = useTagCreateForm();
+type TagCreatePageProps = {
+  shoeId: number;
+};
+
+const TagCreatePage = ({ shoeId }: TagCreatePageProps) => {
+  const { register, formState, handleSubmit, handleSubmitTagCreate } = useTagCreateForm({ shoeId });
 
   return (
     <form onSubmit={handleSubmit(handleSubmitTagCreate)}>

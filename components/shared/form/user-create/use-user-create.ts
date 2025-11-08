@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useToast } from "@/lib/hooks/use-toast";
-import { createUser } from "@/lib/services";
+import { createUserAction } from "@/lib/features/user/user.actions";
 import { createUserSchema, CreateUserSchema } from "./schema";
 
 type UseUserCreateFormProps = {
@@ -23,7 +23,11 @@ const useUserCreateForm = ({ roles }: UseUserCreateFormProps) => {
 
   const handleCrateUser = async (data: CreateUserSchema) => {
     try {
-      await createUser(data);
+      const result = await createUserAction(data);
+      if (!result.success) {
+        failure(result.error);
+        return;
+      }
       success("Usuário criado com sucesso!");
       router.push("/panel/users");
     } catch (err) {

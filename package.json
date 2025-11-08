@@ -7,13 +7,14 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
-    "lint": "next lint",
+    "lint": "next lint && biome lint .",
+    "lint:fix": "biome check --write .",
     "seed": "tsx lib/backend/prisma/resource/seed.ts",
     "build": "pnpm prisma:generate && pnpm prisma:migrate && pnpm seed && next build",
     "start": "next start",
-    "format": "prettier --write \"**/*.{ts,tsx,json}\"",
-    "prisma:migrate": "prisma migrate deploy --schema=./lib/backend/prisma/resource/schema.prisma",
-    "prisma:generate": "prisma generate --schema=./lib/backend/prisma/resource/schema.prisma",
+    "format": "biome format .",
+    "prisma:migrate": "prisma migrate deploy --schema=./lib/prisma/resource/schema.prisma",
+    "prisma:generate": "prisma generate --schema=./lib/prisma/resource/schema.prisma",
     "postinstall": "pnpm prisma:generate"
   },
   "dependencies": {
@@ -26,7 +27,6 @@
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@stripe/stripe-js": "^7.3.0",
-    "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -60,6 +60,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.3.4",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/moment": "^2.13.0",
@@ -72,8 +73,6 @@
     "@types/react-slick": "^0.23.13",
     "@types/stripe": "^8.0.417",
     "@types/web-push": "^3.6.4",
-    "eslint": "^8",
-    "eslint-config-next": "15.0.4",
     "postcss": "^8",
     "prettier": "^3.5.3",
     "prisma": "^6.7.0",

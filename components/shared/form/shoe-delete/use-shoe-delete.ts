@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import { deleteShoeById } from "@/lib/services";
+import { deleteShoeAction } from "@/lib/features/shoe/shoe.actions";
 import { useToast } from "@/lib/hooks/use-toast";
 
 type useShoeDeleteForm = {
@@ -24,7 +24,11 @@ const useShoeDeleteForm = ({ shoeId }: useShoeDeleteForm) => {
     }).then(async (result) => {
       try {
         if (!result.isConfirmed) return;
-        await deleteShoeById(shoeId);
+        const response = await deleteShoeAction(shoeId);
+        if (!response.success) {
+          failure(response.error);
+          return;
+        }
         success("O item foi deletado com sucesso!");
         router.push("/panel/shoes");
       } catch (err) {

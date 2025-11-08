@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
 import { useToast } from "@/lib/hooks/use-toast";
-import { deleteUser } from "@/lib/services";
+import { deleteUserAction } from "@/lib/features/user/user.actions";
 
 type UseUserDeleteFormProps = {
   userId: number;
@@ -26,7 +26,11 @@ const useUserDeleteForm = ({ userId }: UseUserDeleteFormProps) => {
       try {
         if (!result.isConfirmed) return;
 
-        await deleteUser(userId);
+        const response = await deleteUserAction(userId);
+        if (!response.success) {
+          failure(response.error);
+          return;
+        }
         success("O usuário foi deletado com sucesso!");
         router.push("/panel/users");
       } catch (err) {

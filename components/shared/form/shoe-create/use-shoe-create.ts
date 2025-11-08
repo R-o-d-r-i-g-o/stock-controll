@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useToast } from "@/lib/hooks/use-toast";
-import { createShoe } from "@/lib/services";
+import { createShoeAction } from "@/lib/features/shoe/shoe.actions";
 import { createShoeSchema, CreateShoeSchema } from "./schema";
 
 const useShoeCreateForm = () => {
@@ -16,7 +16,11 @@ const useShoeCreateForm = () => {
 
   const handleSubmitCreateShoe = async (data: CreateShoeSchema) => {
     try {
-      await createShoe(data);
+      const result = await createShoeAction(data);
+      if (!result.success) {
+        failure(result.error);
+        return;
+      }
       success("Novo calçado criado com sucesso!");
       router.push("/panel/shoes");
     } catch (err) {

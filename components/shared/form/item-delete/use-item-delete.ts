@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
 import { useToast } from "@/lib/hooks/use-toast";
-import { deleteItemById } from "@/lib/services";
+import { deleteItemAction } from "@/lib/features/item/item.actions";
 
 type useItemDeleteFormProps = {
   itemId: number;
@@ -27,7 +27,11 @@ const useItemDeleteForm = ({ itemId, shoeId }: useItemDeleteFormProps) => {
       try {
         if (!result.isConfirmed) return;
 
-        await deleteItemById(itemId);
+        const response = await deleteItemAction(itemId);
+        if (!response.success) {
+          failure(response.error);
+          return;
+        }
         success("O item foi deletado com sucesso!");
         router.push(`/panel/shoes/${shoeId}`);
       } catch (err) {
