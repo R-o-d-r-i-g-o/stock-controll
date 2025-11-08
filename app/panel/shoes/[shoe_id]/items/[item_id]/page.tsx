@@ -1,4 +1,4 @@
-import { getItemByIdAction } from "@/app/api/_backend/features/item/item.actions";
+import { getItemByIdAction } from "@/lib/features/item/item.actions";
 import { notFound } from "next/navigation";
 
 import Title from "@/components/ui/title";

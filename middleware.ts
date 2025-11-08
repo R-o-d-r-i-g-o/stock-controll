@@ -1,4 +1,4 @@
-import { auth } from "@/app/api/_backend/features/auth/auth.handler";
+import { auth } from "@/lib/features/auth/auth.handler";
 import { NextResponse } from "next/server";
 
 export const config = {

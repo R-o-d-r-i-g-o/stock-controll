@@ -1,3 +1,3 @@
-import { scanItem } from "@/app/api/_backend/features/item/item.handler";
+import { scanItem } from "@/lib/features/item/item.handler";
 
 export { scanItem as POST };

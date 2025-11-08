@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getTagByIdAction } from "@/app/api/_backend/features/tag/tag.actions";
+import { getTagByIdAction } from "@/lib/features/tag/tag.actions";
 
 import Title from "@/components/ui/title";
 import Container from "@/components/templates/container";

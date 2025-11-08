@@ -2,7 +2,7 @@ import { api } from "../api";
 import * as t from "./_types";
 
 // Note: GET operation (getItemById) has been migrated to Server Actions
-// See: app/api/_backend/features/item/item.actions.ts
+// See: lib/backend/features/item/item.actions.ts
 
 const debitItemsFromStorage = async (data: t.debitItemsFromStorage) => {
   const res = await api.post<t.GetItemById[]>("/api/items/scan", data);

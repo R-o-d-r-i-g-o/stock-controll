@@ -7,7 +7,7 @@ import Container from "@/components/templates/container";
 
 import { defaultPageSize } from "@/common/constants";
 
-import { getShoesGroupedByItemSizePaginatedAction } from "@/app/api/_backend/features/shoe/shoe.actions";
+import { getShoesGroupedByItemSizePaginatedAction } from "@/lib/features/shoe/shoe.actions";
 
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import AddIcon from "@mui/icons-material/Add";

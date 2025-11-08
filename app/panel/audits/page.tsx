@@ -1,4 +1,4 @@
-import { getAuditsPaginatedAction } from "@/app/api/_backend/features/audit/audit.actions";
+import { getAuditsPaginatedAction } from "@/lib/features/audit/audit.actions";
 import { defaultPageSize } from "@/common/constants";
 
 import Title from "@/components/ui/title";

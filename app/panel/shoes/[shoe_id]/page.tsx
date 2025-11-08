@@ -1,4 +1,4 @@
-import { getShoeByIdAction } from "@/app/api/_backend/features/shoe/shoe.actions";
+import { getShoeByIdAction } from "@/lib/features/shoe/shoe.actions";
 
 import React from "react";
 import Link from "next/link";

@@ -15,7 +15,7 @@ Este documento descreve a migração das rotas de listagem (GET) de APIs REST pa
 
 ### 1. Helper de Autenticação para Server Actions
 
-**Arquivo criado**: `app/api/_backend/common/api.server-action-auth.ts`
+**Arquivo criado**: `lib/backend/common/api.server-action-auth.ts`
 
 - Criado `validateAuthUserServerAction()` que usa `next-auth` session ao invés de Authorization header
 - Substitui `validateAuthUser()` que dependia de `NextRequest`
@@ -23,26 +23,26 @@ Este documento descreve a migração das rotas de listagem (GET) de APIs REST pa
 ### 2. Server Actions Criadas
 
 #### Shoes
-**Arquivo**: `app/api/_backend/features/shoe/shoe.actions.ts`
+**Arquivo**: `lib/backend/features/shoe/shoe.actions.ts`
 - `getShoesGroupedByItemSizePaginatedAction()` - Lista shoes paginada com items agrupados por tamanho
 - `getShoeByIdAction()` - Busca shoe específico por ID
 
 #### Users
-**Arquivo**: `app/api/_backend/features/user/user.actions.ts`
+**Arquivo**: `lib/backend/features/user/user.actions.ts`
 - `getUsersPaginatedAction()` - Lista usuários paginada
 - `getUserByIdAction()` - Busca usuário específico por ID
 - `getRoleListAction()` - Lista roles disponíveis
 
 #### Audits
-**Arquivo**: `app/api/_backend/features/audit/audit.actions.ts`
+**Arquivo**: `lib/backend/features/audit/audit.actions.ts`
 - `getAuditsPaginatedAction()` - Lista auditorias paginada
 
 #### Items
-**Arquivo**: `app/api/_backend/features/item/item.actions.ts`
+**Arquivo**: `lib/backend/features/item/item.actions.ts`
 - `getItemByIdAction()` - Busca item específico por ID
 
 #### Tags
-**Arquivo**: `app/api/_backend/features/tag/tag.actions.ts`
+**Arquivo**: `lib/backend/features/tag/tag.actions.ts`
 - `getShoeRelatedTagsAction()` - Lista tags relacionadas a um shoe
 - `getTagByIdAction()` - Busca tag específica por ID
 
@@ -112,7 +112,7 @@ const getShoesGroupedByItemSizePaginated = async (req) => {
 ### Depois (Server Action)
 ```typescript
 // Página
-import { getShoesGroupedByItemSizePaginatedAction } from "@/app/api/_backend/features/shoe/shoe.actions";
+import { getShoesGroupedByItemSizePaginatedAction } from "@/lib/backend/features/shoe/shoe.actions";
 
 const result = await getShoesGroupedByItemSizePaginatedAction(filters);
 if (!result.success) {

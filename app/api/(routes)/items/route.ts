@@ -1,3 +1,3 @@
-import { createItem } from "@/app/api/_backend/features/item/item.handler";
+import { createItem } from "@/lib/features/item/item.handler";
 
 export { createItem as POST };

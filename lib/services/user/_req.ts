@@ -2,7 +2,7 @@ import { api } from "../api";
 import * as t from "./_types";
 
 // Note: GET operations (fetchUsersPaginated, getUserById, getRolesList) have been migrated to Server Actions
-// See: app/api/_backend/features/user/user.actions.ts
+// See: lib/backend/features/user/user.actions.ts
 
 // Creates a new user with the given request data.
 const createUser = async (req: t.CreateNewUser) => {

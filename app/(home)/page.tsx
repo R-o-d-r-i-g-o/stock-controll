@@ -1,4 +1,4 @@
-import { auth } from "@/app/api/_backend/features/auth/auth.handler";
+import { auth } from "@/lib/features/auth/auth.handler";
 import { redirect } from "next/navigation";
 
 import NavBar from "@/components/presentation/common/NavBar";

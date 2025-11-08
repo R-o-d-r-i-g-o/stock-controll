@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { getShoeRelatedTagsAction } from "@/app/api/_backend/features/tag/tag.actions";
+import { getShoeRelatedTagsAction } from "@/lib/features/tag/tag.actions";
 import TagTable from "@/components/shared/table/tag";
 import Container from "@/components/templates/container";
 

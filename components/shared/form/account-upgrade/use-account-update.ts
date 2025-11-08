@@ -4,7 +4,10 @@ type UseAccountUpdateForm = {
   shoeId: number;
 };
 
-const useAccountUpdateForm = ({}: UseAccountUpdateForm) => {
+// @ts-ignore
+const useAccountUpdateForm = ({ shoeId }: UseAccountUpdateForm) => {
+  console.log('shoeId', shoeId);
+
   const handleDelete = () => {
     Swal.fire({
       title: "Tem certeza?",

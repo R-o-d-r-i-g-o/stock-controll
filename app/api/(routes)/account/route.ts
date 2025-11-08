@@ -1,1 +1,1 @@
-export { getCompany as GET } from "@/app/api/_backend/features/company/company.handler";
+export { getCompany as GET } from "@/lib/features/company/company.handler";

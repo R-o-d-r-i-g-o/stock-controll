@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getUserByIdAction, getRoleListAction } from "@/app/api/_backend/features/user/user.actions";
+import { getUserByIdAction, getRoleListAction } from "@/lib/features/user/user.actions";
 
 import Title from "@/components/ui/title";
 import Container from "@/components/templates/container";

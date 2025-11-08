@@ -3,7 +3,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 import Title from "@/components/ui/title";
 import Table from "@/components/shared/table/user";
-import { getUsersPaginatedAction } from "@/app/api/_backend/features/user/user.actions";
+import { getUsersPaginatedAction } from "@/lib/features/user/user.actions";
 import Container from "@/components/templates/container";
 import { defaultPageSize } from "@/common/constants";
 

@@ -1,3 +1,3 @@
-import { generateReport } from "@/app/api/_backend/features/report/report.handler";
+import { generateReport } from "@/lib/features/report/report.handler";
 
 export { generateReport as GET };

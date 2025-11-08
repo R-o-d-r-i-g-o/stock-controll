@@ -2,7 +2,7 @@ import { api } from "../api";
 import * as t from "./_types";
 
 // Note: GET operations (getShoesGroupedByItemSizePaginated, getShoeById) have been migrated to Server Actions
-// See: app/api/_backend/features/shoe/shoe.actions.ts
+// See: lib/backend/features/shoe/shoe.actions.ts
 
 const deleteShoeById = async (id: number) => {
   const res = await api.delete(`/api/shoes/${id}`);

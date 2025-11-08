@@ -1,5 +1,5 @@
 import axios from "axios";
-import { auth } from "@/app/api/_backend/features/auth/auth.handler"; //TODO: improve it later.
+import { auth } from "@/lib/features/auth/auth.handler"; //TODO: improve it later.
 import { isServerSide } from "@/common/utilities";
 
 const { isAxiosError, create } = axios;
