@@ -8,12 +8,12 @@ import ItemDeleteForm from "@/components/shared/form/item-delete";
 
 type UpdateShoePageProps = {
   params: Promise<{
-    item_id: number;
+    item_id: string;
   }>;
 };
 
 const UpdateShoePage = async ({ params }: UpdateShoePageProps) => {
-  const itemId = (await params).item_id;
+  const itemId = parseInt((await params).item_id, 10);
   const result = await getItemByIdAction(itemId);
 
   if (!result.success || !result.data) notFound();

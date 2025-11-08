@@ -18,12 +18,12 @@ import ShoeDeleteFrom from "@/components/shared/form/shoe-delete";
 
 type ShoeDetailPageProps = {
   params: Promise<{
-    shoe_id: number;
+    shoe_id: string;
   }>;
 };
 
 const ShoeDetailPage = async ({ params }: ShoeDetailPageProps) => {
-  const shoeId = (await params).shoe_id;
+  const shoeId = parseInt((await params).shoe_id, 10);
   const result = await getShoeByIdAction(shoeId);
 
   if (!result.success || !result.data) notFound();

@@ -9,13 +9,13 @@ import { ArrowBack, Add } from "@mui/icons-material";
 
 type TagListPageProps = {
   params: Promise<{
-    shoe_id: number;
+    shoe_id: string;
   }>;
 };
 
 const TagListPage = async ({ params }: TagListPageProps) => {
   const { shoe_id } = await params;
-  const result = await getShoeRelatedTagsAction(shoe_id);
+  const result = await getShoeRelatedTagsAction(parseInt(shoe_id, 10));
   
   if (!result.success) {
     throw new Error(result.error);

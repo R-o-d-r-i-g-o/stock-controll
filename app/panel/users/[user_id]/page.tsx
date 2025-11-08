@@ -8,12 +8,13 @@ import UserDeleteForm from "@/components/shared/form/user-delete";
 
 type EditUserPageProps = {
   params: Promise<{
-    user_id: number;
+    user_id: string;
   }>;
 };
 
 const EditUserPage = async ({ params }: EditUserPageProps) => {
-  const userId = (await params).user_id;
+  const userId = parseInt((await params).user_id, 10);
+
   const [rolesResult, userResult] = await Promise.all([getRoleListAction(), getUserByIdAction(userId)]);
 
   if (!userResult.success || !userResult.data) notFound();
