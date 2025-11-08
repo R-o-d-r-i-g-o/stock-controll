@@ -46,10 +46,6 @@ class ApiErrorBuilder {
 
     return { ...this.responseError, stackTrace };
   }
-
-  ToNextApiError() {
-    return Response.json({ error: this.formatResponseError() }, { status: this.httpStatus });
-  }
 }
 
 const errorHandler = (err: unknown): ApiErrorBuilder => {
