@@ -1,6 +1,7 @@
 import repo from "./user.repo";
 import * as h from "./user.helper";
 import * as t from "./user.types";
+import { serializeDate } from "../../common/date-serializer";
 
 type UserService = {
   getRoleList(): t.GetRolesSvcOutput;
@@ -42,8 +43,8 @@ userService.getUserBy = async (filter) => {
     email: user.email,
     roleId: user.roleId,
     companyId: user.companyId,
-    createdAt: user.createdAt,
-    deletedAt: user.deletedAt,
+    createdAt: serializeDate(user.createdAt) as string,
+    deletedAt: serializeDate(user.deletedAt),
   };
 };
 
@@ -69,8 +70,8 @@ userService.getUsersPaginated = async (filter) => {
       name: u.name,
       email: u.email,
       role: u.Role.name,
-      createdAt: u.createdAt,
-      deletedAt: u.deletedAt,
+      createdAt: serializeDate(u.createdAt) as string,
+      deletedAt: serializeDate(u.deletedAt),
     })),
   };
 };

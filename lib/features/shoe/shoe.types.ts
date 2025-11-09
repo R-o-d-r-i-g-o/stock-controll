@@ -20,8 +20,8 @@ type getShoesGroupedByItemSizePaginatedRespose = {
     sole: string;
     note: string;
     color: string;
-    createdAt: Date;
-    deletedAt: Date | null;
+    createdAt: string;
+    deletedAt: string | null;
     groupedItems: {
       size: number;
       items: {
@@ -38,15 +38,15 @@ type GetShoeBySvcOutput = Promise<{
   sole: string;
   color: string;
   note: string;
-  createdAt: Date;
-  deletedAt: Date | null;
+  createdAt: string;
+  deletedAt: string | null;
   items: {
     id: number;
     sku: string;
     size: number;
     price: number;
-    createdAt: Date;
-    deletedAt: Date | null;
+    createdAt: string;
+    deletedAt: string | null;
   }[];
 }>;
 

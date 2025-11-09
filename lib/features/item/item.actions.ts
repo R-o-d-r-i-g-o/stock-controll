@@ -2,33 +2,28 @@
 
 import itemSvc from "./item.svc";
 import auditSvc from "../audit/audit.svc";
-import { errorHandler } from "../../common/api.error";
+import { actionHandler } from "../../common/action-handler";
 import { validateAuthUserServerAction } from "../../common/api.server-action-auth";
-import { OperationType, formSchema, itemCreationSchema, itemUpdateSchema } from "./item.schema";
+import { OperationType, scanItemSchema, itemCreationSchema, itemUpdateSchema } from "./item.schema";
 
 /**
  * Server Action to get an item by ID
  */
 export async function getItemByIdAction(itemId: number) {
-  try {
+  return actionHandler(async () => {
     await validateAuthUserServerAction();
-
-    const item = await itemSvc.getItemBy({ id: itemId });
-    return { success: true, data: item };
-  } catch (err) {
-    const error = errorHandler(err);
-    return { success: false, error: error.message };
-  }
+    return await itemSvc.getItemBy({ id: itemId });
+  });
 }
 
 /**
  * Server Action to create an item
  */
 export async function createItemAction(data: unknown) {
-  try {
+  return actionHandler(async () => {
     await validateAuthUserServerAction();
 
-    const payload = await itemCreationSchema.validate(data);
+    const payload = itemCreationSchema.parse(data);
     const itemId = await itemSvc.createItem({
       sku: payload.sku,
       size: payload.size,
@@ -36,42 +31,35 @@ export async function createItemAction(data: unknown) {
       shoeId: payload.shoeId,
     });
 
-    return { success: true, data: { itemId } };
-  } catch (err) {
-    const error = errorHandler(err);
-    return { success: false, error: error.message };
-  }
+    return { itemId };
+  });
 }
 
 /**
  * Server Action to update an item
  */
 export async function updateItemAction(data: unknown) {
-  try {
+  return actionHandler(async () => {
     const user = await validateAuthUserServerAction();
+    const payload = itemUpdateSchema.parse(data);
 
-    const result = await itemUpdateSchema.validate(data);
-
-    await itemSvc.updateItem(result);
+    await itemSvc.updateItem(payload);
     await auditSvc.createAuditRecord({
       userId: user.id,
-      itemId: result.id,
+      itemId: payload.id,
       companyId: user.companyId,
       note: "O usuário atualizou as informações do item",
     });
 
-    return { success: true, data: null };
-  } catch (err) {
-    const error = errorHandler(err);
-    return { success: false, error: error.message };
-  }
+    return null;
+  });
 }
 
 /**
  * Server Action to delete an item
  */
 export async function deleteItemAction(itemId: number) {
-  try {
+  return actionHandler(async () => {
     const user = await validateAuthUserServerAction();
 
     await itemSvc.deleteItem(itemId);
@@ -82,49 +70,43 @@ export async function deleteItemAction(itemId: number) {
       note: "O usuário deletou o item",
     });
 
-    return { success: true, data: null };
-  } catch (err) {
-    const error = errorHandler(err);
-    return { success: false, error: error.message };
-  }
+    return null;
+  });
 }
 
 /**
  * Server Action to scan items (debit or register)
  */
 export async function scanItemAction(data: unknown) {
-  try {
+  return actionHandler(async () => {
     const user = await validateAuthUserServerAction();
+    const payload = scanItemSchema.parse(data);
 
-    const result = formSchema.safeParse(data);
-    if (!result.success) {
-      return { success: false, error: result.error.errors[0].message };
-    }
-
-    if (result.data.oprationType === OperationType.Debit) {
-      await itemSvc.debitItems({ userId: user.id, companyId: user.companyId, skus: result.data.skus });
+    if (payload.oprationType === OperationType.Debit) {
+      await itemSvc.debitItems({ 
+        userId: user.id, 
+        companyId: user.companyId, 
+        skus: payload.skus 
+      });
       await auditSvc.createAuditRecord({
         userId: user.id,
         companyId: user.companyId,
-        note: `O usuário debitou os itens: ${result.data.skus.join(", ")}`,
+        note: `O usuário debitou os itens: ${payload.skus.join(", ")}`,
       });
-      return { success: true, data: null };
+      return null;
     }
 
-    if (result.data.oprationType === OperationType.Register) {
-      await itemSvc.createItems({ userId: user.id, skus: result.data.skus });
+    if (payload.oprationType === OperationType.Register) {
+      await itemSvc.createItems({ userId: user.id, skus: payload.skus });
       await auditSvc.createAuditRecord({
         userId: user.id,
         companyId: user.companyId,
-        note: `O usuário criou os itens: ${result.data.skus.join(", ")}`,
+        note: `O usuário criou os itens: ${payload.skus.join(", ")}`,
       });
-      return { success: true, data: { skus: result.data.skus } };
+      return { skus: payload.skus };
     }
 
-    return { success: false, error: "Tipo de operação inválido" };
-  } catch (err) {
-    const error = errorHandler(err);
-    return { success: false, error: error.message };
-  }
+    throw new Error("Tipo de operação inválido");
+  });
 }
 

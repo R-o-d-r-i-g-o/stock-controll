@@ -83,8 +83,8 @@ type GetUsersPaginatedSvcOutput = Promise<{
     name: string;
     email: string;
     role: string;
-    createdAt: Date;
-    deletedAt: Date | null;
+    createdAt: string;
+    deletedAt: string | null;
   }[];
 }>;
 
@@ -98,7 +98,16 @@ type GetRolesSvcOutput = Promise<{
   }[];
 }>;
 
-type GetUserBySvcOutput = Promise<Omit<UserEntity, "password">>;
+type GetUserBySvcOutput = Promise<{
+  id: number;
+  code: string;
+  name: string;
+  email: string;
+  roleId: number;
+  companyId: number;
+  createdAt: string;
+  deletedAt: string | null;
+}>;
 
 type GetUserByRepoOutput = Promise<UserEntity>;
 

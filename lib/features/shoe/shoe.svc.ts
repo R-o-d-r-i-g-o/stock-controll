@@ -1,5 +1,6 @@
 import shoeRepo from "./shoe.repo";
 import * as t from "./shoe.types";
+import { serializeDate } from "../../common/date-serializer";
 
 type ShoeService = {
   getShoeBy(filter: t.getShoeBy): t.GetShoeBySvcOutput;
@@ -22,15 +23,15 @@ shoeService.getShoeBy = async (filter) => {
     sole,
     color,
     note,
-    createdAt: createdAt,
-    deletedAt: deletedAt,
+    createdAt: serializeDate(createdAt) as string,
+    deletedAt: serializeDate(deletedAt),
     items: Item?.map((i) => ({
       id: i.id,
       sku: i.sku,
       size: i.size,
       price: i.price.toNumber(),
-      createdAt: i.createdAt,
-      deletedAt: i.deletedAt,
+      createdAt: serializeDate(i.createdAt) as string,
+      deletedAt: serializeDate(i.deletedAt),
     })),
   };
 };
@@ -66,8 +67,8 @@ shoeService.getShoesGroupedBySizePaginated = async (filter) => {
       sole,
       color,
       note,
-      createdAt: createdAt,
-      deletedAt: deletedAt,
+      createdAt: serializeDate(createdAt) as string,
+      deletedAt: serializeDate(deletedAt),
       groupedItems: itemsGroupedBySize,
     };
   });

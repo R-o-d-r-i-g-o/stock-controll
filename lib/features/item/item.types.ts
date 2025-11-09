@@ -71,6 +71,14 @@ type CreateItemsRepoInput = {
   skus: string[];
 };
 
-type GetItemBySvcOutput = Promise<ItemEntity>;
+type GetItemBySvcOutput = Promise<{
+  id: number;
+  sku: string;
+  size: number;
+  price: number;
+  shoeId: number;
+  createdAt: string;
+  deletedAt: string | null;
+}>;
 
 export type { GetShoeSvcInput, CreateShoeSvcInput, UpdateShoeSvcInput, DebitItemsSvcInput, CreateItemsSvcInput, CreateItemsRepoInput, UpdateShoeRepoInput, GetItemBySvcOutput, GetShoePaginatedRepoInput, GetShoeRepoInput, DebitItemsRepoInput, CreateShoeRepoInput };

@@ -28,7 +28,7 @@ const AuditListPage = async ({ searchParams }: AuditListPageProps) => {
   return (
     <Container>
       <Title className="text-center mb-6" text="Histórico de atividades" />
-      <Table filter={filters} data={result.data} />
+      <Table filter={filters} data={result.data as any} />
     </Container>
   );
 };

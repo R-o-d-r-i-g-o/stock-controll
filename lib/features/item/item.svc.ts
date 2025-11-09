@@ -1,5 +1,6 @@
 import * as repo from "./item.repo";
 import * as t from "./item.types";
+import { serializeDate } from "../../common/date-serializer";
 
 type ItemService = {
   getItemBy(input: t.GetShoeSvcInput): t.GetItemBySvcOutput;
@@ -19,10 +20,10 @@ itemService.getItemBy = async (filter) => {
     id: s.id,
     sku: s.sku,
     size: s.size,
-    price: s.price,
+    price: s.price.toNumber(),
     shoeId: s.shoeId,
-    createdAt: s.createdAt,
-    deletedAt: s.deletedAt,
+    createdAt: serializeDate(s.createdAt) as string,
+    deletedAt: serializeDate(s.deletedAt),
   };
 };
 

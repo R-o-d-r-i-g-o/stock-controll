@@ -32,7 +32,7 @@ const TagListPage = async ({ params }: TagListPageProps) => {
           <Add />
         </Link>
       </div>
-      <TagTable meta={result.data.meta} data={result.data.tags} />
+      <TagTable meta={result.data.meta} data={result.data.tags as any} />
     </Container>
   );
 };
