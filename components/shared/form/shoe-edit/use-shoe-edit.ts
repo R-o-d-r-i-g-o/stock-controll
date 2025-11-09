@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useToast } from "@/lib/hooks/use-toast";
-import { updateShoe } from "@/lib/services";
+import { updateShoeAction } from "@/lib/features/shoe/shoe.actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ShoeEditSchema, shoeEditSchema } from "./schema";
@@ -32,7 +32,11 @@ const useShoeEditForm = ({ data }: UseShoeEditFormProps) => {
 
   const handleSubmitShoeEdit = async (formData: ShoeEditSchema) => {
     try {
-      await updateShoe({ ...formData, id: data.id });
+      const result = await updateShoeAction({ ...formData, id: data.id });
+      if (!result.success) {
+        failure(result.error);
+        return;
+      }
       success("Calçado atualizado com sucesso!");
     } catch (err) {
       console.error(err);

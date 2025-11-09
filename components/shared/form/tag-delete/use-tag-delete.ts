@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
 import { useToast } from "@/lib/hooks/use-toast";
-import { deleteTag } from "@/lib/services";
+import { deleteTagAction } from "@/lib/features/tag/tag.actions";
 
 type UseTagDeleteFormProps = {
   tagId: number;
@@ -27,9 +27,13 @@ const useTagDeleteForm = ({ tagId, shoeId }: UseTagDeleteFormProps) => {
       try {
         if (!result.isConfirmed) return;
 
-        await deleteTag({ shoeId, tagId });
+        const response = await deleteTagAction(tagId, shoeId);
+        if (!response.success) {
+          failure(response.error);
+          return;
+        }
         success("A etiqueta foi deletada com sucesso!");
-        router.push("/panel/users");
+        router.push(`/panel/shoes/${shoeId}/tags`);
       } catch (err) {
         console.error(err);
         failure("Houve um erro ao deletar a etiqueta.");

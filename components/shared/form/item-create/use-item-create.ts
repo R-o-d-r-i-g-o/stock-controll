@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useToast } from "@/lib/hooks/use-toast";
-import { createItem } from "@/lib/services";
+import { createItemAction } from "@/lib/features/item/item.actions";
 import { footSizesList } from "@/common/constants";
 import { itemCreateSchema, ItemCreateSchema } from "./schema";
 
@@ -26,7 +26,11 @@ const useItemCreateForm = ({ shoeId }: useItemCreateFormProps) => {
 
   const handleSubmitTagEdit = async (data: ItemCreateSchema) => {
     try {
-      await createItem({ ...data, shoeId });
+      const result = await createItemAction({ ...data, shoeId });
+      if (!result.success) {
+        failure(result.error);
+        return;
+      }
       success("Novo item criado com sucesso!");
       router.push(`/panel/shoes/${shoeId}`);
     } catch (err) {

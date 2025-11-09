@@ -1,7 +1,0 @@
-{
-  "extends": ["eslint:recommended", "next/core-web-vitals", "next/typescript"],
-  "rules": {
-    "@typescript-eslint/ban-ts-comment": "warn",
-    "max-len": "off"
-  }
-}

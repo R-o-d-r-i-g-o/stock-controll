@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 
 import { useToast } from "@/lib/hooks/use-toast";
-import { updateUser } from "@/lib/services";
+import { updateUserAction } from "@/lib/features/user/user.actions";
 import { EditUserSchema, editUserSchema } from "./schema";
 
 type UseUserEditFormProps = {
@@ -36,7 +36,11 @@ const useUserEditForm = ({ user, roles }: UseUserEditFormProps) => {
 
   const handleSubmitEditUser = async (data: EditUserSchema) => {
     try {
-      await updateUser({ ...data, id: user.id });
+      const result = await updateUserAction({ ...data, id: user.id });
+      if (!result.success) {
+        failure(result.error);
+        return;
+      }
       success("Usuário atualizado com sucesso!");
       router.push("/panel/users");
     } catch (err) {

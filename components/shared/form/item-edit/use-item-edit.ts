@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useToast } from "@/lib/hooks/use-toast";
-import { updateItem } from "@/lib/services";
+import { updateItemAction } from "@/lib/features/item/item.actions";
 import { footSizesList } from "@/common/constants";
 import { itemEditSchema, ItemEditSchema } from "./schema";
 
@@ -34,7 +34,11 @@ const useItemEditFrom = ({ item }: UseItemEditFromProps) => {
 
   const handleSubmitEditItem = async (data: ItemEditSchema) => {
     try {
-      await updateItem({ ...data, shoeId: item.shoeId, id: item.id });
+      const result = await updateItemAction({ ...data, shoeId: item.shoeId, id: item.id });
+      if (!result.success) {
+        failure(result.error);
+        return;
+      }
       success("Item atualizado com sucesso!");
       router.back();
     } catch (error) {

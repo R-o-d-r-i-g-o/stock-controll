@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import * as svc from "@/lib/services";
+import { getTagByIdAction } from "@/lib/features/tag/tag.actions";
 
 import Title from "@/components/ui/title";
 import Container from "@/components/templates/container";
@@ -16,17 +16,19 @@ type TagEditPageProps = {
 const TagEditPage = async ({ params }: TagEditPageProps) => {
   const req = await params;
   const filter = {
-    tagId: parseInt(req.tag_id, 10),
+    id: parseInt(req.tag_id, 10),
     shoeId: parseInt(req.shoe_id, 10),
   };
 
-  const tag = await svc.getShoeRelatedTag(filter);
-  if (!tag) notFound();
+  const result = await getTagByIdAction(filter);
+  if (!result.success || !result.data) notFound();
+  
+  const tag = result.data;
 
   return (
     <Container display="small">
       <Title className="text-center text-3xl mb-6" text={`Editar etiqueta #${tag.id}`} />
-      <TagEditForm tag={tag} />
+      <TagEditForm tag={tag as any} />
       <TagDeleteForm shoeId={tag.shoeId} tagId={tag.id} />
     </Container>
   );

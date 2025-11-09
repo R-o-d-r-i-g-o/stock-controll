@@ -1,14 +1,16 @@
 import { notFound } from "next/navigation";
-import * as svc from "@/lib/services";
+import { getRoleListAction } from "@/lib/features/user/user.actions";
 
 import Title from "@/components/ui/title";
 import Container from "@/components/templates/container";
 import UserCreateForm from "@/components/shared/form/user-create";
 
 const UserCreatePage = async () => {
-  const rolesList = await svc.getRolesList();
+  const result = await getRoleListAction();
 
-  if (!rolesList || rolesList.roles.length < 1) notFound();
+  if (!result.success || !result.data || result.data.roles.length < 1) notFound();
+  
+  const rolesList = result.data;
 
   return (
     <Container display="small">

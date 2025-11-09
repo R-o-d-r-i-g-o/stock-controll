@@ -2,11 +2,15 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import * as svc from "@/lib/services";
 import { useToast } from "@/lib/hooks/use-toast";
+import { createTagAction } from "@/lib/features/tag/tag.actions";
 import { createTagSchema, CreateShoeSchema } from "./schema";
 
-const useTagCreateForm = () => {
+type UseTagCreateFormProps = {
+  shoeId: number;
+};
+
+const useTagCreateForm = ({ shoeId }: UseTagCreateFormProps) => {
   const router = useRouter();
   const defaultMetadata = JSON.stringify({ size: 36, price: 100.0 }, null, 2);
 
@@ -21,13 +25,17 @@ const useTagCreateForm = () => {
 
   const handleSubmitTagCreate = async (data: CreateShoeSchema) => {
     try {
-      await svc.createShoeRelatedTag({
-        shoeId: 1,
-        payload: {
+      const result = await createTagAction(
+        {
           sku: data.tag,
           metadata: JSON.parse(data.metadata),
         },
-      });
+        shoeId
+      );
+      if (!result.success) {
+        failure(result.error);
+        return;
+      }
       success("Nova etiqueta criada com sucesso!");
       router.back();
     } catch (err) {

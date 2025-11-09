@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useToast } from "@/lib/hooks/use-toast";
-import { updateTag } from "@/lib/services";
+import { updateTagAction } from "@/lib/features/tag/tag.actions";
 
 import { tagEditSchema, TagEditSchema } from "./schema";
 
@@ -33,11 +33,18 @@ const useTagEditForm = ({ tag }: UseTagEditFormProps) => {
 
   const handleSubmitTagEdit = async (data: TagEditSchema) => {
     try {
-      await updateTag({
-        ...tag,
-        sku: data.sku,
-        metadata: JSON.parse(data.metadata),
-      });
+      const result = await updateTagAction(
+        {
+          sku: data.sku,
+          metadata: JSON.parse(data.metadata),
+        },
+        tag.id,
+        tag.shoeId
+      );
+      if (!result.success) {
+        failure(result.error);
+        return;
+      }
       success("Tag editada com sucesso!");
       router.push(`/panel/shoes/${tag.shoeId}/tags`);
     } catch (err) {

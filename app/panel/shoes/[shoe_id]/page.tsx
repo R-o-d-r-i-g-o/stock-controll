@@ -1,4 +1,4 @@
-import * as svc from "@/lib/services";
+import { getShoeByIdAction } from "@/lib/features/shoe/shoe.actions";
 
 import React from "react";
 import Link from "next/link";
@@ -18,15 +18,17 @@ import ShoeDeleteFrom from "@/components/shared/form/shoe-delete";
 
 type ShoeDetailPageProps = {
   params: Promise<{
-    shoe_id: number;
+    shoe_id: string;
   }>;
 };
 
 const ShoeDetailPage = async ({ params }: ShoeDetailPageProps) => {
-  const shoeId = (await params).shoe_id;
-  const shoe = await svc.getShoeById(shoeId);
+  const shoeId = parseInt((await params).shoe_id, 10);
+  const result = await getShoeByIdAction(shoeId);
 
-  if (!shoe) notFound();
+  if (!result.success || !result.data) notFound();
+  
+  const shoe = result.data;
 
   return (
     <Container>

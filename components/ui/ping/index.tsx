@@ -1,14 +1,15 @@
 import React from "react";
 import InfoIcon from "@mui/icons-material/InfoOutlined";
 
-import * as src from "@/lib/services";
+import { getHealthDataAction } from "@/lib/features/ping/ping.actions";
 import { defaultDateMask } from "@/common/constants";
 import moment from "moment";
 
 type InfoButtonProps = React.HTMLAttributes<HTMLDivElement> & {};
 
 const InfoButton = async ({ className }: InfoButtonProps) => {
-  const appData = await src.fetchHealthData();
+  const result = await getHealthDataAction();
+  const appData = result.success ? result.data : { version: "N/A", database: false, lastBuild: new Date().toISOString() };
 
   return (
     <div className={`relative ${className}`}>
