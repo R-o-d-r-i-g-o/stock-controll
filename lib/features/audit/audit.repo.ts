@@ -19,7 +19,6 @@ auditRepository.createAuditRecord = async (audit) => {
 };
 
 auditRepository.getAuditsCount = async (filter) => {
-  console.log("filter", filter);
   return await prisma.audit.count();
 };
 

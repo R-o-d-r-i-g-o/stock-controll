@@ -53,7 +53,6 @@ userRepository.getUserBy = async (filter) => {
 };
 
 userRepository.getUsersCount = async (filter) => {
-  console.log("filter", filter);
   return await prisma.user.count();
 };
 
