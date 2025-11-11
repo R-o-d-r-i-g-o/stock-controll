@@ -35,9 +35,7 @@ const UpdateItemPage = async ({ params }: UpdateItemPageProps) => {
       <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 border-2 border-gray-100 mb-6">
         <ItemEditForm item={result.data} />
       </div>
-      <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 border-2 border-gray-100">
-        <ItemDeleteForm itemId={result.data.id} shoeId={result.data.shoeId} />
-      </div>
+      <ItemDeleteForm itemId={result.data.id} shoeId={result.data.shoeId} />
     </Container>
   );
 };

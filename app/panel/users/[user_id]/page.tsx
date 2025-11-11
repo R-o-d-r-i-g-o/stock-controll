@@ -40,9 +40,7 @@ const EditUserPage = async ({ params }: EditUserPageProps) => {
       <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 border-2 border-gray-100 mb-6">
         <UserEditForm user={user} roles={rolesList.roles} />
       </div>
-      <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 border-2 border-gray-100">
-        <UserDeleteForm userId={user.id} />
-      </div>
+      <UserDeleteForm userId={user.id} />
     </Container>
   );
 };

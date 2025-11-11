@@ -42,9 +42,7 @@ const TagEditPage = async ({ params }: TagEditPageProps) => {
       <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 border-2 border-gray-100 mb-6">
         <TagEditForm tag={tag as any} />
       </div>
-      <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 border-2 border-gray-100">
-        <TagDeleteForm shoeId={tag.shoeId} tagId={tag.id} />
-      </div>
+      <TagDeleteForm shoeId={tag.shoeId} tagId={tag.id} />
     </Container>
   );
 };
