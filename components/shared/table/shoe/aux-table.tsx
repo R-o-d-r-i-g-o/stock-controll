@@ -21,16 +21,20 @@ const AuxTable = ({ groupedItems }: AuxTableProps) => {
   return (
     <Table>
       <TableHead>
-        <TableRow>
+        <TableRow className="bg-gray-100">
           {footSizesList.map((size) => (
-            <TableCell key={size}>{size}</TableCell>
+            <TableCell key={size} className="!font-semibold !text-center">
+              {size}
+            </TableCell>
           ))}
         </TableRow>
       </TableHead>
       <TableBody>
         <TableRow>
           {footSizesList.map((size) => (
-            <TableCell key={size}>{itemCountBySize[size] || 0}</TableCell>
+            <TableCell key={size} className="!text-center">
+              {itemCountBySize[size] || 0}
+            </TableCell>
           ))}
         </TableRow>
       </TableBody>

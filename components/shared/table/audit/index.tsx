@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { Table as MuiTable, TableRow, Collapse, TableBody, TableCell, TableHead, IconButton, TableContainer } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import DescriptionIcon from "@mui/icons-material/Description";
 
 import moment from "moment";
 
@@ -41,57 +43,63 @@ const Tabela = ({ filter, data }: TabelaProps) => {
     <React.Fragment>
       <TableContainer
         style={{
-          boxShadow: "0px 13px 20px 0px #80808029",
+          boxShadow: "0px 2px 8px 0px rgba(0,0,0,0.1)",
           overflowX: "scroll",
-          borderRadius: "10px",
+          borderRadius: "8px",
         }}
       >
         <MuiTable>
           <TableHead>
             <TableRow className="bg-indigo-500">
-              <TableCell className="!text-white font-semibold">#</TableCell>
-              <TableCell className="!text-white font-semibold">Data</TableCell>
-              <TableCell className="!text-white font-semibold">User</TableCell>
-              <TableCell className="!text-white font-semibold">Calçado</TableCell>
-              <TableCell className="!text-white font-semibold">Config.</TableCell>
+              <TableCell className="!text-white !font-semibold">#</TableCell>
+              <TableCell className="!text-white !font-semibold">Data</TableCell>
+              <TableCell className="!text-white !font-semibold">User</TableCell>
+              <TableCell className="!text-white !font-semibold">Calçado</TableCell>
+              <TableCell className="!text-white !font-semibold">Config.</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {!data.audits ||
-              (data.audits.length < 1 && (
-                <TableRow>
-                  <TableCell colSpan={5} align="center">
-                    <p className="text-gray-500">Nenhum registro encontrado.</p>
-                  </TableCell>
-                </TableRow>
-              ))}
-            {data.audits?.map((a, index) => (
-              <React.Fragment key={a.id}>
-                <TableRow className="hover:bg-indigo-100">
-                  <TableCell>{a.id}</TableCell>
-                  <TableCell>{moment(a.createdAt).format(defaultDateMask)}</TableCell>
-                  <TableCell>{a.user}</TableCell>
-                  <TableCell>{a.shoeId ?? "--"}</TableCell>
-                  <TableCell>
-                    <IconButton onClick={() => handleRowClick(index)}>
-                      <ExpandMoreIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell colSpan={5} style={{ paddingBottom: 0, paddingTop: 0 }}>
-                    <Collapse in={selectedRow === index} timeout="auto" unmountOnExit>
-                      <div className="p-4">
-                        <p className="text-gray-700">
-                          <strong>Descrição:</strong>
-                        </p>
-                        <p className="text-gray-700">{a.note}</p>
-                      </div>
-                    </Collapse>
-                  </TableCell>
-                </TableRow>
-              </React.Fragment>
-            ))}
+            {!data.audits || data.audits.length < 1 ? (
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  <p className="text-gray-500">Nenhum registro encontrado.</p>
+                </TableCell>
+              </TableRow>
+            ) : (
+              data.audits.map((a, index) => (
+                <React.Fragment key={a.id}>
+                  <TableRow className="hover:bg-indigo-50 transition-colors duration-200">
+                    <TableCell>{a.id}</TableCell>
+                    <TableCell>{moment(a.createdAt).format(defaultDateMask)}</TableCell>
+                    <TableCell>{a.user}</TableCell>
+                    <TableCell>{a.shoeId ?? "--"}</TableCell>
+                    <TableCell>
+                      <IconButton
+                        onClick={() => handleRowClick(index)}
+                        size="small"
+                        className={`transition-colors duration-200 ${
+                          selectedRow === index ? "!bg-indigo-500 !text-white" : "hover:!bg-gray-100"
+                        }`}
+                      >
+                        {selectedRow === index ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell colSpan={5} style={{ paddingBottom: 0, paddingTop: 0 }}>
+                      <Collapse in={selectedRow === index} timeout="auto" unmountOnExit>
+                        <div className="p-4 bg-gray-50">
+                          <p className="text-gray-700">
+                            <strong>Descrição:</strong>
+                          </p>
+                          <p className="text-gray-700">{a.note}</p>
+                        </div>
+                      </Collapse>
+                    </TableCell>
+                  </TableRow>
+                </React.Fragment>
+              ))
+            )}
           </TableBody>
         </MuiTable>
       </TableContainer>
