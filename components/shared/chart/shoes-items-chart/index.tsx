@@ -44,7 +44,21 @@ const ShoesItemsChart: React.FC<ShoesItemsChartProps> = ({ data }) => {
   if (!data || data.length === 0) {
     return (
       <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-8 border-2 border-gray-100">
-        <p className="text-gray-500 text-center">Nenhum dado disponível para exibir.</p>
+        <div className="mb-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
+            <div>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-1">
+                Visão Geral do Estoque
+              </h3>
+              <p className="text-gray-600 text-sm">Distribuição de itens por sapato</p>
+            </div>
+          </div>
+        </div>
+        <div className="h-96 flex flex-col items-center justify-center text-center">
+          <InventoryIcon className="text-6xl text-gray-300 mb-4" />
+          <p className="text-gray-500 text-lg font-medium mb-2">Nenhum dado disponível</p>
+          <p className="text-gray-400 text-sm">Não há sapatos cadastrados no sistema para exibir.</p>
+        </div>
       </div>
     );
   }

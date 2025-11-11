@@ -67,6 +67,10 @@ const AuditsChart: React.FC<AuditsChartProps> = ({ initialData }) => {
     return data.reduce((sum, item) => sum + item.count, 0);
   }, [data]);
 
+  const hasData = useMemo(() => {
+    return data && data.length > 0 && data.some((item) => item.count > 0);
+  }, [data]);
+
   const quickFilters = [
     { label: "7 dias", days: 7 },
     { label: "30 dias", days: 30 },
@@ -74,13 +78,35 @@ const AuditsChart: React.FC<AuditsChartProps> = ({ initialData }) => {
     { label: "1 ano", days: 365 },
   ];
 
+  if (!hasData && !loading) {
+    return (
+      <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-8 border-2 border-gray-100">
+        <div className="mb-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
+            <div>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-1">
+                Interações dos usuários
+              </h3>
+              <p className="text-gray-600 text-sm">Atividades registradas no sistema</p>
+            </div>
+          </div>
+        </div>
+        <div className="h-96 flex flex-col items-center justify-center text-center">
+          <HistoryIcon className="text-6xl text-gray-300 mb-4" />
+          <p className="text-gray-500 text-lg font-medium mb-2">Nenhum dado disponível</p>
+          <p className="text-gray-400 text-sm">Não há interações registradas no período selecionado para exibir.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-6 md:p-8 border-2 border-gray-100">
       <div className="mb-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
           <div>
             <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-1">
-              Interações (Audits) por Dia
+              Interações dos usuários
             </h3>
             <p className="text-gray-600 text-sm">Atividades registradas no sistema</p>
           </div>
