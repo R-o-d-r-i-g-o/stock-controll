@@ -115,6 +115,7 @@ type updateShoe = {
 };
 
 type getExpeditionShoes = {
+  companyId: number;
   startDate: Date;
   endDate: Date;
 };

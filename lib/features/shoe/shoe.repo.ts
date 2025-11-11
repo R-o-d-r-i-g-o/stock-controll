@@ -81,7 +81,8 @@ shoeRepository.getExpeditionShoes = async (filter) => {
     FROM go_live.tb_expeditions e
     JOIN go_live.tb_items i ON e.item_id = i.id
     JOIN go_live.tb_shoes s ON i.shoe_id = s.id
-    WHERE e.created_at >= CAST(${formateDate(filter.startDate)} AS DATE)
+    WHERE e.company_id = ${filter.companyId}
+      AND e.created_at >= CAST(${formateDate(filter.startDate)} AS DATE)
       AND e.created_at <= CAST(${formateDate(filter.endDate)} AS DATE)
     GROUP BY s.name;
   `;

@@ -92,3 +92,17 @@ export async function getShoesItemsSummaryAction() {
   });
 }
 
+/**
+ * Server Action to get expedition shoes (for sales reports)
+ */
+export async function getExpeditionShoesAction(startDate: string, endDate: string) {
+  return actionHandler(async () => {
+    const user = await validateAuthUserServerAction();
+    return await shoeSvc.getExpeditionShoes({
+      companyId: user.companyId,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
+    });
+  });
+}
+
