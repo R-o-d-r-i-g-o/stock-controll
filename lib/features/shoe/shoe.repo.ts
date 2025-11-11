@@ -11,6 +11,7 @@ type ShoeRepository = {
   createShoe(data: t.createShoe): Promise<number>;
   getItemShoesPaginated(filter: t.getShoesPaginated): t.GetItemShoesPaginatedRepoOutput;
   getExpeditionShoes(filter: t.getExpeditionShoes): t.GetExpeditionShoesRepoOutput;
+  getShoesItemsSummary(companyId: number): Promise<t.GetShoesItemsSummaryOutput[]>;
 };
 
 const shoeRepository = {} as ShoeRepository;
@@ -85,6 +86,38 @@ shoeRepository.getExpeditionShoes = async (filter) => {
     GROUP BY s.name;
   `;
   return result;
+};
+
+shoeRepository.getShoesItemsSummary = async (companyId: number) => {
+  const result = await prisma.shoe.findMany({
+    where: {
+      companyId,
+      deletedAt: null,
+    },
+    select: {
+      id: true,
+      name: true,
+      _count: {
+        select: {
+          Item: {
+            where: {
+              deletedAt: null,
+              Expedition: { none: {} },
+            },
+          },
+        },
+      },
+    },
+    orderBy: {
+      name: "asc",
+    },
+  });
+
+  return result.map((shoe) => ({
+    id: shoe.id,
+    name: shoe.name,
+    itemsCount: shoe._count.Item,
+  }));
 };
 
 shoeRepository.deleteShoe = async (id) => {

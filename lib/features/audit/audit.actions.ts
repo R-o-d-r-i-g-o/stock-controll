@@ -21,3 +21,17 @@ export async function getAuditsPaginatedAction(params: { page: number; size: num
   });
 }
 
+/**
+ * Server Action to get audits by date (optimized for charts)
+ */
+export async function getAuditsByDateAction(startDate: string, endDate: string) {
+  return actionHandler(async () => {
+    const user = await validateAuthUserServerAction();
+    return await auditSvc.getAuditsByDate({
+      companyId: user.companyId,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
+    });
+  });
+}
+

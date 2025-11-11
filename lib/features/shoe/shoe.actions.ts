@@ -82,3 +82,13 @@ export async function deleteShoeAction(id: number) {
   });
 }
 
+/**
+ * Server Action to get shoes with items count summary (optimized for charts)
+ */
+export async function getShoesItemsSummaryAction() {
+  return actionHandler(async () => {
+    const user = await validateAuthUserServerAction();
+    return await shoeSvc.getShoesItemsSummary(user.companyId);
+  });
+}
+

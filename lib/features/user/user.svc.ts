@@ -11,6 +11,7 @@ type UserService = {
   updateUser(input: t.updateUserProps): Promise<void>;
   deleteUser(input: number): Promise<void>;
   getUsersPaginated(input: t.getUsersPaginatedProps): t.GetUsersPaginatedSvcOutput;
+  getUsersActiveByDate(input: t.GetUsersActiveByDateInput): Promise<t.GetUsersActiveByDateOutput>;
 };
 
 const userService = {} as UserService;
@@ -101,6 +102,10 @@ userService.updateUser = async (user) => {
     user.password = await encryptPassword(user.password);
   }
   await repo.updateUser(user);
+};
+
+userService.getUsersActiveByDate = async (input) => {
+  return await repo.getUsersActiveByDate(input);
 };
 
 export default userService;

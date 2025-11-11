@@ -10,6 +10,7 @@ type UserRepository = {
   getUsersCount(filter: t.getUsersPaginated): Promise<number>;
   getUsersPaginated(filter: t.getUsersPaginated): t.GetUsersPaginatedRepoOutput;
   getRolesList(): t.GetRolesListRepoOutput;
+  getUsersActiveByDate(input: t.GetUsersActiveByDateInput): Promise<t.GetUsersActiveByDateOutput>;
 };
 
 const userRepository = {} as UserRepository;
@@ -66,6 +67,28 @@ userRepository.getUsersPaginated = async (filter) => {
 
 userRepository.getRolesList = async () => {
   return await prisma.role.findMany();
+};
+
+userRepository.getUsersActiveByDate = async (input) => {
+  const formatDate = (date: Date) => moment(date).format("YYYY-MM-DD");
+
+  const result = await prisma.$queryRaw<Array<{ date: string; count: bigint }>>`
+    SELECT
+      DATE(created_at) as date,
+      COUNT(*)::int as count
+    FROM go_live.tb_users
+    WHERE company_id = ${input.companyId}
+      AND deleted_at IS NULL
+      AND created_at >= CAST(${formatDate(input.startDate)} AS DATE)
+      AND created_at <= CAST(${formatDate(input.endDate)} AS DATE)
+    GROUP BY DATE(created_at)
+    ORDER BY DATE(created_at) ASC
+  `;
+
+  return result.map((row) => ({
+    date: row.date,
+    count: Number(row.count),
+  }));
 };
 
 export default userRepository;

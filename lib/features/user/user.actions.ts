@@ -98,3 +98,17 @@ export async function deleteUserAction(userId: number) {
   });
 }
 
+/**
+ * Server Action to get users active by date (optimized for charts)
+ */
+export async function getUsersActiveByDateAction(startDate: string, endDate: string) {
+  return actionHandler(async () => {
+    const user = await validateAuthUserServerAction();
+    return await userSvc.getUsersActiveByDate({
+      companyId: user.companyId,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
+    });
+  });
+}
+

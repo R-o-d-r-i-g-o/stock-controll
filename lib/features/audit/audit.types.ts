@@ -52,4 +52,15 @@ type CreateAuditRecordRepoOutput = Promise<number>;
 
 type GetAuditsCountRepoOutput = Promise<number>;
 
-export type { CreateAuditSvcInput, GetAuditsCountRepoOutput, CreateAuditRecordSvcOutput, CreateAuditRecordRepoInput, GetAuditsPaginatedSvcInput, GetAuditsPaginatedSvcOutput, GetAuditsPaginatedRepoInput, GetAuditsPaginatedRepoOutput, CreateAuditRecordRepoOutput };
+type GetAuditsByDateInput = {
+  companyId: number;
+  startDate: Date;
+  endDate: Date;
+};
+
+type GetAuditsByDateOutput = Array<{
+  date: string;
+  count: number;
+}>;
+
+export type { CreateAuditSvcInput, GetAuditsCountRepoOutput, CreateAuditRecordSvcOutput, CreateAuditRecordRepoInput, GetAuditsPaginatedSvcInput, GetAuditsPaginatedSvcOutput, GetAuditsPaginatedRepoInput, GetAuditsPaginatedRepoOutput, CreateAuditRecordRepoOutput, GetAuditsByDateInput, GetAuditsByDateOutput };

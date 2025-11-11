@@ -116,6 +116,17 @@ type DeleteUserRepoOutput = Promise<UserEntity>;
 
 type GetRolesListRepoOutput = Promise<RoleEntity[]>;
 
+type GetUsersActiveByDateInput = {
+  companyId: number;
+  startDate: Date;
+  endDate: Date;
+};
+
+type GetUsersActiveByDateOutput = Array<{
+  date: string;
+  count: number;
+}>;
+
 export type {
   getUsersPaginatedProps,
   GetAuthUserSvcOutput,
@@ -134,4 +145,6 @@ export type {
   updateUser,
   createUser,
   getUser,
+  GetUsersActiveByDateInput,
+  GetUsersActiveByDateOutput,
 };

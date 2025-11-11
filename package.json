@@ -45,6 +45,7 @@
     "react-slick": "^0.30.3",
     "react-toastify": "^10.0.6",
     "react-zxing": "^2.0.2",
+    "recharts": "^3.4.1",
     "redoc": "^2.5.0",
     "slick-carousel": "^1.8.1",
     "stripe": "^18.1.0",

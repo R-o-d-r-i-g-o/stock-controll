@@ -130,6 +130,12 @@ type getShoesPaginated = {
   endDate?: Date;
 };
 
+type GetShoesItemsSummaryOutput = {
+  id: number;
+  name: string;
+  itemsCount: number;
+};
+
 export type {
   updateShoe,
   createShoe,
@@ -144,4 +150,5 @@ export type {
   getExpeditionShoes,
   getShoesGroupedBySizePaginated,
   getShoesGroupedByItemSizePaginatedRespose,
+  GetShoesItemsSummaryOutput,
 };
