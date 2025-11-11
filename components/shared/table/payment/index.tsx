@@ -30,22 +30,22 @@ const Table: React.FC<TableProps> = ({ data }) => (
         </TableRow>
       </TableHead>
       <TableBody>
-        {!data ||
-          (data.length < 1 && (
-            <TableRow>
-              <TableCell colSpan={4} align="center">
-                <p className="text-gray-500">Nenhum registro encontrado.</p>
-              </TableCell>
-            </TableRow>
-          ))}
-        {data?.map((shoe) => (
-          <TableRow key={shoe.id} className="hover:bg-gray-100">
-            <TableCell className="!text-center">{shoe.id}</TableCell>
-            <TableCell className="!text-center">{shoe.code}</TableCell>
-            <TableCell className="!text-center">{new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(shoe.price)}</TableCell>
-            <TableCell className="!text-center">{moment(shoe.date).format(defaultDateMask)}</TableCell>
+        {!data || data.length < 1 ? (
+          <TableRow>
+            <TableCell colSpan={4} align="center">
+              <p className="text-gray-500">Nenhum registro encontrado.</p>
+            </TableCell>
           </TableRow>
-        ))}
+        ) : (
+          data.map((payment) => (
+            <TableRow key={payment.id} className="hover:bg-gray-100">
+              <TableCell className="!text-center">{payment.id}</TableCell>
+              <TableCell className="!text-center">{payment.code}</TableCell>
+              <TableCell className="!text-center">{new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(payment.price)}</TableCell>
+              <TableCell className="!text-center">{moment(payment.date).format(defaultDateMask)}</TableCell>
+            </TableRow>
+          ))
+        )}
       </TableBody>
     </MuiTable>
   </TableContainer>

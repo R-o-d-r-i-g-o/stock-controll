@@ -42,6 +42,7 @@ userService.getUserBy = async (filter) => {
     name: user.name,
     email: user.email,
     roleId: user.roleId,
+    roleName: user.Role.name,
     companyId: user.companyId,
     createdAt: serializeDate(user.createdAt) as string,
     deletedAt: serializeDate(user.deletedAt),

@@ -45,7 +45,10 @@ userRepository.deleteUser = async (id) => {
 };
 
 userRepository.getUserBy = async (filter) => {
-  return await prisma.user.findFirstOrThrow({ where: { ...filter } });
+  return await prisma.user.findFirstOrThrow({ 
+    where: { ...filter },
+    include: { Role: true }
+  });
 };
 
 userRepository.getUsersCount = async (filter) => {

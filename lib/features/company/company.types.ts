@@ -17,4 +17,12 @@ type CreateCompanyInput = {
 
 type CreateCompanyOutput = Promise<number>;
 
-export type { getCompanyByInput, getCompanyByOutput, CreateCompanyInput, CreateCompanyOutput };
+type UpdateCompanyInput = {
+  id: number;
+  name?: string;
+  subscriptionExpiresAt?: Date | null;
+};
+
+type UpdateCompanyOutput = Promise<void>;
+
+export type { getCompanyByInput, getCompanyByOutput, CreateCompanyInput, CreateCompanyOutput, UpdateCompanyInput, UpdateCompanyOutput };
