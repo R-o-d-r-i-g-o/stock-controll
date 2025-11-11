@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe/stripe.client";
+import { stripe } from "@/lib/features/stripe/stripe.client";
 import { auth } from "@/lib/features/auth/auth.handler";
 import userSvc from "@/lib/features/user/user.svc";
 import companySvc from "@/lib/features/company/company.svc";

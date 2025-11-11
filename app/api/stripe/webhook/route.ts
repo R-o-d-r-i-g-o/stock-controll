@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe, STRIPE_WEBHOOK_SECRET } from "@/lib/stripe/stripe.client";
+import { stripe, STRIPE_WEBHOOK_SECRET } from "@/lib/features/stripe/stripe.client";
 import Stripe from "stripe";
 import subscriptionSvc from "@/lib/features/subscription/subscription.svc";
 import companySvc from "@/lib/features/company/company.svc";

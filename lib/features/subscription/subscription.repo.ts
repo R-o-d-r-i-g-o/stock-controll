@@ -29,7 +29,7 @@ subscriptionRepository.getSubscriptionsByCompany = async (input) => {
     orderBy: {
       createdAt: "desc",
     },
-  });
+  }) as any;
 };
 
 export default subscriptionRepository;
