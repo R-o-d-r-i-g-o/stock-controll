@@ -4,6 +4,12 @@ const registerSchema = z
   .object({
     email: z.string().email("Digite um email válido").min(5, "O email deve ter pelo menos 5 caracteres"),
 
+    username: z
+      .string()
+      .min(3, "O nome de usuário deve ter pelo menos 3 caracteres")
+      .max(20, "O nome de usuário deve ter no máximo 20 caracteres")
+      .nonempty("O nome de usuário é obrigatório"),
+
     password: z
       .string()
       .min(8, "A senha deve ter pelo menos 8 caracteres")

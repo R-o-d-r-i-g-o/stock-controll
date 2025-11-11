@@ -63,6 +63,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-lottie": "^1.2.10",
     "@types/react-slick": "^0.23.13",
     "@types/stripe": "^8.0.417",
     "postcss": "^8",

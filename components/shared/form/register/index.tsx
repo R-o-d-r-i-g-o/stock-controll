@@ -13,6 +13,11 @@ const RegisterForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-6">
+        <InputLable htmlFor="username" lable="Nome de usuário" />
+        <InputText id="username" placeholder="johndoe" {...register("username")} />
+        <InputError error={formState.errors.username} />
+      </div>
+      <div className="mb-6">
         <InputLable htmlFor="email" lable="E-mail" />
         <InputText id="email" placeholder="john@example.com" {...register("email")} />
         <InputError error={formState.errors.email} />

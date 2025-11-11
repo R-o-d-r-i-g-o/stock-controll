@@ -43,7 +43,7 @@ const AccountPage = async () => {
   const user = await validateAuthUserServerAction();
   const userData = await userSvc.getUserBy({ id: user.id });
   
-  const companyResult = await getCompanyByUserIdAction();
+  const companyResult = await getCompanyByUserIdAction() as any;
   const subscriptionsResult = await getSubscriptionsByCompanyAction();
 
   if (!companyResult.success || !companyResult.data) {

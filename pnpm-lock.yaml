@@ -141,6 +141,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.1.2(@types/react@19.1.2)
+      '@types/react-lottie':
+        specifier: ^1.2.10
+        version: 1.2.10
       '@types/react-slick':
         specifier: ^0.23.13
         version: 0.23.13
@@ -1557,6 +1560,9 @@ packages:
     resolution: {integrity: sha512-XGJkWF41Qq305SKWEILa1O8vzhb3aOo3ogBlSmiqNko/WmRb6QIaweuZCXjKygVDXpzXb5wyxKTSOsmkuqj+Qw==}
     peerDependencies:
       '@types/react': ^19.0.0
+
+  '@types/react-lottie@1.2.10':
+    resolution: {integrity: sha512-rCd1p3US4ELKJlqwVnP0h5b24zt5p9OCvKUoNpYExLqwbFZMWEiJ6EGLMmH7nmq5V7KomBIbWO2X/XRFsL0vCA==}
 
   '@types/react-slick@0.23.13':
     resolution: {integrity: sha512-bNZfDhe/L8t5OQzIyhrRhBr/61pfBcWaYJoq6UDqFtv5LMwfg4NsVDD2J8N01JqdAdxLjOt66OZEp6PX+dGs/A==}
@@ -5367,6 +5373,10 @@ snapshots:
   '@types/prop-types@15.7.14': {}
 
   '@types/react-dom@19.1.2(@types/react@19.1.2)':
+    dependencies:
+      '@types/react': 19.1.2
+
+  '@types/react-lottie@1.2.10':
     dependencies:
       '@types/react': 19.1.2
 
