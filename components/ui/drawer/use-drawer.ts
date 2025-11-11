@@ -53,12 +53,34 @@ const useDrawer = () => {
     },
   ];
 
+  const handleItemClick = (nav: string) => {
+    handleNavigation(nav);
+    // Close all drawers after navigation
+    Object.keys(state).forEach((key) => {
+      if (state[key as Anchor]) {
+        toggleDrawer(key as Anchor, false)();
+      }
+    });
+  };
+
+  const handleActionClick = (action: () => void) => {
+    action();
+    // Close all drawers after action
+    Object.keys(state).forEach((key) => {
+      if (state[key as Anchor]) {
+        toggleDrawer(key as Anchor, false)();
+      }
+    });
+  };
+
   return {
     state,
     actionItem,
     toggleDrawer,
     menuPositions,
+    handleItemClick,
     handleNavigation,
+    handleActionClick,
   };
 };
 
