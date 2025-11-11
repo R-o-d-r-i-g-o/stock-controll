@@ -2,10 +2,13 @@ import nextPwa from "next-pwa";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  turbopack: {
+    resolveExtensions: ['.mdx', '.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
+  },
   publicRuntimeConfig: {
     modifiedDate: new Date().toISOString(),
   },
-  reactStrictMode: true,
 };
 
 const withPwa = nextPwa({

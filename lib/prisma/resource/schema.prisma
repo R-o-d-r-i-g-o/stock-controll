@@ -135,12 +135,17 @@ model CustomTag {
 }
 
 model Subscription {
-  id        Int      @id @default(autoincrement()) @map("id")
-  code      String   @unique @default(uuid()) @map("code")
-  price     Decimal  @map("price")
-  companyId Int      @map("company_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  Company   Company  @relation(fields: [companyId], references: [id])
+  id              Int       @id @default(autoincrement()) @map("id")
+  code            String    @unique @default(uuid()) @map("code")
+  price           Decimal   @map("price")
+  companyId       Int       @map("company_id")
+  stripeSessionId String?   @map("stripe_session_id")
+  stripePaymentId String?   @map("stripe_payment_id")
+  status          String    @default("pending") @map("status")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  deletedAt       DateTime? @map("deleted_at")
+  Company         Company   @relation(fields: [companyId], references: [id])
 
   @@map("tb_subscriptions")
 }

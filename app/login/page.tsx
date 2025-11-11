@@ -8,6 +8,7 @@ import Title from "@/components/ui/title";
 import LoginForm from "@/components/shared/form/login";
 import Container from "@/components/templates/container";
 import Background from "@/components/templates/background";
+import InstallPWA from "@/components/ui/install-pwa";
 
 type LoginPageProps = {
   searchParams: Promise<{
@@ -20,6 +21,7 @@ const LoginPage: React.FC<LoginPageProps> = async ({ searchParams }) => {
 
   return (
     <Background>
+      <InstallPWA />
       <Container display="small">
         <Link href="/" className="text-gray-600 hover:text-gray-800">
           <ArrowBack fontSize="small" />

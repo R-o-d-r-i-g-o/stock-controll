@@ -1,6 +1,9 @@
 type CreateSubscriptionInput = {
   companyId: number;
   price: number;
+  stripeSessionId?: string | null;
+  stripePaymentId?: string | null;
+  status?: string;
 };
 
 type CreateSubscriptionOutput = Promise<number>;

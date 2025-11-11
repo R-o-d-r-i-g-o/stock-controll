@@ -9,7 +9,15 @@ type SubscriptionRepository = {
 const subscriptionRepository = {} as SubscriptionRepository;
 
 subscriptionRepository.createSubscription = async (input) => {
-  const { id } = await prisma.subscription.create({ data: input });
+  const { id } = await prisma.subscription.create({ 
+    data: {
+      companyId: input.companyId,
+      price: input.price,
+      stripeSessionId: input.stripeSessionId || null,
+      stripePaymentId: input.stripePaymentId || null,
+      status: input.status || "pending",
+    }
+  });
   return id;
 };
 
