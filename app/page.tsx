@@ -18,10 +18,10 @@ const Page = async () => {
 
   return (
     <Background>
-      <main>
+      <main className="overflow-x-hidden">
         <span id="home" />
         <NavBar />
-        <div className="px-4 md:px-[9rem]">
+        <div className="px-4 md:px-8 lg:px-16 xl:px-24">
           <HeroSection />
           <SpecialOffer />
           <ObjetionSection />
