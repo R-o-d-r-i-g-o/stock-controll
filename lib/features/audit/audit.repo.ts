@@ -37,15 +37,13 @@ auditRepository.getAuditsByDate = async (input) => {
   const formatDate = (date: Date) => moment(date).format("YYYY-MM-DD");
 
   const result = await prisma.$queryRaw<Array<{ date: string; count: bigint }>>`
-    SELECT
-      DATE(created_at) as date,
-      COUNT(*)::int as count
-    FROM go_live.tb_audits
-    WHERE company_id = ${input.companyId}
-      AND created_at >= CAST(${formatDate(input.startDate)} AS DATE)
-      AND created_at <= CAST(${formatDate(input.endDate)} AS DATE)
-    GROUP BY DATE(created_at)
-    ORDER BY DATE(created_at) ASC
+    SELECT DATE(a.created_at)   AS date,
+           COUNT(1)::int        AS count
+      FROM "public"."tb_audits" AS a
+     WHERE a.company_id  = ${input.companyId}
+       AND a.created_at >= CAST(${formatDate(input.startDate)} AS DATE)
+     GROUP BY DATE(a.created_at)
+     ORDER BY DATE(a.created_at) ASC
   `;
 
   return result.map((row) => ({
