@@ -5,6 +5,7 @@ import auditSvc from "../audit/audit.svc";
 import { actionHandler } from "../../common/action-handler";
 import { validateAuthUserServerAction } from "../../common/api.server-action-auth";
 import { createShoeSchema, updateShoeSchema } from "./shoe.schema";
+import { validateFreeTierForCreation } from "../../common/free-tier-validator";
 
 /**
  * Server Action to get shoes grouped by item size with pagination
@@ -33,6 +34,9 @@ export async function createShoeAction(data: unknown) {
   return actionHandler(async () => {
     const user = await validateAuthUserServerAction();
     const payload = createShoeSchema.parse(data);
+
+    // Validate free tier
+    await validateFreeTierForCreation(user.companyId);
 
     const shoeId = await shoeSvc.createShoe({ ...payload, companyId: user.companyId });
     await auditSvc.createAuditRecord({

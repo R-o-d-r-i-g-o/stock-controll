@@ -4,6 +4,7 @@ import * as svc from "./tag.svc";
 import { actionHandler } from "../../common/action-handler";
 import { validateAuthUserServerAction } from "../../common/api.server-action-auth";
 import { createTagSchema, updateTagSchema, deleteTagSchema } from "./tag.schema";
+import { validateFreeTierForCreation } from "../../common/free-tier-validator";
 
 /**
  * Server Action to get tags related to a shoe
@@ -35,6 +36,9 @@ export async function createTagAction(data: unknown, shoeId: number) {
   return actionHandler(async () => {
     const user = await validateAuthUserServerAction();
     const payload = createTagSchema.parse(data);
+
+    // Validate free tier
+    await validateFreeTierForCreation(user.companyId);
 
     const tagId = await svc.createTag({
       ...payload,

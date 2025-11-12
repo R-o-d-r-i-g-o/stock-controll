@@ -6,6 +6,7 @@ import companySvc from "../company/company.svc";
 import userSvc from "../user/user.svc";
 import auditSvc from "../audit/audit.svc";
 import * as h from "../user/user.helper";
+import moment from "moment";
 
 const { encryptPassword } = h.hashHelper();
 
@@ -16,9 +17,13 @@ export async function registerAction(data: unknown) {
   return actionHandler(async () => {
     const payload = registerSchema.parse(data);
 
-    // Create company first
+    // Set free tier expiration to 30 days from now
+    const freeTierExpiresAt = moment().add(30, "days").toDate();
+
+    // Create company first with free tier expiration
     const companyId = await companySvc.createCompany({
       name: payload.companyName,
+      freeTierExpiresAt,
     });
 
     // Create user with admin role (roleId: 2)

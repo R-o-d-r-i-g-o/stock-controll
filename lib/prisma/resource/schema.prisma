@@ -85,6 +85,7 @@ model Company {
   createdAt             DateTime   @default(now()) @map("created_at")
   deletedAt             DateTime?  @map("deleted_at")
   subscriptionExpiresAt DateTime?  @map("subscription_expires_at")
+  freeTierExpiresAt     DateTime?  @map("free_tier_expires_at")
   User                  User[]
   Shoe                  Shoe[]
   Audit                 Audit[]

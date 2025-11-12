@@ -22,12 +22,14 @@ const useLoginForm = ({ callbackUrl }: UseLoginFormProps) => {
   const onSubmit = async (data: LoginSchema) => {
     try {
       const auth = await signIn("credentials", { ...data, redirect: false });
-      if (!auth || !auth.ok) throw new Error();
+      if (auth.error) {
+        failure("Usuário ou senha incorretos.");
+        return;
+      } ;
 
       router.push(callbackUrl ?? "/panel");
     } catch (err) {
-      console.error(err);
-      failure("Usuário ou senha incorretos.");
+      failure("instabilidade no sistema. Tente novamente mais tarde.");
     }
   };
 

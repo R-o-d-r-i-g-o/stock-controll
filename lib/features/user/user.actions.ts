@@ -5,6 +5,7 @@ import auditSvc from "../audit/audit.svc";
 import { actionHandler } from "../../common/action-handler";
 import { validateAuthUserServerAction } from "../../common/api.server-action-auth";
 import { getUsersPaginatedSchema, createUserSchema, updateUserSchema } from "./user.schema";
+import { validateFreeTierForCreation } from "../../common/free-tier-validator";
 
 /**
  * Server Action to get users with pagination
@@ -49,6 +50,9 @@ export async function createUserAction(data: unknown) {
   return actionHandler(async () => {
     const user = await validateAuthUserServerAction();
     const payload = createUserSchema.parse(data);
+
+    // Validate free tier
+    await validateFreeTierForCreation(user.companyId);
 
     const userId = await userSvc.createUser({ ...payload, companyId: user.companyId });
     await auditSvc.createAuditRecord({

@@ -34,7 +34,8 @@ companyRepository.updateCompany = async (input) => {
     where: { id: input.id },
     data: {
       name: input.name || undefined,
-      subscriptionExpiresAt:input.subscriptionExpiresAt || undefined,
+      subscriptionExpiresAt: input.subscriptionExpiresAt || undefined,
+      freeTierExpiresAt: input.freeTierExpiresAt || undefined,
     },
   });
 };
