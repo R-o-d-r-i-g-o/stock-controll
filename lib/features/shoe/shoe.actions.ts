@@ -5,6 +5,7 @@ import auditSvc from "../audit/audit.svc";
 import { actionHandler } from "../../common/action-handler";
 import { validateAuthUserServerAction } from "../../common/api.server-action-auth";
 import { createShoeSchema, updateShoeSchema } from "./shoe.schema";
+import { validateFreeTierForCreation } from "../../common/free-tier-validator";
 
 /**
  * Server Action to get shoes grouped by item size with pagination
@@ -33,6 +34,9 @@ export async function createShoeAction(data: unknown) {
   return actionHandler(async () => {
     const user = await validateAuthUserServerAction();
     const payload = createShoeSchema.parse(data);
+
+    // Validate free tier
+    await validateFreeTierForCreation(user.companyId);
 
     const shoeId = await shoeSvc.createShoe({ ...payload, companyId: user.companyId });
     await auditSvc.createAuditRecord({
@@ -79,6 +83,30 @@ export async function deleteShoeAction(id: number) {
     });
 
     return null;
+  });
+}
+
+/**
+ * Server Action to get shoes with items count summary (optimized for charts)
+ */
+export async function getShoesItemsSummaryAction() {
+  return actionHandler(async () => {
+    const user = await validateAuthUserServerAction();
+    return await shoeSvc.getShoesItemsSummary(user.companyId);
+  });
+}
+
+/**
+ * Server Action to get expedition shoes (for sales reports)
+ */
+export async function getExpeditionShoesAction(startDate: string, endDate: string) {
+  return actionHandler(async () => {
+    const user = await validateAuthUserServerAction();
+    return await shoeSvc.getExpeditionShoes({
+      companyId: user.companyId,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
+    });
   });
 }
 

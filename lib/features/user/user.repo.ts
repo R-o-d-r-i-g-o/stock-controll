@@ -10,6 +10,7 @@ type UserRepository = {
   getUsersCount(filter: t.getUsersPaginated): Promise<number>;
   getUsersPaginated(filter: t.getUsersPaginated): t.GetUsersPaginatedRepoOutput;
   getRolesList(): t.GetRolesListRepoOutput;
+  getUsersActiveByDate(input: t.GetUsersActiveByDateInput): Promise<t.GetUsersActiveByDateOutput>;
 };
 
 const userRepository = {} as UserRepository;
@@ -45,11 +46,13 @@ userRepository.deleteUser = async (id) => {
 };
 
 userRepository.getUserBy = async (filter) => {
-  return await prisma.user.findFirstOrThrow({ where: { ...filter } });
+  return await prisma.user.findFirstOrThrow({ 
+    where: { ...filter },
+    include: { Role: true }
+  });
 };
 
 userRepository.getUsersCount = async (filter) => {
-  console.log("filter", filter);
   return await prisma.user.count();
 };
 
@@ -63,6 +66,26 @@ userRepository.getUsersPaginated = async (filter) => {
 
 userRepository.getRolesList = async () => {
   return await prisma.role.findMany();
+};
+
+userRepository.getUsersActiveByDate = async (input) => {
+  const formatDate = (date: Date) => moment(date).format("YYYY-MM-DD");
+
+  const result = await prisma.$queryRaw<Array<{ date: string; count: bigint }>>`
+    SELECT DATE(u.created_at) AS date,
+           COUNT(1)::int      AS count
+      FROM "public"."tb_users"  AS u
+     WHERE u.company_id = ${input.companyId}
+       AND u.deleted_at IS NULL
+       AND u.created_at >= CAST(${formatDate(input.startDate)} AS DATE)
+     GROUP BY DATE(u.created_at)
+     ORDER BY DATE(u.created_at) ASC
+  `;
+
+  return result.map((row) => ({
+    date: row.date,
+    count: Number(row.count),
+  }));
 };
 
 export default userRepository;

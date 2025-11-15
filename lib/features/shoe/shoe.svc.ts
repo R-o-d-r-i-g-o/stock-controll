@@ -9,6 +9,7 @@ type ShoeService = {
   updateShoe(data: t.updateShoe): Promise<void>;
   getExpeditionShoes(filter: t.getExpeditionShoes): t.GetExpeditionShoesSvcOutput;
   getShoesGroupedBySizePaginated(filter: t.getShoesGroupedBySizePaginated): Promise<t.getShoesGroupedByItemSizePaginatedRespose>;
+  getShoesItemsSummary(companyId: number): Promise<t.GetShoesItemsSummaryOutput[]>;
 };
 
 const shoeService = {} as ShoeService;
@@ -94,6 +95,10 @@ shoeService.deleteShoe = async (id) => {
 
 shoeService.updateShoe = async (data) => {
   await shoeRepo.updateShoe(data);
+};
+
+shoeService.getShoesItemsSummary = async (companyId) => {
+  return await shoeRepo.getShoesItemsSummary(companyId);
 };
 
 export default shoeService;

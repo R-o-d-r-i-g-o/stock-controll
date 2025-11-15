@@ -5,12 +5,14 @@ import { ArrowBack } from "@mui/icons-material";
 
 import Ping from "@/components/ui/ping";
 import Title from "@/components/ui/title";
+import InstallPWA from "@/components/ui/install-pwa";
 import Container from "@/components/templates/container";
 import Background from "@/components/templates/background";
 import RegisterForm from "@/components/shared/form/register";
 
 const RegisterPage: React.FC = () => (
   <Background className="py-32">
+    <InstallPWA />
     <Container display="small">
       <Link href="/" className="text-gray-600 hover:text-gray-800">
         <ArrowBack fontSize="small" />

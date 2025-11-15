@@ -3,8 +3,8 @@ import * as t from "./audit.types";
 
 type AuditService = {
   createAuditRecord(input: t.CreateAuditSvcInput): t.CreateAuditRecordSvcOutput;
-
   getAuditsPaginated(input: t.GetAuditsPaginatedSvcInput): t.GetAuditsPaginatedSvcOutput;
+  getAuditsByDate(input: t.GetAuditsByDateInput): Promise<t.GetAuditsByDateOutput>;
 };
 
 const auditService = {} as AuditService;
@@ -35,6 +35,10 @@ auditService.getAuditsPaginated = async (filter) => {
       createdAt: a.createdAt,
     })),
   };
+};
+
+auditService.getAuditsByDate = async (input) => {
+  return await repo.getAuditsByDate(input);
 };
 
 export default auditService;

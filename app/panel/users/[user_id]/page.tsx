@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
-import { getUserByIdAction, getRoleListAction } from "@/lib/features/user/user.actions";
+import EditIcon from "@mui/icons-material/Edit";
 
+import { getUserByIdAction, getRoleListAction } from "@/lib/features/user/user.actions";
 import Title from "@/components/ui/title";
 import Container from "@/components/templates/container";
 import UserEditForm from "@/components/shared/form/user-edit";
@@ -25,9 +26,21 @@ const EditUserPage = async ({ params }: EditUserPageProps) => {
 
   return (
     <Container display="small">
-      <Title className="text-center mb-6" text={`Editar usuário #${user.id}`} />
-      <UserEditForm user={user} roles={rolesList.roles} />
-      <UserDeleteForm className="mt-6" userId={user.id} />
+      <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-6 md:p-8 border-2 border-gray-100 mb-6">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="p-3 rounded-xl bg-gradient-to-br from-indigo-100 to-purple-100">
+            <EditIcon className="text-indigo-600 text-3xl" />
+          </div>
+          <div>
+            <Title className="!mb-0 !text-left" text={`Editar Usuário #${user.id}`} />
+            <p className="text-gray-600 text-sm mt-1">Atualize as informações do usuário</p>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 border-2 border-gray-100 mb-6">
+        <UserEditForm user={user} roles={rolesList.roles} />
+      </div>
+      <UserDeleteForm userId={user.id} />
     </Container>
   );
 };

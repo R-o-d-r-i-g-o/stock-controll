@@ -13,8 +13,18 @@ type CreateCompanyInput = {
   id?: number;
   name: string;
   code?: string;
+  freeTierExpiresAt?: Date | null;
 };
 
 type CreateCompanyOutput = Promise<number>;
 
-export type { getCompanyByInput, getCompanyByOutput, CreateCompanyInput, CreateCompanyOutput };
+type UpdateCompanyInput = {
+  id: number;
+  name?: string;
+  subscriptionExpiresAt?: Date | null;
+  freeTierExpiresAt?: Date | null;
+};
+
+type UpdateCompanyOutput = Promise<void>;
+
+export type { getCompanyByInput, getCompanyByOutput, CreateCompanyInput, CreateCompanyOutput, UpdateCompanyInput, UpdateCompanyOutput };

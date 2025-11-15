@@ -115,6 +115,7 @@ type updateShoe = {
 };
 
 type getExpeditionShoes = {
+  companyId: number;
   startDate: Date;
   endDate: Date;
 };
@@ -128,6 +129,12 @@ type getShoesPaginated = {
   take: number;
   startDate?: Date;
   endDate?: Date;
+};
+
+type GetShoesItemsSummaryOutput = {
+  id: number;
+  name: string;
+  itemsCount: number;
 };
 
 export type {
@@ -144,4 +151,5 @@ export type {
   getExpeditionShoes,
   getShoesGroupedBySizePaginated,
   getShoesGroupedByItemSizePaginatedRespose,
+  GetShoesItemsSummaryOutput,
 };

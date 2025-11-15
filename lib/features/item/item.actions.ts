@@ -5,6 +5,7 @@ import auditSvc from "../audit/audit.svc";
 import { actionHandler } from "../../common/action-handler";
 import { validateAuthUserServerAction } from "../../common/api.server-action-auth";
 import { OperationType, scanItemSchema, itemCreationSchema, itemUpdateSchema } from "./item.schema";
+import { validateFreeTierForCreation } from "../../common/free-tier-validator";
 
 /**
  * Server Action to get an item by ID
@@ -21,7 +22,10 @@ export async function getItemByIdAction(itemId: number) {
  */
 export async function createItemAction(data: unknown) {
   return actionHandler(async () => {
-    await validateAuthUserServerAction();
+    const user = await validateAuthUserServerAction();
+
+    // Validate free tier
+    await validateFreeTierForCreation(user.companyId);
 
     const payload = itemCreationSchema.parse(data);
     const itemId = await itemSvc.createItem({
@@ -82,6 +86,9 @@ export async function scanItemAction(data: unknown) {
     const user = await validateAuthUserServerAction();
     const payload = scanItemSchema.parse(data);
 
+    // Validate free tier
+    await validateFreeTierForCreation(user.companyId);
+
     if (payload.oprationType === OperationType.Debit) {
       await itemSvc.debitItems({ 
         userId: user.id, 
@@ -97,6 +104,10 @@ export async function scanItemAction(data: unknown) {
     }
 
     if (payload.oprationType === OperationType.Register) {
+      // Validate free tier for item creation
+      const { validateFreeTierForCreation } = await import("../../common/free-tier-validator");
+      await validateFreeTierForCreation(user.companyId);
+
       await itemSvc.createItems({ userId: user.id, skus: payload.skus });
       await auditSvc.createAuditRecord({
         userId: user.id,
