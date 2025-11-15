@@ -1,4 +1,4 @@
-# stock-controll
+# stock-controll (pwa)
 
 ## Getting Started
 
